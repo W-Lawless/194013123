@@ -9,8 +9,8 @@ import SwiftUI
 
 struct Home: View {
     
-    @ObservedObject var watch = WatchConnection()
-    @State var message = ""
+//    @ObservedObject var watch = WatchConnection()
+//    @State var message = ""
     
     var body: some View {
         VStack { //: VSTQ 1

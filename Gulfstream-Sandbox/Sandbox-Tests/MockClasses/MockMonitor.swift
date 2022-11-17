@@ -15,25 +15,25 @@ protocol HeartbeatMonitor {
     func findPulse() async
 }
 
-class CabinMonitor: HeartbeatMonitor {
+class MockMonitor: HeartbeatMonitor {
     
     private var endpoint: URLRequest?
     private var timer: Timer?
+    var timerProvider: Timer.Type
     var onPulse: (_ alive: Bool, _ data: String?) async -> ()
 
-    init(endpoint url: URL, callBack cb: @escaping (_ alive: Bool, _ data: String?) async -> ()) {
-        var request = URLRequest(url: url, timeoutInterval: 5);
-        request.httpMethod = "HEAD" ///Reduces size of packet transfer
+    init(endpoint url: URL, callBack cb: @escaping (_ alive: Bool, _ data: String?) async -> (), timerProvider: Timer.Type = Timer.self) {
+        var request = URLRequest(url: url, timeoutInterval: 0.2);
+        request.httpMethod = "GET" ///Reduces size of packet transfer
         self.endpoint = request
         self.onPulse = cb
+        self.timerProvider = timerProvider
     }
 
     func startMonitor(interval: Double) {
-        print("Start Monitor w/ \(interval)")
         DispatchQueue.global(qos: .background).async {
             self.timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
                 Task {
-                    print("Interval is \(interval)")
                     await self.findPulse()
                 }
             }
@@ -52,12 +52,13 @@ class CabinMonitor: HeartbeatMonitor {
     func findPulse() async {
         do {
             let (_,response) = try await MockSession.shared.data(for: self.endpoint!)
-            if let res = response as? HTTPURLResponse { print(" ✅: Cabin Responsed with Status:\(res.statusCode)")
+            if let res = response as? HTTPURLResponse {
+                print(" ✅ ")
                 await self.onPulse(true, nil)
             }
         } catch {
+            print(" ❌ ")
             let cast = error as NSError;
-            print(" ❌: Cabin Connection Error \(cast.code)")
             await self.onPulse(false, nil)
         }
     }

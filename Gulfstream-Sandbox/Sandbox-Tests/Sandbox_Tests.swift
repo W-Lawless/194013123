@@ -23,6 +23,38 @@ final class Sandbox_Tests: XCTestCase {
         XCTAssert(type(of: ViewFactories.buildSeatsSelection()) == SeatSelection.self)
     }
     
+    func testMonitor() throws {
+        var count = 0
+        
+        let endpoint = URL(string: "http://apple.com")!
+        func tickClock(_ alive: Bool, _: String?) async -> () {
+                count += 1
+        }
+        
+        let monitor = MockMonitor(endpoint: endpoint, callBack: tickClock)
+        monitor.startMonitor(interval: 0.2)
+
+        sleep(1)
+        
+        XCTAssert(count > 0)
+    }
+    
+    func testStopMonitor() throws {
+        var count = 0
+        
+        let endpoint = URL(string: "http://apple.com")!
+        func tickClock(_ alive: Bool, _: String?) async -> () {
+                count += 1
+        }
+        
+        let monitor = MockMonitor(endpoint: endpoint, callBack: tickClock)
+        monitor.startMonitor(interval: 0.2)
+        
+        sleep(1)
+        
+        XCTAssert(count > 0)
+    }
+    
     func testSeatDecoder() throws {
         let pathString = Bundle(for: type(of: self)).path(forResource: "Seats", ofType: "json")!
         let jsonString = try String(contentsOfFile: pathString, encoding: .utf8)
@@ -53,5 +85,77 @@ final class Sandbox_Tests: XCTestCase {
 //            // Put the code you want to measure the time of here.
 //        }
 //    }
+
+}
+
+class TimerControllerTests: XCTestCase {
+
+    // MARK: - Properties
+
+    var timerController: TimerController!
+
+    // MARK: - Setup
+
+    override func setUp() {
+        timerController = TimerController(seconds: 1)
+    }
+
+    // MARK: - Teardown
+
+    override func tearDown() {
+        timerController.resetTimer()
+        super.tearDown()
+    }
+
+    // MARK: - Time
+
+    func test_TimerController_DurationInSeconds_IsSet() {
+        let expected: TimeInterval = 60
+        let timerController = TimerController(seconds: 60)
+        XCTAssertEqual(timerController.durationInSeconds, expected, "'durationInSeconds' is not set to correct value.")
+    }
+
+    func test_TimerController_DurationInSeconds_IsZeroAfterTimerIsFinished() {
+        let numberOfSeconds: TimeInterval = 1
+        let durationExpectation = expectation(description: "durationExpectation")
+        timerController = TimerController(seconds: numberOfSeconds)
+        timerController.startTimer(fireCompletion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + numberOfSeconds, execute: {
+            durationExpectation.fulfill()
+            XCTAssertEqual(0, self.timerController.durationInSeconds, "'durationInSeconds' is not set to correct value.")
+        })
+        waitForExpectations(timeout: numberOfSeconds + 1, handler: nil)
+    }
+
+    // MARK: - Timer State
+
+    func test_TimerController_TimerIsValidAfterTimerStarts() {
+        let timerValidityExpectation = expectation(description: "timerValidity")
+        timerController.startTimer {
+            timerValidityExpectation.fulfill()
+            XCTAssertTrue(self.timerController.isTimerValid, "Timer is invalid.")
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+
+    func test_TimerController_TimerIsInvalidAfterTimerIsPaused() {
+        let timerValidityExpectation = expectation(description: "timerValidity")
+        timerController.startTimer {
+            self.timerController.pauseTimer()
+            timerValidityExpectation.fulfill()
+            XCTAssertFalse(self.timerController.isTimerValid, "Timer is valid")
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+
+    func test_TimerController_TimerIsInvalidAfterTimerIsReset() {
+        let timerValidityExpectation = expectation(description: "timerValidity")
+        timerController.startTimer {
+            self.timerController.resetTimer()
+            timerValidityExpectation.fulfill()
+            XCTAssertFalse(self.timerController.isTimerValid, "Timer is valid")
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+    }
 
 }
