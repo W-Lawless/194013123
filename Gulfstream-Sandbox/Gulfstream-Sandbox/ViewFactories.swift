@@ -13,14 +13,6 @@ import SwiftUI
 
 struct ViewFactories {
     
-    static func buildRootView() -> RootView {
-        let viewModel = RootViewModel()
-        let api = _CabinAPI(viewModel: viewModel)
-        
-        let view = RootView(viewModel: viewModel, api: api)
-        return view
-    }
-
     static func buildFlightInfo() -> FlightInfo {
         let viewModel = FlightViewModel()
         let api = FlightAPI(viewModel: viewModel)

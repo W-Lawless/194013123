@@ -24,9 +24,6 @@
 		2BB3A587292445C90094B787 /* HeartbeatMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3A586292445C90094B787 /* HeartbeatMonitor.swift */; };
 		2BB3A589292445FE0094B787 /* Cabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3A588292445FE0094B787 /* Cabin.swift */; };
 		2BB3A58B29244B2D0094B787 /* FlightAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3A58A29244B2D0094B787 /* FlightAPI.swift */; };
-		2BC2944A2926C40000A166B9 /* old_Cabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC294492926C40000A166B9 /* old_Cabin.swift */; };
-		2BC2944E2926CAAB00A166B9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC2944D2926CAAB00A166B9 /* RootView.swift */; };
-		2BC294502926CB2600A166B9 /* exp_Cabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC2944F2926CB2600A166B9 /* exp_Cabin.swift */; };
 		2BC49CD229228F2A007DA457 /* +FlightInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC49CD129228F2A007DA457 /* +FlightInfo.swift */; };
 		2BC49CD42922BEE5007DA457 /* +Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC49CD32922BEE5007DA457 /* +Weather.swift */; };
 		2BC49CD62922CE1B007DA457 /* NetworkBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC49CD52922CE1B007DA457 /* NetworkBridge.swift */; };
@@ -94,9 +91,6 @@
 		2BB3A586292445C90094B787 /* HeartbeatMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatMonitor.swift; sourceTree = "<group>"; };
 		2BB3A588292445FE0094B787 /* Cabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cabin.swift; sourceTree = "<group>"; };
 		2BB3A58A29244B2D0094B787 /* FlightAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightAPI.swift; sourceTree = "<group>"; };
-		2BC294492926C40000A166B9 /* old_Cabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = old_Cabin.swift; sourceTree = "<group>"; };
-		2BC2944D2926CAAB00A166B9 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		2BC2944F2926CB2600A166B9 /* exp_Cabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exp_Cabin.swift; sourceTree = "<group>"; };
 		2BC49CD129228F2A007DA457 /* +FlightInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+FlightInfo.swift"; sourceTree = "<group>"; };
 		2BC49CD32922BEE5007DA457 /* +Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Weather.swift"; sourceTree = "<group>"; };
 		2BC49CD52922CE1B007DA457 /* NetworkBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkBridge.swift; sourceTree = "<group>"; };
@@ -165,7 +159,6 @@
 				2B183F5A2913F9520087654E /* Networking */,
 				2B183F4B2913F8BD0087654E /* EntryPoint.swift */,
 				2BA8F60D292536AB005621D3 /* ViewFactories.swift */,
-				2BC2944D2926CAAB00A166B9 /* RootView.swift */,
 				2B183F512913F8C00087654E /* Gulfstream_Sandbox.entitlements */,
 				2B183F4F2913F8C00087654E /* Assets.xcassets */,
 				2B7FE8102919C692002C64FF /* Info.plist */,
@@ -205,8 +198,6 @@
 			children = (
 				2BE97D59291C46ED00149BA4 /* Watch.swift */,
 				2BB3A588292445FE0094B787 /* Cabin.swift */,
-				2BC294492926C40000A166B9 /* old_Cabin.swift */,
-				2BC2944F2926CB2600A166B9 /* exp_Cabin.swift */,
 			);
 			name = Peripherals;
 			sourceTree = "<group>";
@@ -487,13 +478,10 @@
 				2BE97D41291C178E00149BA4 /* TabContainer.swift in Sources */,
 				2BE97D3F291C175F00149BA4 /* Media.swift in Sources */,
 				2BE97D5A291C46ED00149BA4 /* Watch.swift in Sources */,
-				2BC2944A2926C40000A166B9 /* old_Cabin.swift in Sources */,
 				2BB3A58B29244B2D0094B787 /* FlightAPI.swift in Sources */,
 				2BE97D3B291C137B00149BA4 /* Home.swift in Sources */,
 				2BA8F60629252166005621D3 /* SeatModels.swift in Sources */,
-				2BC2944E2926CAAB00A166B9 /* RootView.swift in Sources */,
 				2BE97D3D291C174000149BA4 /* FlightInfo.swift in Sources */,
-				2BC294502926CB2600A166B9 /* exp_Cabin.swift in Sources */,
 				2BA8F61A29258F78005621D3 /* ElementsAPI.swift in Sources */,
 				2BA8F60329251C0C005621D3 /* FlightModels.swift in Sources */,
 				2BA7B4CD291D504900942CB5 /* Session.swift in Sources */,
