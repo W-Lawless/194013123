@@ -10,13 +10,7 @@ import XCTest
 
 final class Sandbox_Tests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
 
     func testFactories() throws {
         XCTAssert(type(of: ViewFactories.buildFlightInfo()) == FlightInfo.self)
@@ -34,22 +28,6 @@ final class Sandbox_Tests: XCTestCase {
         let monitor = MockMonitor(endpoint: endpoint, callBack: tickClock)
         monitor.startMonitor(interval: 0.2)
 
-        sleep(1)
-        
-        XCTAssert(count > 0)
-    }
-    
-    func testStopMonitor() throws {
-        var count = 0
-        
-        let endpoint = URL(string: "http://apple.com")!
-        func tickClock(_ alive: Bool, _: String?) async -> () {
-                count += 1
-        }
-        
-        let monitor = MockMonitor(endpoint: endpoint, callBack: tickClock)
-        monitor.startMonitor(interval: 0.2)
-        
         sleep(1)
         
         XCTAssert(count > 0)
@@ -78,15 +56,21 @@ final class Sandbox_Tests: XCTestCase {
         
         let _ = try! JSONDecoder().decode(WeatherModel.self, from: jsonData)
     }
-    
-//    func testPerformanceExample() throws {
-//        // This is an example of a performance test case.
-//        measure {
-//            // Put the code you want to measure the time of here.
-//        }
-//    }
 
 }
+
+//class NetworkIntegrationTests: XCTestCase {
+//    func testSuccessfullyPerformingRequest() throws {
+//        let session = URLSession(mockResponder: Item.MockDataURLResponder.self)
+//        let accessToken = AccessToken(rawValue: "12345")
+//
+//        let publisher = session.publisher(for: .latestItem, using: accessToken)
+//        let result = try awaitCompletion(of: publisher)
+//
+//        XCTAssertEqual(result, [Item.MockDataURLResponder.item])
+//    }
+//}
+
 
 class TimerControllerTests: XCTestCase {
 

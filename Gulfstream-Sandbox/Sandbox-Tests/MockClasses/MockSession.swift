@@ -7,6 +7,7 @@
 
 import Foundation
 import XCTest
+import Combine
 
 struct MockSession {
     
@@ -26,6 +27,8 @@ struct MockSession {
     }
 }
 
+//MARK: - Session Config
+
 extension URLSession {
 
     convenience init<T: MockURLResponder>(mockResponder: T.Type) {
@@ -36,6 +39,26 @@ extension URLSession {
     }
     
 }
+
+//extension URLSession {
+//    func publisher<K, R>(
+//        for endpoint: Endpoint<K, R>,
+//        using requestData: K.RequestData,
+//        decoder: JSONDecoder = .init()
+//    ) -> AnyPublisher<R, Error> {
+//        guard let request = endpoint.makeRequest(with: requestData) else {
+//            return Fail(
+//                error: InvalidEndpointError(endpoint: endpoint)
+//            ).eraseToAnyPublisher()
+//        }
+//
+//        return dataTaskPublisher(for: request)
+//            .map(\.data)
+//            .decode(type: NetworkResponse<R>.self, decoder: decoder)
+//            .map(\.result)
+//            .eraseToAnyPublisher()
+//    }
+//}
 
 class MockURLProtocol<Responder: MockURLResponder>: URLProtocol {
     override class func canInit(with request: URLRequest) -> Bool {
@@ -82,4 +105,25 @@ class MockURLProtocol<Responder: MockURLResponder>: URLProtocol {
 
 protocol MockURLResponder {
     static func respond(to request: URLRequest) throws -> Data
+}
+
+
+struct Item: Decodable {
+    var title: String
+    var description: String
+}
+
+//extension Item {
+//    enum MockDataURLResponder: MockURLResponder {
+//        static let item = Item(title: "Title", description: "Description")
+//
+//        static func respond(to request: URLRequest) throws -> Data {
+//            let response = NetworkResponse(result: item)
+//            return try JSONEncoder().encode(response)
+//        }
+//    }
+//}
+
+struct NetworkResponse<Wrapped: Decodable>: Decodable {
+    var result: Wrapped
 }
