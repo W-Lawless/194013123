@@ -21,11 +21,19 @@
 		2BA8F60E292536AB005621D3 /* ViewFactories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8F60D292536AB005621D3 /* ViewFactories.swift */; };
 		2BA8F61729257848005621D3 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8F61629257848005621D3 /* Navigator.swift */; };
 		2BA8F61A29258F78005621D3 /* ElementsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8F61929258F78005621D3 /* ElementsAPI.swift */; };
+		2BB135D92926D1290016444C /* Sandbox_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135D82926D1290016444C /* Sandbox_Tests.swift */; };
+		2BB135E72926D66E0016444C /* +Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC49CD32922BEE5007DA457 /* +Weather.swift */; };
+		2BB135EA2926D6990016444C /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135E92926D6990016444C /* WeatherAPI.swift */; };
+		2BB135EC2926D6AB0016444C /* WeatherModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135EB2926D6AB0016444C /* WeatherModels.swift */; };
+		2BB135F02926DD610016444C /* Weather.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BB135ED2926DD610016444C /* Weather.json */; };
+		2BB135F12926DD610016444C /* Seats.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BB135EE2926DD610016444C /* Seats.json */; };
+		2BB135F22926DD610016444C /* Flight.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BB135EF2926DD610016444C /* Flight.json */; };
+		2BB135F52926E21A0016444C /* MockMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135F42926E21A0016444C /* MockMonitor.swift */; };
+		2BB135F72926E4590016444C /* MockSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135F62926E4590016444C /* MockSession.swift */; };
 		2BB3A587292445C90094B787 /* HeartbeatMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3A586292445C90094B787 /* HeartbeatMonitor.swift */; };
 		2BB3A589292445FE0094B787 /* Cabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3A588292445FE0094B787 /* Cabin.swift */; };
 		2BB3A58B29244B2D0094B787 /* FlightAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3A58A29244B2D0094B787 /* FlightAPI.swift */; };
 		2BC49CD229228F2A007DA457 /* +FlightInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC49CD129228F2A007DA457 /* +FlightInfo.swift */; };
-		2BC49CD42922BEE5007DA457 /* +Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC49CD32922BEE5007DA457 /* +Weather.swift */; };
 		2BC49CD62922CE1B007DA457 /* NetworkBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC49CD52922CE1B007DA457 /* NetworkBridge.swift */; };
 		2BC49CD92923DD8F007DA457 /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC49CD82923DD8F007DA457 /* Loading.swift */; };
 		2BC49CDD2923E81C007DA457 /* +Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC49CDC2923E81C007DA457 /* +Session.swift */; };
@@ -38,7 +46,7 @@
 		2BE97D4B291C348800149BA4 /* CallAttendant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D4A291C348800149BA4 /* CallAttendant.swift */; };
 		2BE97D4D291C348900149BA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE97D4C291C348900149BA4 /* Assets.xcassets */; };
 		2BE97D50291C348900149BA4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE97D4F291C348900149BA4 /* Preview Assets.xcassets */; };
-		2BE97D53291C348900149BA4 /* wearable Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2BE97D46291C348800149BA4 /* wearable Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2BE97D53291C348900149BA4 /* My Cabin.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2BE97D46291C348800149BA4 /* My Cabin.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2BE97D5A291C46ED00149BA4 /* Watch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D59291C46ED00149BA4 /* Watch.swift */; };
 		2BE97D60291C4B5100149BA4 /* +Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D5F291C4B5100149BA4 /* +Phone.swift */; };
 		2BE97D62291C57B600149BA4 /* FlightInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D61291C57B600149BA4 /* FlightInfo.swift */; };
@@ -47,6 +55,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2BB135DA2926D1290016444C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2B183F402913F8BD0087654E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2B183F472913F8BD0087654E;
+			remoteInfo = "Gulfstream-Sandbox";
+		};
 		2BE97D51291C348900149BA4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2B183F402913F8BD0087654E /* Project object */;
@@ -63,7 +78,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				2BE97D53291C348900149BA4 /* wearable Watch App.app in Embed Watch Content */,
+				2BE97D53291C348900149BA4 /* My Cabin.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,6 +103,15 @@
 		2BA8F60D292536AB005621D3 /* ViewFactories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactories.swift; sourceTree = "<group>"; };
 		2BA8F61629257848005621D3 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		2BA8F61929258F78005621D3 /* ElementsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsAPI.swift; sourceTree = "<group>"; };
+		2BB135D62926D1290016444C /* Sandbox-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sandbox-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BB135D82926D1290016444C /* Sandbox_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sandbox_Tests.swift; sourceTree = "<group>"; };
+		2BB135E92926D6990016444C /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
+		2BB135EB2926D6AB0016444C /* WeatherModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModels.swift; sourceTree = "<group>"; };
+		2BB135ED2926DD610016444C /* Weather.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Weather.json; sourceTree = "<group>"; };
+		2BB135EE2926DD610016444C /* Seats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Seats.json; sourceTree = "<group>"; };
+		2BB135EF2926DD610016444C /* Flight.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Flight.json; sourceTree = "<group>"; };
+		2BB135F42926E21A0016444C /* MockMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMonitor.swift; sourceTree = "<group>"; };
+		2BB135F62926E4590016444C /* MockSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSession.swift; sourceTree = "<group>"; };
 		2BB3A586292445C90094B787 /* HeartbeatMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatMonitor.swift; sourceTree = "<group>"; };
 		2BB3A588292445FE0094B787 /* Cabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cabin.swift; sourceTree = "<group>"; };
 		2BB3A58A29244B2D0094B787 /* FlightAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightAPI.swift; sourceTree = "<group>"; };
@@ -101,7 +125,7 @@
 		2BE97D3C291C174000149BA4 /* FlightInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightInfo.swift; sourceTree = "<group>"; };
 		2BE97D3E291C175F00149BA4 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		2BE97D40291C178E00149BA4 /* TabContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContainer.swift; sourceTree = "<group>"; };
-		2BE97D46291C348800149BA4 /* wearable Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "wearable Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BE97D46291C348800149BA4 /* My Cabin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My Cabin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE97D48291C348800149BA4 /* EntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPoint.swift; sourceTree = "<group>"; };
 		2BE97D4A291C348800149BA4 /* CallAttendant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallAttendant.swift; sourceTree = "<group>"; };
 		2BE97D4C291C348900149BA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -115,6 +139,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		2B183F452913F8BD0087654E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BB135D32926D1290016444C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -136,6 +167,7 @@
 			children = (
 				2B183F4A2913F8BD0087654E /* Gulfstream-Sandbox */,
 				2BE97D47291C348800149BA4 /* wearable Watch App */,
+				2BB135D72926D1290016444C /* Sandbox-Tests */,
 				2B183F492913F8BD0087654E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -144,7 +176,8 @@
 			isa = PBXGroup;
 			children = (
 				2B183F482913F8BD0087654E /* Gulfstream-Sandbox.app */,
-				2BE97D46291C348800149BA4 /* wearable Watch App.app */,
+				2BE97D46291C348800149BA4 /* My Cabin.app */,
+				2BB135D62926D1290016444C /* Sandbox-Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -208,6 +241,7 @@
 				2BA8F61829258F3E005621D3 /* CabinElements */,
 				2BA8F60429252150005621D3 /* Seats */,
 				2BA8F60129251BFB005621D3 /* FlightInfo */,
+				2BB135E82926D67F0016444C /* Weather */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -294,6 +328,44 @@
 			name = CabinElements;
 			sourceTree = "<group>";
 		};
+		2BB135D72926D1290016444C /* Sandbox-Tests */ = {
+			isa = PBXGroup;
+			children = (
+				2BB135F32926E1EB0016444C /* MockClasses */,
+				2BB135DF2926D2C80016444C /* MockData */,
+				2BB135D82926D1290016444C /* Sandbox_Tests.swift */,
+			);
+			path = "Sandbox-Tests";
+			sourceTree = "<group>";
+		};
+		2BB135DF2926D2C80016444C /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+				2BB135EF2926DD610016444C /* Flight.json */,
+				2BB135EE2926DD610016444C /* Seats.json */,
+				2BB135ED2926DD610016444C /* Weather.json */,
+			);
+			path = MockData;
+			sourceTree = "<group>";
+		};
+		2BB135E82926D67F0016444C /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				2BB135E92926D6990016444C /* WeatherAPI.swift */,
+				2BB135EB2926D6AB0016444C /* WeatherModels.swift */,
+			);
+			name = Weather;
+			sourceTree = "<group>";
+		};
+		2BB135F32926E1EB0016444C /* MockClasses */ = {
+			isa = PBXGroup;
+			children = (
+				2BB135F42926E21A0016444C /* MockMonitor.swift */,
+				2BB135F62926E4590016444C /* MockSession.swift */,
+			);
+			path = MockClasses;
+			sourceTree = "<group>";
+		};
 		2BC49CD72923DD82007DA457 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,8 +425,8 @@
 				2BE97D5F291C4B5100149BA4 /* +Phone.swift */,
 				2BA7B4FA291DC0FF00942CB5 /* +Seats.swift */,
 				2BC49CD129228F2A007DA457 /* +FlightInfo.swift */,
-				2BC49CD32922BEE5007DA457 /* +Weather.swift */,
 				2BC49CD52922CE1B007DA457 /* NetworkBridge.swift */,
+				2BC49CD32922BEE5007DA457 /* +Weather.swift */,
 				2BC49CDC2923E81C007DA457 /* +Session.swift */,
 				2BC49CDE2923FC06007DA457 /* +Cabin.swift */,
 			);
@@ -391,6 +463,24 @@
 			productReference = 2B183F482913F8BD0087654E /* Gulfstream-Sandbox.app */;
 			productType = "com.apple.product-type.application";
 		};
+		2BB135D52926D1290016444C /* Sandbox-Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2BB135DC2926D1290016444C /* Build configuration list for PBXNativeTarget "Sandbox-Tests" */;
+			buildPhases = (
+				2BB135D22926D1290016444C /* Sources */,
+				2BB135D32926D1290016444C /* Frameworks */,
+				2BB135D42926D1290016444C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2BB135DB2926D1290016444C /* PBXTargetDependency */,
+			);
+			name = "Sandbox-Tests";
+			productName = "Sandbox-Tests";
+			productReference = 2BB135D62926D1290016444C /* Sandbox-Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		2BE97D45291C348800149BA4 /* wearable Watch App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2BE97D54291C348900149BA4 /* Build configuration list for PBXNativeTarget "wearable Watch App" */;
@@ -405,7 +495,7 @@
 			);
 			name = "wearable Watch App";
 			productName = "wearable Watch App";
-			productReference = 2BE97D46291C348800149BA4 /* wearable Watch App.app */;
+			productReference = 2BE97D46291C348800149BA4 /* My Cabin.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -420,6 +510,10 @@
 				TargetAttributes = {
 					2B183F472913F8BD0087654E = {
 						CreatedOnToolsVersion = 14.0.1;
+					};
+					2BB135D52926D1290016444C = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 2B183F472913F8BD0087654E;
 					};
 					2BE97D45291C348800149BA4 = {
 						CreatedOnToolsVersion = 14.1;
@@ -441,6 +535,7 @@
 			targets = (
 				2B183F472913F8BD0087654E /* Gulfstream-Sandbox */,
 				2BE97D45291C348800149BA4 /* wearable Watch App */,
+				2BB135D52926D1290016444C /* Sandbox-Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -452,6 +547,16 @@
 			files = (
 				2B183F542913F8C00087654E /* Preview Assets.xcassets in Resources */,
 				2B183F502913F8C00087654E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BB135D42926D1290016444C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BB135F22926DD610016444C /* Flight.json in Resources */,
+				2BB135F12926DD610016444C /* Seats.json in Resources */,
+				2BB135F02926DD610016444C /* Weather.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +577,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B183F4E2913F8BD0087654E /* Loading.swift in Sources */,
+				2BB135EC2926D6AB0016444C /* WeatherModels.swift in Sources */,
 				2BE97D67291C69F700149BA4 /* Haptics.swift in Sources */,
 				2BB3A587292445C90094B787 /* HeartbeatMonitor.swift in Sources */,
 				2BA7B4CF291D551A00942CB5 /* SeatSelection.swift in Sources */,
@@ -488,8 +594,19 @@
 				2BB3A589292445FE0094B787 /* Cabin.swift in Sources */,
 				2B183F4C2913F8BD0087654E /* EntryPoint.swift in Sources */,
 				2BA7B4CB291D4A3A00942CB5 /* SeatsAPI.swift in Sources */,
+				2BB135EA2926D6990016444C /* WeatherAPI.swift in Sources */,
 				2BA8F61729257848005621D3 /* Navigator.swift in Sources */,
 				2BA8F60E292536AB005621D3 /* ViewFactories.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BB135D22926D1290016444C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BB135F72926E4590016444C /* MockSession.swift in Sources */,
+				2BB135F52926E21A0016444C /* MockMonitor.swift in Sources */,
+				2BB135D92926D1290016444C /* Sandbox_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,11 +617,11 @@
 				2BE97D64291C57CB00149BA4 /* Weather.swift in Sources */,
 				2BC49CDF2923FC06007DA457 /* +Cabin.swift in Sources */,
 				2BE97D4B291C348800149BA4 /* CallAttendant.swift in Sources */,
+				2BB135E72926D66E0016444C /* +Weather.swift in Sources */,
 				2BE97D62291C57B600149BA4 /* FlightInfo.swift in Sources */,
 				2BC49CD92923DD8F007DA457 /* Loading.swift in Sources */,
 				2BA7B4F9291D9E9200942CB5 /* TabContainer.swift in Sources */,
 				2BC49CDD2923E81C007DA457 /* +Session.swift in Sources */,
-				2BC49CD42922BEE5007DA457 /* +Weather.swift in Sources */,
 				2BC49CD62922CE1B007DA457 /* NetworkBridge.swift in Sources */,
 				2BE97D60291C4B5100149BA4 /* +Phone.swift in Sources */,
 				2BC49CD229228F2A007DA457 /* +FlightInfo.swift in Sources */,
@@ -516,6 +633,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2BB135DB2926D1290016444C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2B183F472913F8BD0087654E /* Gulfstream-Sandbox */;
+			targetProxy = 2BB135DA2926D1290016444C /* PBXContainerItemProxy */;
+		};
 		2BE97D52291C348900149BA4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2BE97D45291C348800149BA4 /* wearable Watch App */;
@@ -649,7 +771,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Gulfstream-Sandbox/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Sandbox;
+				INFOPLIST_KEY_CFBundleDisplayName = "My Cabin";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -692,7 +814,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Gulfstream-Sandbox/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Sandbox;
+				INFOPLIST_KEY_CFBundleDisplayName = "My Cabin";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -719,6 +841,50 @@
 			};
 			name = Release;
 		};
+		2BB135DD2926D1290016444C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T5533WY4HV;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 12.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sandbox.Sandbox-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gulfstream-Sandbox.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Gulfstream-Sandbox";
+			};
+			name = Debug;
+		};
+		2BB135DE2926D1290016444C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T5533WY4HV;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 12.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sandbox.Sandbox-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gulfstream-Sandbox.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Gulfstream-Sandbox";
+			};
+			name = Release;
+		};
 		2BE97D55291C348900149BA4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -731,7 +897,6 @@
 				DEVELOPMENT_TEAM = T5533WY4HV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = wearable;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.gulfstream.sandbox.Gulfstream-Sandbox";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -740,7 +905,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gulfstream.sandbox.Gulfstream-Sandbox.watchkitapp";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "My Cabin";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -762,7 +927,6 @@
 				DEVELOPMENT_TEAM = T5533WY4HV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = wearable;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.gulfstream.sandbox.Gulfstream-Sandbox";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -771,7 +935,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gulfstream.sandbox.Gulfstream-Sandbox.watchkitapp";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "My Cabin";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -799,6 +963,15 @@
 			buildConfigurations = (
 				2B183F582913F8C00087654E /* Debug */,
 				2B183F592913F8C00087654E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2BB135DC2926D1290016444C /* Build configuration list for PBXNativeTarget "Sandbox-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BB135DD2926D1290016444C /* Debug */,
+				2BB135DE2926D1290016444C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

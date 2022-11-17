@@ -1,0 +1,88 @@
+{
+    "results": [
+        {
+            "current": {
+                "condition": "FOG",
+                "temperatureF": 51.6,
+                "high": 98,
+                "low": 24,
+                "relativeHumidityPct": "50",
+                "windDirectionDeg": 165,
+                "windMph": 15.5,
+                "pressureIn": 29.46,
+                "pressureTrend": "-",
+                "dewpointF": 38,
+                "heatIndexF": "87",
+                "windChillF": "",
+                "visibilityMi": 4.4,
+                "solarRadiation": "",
+                "uv": "1",
+                "probabilityOfPrecipitation": 91
+            },
+            "forecasts": [
+                {
+                    "date": 1622812672857,
+                    "highF": 54,
+                    "lowF": 37,
+                    "condition": "SNOW",
+                    "probabilityOfPrecipitation": 94,
+                    "quantitativePrecipitationForecastAllDayIn": 0.57,
+                    "quantitativePrecipitationForecastDayIn": 0.43,
+                    "quantitativePrecipitationForecastNightIn": 0.71,
+                    "snowAllDayIn": 0.01,
+                    "snowDayIn": 0.75,
+                    "snowNightIn": 0.73,
+                    "maxWindMph": 4,
+                    "maxWindDirectionDeg": 223,
+                    "avgWindMph": 32,
+                    "avgWindDirectionDeg": 18,
+                    "averageHumidityPct": 34
+                },
+                {
+                    "date": 1622899072857,
+                    "highF": 64,
+                    "lowF": 31,
+                    "condition": "PARTLY_CLOUDY",
+                    "probabilityOfPrecipitation": 74,
+                    "quantitativePrecipitationForecastAllDayIn": 0.03,
+                    "quantitativePrecipitationForecastDayIn": 0.69,
+                    "quantitativePrecipitationForecastNightIn": 0.0,
+                    "snowAllDayIn": 0.63,
+                    "snowDayIn": 0.61,
+                    "snowNightIn": 0.51,
+                    "maxWindMph": 4,
+                    "maxWindDirectionDeg": 301,
+                    "avgWindMph": 6,
+                    "avgWindDirectionDeg": 205,
+                    "averageHumidityPct": 15
+                },
+                {
+                    "date": 1622985472858,
+                    "highF": 73,
+                    "lowF": 36,
+                    "condition": "MOSTLY_SUNNY",
+                    "probabilityOfPrecipitation": 63,
+                    "quantitativePrecipitationForecastAllDayIn": 0.03,
+                    "quantitativePrecipitationForecastDayIn": 0.79,
+                    "quantitativePrecipitationForecastNightIn": 0.84,
+                    "snowAllDayIn": 0.87,
+                    "snowDayIn": 0.73,
+                    "snowNightIn": 0.99,
+                    "maxWindMph": 24,
+                    "maxWindDirectionDeg": 268,
+                    "avgWindMph": 35,
+                    "avgWindDirectionDeg": 27,
+                    "averageHumidityPct": 75
+                }
+            ],
+            "astronomy": {
+                "moonPhasePctIlluminated": 20,
+                "ageOfMoon": 14,
+                "sunSet": "20:12",
+                "sunRise": "06:23"
+            }
+        }
+    ],
+    "length": 1
+}
+
