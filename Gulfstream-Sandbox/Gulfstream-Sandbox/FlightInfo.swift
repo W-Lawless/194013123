@@ -50,8 +50,8 @@ class FlightViewModel: ObservableObject {
     
     @MainActor func updateValues(_ alive: Bool, _ data: FlightModel?) {
         self.loading = false
-        self.groundSpeed = data?.results[0].ground_speed
-        self.airSpeed = data?.results[0].air_speed
+        self.groundSpeed = data?.ground_speed
+        self.airSpeed = data?.air_speed
     }
 
 }

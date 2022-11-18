@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct FlightModel: Codable {
-    var results: [FlightDetails]
-    var length: Int
-}
+//struct FlightModel: Codable {
+//    var results: [FlightDetails]
+//    var length: Int
+//}
 
-struct FlightDetails: Codable {
+struct FlightModel: Codable {
     var latitude: Double
     var longitude: Double
     var altitude: Int

@@ -8,21 +8,14 @@
 import Foundation
 
 
-struct SeatsModel: Codable {
-    var results: [Seat]
-    var length: Int
-}
+//struct SeatsModel: Codable {
+//    var results: [Seat]
+//    var length: Int
+//}
 
-struct StateModel: Codable {
-    var results: [State]
-    var length:Int
-    struct State: Codable {
-        var call: Bool
-        var identifier: String
-    }
-}
 
-struct Seat: Codable, Identifiable {
+
+struct SeatModel: Codable, Identifiable {
     var id: String
     var name: String
     struct rect: Codable {
@@ -39,6 +32,15 @@ struct Seat: Codable, Identifiable {
     var short_name: String
     var chirality: String
     struct state: Codable {
+        var call: Bool
+        var identifier: String
+    }
+}
+
+struct StateModel: Codable {
+    var results: [State]
+    var length:Int
+    struct State: Codable {
         var call: Bool
         var identifier: String
     }

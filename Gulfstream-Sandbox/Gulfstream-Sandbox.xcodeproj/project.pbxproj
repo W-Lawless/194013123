@@ -31,6 +31,7 @@
 		2BB135F52926E21A0016444C /* MockMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135F42926E21A0016444C /* MockMonitor.swift */; };
 		2BB135F72926E4590016444C /* MockSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135F62926E4590016444C /* MockSession.swift */; };
 		2BB135FA2926FD760016444C /* MockTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135F92926FD760016444C /* MockTimer.swift */; };
+		2BB135FC292703970016444C /* CodableWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135FB292703970016444C /* CodableWrapper.swift */; };
 		2BB3A587292445C90094B787 /* HeartbeatMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3A586292445C90094B787 /* HeartbeatMonitor.swift */; };
 		2BB3A589292445FE0094B787 /* Cabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3A588292445FE0094B787 /* Cabin.swift */; };
 		2BB3A58B29244B2D0094B787 /* FlightAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3A58A29244B2D0094B787 /* FlightAPI.swift */; };
@@ -115,6 +116,7 @@
 		2BB135F62926E4590016444C /* MockSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSession.swift; sourceTree = "<group>"; };
 		2BB135F82926EAC90016444C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2BB135F92926FD760016444C /* MockTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimer.swift; sourceTree = "<group>"; };
+		2BB135FB292703970016444C /* CodableWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableWrapper.swift; sourceTree = "<group>"; };
 		2BB3A586292445C90094B787 /* HeartbeatMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatMonitor.swift; sourceTree = "<group>"; };
 		2BB3A588292445FE0094B787 /* Cabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cabin.swift; sourceTree = "<group>"; };
 		2BB3A58A29244B2D0094B787 /* FlightAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightAPI.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				2BA7B4C8291D379200942CB5 /* Peripherals */,
 				2BA7B4CC291D504900942CB5 /* Session.swift */,
 				2BB3A586292445C90094B787 /* HeartbeatMonitor.swift */,
+				2BB135FB292703970016444C /* CodableWrapper.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -585,6 +588,7 @@
 				2BB135EC2926D6AB0016444C /* WeatherModels.swift in Sources */,
 				2BE97D67291C69F700149BA4 /* Haptics.swift in Sources */,
 				2BB3A587292445C90094B787 /* HeartbeatMonitor.swift in Sources */,
+				2BB135FC292703970016444C /* CodableWrapper.swift in Sources */,
 				2BA7B4CF291D551A00942CB5 /* SeatSelection.swift in Sources */,
 				2BE97D41291C178E00149BA4 /* TabContainer.swift in Sources */,
 				2BE97D3F291C175F00149BA4 /* Media.swift in Sources */,

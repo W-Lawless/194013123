@@ -11,7 +11,7 @@ import SwiftUI
 struct Gulfstream_SandboxApp: App {
     
     @Environment(\.scenePhase) var scenePhase
-    @ObservedObject var cabin = CabinAPI.shared
+    @StateObject var cabin = CabinAPI.shared
     
     var body: some Scene {
         WindowGroup {

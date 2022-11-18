@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct WeatherModel: Codable {
-    var results: [WeatherSubmodel]
-    var length: Int
-}
+//struct WeatherModel: Codable {
+//    var results: [WeatherSubmodel]
+//    var length: Int
+//}
 
-struct WeatherSubmodel: Codable {
+struct WeatherModel: Codable {
     var current: RealtimeForecast
     var forecasts: [FutureForecast]
     var astronomy: Astronomy

@@ -124,6 +124,6 @@ struct Item: Decodable {
 //    }
 //}
 
-struct NetworkResponse<Wrapped: Decodable>: Decodable {
-    var result: Wrapped
-}
+//struct NetworkResponse<Wrapped: Decodable>: Decodable {
+//    var result: Wrapped
+//}
