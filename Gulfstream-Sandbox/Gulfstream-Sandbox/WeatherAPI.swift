@@ -39,13 +39,11 @@ class WeatherApi: ObservableObject {
         
         do {
             let (data, _) = try await Session.shared.data(from: url)
-            let serializedData = try! JSONDecoder().decode(WeatherModel.self, from: data)
+            let serializedData = try? JSONDecoder().decode(NetworkResponse<WeatherModel>.self, from: data)
             
-//            if let model = serializedData {
-//                onHeartbeat(model: model)
-                self.onHeartbeat(model: serializedData)
-
-//            }
+            if let model = serializedData {
+                onHeartbeat(model: model)
+            }
         } catch { print(" ❌: Weather Api Error: \(error)") }
     }
     
@@ -84,19 +82,18 @@ class WeatherApi: ObservableObject {
             
             if let data = data {
                 
-                let serializedData = try! JSONDecoder().decode(WeatherModel.self, from: data)
+                let serializedData = try? JSONDecoder().decode(NetworkResponse<WeatherModel>.self, from: data)
                 
-//                if let model = serializedData {
-//                    self.onHeartbeat(model: model)
-                self.onHeartbeat(model: serializedData)
-//                }
+                if let model = serializedData {
+                    self.onHeartbeat(model: model)
+                }
             }
             
         }
         task.resume()
     }
     
-    func onHeartbeat(model: WeatherModel) {
+    func onHeartbeat(model: NetworkResponse<WeatherModel>) {
         DispatchQueue.main.async {
             self.condition = model.results[0].current.condition
             self.currentTemp = Int(model.results[0].current.temperatureF)

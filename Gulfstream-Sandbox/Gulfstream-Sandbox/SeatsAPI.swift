@@ -37,12 +37,12 @@ struct SeatsAPI {
         
         do {
             let (data, _) = try await Session.shared.data(from: url)
-            let serializedData = try? JSONDecoder().decode(SeatsModel.self, from: data)
+            let serializedData = try? JSONDecoder().decode(NetworkResponse<SeatModel>.self, from: data)
             if let model = serializedData { await viewModel.updateValues(data: model) }
         } catch { print(" ❌: Seats Api Error Decoding: \(error)") }
     }
     
-    func call(seat: Seat) async {
+    func call(seat: SeatModel) async {
         var URI = self.configurableEndpoint
         URI.path.append("/\(seat.id)")
         URI.path.append(self.seatState)
@@ -56,7 +56,7 @@ struct SeatsAPI {
         request.httpMethod = "PUT"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
     
-        let encodeObj = Seat.state(call: true, identifier: seat.id)
+        let encodeObj = SeatModel.state(call: true, identifier: seat.id)
         let requestBody = try? JSONEncoder().encode(encodeObj)
         
         request.httpBody = requestBody

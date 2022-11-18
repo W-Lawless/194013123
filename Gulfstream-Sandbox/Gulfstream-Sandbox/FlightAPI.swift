@@ -32,7 +32,7 @@ struct FlightAPI {
     func initialFetch() async {
         do {
             let (data, _) = try await Session.shared.data(from: endpoint)
-            let serializedData = try? JSONDecoder().decode(FlightModel.self, from: data)
+            let serializedData = try? JSONDecoder().decode(NetworkResponse<FlightModel>.self, from: data)
             if let model = serializedData { await viewModel.updateValues(true, model) }
         } catch { print(" ❌: Flight Api Error: \(error)") }
     }
@@ -45,9 +45,9 @@ class FlightMonitor: HeartbeatMonitor {
     
     private var endpoint: URL
     private var timer: Timer?
-    var onPulse: (Bool, FlightModel?) async -> ()
+    var onPulse: (Bool, NetworkResponse<FlightModel>?) async -> ()
     
-    init(endpoint url: URL, callBack cb: @escaping (_: Bool, _: FlightModel?) async -> ()) {
+    init(endpoint url: URL, callBack cb: @escaping (_: Bool, _: NetworkResponse<FlightModel>?) async -> ()) {
         self.endpoint = url
         self.onPulse = cb
     }
@@ -77,7 +77,7 @@ class FlightMonitor: HeartbeatMonitor {
         
         do {
             let (data, _) = try await Session.shared.data(for: request)
-            let serializedData = try? JSONDecoder().decode(FlightModel.self, from: data)
+            let serializedData = try? JSONDecoder().decode(NetworkResponse<FlightModel>.self, from: data)
             if let model = serializedData {
                 await self.onPulse(true, model)
             }

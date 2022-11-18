@@ -14,7 +14,7 @@ struct SeatSelection: View {
     
     var body: some View {
         
-        List(viewModel.seatList ?? [Seat]()) { seat in
+        List(viewModel.seatList ?? [SeatModel]()) { seat in
             Button(seat.id) {
                 Task {
                     await api.call(seat: seat)
@@ -32,10 +32,10 @@ struct SeatSelection: View {
 
 class SeatsViewModel: ObservableObject {
 
-    @Published var seatList: [Seat]?
+    @Published var seatList: [SeatModel]?
     
-    @MainActor func updateValues(data: SeatsModel) {
-        var out = [Seat]()
+    @MainActor func updateValues(data: NetworkResponse<SeatModel>) {
+        var out = [SeatModel]()
         
         data.results.forEach { Seat in
             out.append(Seat)

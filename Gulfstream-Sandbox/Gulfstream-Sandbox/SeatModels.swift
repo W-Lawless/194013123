@@ -13,8 +13,6 @@ import Foundation
 //    var length: Int
 //}
 
-
-
 struct SeatModel: Codable, Identifiable {
     var id: String
     var name: String

@@ -41,7 +41,7 @@ struct ElementsAPI {
         
         do {
             let (data, _) = try await Session.shared.data(from: url)
-            let serializedData = try? JSONDecoder().decode(SeatsModel.self, from: data)
+            let serializedData = try? JSONDecoder().decode(NetworkResponse<SeatModel>.self, from: data)
             if let model = serializedData { await viewModel.updateValues(data: model) }
         } catch { print(" ❌: Seats Api Error Decoding: \(error)") }
     }
