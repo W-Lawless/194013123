@@ -57,11 +57,10 @@ class CabinMonitor: HeartbeatMonitor {
     }
 
     func startMonitor(interval: Double) {
-        print("Start Monitor w/ \(interval)")
         DispatchQueue.global(qos: .background).async {
             self.timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
                 Task {
-                    print("Interval is \(interval)")
+                    print(" ⏱: \(interval)")
                     await self.findPulse()
                 }
             }
@@ -71,7 +70,6 @@ class CabinMonitor: HeartbeatMonitor {
     }
     
     func stopMonitor() {
-        print("Monitor killed")
         DispatchQueue.global(qos: .background).async {
             self.timer?.invalidate()
         }
