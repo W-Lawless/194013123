@@ -8,60 +8,13 @@
 import XCTest
 @testable import Gulfstream_Sandbox
 
-/*
+
 class Monitor_Tests: XCTestCase {
     
-    var monitor: CabinMonitorTEST!
-
-    override func setUp() {
-        let endpoint = URL(string: "http://apple.com")!
-        self.monitor = CabinMonitorTEST(endpoint: endpoint, callBack: nil)
-    }
-
-    override func tearDown() {
-        monitor.stopMonitor()
-        super.tearDown()
-    }
-    
-    
-    func testMonitorStarts() throws {
-        
-        let timerStarts = expectation(description: "timerStarts")
-        func tickClock(_ alive: Bool, _: String?) async -> () {
-            timerStarts.fulfill()
-            XCTAssertTrue(monitor.isTimerValid)
-        }
-    
-        self.monitor.onPulse = tickClock
-        self.monitor.startMonitor(interval: 1)
-     
-        
-        waitForExpectations(timeout: 5, handler: nil)
-    }
-    
-    func testMonitorStops() throws {
-
-        let timerStops = expectation(description: "timerStops")
-
-        func tickClock(_ alive: Bool, _: String?) async -> () {
-            self.monitor.stopMonitor()
-            timerStops.fulfill()
-            XCTAssertFalse(monitor.isTimerValid)
-        }
-
-        self.monitor.onPulse = tickClock
-        monitor.startMonitor(interval: 1)
-        
-        waitForExpectations(timeout: 5, handler: nil)
-    }
-    
-}
-*/
-class Monitor2_Tests: XCTestCase {
-    
     func testMonitorStarts() throws {
 
-        let monitor = CabinMonitorTEST2()
+        let monitor = HeartBeatMonitor()
+    ()
 
         let timerStarts = expectation(description: "timerStarts")
         func testTimer() async -> Void {
@@ -70,14 +23,13 @@ class Monitor2_Tests: XCTestCase {
             monitor.stopMonitor()
         }
 
-        monitor.startMonitor(interval: 1, callback: testTimer)
-        // WILL CALLBACK EVER BE NIL ? -- NO 
+        monitor.startMonitor(interval: 1.1, callback: testTimer)
 
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 2, handler: nil)
     }
     
     func testMonitorStops() throws {
-        let monitor = CabinMonitorTEST2()
+        let monitor = HeartBeatMonitor()
 
         let timerStops = expectation(description: "timerStops")
         func testTimer() async -> Void {
@@ -86,9 +38,9 @@ class Monitor2_Tests: XCTestCase {
             XCTAssertFalse(monitor.isTimerValid)
         }
 
-        monitor.startMonitor(interval: 1, callback: testTimer)
+        monitor.startMonitor(interval: 1.2, callback: testTimer)
 
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 2, handler: nil)
     }
         
 }
@@ -96,7 +48,6 @@ class Monitor2_Tests: XCTestCase {
 
 
 class TestDecoders: XCTestCase {
-
     
     func testSeatDecoder() throws {
         let pathString = Bundle(for: type(of: self)).path(forResource: "Seats", ofType: "json")!
@@ -219,3 +170,54 @@ class TimerControllerTests: XCTestCase {
 //        XCTAssertEqual(result, [Item.MockDataURLResponder.item])
 //    }
 //}
+
+
+/*
+class Monitor_Tests: XCTestCase {
+    
+    var monitor: CabinMonitorTEST!
+
+    override func setUp() {
+        let endpoint = URL(string: "http://apple.com")!
+        self.monitor = CabinMonitorTEST(endpoint: endpoint, callBack: nil)
+    }
+
+    override func tearDown() {
+        monitor.stopMonitor()
+        super.tearDown()
+    }
+    
+    
+    func testMonitorStarts() throws {
+        
+        let timerStarts = expectation(description: "timerStarts")
+        func tickClock(_ alive: Bool, _: String?) async -> () {
+            timerStarts.fulfill()
+            XCTAssertTrue(monitor.isTimerValid)
+        }
+    
+        self.monitor.onPulse = tickClock
+        self.monitor.startMonitor(interval: 1)
+     
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+    func testMonitorStops() throws {
+
+        let timerStops = expectation(description: "timerStops")
+
+        func tickClock(_ alive: Bool, _: String?) async -> () {
+            self.monitor.stopMonitor()
+            timerStops.fulfill()
+            XCTAssertFalse(monitor.isTimerValid)
+        }
+
+        self.monitor.onPulse = tickClock
+        monitor.startMonitor(interval: 1)
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+}
+*/

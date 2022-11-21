@@ -10,8 +10,7 @@ import SwiftUI
 struct FlightInfo: View {
     
     @ObservedObject var viewModel: FlightViewModel
-//    var api: FlightAPI
-    var api: FlightAPI2
+    var api: FlightAPI
     
     var body: some View {
         List {

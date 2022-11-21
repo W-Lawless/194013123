@@ -2,7 +2,7 @@
 //  FlightInterface.swift
 //  Gulfstream-Sandbox
 //
-//  Created by Lawless on 11/15/22.
+//  Created by Lawless on 11/21/22.
 //
 
 import Foundation
@@ -12,7 +12,7 @@ import Foundation
 struct FlightAPI {
     
     private var viewModel: FlightViewModel
-    var monitor: any HeartbeatMonitor
+    let monitor = HeartBeatMonitor()
     
     private let scheme = "http"
     private let host = "10.0.0.41"
@@ -26,7 +26,6 @@ struct FlightAPI {
         URI.path = "\(self.baseApi)"
         self.endpoint = URI.url!
         self.viewModel = viewModel
-        self.monitor = FlightMonitor(endpoint: endpoint, callBack: viewModel.updateValues)
     }
     
     func initialFetch() async {
@@ -36,53 +35,18 @@ struct FlightAPI {
             if let model = serializedData { await viewModel.updateValues(true, model) }
         } catch { print(" ❌: Flight Api Error: \(error)") }
     }
-}
-
-
-//MARK: - Monitor
-
-class FlightMonitor: HeartbeatMonitor {
     
-    private var endpoint: URL
-    private var timer: Timer?
-    var onPulse: (Bool, NetworkResponse<FlightModel>?) async -> ()
-    
-    init(endpoint url: URL, callBack cb: @escaping (_: Bool, _: NetworkResponse<FlightModel>?) async -> ()) {
-        self.endpoint = url
-        self.onPulse = cb
-    }
-    
-    func startMonitor(interval: Double) {
-        DispatchQueue.global(qos: .background).async {
-            self.timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
-                Task {
-                    print("Calling flight monitor at \(interval)")
-                    await self.findPulse()
-                }
-            }
-            RunLoop.current.add(self.timer!, forMode: .common);
-            RunLoop.current.run()
-        }
-    }
-    
-    func stopMonitor() {
-        DispatchQueue.global(qos: .background).async {
-            self.timer?.invalidate()
-        }
-    }
-
-    func findPulse() async {
-        
+    func monitorCallback() async {
         let request = URLRequest(url: self.endpoint, timeoutInterval: 2)
         
         do {
             let (data, _) = try await Session.shared.data(for: request)
             let serializedData = try? JSONDecoder().decode(NetworkResponse<FlightModel>.self, from: data)
             if let model = serializedData {
-                await self.onPulse(true, model)
+                print("Ground Speed: \(model.results[0].ground_speed)")
+                await viewModel.updateValues(true, model)
             }
         }
-        catch { await self.onPulse(false, nil) }
+        catch { await viewModel.updateValues(false, nil) }
     }
-
 }

@@ -7,33 +7,6 @@
 
 import Foundation
 
-protocol HeartbeatMonitor {
-    associatedtype DataModel
-    var onPulse: (_ alive: Bool, _ data: DataModel?) async -> () { get set }
-    func startMonitor(interval: Double)
-    func stopMonitor()
-    func findPulse() async
-}
-
-
-protocol HeartbeatMonitorTEST {
-    associatedtype DataModel
-//    typealias onPulse = (_ alive: Bool, _ data: DataModel?) async -> ()
-    var onPulse: ((_ alive: Bool, _ data: DataModel?) async -> ())? { get set }
-    func startMonitor(interval: Double)
-    func stopMonitor()
-    func findPulse() async
-}
-
-
-
-protocol HeartbeatMonitorTEST2{
-//    var delegate: MonitorDelegate? { get set }
-    func startMonitor(interval: Double, callback: (() async -> Void)?)
-    func stopMonitor()
-    var isTimerValid: Bool { get }
-}
-
 class HeartBeatMonitor {
 
     private var timer = Timer()
@@ -42,16 +15,18 @@ class HeartBeatMonitor {
         return timer.isValid
     }
     
-    func startMonitor(interval: Double, callback cb: (() async -> Void)?) {
+    func startMonitor(interval: Double, callback cb: @escaping () async -> Void) {
+//        print(" ⏱ 🏁: \(interval)")
         self.timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
-            print(" ⏱:: 🛩: \(interval)")
+            print(" ⏱: \(interval)")
             Task(priority: .background) {
-                await cb?()
+                await cb()
             }
         }
     }
     
     func stopMonitor() {
+//        print(" ⏱ ❌ ")
         timer.invalidate()
     }
 

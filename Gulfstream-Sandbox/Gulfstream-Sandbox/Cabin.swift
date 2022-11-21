@@ -7,17 +7,24 @@
 
 import Foundation
 
+
 class CabinAPI: ObservableObject {
+    
+    //MARK: - ViewModel
     
     @Published var pulse: Bool = false
 
-    @MainActor func updateValues(_ alive: Bool, _ data: String?) {
+    @MainActor func updateValues(_ alive: Bool, _ data: String?) -> Void {
         if (alive) {
             self.pulse = true
         } else {
             self.pulse = false
         }
     }
+    
+    var monitor = HeartBeatMonitor()
+
+    //MARK: - API
     
     private let scheme = "http"
     private let host = "10.0.0.41"
@@ -30,64 +37,20 @@ class CabinAPI: ObservableObject {
         return URI.url!
     }
     
-    var monitor: (any HeartbeatMonitor)?
-    
-    static var shared: CabinAPI {
-        get {
-            let foo = CabinAPI()
-            foo.monitor = CabinMonitor(endpoint: foo.endpoint, callBack: foo.updateValues)
-            return foo
-        }
-    }
-    private init() { }
-    
-}
-
-class CabinMonitor: HeartbeatMonitor {
-    
-    private var endpoint: URLRequest?
-    private var timer: Timer?
-    var onPulse: (_ alive: Bool, _ data: String?) async -> ()
-
-    init(endpoint url: URL, callBack cb: @escaping (_ alive: Bool, _ data: String?) async -> ()) {
-        var request = URLRequest(url: url, timeoutInterval: 5);
-        request.httpMethod = "HEAD" ///Reduces size of packet transfer 
-        self.endpoint = request
-        self.onPulse = cb
-    }
-
-    func startMonitor(interval: Double) {
-        DispatchQueue.global(qos: .background).async {
-            self.timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
-                Task {
-                    print(" ⏱: \(interval)")
-                    await self.findPulse()
-                }
-            }
-            RunLoop.current.add(self.timer!, forMode: .default);
-            RunLoop.current.run()
-        }
-    }
-    
-    func stopMonitor() {
-        DispatchQueue.global(qos: .background).async {
-            self.timer?.invalidate()
-        }
-    }
-    
-    func findPulse() async {
+    func monitorCallback() async {
         do {
-            let (_,response) = try await Session.shared.data(for: self.endpoint!)
+            var request = URLRequest(url: self.endpoint, timeoutInterval: 5);
+            request.httpMethod = "HEAD"
+            let (_,response) = try await Session.shared.data(for: request)
             if let res = response as? HTTPURLResponse { print(" ✅: Cabin Responsed with Status:\(res.statusCode)")
-                await self.onPulse(true, nil)
+                await updateValues(true, nil)
             }
         } catch {
             let cast = error as NSError;
             print(" ❌: Cabin Connection Error \(cast.code)")
-            await self.onPulse(false, nil)
+            await updateValues(false, nil)
         }
     }
+    
 }
-
-
 

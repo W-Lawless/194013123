@@ -15,7 +15,7 @@ struct ViewFactories {
     
     static func buildFlightInfo() -> FlightInfo {
         let viewModel = FlightViewModel()
-        let api = FlightAPI2(viewModel: viewModel)
+        let api = FlightAPI(viewModel: viewModel)
         
         let view = FlightInfo(viewModel: viewModel, api: api)
         return view
