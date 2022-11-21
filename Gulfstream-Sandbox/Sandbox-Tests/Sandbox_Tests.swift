@@ -8,30 +8,94 @@
 import XCTest
 @testable import Gulfstream_Sandbox
 
-final class Sandbox_Tests: XCTestCase {
+/*
+class Monitor_Tests: XCTestCase {
+    
+    var monitor: CabinMonitorTEST!
 
+    override func setUp() {
+        let endpoint = URL(string: "http://apple.com")!
+        self.monitor = CabinMonitorTEST(endpoint: endpoint, callBack: nil)
+    }
 
-
-    func testFactories() throws {
-        XCTAssert(type(of: ViewFactories.buildFlightInfo()) == FlightInfo.self)
-        XCTAssert(type(of: ViewFactories.buildSeatsSelection()) == SeatSelection.self)
+    override func tearDown() {
+        monitor.stopMonitor()
+        super.tearDown()
     }
     
-//    func testMonitor() throws {
-//        var count = 0
-//        
-//        let endpoint = URL(string: "http://apple.com")!
-//        func tickClock(_ alive: Bool, _: String?) async -> () {
-//                count += 1
-//        }
-//        
-//        let monitor = MockMonitor(endpoint: endpoint, callBack: tickClock)
-//        monitor.startMonitor(interval: 0.2)
-//
-//        sleep(1)
-//        
-//        XCTAssert(count > 0)
-//    }
+    
+    func testMonitorStarts() throws {
+        
+        let timerStarts = expectation(description: "timerStarts")
+        func tickClock(_ alive: Bool, _: String?) async -> () {
+            timerStarts.fulfill()
+            XCTAssertTrue(monitor.isTimerValid)
+        }
+    
+        self.monitor.onPulse = tickClock
+        self.monitor.startMonitor(interval: 1)
+     
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+    func testMonitorStops() throws {
+
+        let timerStops = expectation(description: "timerStops")
+
+        func tickClock(_ alive: Bool, _: String?) async -> () {
+            self.monitor.stopMonitor()
+            timerStops.fulfill()
+            XCTAssertFalse(monitor.isTimerValid)
+        }
+
+        self.monitor.onPulse = tickClock
+        monitor.startMonitor(interval: 1)
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+}
+*/
+class Monitor2_Tests: XCTestCase {
+    
+    func testMonitorStarts() throws {
+
+        let monitor = CabinMonitorTEST2()
+
+        let timerStarts = expectation(description: "timerStarts")
+        func testTimer() async -> Void {
+            timerStarts.fulfill()
+            XCTAssertTrue(monitor.isTimerValid)
+            monitor.stopMonitor()
+        }
+
+        monitor.startMonitor(interval: 1, callback: testTimer)
+
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+    func testMonitorStops() throws {
+        let monitor = CabinMonitorTEST2()
+
+        let timerStops = expectation(description: "timerStops")
+        func testTimer() async -> Void {
+            monitor.stopMonitor()
+            timerStops.fulfill()
+            XCTAssertFalse(monitor.isTimerValid)
+        }
+
+        monitor.startMonitor(interval: 1, callback: testTimer)
+
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+        
+}
+
+
+
+class TestDecoders: XCTestCase {
+
     
     func testSeatDecoder() throws {
         let pathString = Bundle(for: type(of: self)).path(forResource: "Seats", ofType: "json")!
@@ -59,19 +123,16 @@ final class Sandbox_Tests: XCTestCase {
 
 }
 
-//class NetworkIntegrationTests: XCTestCase {
-//    func testSuccessfullyPerformingRequest() throws {
-//        let session = URLSession(mockResponder: Item.MockDataURLResponder.self)
-//        let accessToken = AccessToken(rawValue: "12345")
-//
-//        let publisher = session.publisher(for: .latestItem, using: accessToken)
-//        let result = try awaitCompletion(of: publisher)
-//
-//        XCTAssertEqual(result, [Item.MockDataURLResponder.item])
-//    }
-//}
+class TestViewFactories: XCTestCase {
+    
+    func testFactories() throws {
+        XCTAssert(type(of: ViewFactories.buildFlightInfo()) == FlightInfo.self)
+        XCTAssert(type(of: ViewFactories.buildSeatsSelection()) == SeatSelection.self)
+    }
+    
+}
 
-
+/*
 class TimerControllerTests: XCTestCase {
 
     // MARK: - Properties
@@ -143,3 +204,17 @@ class TimerControllerTests: XCTestCase {
     }
 
 }
+*/
+
+
+//class NetworkIntegrationTests: XCTestCase {
+//    func testSuccessfullyPerformingRequest() throws {
+//        let session = URLSession(mockResponder: Item.MockDataURLResponder.self)
+//        let accessToken = AccessToken(rawValue: "12345")
+//
+//        let publisher = session.publisher(for: .latestItem, using: accessToken)
+//        let result = try awaitCompletion(of: publisher)
+//
+//        XCTAssertEqual(result, [Item.MockDataURLResponder.item])
+//    }
+//}

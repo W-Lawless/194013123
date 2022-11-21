@@ -14,3 +14,21 @@ protocol HeartbeatMonitor {
     func stopMonitor()
     func findPulse() async
 }
+
+
+protocol HeartbeatMonitorTEST {
+    associatedtype DataModel
+//    typealias onPulse = (_ alive: Bool, _ data: DataModel?) async -> ()
+    var onPulse: ((_ alive: Bool, _ data: DataModel?) async -> ())? { get set }
+    func startMonitor(interval: Double)
+    func stopMonitor()
+    func findPulse() async
+}
+
+
+
+protocol HeartbeatMonitorTEST2{
+//    var delegate: MonitorDelegate? { get set }
+    func startMonitor(interval: Double, callback: (() async -> Void)?)
+    func stopMonitor()
+}
