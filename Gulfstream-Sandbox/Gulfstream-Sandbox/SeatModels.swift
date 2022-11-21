@@ -8,11 +8,6 @@
 import Foundation
 
 
-//struct SeatsModel: Codable {
-//    var results: [Seat]
-//    var length: Int
-//}
-
 struct SeatModel: Codable, Identifiable {
     var id: String
     var name: String

@@ -33,6 +33,7 @@
 		2BB135FA2926FD760016444C /* MockTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135F92926FD760016444C /* MockTimer.swift */; };
 		2BB135FC292703970016444C /* CodableWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135FB292703970016444C /* CodableWrapper.swift */; };
 		2BB135FF292708750016444C /* ShadesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135FE292708750016444C /* ShadesAPI.swift */; };
+		2BB13601292713570016444C /* Shades.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BB13600292713570016444C /* Shades.json */; };
 		2BB3A587292445C90094B787 /* HeartbeatMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3A586292445C90094B787 /* HeartbeatMonitor.swift */; };
 		2BB3A589292445FE0094B787 /* Cabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3A588292445FE0094B787 /* Cabin.swift */; };
 		2BB3A58B29244B2D0094B787 /* FlightAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3A58A29244B2D0094B787 /* FlightAPI.swift */; };
@@ -119,6 +120,7 @@
 		2BB135F92926FD760016444C /* MockTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimer.swift; sourceTree = "<group>"; };
 		2BB135FB292703970016444C /* CodableWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableWrapper.swift; sourceTree = "<group>"; };
 		2BB135FE292708750016444C /* ShadesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadesAPI.swift; sourceTree = "<group>"; };
+		2BB13600292713570016444C /* Shades.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Shades.json; sourceTree = "<group>"; };
 		2BB3A586292445C90094B787 /* HeartbeatMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatMonitor.swift; sourceTree = "<group>"; };
 		2BB3A588292445FE0094B787 /* Cabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cabin.swift; sourceTree = "<group>"; };
 		2BB3A58A29244B2D0094B787 /* FlightAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightAPI.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 			children = (
 				2BB135EF2926DD610016444C /* Flight.json */,
 				2BB135EE2926DD610016444C /* Seats.json */,
+				2BB13600292713570016444C /* Shades.json */,
 				2BB135ED2926DD610016444C /* Weather.json */,
 			);
 			path = MockData;
@@ -576,6 +579,7 @@
 				2BB135F22926DD610016444C /* Flight.json in Resources */,
 				2BB135F12926DD610016444C /* Seats.json in Resources */,
 				2BB135F02926DD610016444C /* Weather.json in Resources */,
+				2BB13601292713570016444C /* Shades.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
