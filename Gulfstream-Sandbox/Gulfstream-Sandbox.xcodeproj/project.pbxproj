@@ -12,6 +12,7 @@
 		2B183F502913F8C00087654E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B183F4F2913F8C00087654E /* Assets.xcassets */; };
 		2B183F542913F8C00087654E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B183F532913F8C00087654E /* Preview Assets.xcassets */; };
 		2B41EF4A292C105E0062CA2B /* CabinAbstracted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B41EF49292C105E0062CA2B /* CabinAbstracted.swift */; };
+		2B41EF4C292C21E50062CA2B /* FlightAPIAbstracted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B41EF4B292C21E50062CA2B /* FlightAPIAbstracted.swift */; };
 		2BA7B4CB291D4A3A00942CB5 /* SeatsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4CA291D4A3A00942CB5 /* SeatsAPI.swift */; };
 		2BA7B4CD291D504900942CB5 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4CC291D504900942CB5 /* Session.swift */; };
 		2BA7B4CF291D551A00942CB5 /* SeatSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4CE291D551A00942CB5 /* SeatSelection.swift */; };
@@ -99,6 +100,7 @@
 		2B183F512913F8C00087654E /* Gulfstream_Sandbox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gulfstream_Sandbox.entitlements; sourceTree = "<group>"; };
 		2B183F532913F8C00087654E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2B41EF49292C105E0062CA2B /* CabinAbstracted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinAbstracted.swift; sourceTree = "<group>"; };
+		2B41EF4B292C21E50062CA2B /* FlightAPIAbstracted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightAPIAbstracted.swift; sourceTree = "<group>"; };
 		2B7FE8102919C692002C64FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		2BA7B4CA291D4A3A00942CB5 /* SeatsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatsAPI.swift; sourceTree = "<group>"; };
 		2BA7B4CC291D504900942CB5 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 			children = (
 				2BB3A58A29244B2D0094B787 /* FlightAPI.swift */,
 				2BA8F60229251C0C005621D3 /* FlightModels.swift */,
+				2B41EF4B292C21E50062CA2B /* FlightAPIAbstracted.swift */,
 			);
 			name = FlightInfo;
 			sourceTree = "<group>";
@@ -622,6 +625,7 @@
 				2BA8F61A29258F78005621D3 /* ElementsAPI.swift in Sources */,
 				2BA8F60329251C0C005621D3 /* FlightModels.swift in Sources */,
 				2BA7B4CD291D504900942CB5 /* Session.swift in Sources */,
+				2B41EF4C292C21E50062CA2B /* FlightAPIAbstracted.swift in Sources */,
 				2B41EF4A292C105E0062CA2B /* CabinAbstracted.swift in Sources */,
 				2BB3A589292445FE0094B787 /* Cabin.swift in Sources */,
 				2B183F4C2913F8BD0087654E /* EntryPoint.swift in Sources */,

@@ -71,6 +71,7 @@ class Monitor2_Tests: XCTestCase {
         }
 
         monitor.startMonitor(interval: 1, callback: testTimer)
+        // WILL CALLBACK EVER BE NIL ? -- NO 
 
         waitForExpectations(timeout: 5, handler: nil)
     }

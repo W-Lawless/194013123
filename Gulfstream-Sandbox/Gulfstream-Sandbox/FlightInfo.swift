@@ -10,7 +10,8 @@ import SwiftUI
 struct FlightInfo: View {
     
     @ObservedObject var viewModel: FlightViewModel
-    var api: FlightAPI
+//    var api: FlightAPI
+    var api: FlightAPI2
     
     var body: some View {
         List {
@@ -32,7 +33,7 @@ struct FlightInfo: View {
             await api.initialFetch()
         }
         .onAppear() {
-            api.monitor.startMonitor(interval: 3.0)
+            api.monitor.startMonitor(interval: 3.0, callback: api.monitorCallback)
         }
         .onDisappear() {
             api.monitor.stopMonitor()
