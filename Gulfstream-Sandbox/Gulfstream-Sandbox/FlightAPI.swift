@@ -11,7 +11,7 @@ import Foundation
 
 struct FlightAPI {
     
-    private var viewModel: FlightViewModel
+    var viewModel: FlightViewModel
     let monitor = HeartBeatMonitor()
     
     private let scheme = "http"

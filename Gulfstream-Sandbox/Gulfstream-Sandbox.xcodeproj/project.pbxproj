@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B10DD22292D08B800AB98F3 /* Network_Layer_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD21292D08B800AB98F3 /* Network_Layer_Tests.swift */; };
 		2B183F4C2913F8BD0087654E /* EntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B183F4B2913F8BD0087654E /* EntryPoint.swift */; };
 		2B183F4E2913F8BD0087654E /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B183F4D2913F8BD0087654E /* Loading.swift */; };
 		2B183F502913F8C00087654E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B183F4F2913F8C00087654E /* Assets.xcassets */; };
@@ -30,8 +31,6 @@
 		2BB135F02926DD610016444C /* Weather.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BB135ED2926DD610016444C /* Weather.json */; };
 		2BB135F12926DD610016444C /* Seats.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BB135EE2926DD610016444C /* Seats.json */; };
 		2BB135F22926DD610016444C /* Flight.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BB135EF2926DD610016444C /* Flight.json */; };
-		2BB135F52926E21A0016444C /* MockMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135F42926E21A0016444C /* MockMonitor.swift */; };
-		2BB135F72926E4590016444C /* MockSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135F62926E4590016444C /* MockSession.swift */; };
 		2BB135FA2926FD760016444C /* MockTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135F92926FD760016444C /* MockTimer.swift */; };
 		2BB135FC292703970016444C /* CodableWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135FB292703970016444C /* CodableWrapper.swift */; };
 		2BB135FF292708750016444C /* ShadesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135FE292708750016444C /* ShadesAPI.swift */; };
@@ -90,6 +89,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2B10DD21292D08B800AB98F3 /* Network_Layer_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network_Layer_Tests.swift; sourceTree = "<group>"; };
 		2B183F482913F8BD0087654E /* Gulfstream-Sandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gulfstream-Sandbox.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B183F4B2913F8BD0087654E /* EntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPoint.swift; sourceTree = "<group>"; };
 		2B183F4D2913F8BD0087654E /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
@@ -116,8 +116,6 @@
 		2BB135ED2926DD610016444C /* Weather.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Weather.json; sourceTree = "<group>"; };
 		2BB135EE2926DD610016444C /* Seats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Seats.json; sourceTree = "<group>"; };
 		2BB135EF2926DD610016444C /* Flight.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Flight.json; sourceTree = "<group>"; };
-		2BB135F42926E21A0016444C /* MockMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMonitor.swift; sourceTree = "<group>"; };
-		2BB135F62926E4590016444C /* MockSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSession.swift; sourceTree = "<group>"; };
 		2BB135F82926EAC90016444C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2BB135F92926FD760016444C /* MockTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimer.swift; sourceTree = "<group>"; };
 		2BB135FB292703970016444C /* CodableWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableWrapper.swift; sourceTree = "<group>"; };
@@ -346,6 +344,7 @@
 				2BB135F32926E1EB0016444C /* MockClasses */,
 				2BB135DF2926D2C80016444C /* MockData */,
 				2BB135D82926D1290016444C /* Sandbox_Tests.swift */,
+				2B10DD21292D08B800AB98F3 /* Network_Layer_Tests.swift */,
 			);
 			path = "Sandbox-Tests";
 			sourceTree = "<group>";
@@ -373,8 +372,6 @@
 		2BB135F32926E1EB0016444C /* MockClasses */ = {
 			isa = PBXGroup;
 			children = (
-				2BB135F42926E21A0016444C /* MockMonitor.swift */,
-				2BB135F62926E4590016444C /* MockSession.swift */,
 				2BB135F92926FD760016444C /* MockTimer.swift */,
 			);
 			path = MockClasses;
@@ -629,9 +626,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BB135F72926E4590016444C /* MockSession.swift in Sources */,
+				2B10DD22292D08B800AB98F3 /* Network_Layer_Tests.swift in Sources */,
 				2BB135FA2926FD760016444C /* MockTimer.swift in Sources */,
-				2BB135F52926E21A0016444C /* MockMonitor.swift in Sources */,
 				2BB135D92926D1290016444C /* Sandbox_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

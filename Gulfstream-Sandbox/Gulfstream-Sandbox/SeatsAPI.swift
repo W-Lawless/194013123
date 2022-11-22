@@ -10,7 +10,7 @@ import Foundation
 
 struct SeatsAPI {
     
-    private var viewModel: SeatsViewModel
+    var viewModel: SeatsViewModel
     
     init(viewModel: SeatsViewModel) {
         self.viewModel = viewModel

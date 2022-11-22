@@ -12,7 +12,7 @@ import Foundation
 //    var length: Int
 //}
 
-struct FlightModel: Codable {
+struct FlightModel: Codable, Equatable {
     var latitude: Double
     var longitude: Double
     var altitude: Int

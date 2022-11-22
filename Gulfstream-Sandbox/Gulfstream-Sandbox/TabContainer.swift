@@ -16,7 +16,7 @@ struct TabContainer: View {
                     Label("Home", systemImage: "house.fill")
                 }
                 
-            ViewFactories.buildSeatsSelection()
+            ViewFactories.buildSeatSelection()
                 .tabItem{
                     Label("Media", systemImage: "play.tv")
                 }

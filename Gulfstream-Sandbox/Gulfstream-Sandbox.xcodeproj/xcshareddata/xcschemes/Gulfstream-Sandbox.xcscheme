@@ -29,19 +29,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2BB135C62926D01B0016444C"
-               BuildableName = "Gulfstream-SandboxUITests.xctest"
-               BlueprintName = "Gulfstream-SandboxUITests"
-               ReferencedContainer = "container:Gulfstream-Sandbox.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2BB135D52926D1290016444C"

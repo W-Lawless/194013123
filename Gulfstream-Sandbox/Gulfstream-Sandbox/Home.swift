@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import Combine
 
 struct Home: View {
+    
+    var shades = ShadesAPI()
     
     var body: some View {
         VStack { //: VSTQ 1
@@ -17,6 +20,9 @@ struct Home: View {
                 .frame(height: 72)
                 .hapticFeedback()
 
+            Button("Shades Load") {
+                shades.fetchEndpoint()
+            }
 
         } //VSTQ: 1
         .frame(height: 300)

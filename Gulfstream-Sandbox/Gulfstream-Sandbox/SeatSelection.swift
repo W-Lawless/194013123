@@ -50,6 +50,6 @@ class SeatsViewModel: ObservableObject {
 
 struct Seats_Previews: PreviewProvider {
     static var previews: some View {
-        ViewFactories.buildSeatsSelection()
+        ViewFactories.buildSeatSelection()
     }
 }

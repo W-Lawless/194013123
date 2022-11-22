@@ -6,33 +6,41 @@
 //
 
 import Foundation
+import Combine
 
-struct ShadesAPI {
+class ShadesAPI {
+    
+    var cancelToken: Cancellable?
     
     func fetchEndpoint() {
+        print("fetch")
         let url = URL(string: "http://10.0.0.41/api/v1/windows")!
-        let publisher = URLSession.shared.dataTaskPublisher(for: url)
         
-        let cancellable = publisher.sink(
+        let endpoint = Endpoint<EndpointFormats.Get, ShadesModel>(path: "/api/v1/windows")
+//        let publisher = URLSession.shared.dataTaskPublisher(for: url)
+//            .map(\.data)
+//            .decode(type: NetworkResponse<ShadesModel>.self, decoder: JSONDecoder())
+            //.receive(on: DispatchQueue.main) -- fire sink closure on main thread
+
+        
+        let publisher = Session.shared.publisher(for: endpoint, using: nil)
+        
+        self.cancelToken = publisher.sink(
             receiveCompletion: { completion in
-                // Called once, when the publisher was completed.
-                print(completion)
-            },
-            receiveValue: { value in
-                // Can be called multiple times, each time that a
-                // new value was emitted by the publisher.
-                
-                let decoder = JSONDecoder()
-                
-                do {
-                    let repo = try decoder.decode(NetworkResponse<ShadesModel>.self, from: value.data)
-                } catch {
+                switch completion {
+                case .failure(let error):
                     print(error)
+                case .finished:
+                    print("Success")
                 }
-                
-                
+            },
+            receiveValue: { shades in
+                print(shades)
             }
         )
+        
+        
+        
     }
 }
 

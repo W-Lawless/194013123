@@ -21,7 +21,7 @@ struct ViewFactories {
         return view
     }
     
-    static func buildSeatsSelection() -> SeatSelection {
+    static func buildSeatSelection() -> SeatSelection {
         let viewModel = SeatsViewModel()
         let api = SeatsAPI(viewModel: viewModel)
         
