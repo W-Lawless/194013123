@@ -28,10 +28,8 @@ struct FlightInfo: View {
                 }
             }
         }
-        .task {
-            await api.initialFetch()
-        }
         .onAppear() {
+            api.fetch()
             api.monitor.startMonitor(interval: 3.0, callback: api.monitorCallback)
         }
         .onDisappear() {
@@ -48,10 +46,10 @@ class FlightViewModel: ObservableObject {
     @Published var groundSpeed: Int?
     @Published var airSpeed: Int?
     
-    @MainActor func updateValues(_ alive: Bool, _ data: NetworkResponse<FlightModel>?) {
+    @MainActor func updateValues(_ alive: Bool, _ data: FlightModel?) {
         self.loading = false
-        self.groundSpeed = data?.results[0].ground_speed
-        self.airSpeed = data?.results[0].air_speed
+        self.groundSpeed = data?.ground_speed
+        self.airSpeed = data?.air_speed
     }
 
 }

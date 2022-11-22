@@ -14,7 +14,6 @@ class ShadesAPI {
     
     func fetchEndpoint() {
         print("fetch")
-        let url = URL(string: "http://10.0.0.41/api/v1/windows")!
         
         let endpoint = Endpoint<EndpointFormats.Get, ShadesModel>(path: "/api/v1/windows")
 //        let publisher = URLSession.shared.dataTaskPublisher(for: url)

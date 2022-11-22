@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import Combine
 
 //MARK: - API
 
-struct FlightAPI {
+class FlightAPI {
     
     var viewModel: FlightViewModel
     let monitor = HeartBeatMonitor()
@@ -18,6 +19,8 @@ struct FlightAPI {
     private let host = "10.0.0.41"
     private let baseApi = "/api/v1/flightInfo"
     private var endpoint: URL
+    private let endpoint2 = Endpoint<EndpointFormats.Get, FlightModel>(path: "/api/v1/flightInfo")
+    var cancelToken: Cancellable?
     
     init(viewModel: FlightViewModel) {
         var URI = URLComponents()
@@ -28,25 +31,26 @@ struct FlightAPI {
         self.viewModel = viewModel
     }
     
-    func initialFetch() async {
-        do {
-            let (data, _) = try await Session.shared.data(from: endpoint)
-            let serializedData = try? JSONDecoder().decode(NetworkResponse<FlightModel>.self, from: data)
-            if let model = serializedData { await viewModel.updateValues(true, model) }
-        } catch { print(" ❌: Flight Api Error: \(error)") }
+    func fetch() {
+        let publisher = Session.shared.publisher(for: self.endpoint2, using: nil)
+        self.cancelToken = publisher.sink(
+            receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print(error)
+                case .finished:
+                    print()
+                }
+            },
+            receiveValue: { shades in
+                Task {
+                    await self.viewModel.updateValues(true, shades[0])
+                }
+            }
+        )
     }
     
-    func monitorCallback() async {
-        let request = URLRequest(url: self.endpoint, timeoutInterval: 2)
-        
-        do {
-            let (data, _) = try await Session.shared.data(for: request)
-            let serializedData = try? JSONDecoder().decode(NetworkResponse<FlightModel>.self, from: data)
-            if let model = serializedData {
-                print("Ground Speed: \(model.results[0].ground_speed)")
-                await viewModel.updateValues(true, model)
-            }
-        }
-        catch { await viewModel.updateValues(false, nil) }
+    func monitorCallback() {
+        fetch()
     }
 }
