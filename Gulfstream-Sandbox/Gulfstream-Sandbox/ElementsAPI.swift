@@ -32,18 +32,19 @@ struct ElementsAPI {
         return URI
     }
     
+    
     func initialFetch() async {
  
-        guard let url = configurableEndpoint.url  else {
-            print(" ❌: Invalid Endpoint")
-            return
-        }
-        
-        do {
-            let (data, _) = try await Session.shared.data(from: url)
-            let serializedData = try? JSONDecoder().decode(NetworkResponse<SeatModel>.self, from: data)
-            if let model = serializedData { await viewModel.updateValues(data: model) }
-        } catch { print(" ❌: Seats Api Error Decoding: \(error)") }
+//        guard let url = configurableEndpoint.url  else {
+//            print(" ❌: Invalid Endpoint")
+//            return
+//        }
+//
+//        do {
+//            let (data, _) = try await Session.shared.data(from: url)
+//            let serializedData = try? JSONDecoder().decode(NetworkResponse<SeatModel>.self, from: data)
+//            if let model = serializedData { await viewModel.updateValues(data: model) }
+//        } catch { print(" ❌: Seats Api Error Decoding: \(error)") }
     }
     
 }

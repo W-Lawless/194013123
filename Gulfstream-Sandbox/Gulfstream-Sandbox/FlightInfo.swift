@@ -46,7 +46,7 @@ class FlightViewModel: ObservableObject {
     @Published var groundSpeed: Int?
     @Published var airSpeed: Int?
     
-    @MainActor func updateValues(_ alive: Bool, _ data: FlightModel?) {
+    func updateValues(_ alive: Bool, _ data: FlightModel?) {
         self.loading = false
         self.groundSpeed = data?.ground_speed
         self.airSpeed = data?.air_speed

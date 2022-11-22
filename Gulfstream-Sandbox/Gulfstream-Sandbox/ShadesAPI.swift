@@ -16,11 +16,6 @@ class ShadesAPI {
         print("fetch")
         
         let endpoint = Endpoint<EndpointFormats.Get, ShadesModel>(path: "/api/v1/windows")
-//        let publisher = URLSession.shared.dataTaskPublisher(for: url)
-//            .map(\.data)
-//            .decode(type: NetworkResponse<ShadesModel>.self, decoder: JSONDecoder())
-            //.receive(on: DispatchQueue.main) -- fire sink closure on main thread
-
         
         let publisher = Session.shared.publisher(for: endpoint, using: nil)
         

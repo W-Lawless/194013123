@@ -16,15 +16,12 @@ struct SeatSelection: View {
         
         List(viewModel.seatList ?? [SeatModel]()) { seat in
             Button(seat.id) {
-                Task {
-                    await api.call(seat: seat)
-                }
+                api.call(seat: seat)
             }
         } //: LIST
-        .task() {
-            await api.getSeats()
+        .onAppear {
+            api.getSeats()
         }
-        
     }
 }
 
@@ -34,14 +31,8 @@ class SeatsViewModel: ObservableObject {
 
     @Published var seatList: [SeatModel]?
     
-    @MainActor func updateValues(data: NetworkResponse<SeatModel>) {
-        var out = [SeatModel]()
-        
-        data.results.forEach { Seat in
-            out.append(Seat)
-        }
-        
-        self.seatList = out
+    func updateValues(_ alive: Bool, data: [SeatModel]) {
+        self.seatList = data
     }
     
 }

@@ -29,4 +29,12 @@ struct ViewFactories {
         return view
     }
     
+    static func buildWeatherView() -> Weather {
+        let viewModel = WeatherViewModel()
+        let api = WeatherApi(viewModel: viewModel)
+        
+        let view = Weather(viewModel: viewModel, api: api)
+        return view
+    }
+    
 }
