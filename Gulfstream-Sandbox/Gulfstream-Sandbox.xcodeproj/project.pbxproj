@@ -48,6 +48,7 @@
 		2BC49CDF2923FC06007DA457 /* +Cabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC49CDE2923FC06007DA457 /* +Cabin.swift */; };
 		2BD75A17292E7503004360A3 /* Lights.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BD75A16292E7503004360A3 /* Lights.json */; };
 		2BD75A19292E7ACE004360A3 /* LightControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD75A18292E7ACE004360A3 /* LightControl.swift */; };
+		2BD75A1B292EB256004360A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD75A1A292EB256004360A3 /* AppDelegate.swift */; };
 		2BE97D3B291C137B00149BA4 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D3A291C137B00149BA4 /* Home.swift */; };
 		2BE97D3D291C174000149BA4 /* FlightInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D3C291C174000149BA4 /* FlightInfo.swift */; };
 		2BE97D3F291C175F00149BA4 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D3E291C175F00149BA4 /* Media.swift */; };
@@ -142,6 +143,7 @@
 		2BC49CDE2923FC06007DA457 /* +Cabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Cabin.swift"; sourceTree = "<group>"; };
 		2BD75A16292E7503004360A3 /* Lights.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Lights.json; sourceTree = "<group>"; };
 		2BD75A18292E7ACE004360A3 /* LightControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightControl.swift; sourceTree = "<group>"; };
+		2BD75A1A292EB256004360A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BE97D3A291C137B00149BA4 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		2BE97D3C291C174000149BA4 /* FlightInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightInfo.swift; sourceTree = "<group>"; };
 		2BE97D3E291C175F00149BA4 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				2BA8F61529257838005621D3 /* Navigation */,
 				2B183F522913F8C00087654E /* Preview Content */,
 				2BE97D65291C69DB00149BA4 /* Extensions */,
+				2BD75A1A292EB256004360A3 /* AppDelegate.swift */,
 			);
 			path = "Gulfstream-Sandbox";
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				2BA8F60629252166005621D3 /* SeatModels.swift in Sources */,
 				2BE97D3D291C174000149BA4 /* FlightInfo.swift in Sources */,
 				2BB135FF292708750016444C /* ShadesAPI.swift in Sources */,
+				2BD75A1B292EB256004360A3 /* AppDelegate.swift in Sources */,
 				2BA8F61A29258F78005621D3 /* ElementsAPI.swift in Sources */,
 				2BA8F60329251C0C005621D3 /* FlightModels.swift in Sources */,
 				2BA7B4CD291D504900942CB5 /* Session.swift in Sources */,
