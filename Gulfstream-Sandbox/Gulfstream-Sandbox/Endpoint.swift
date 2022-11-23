@@ -38,9 +38,10 @@ enum EndpointFormats {
 
     enum Put<Body: Codable>: EndpointFormat {
         static func prepare(_ request: inout URLRequest, with data: Body) {
-            print("preparing put request")
+            print("preparing put request", data, type(of: data))
             request.httpMethod = "PUT"
-            let requestBody = try? JSONEncoder().encode(data)
+            let requestBody = try! JSONEncoder().encode(data)
+            print("** ", requestBody)
             request.httpBody = requestBody
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         }

@@ -22,6 +22,7 @@ struct SeatSelection: View {
         .onAppear {
             api.getSeats()
         }
+        
     }
 }
 

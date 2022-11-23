@@ -43,17 +43,13 @@ struct Weather: View {
                 Text("\(viewModel.sundown)")
             }
         }
-        .task {
+        .onAppear {
             api.fetch()
         }
     }
 }
 
-struct Weather_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewFactories.buildWeatherView()
-    }
-}
+//MARK: - View Model
 
 class WeatherViewModel: ObservableObject {
     
@@ -75,5 +71,13 @@ class WeatherViewModel: ObservableObject {
             self.windSpeed = Int(data.current.windMph)
             self.sundown =  data.astronomy.sunSet
         }
+    }
+}
+
+//MARK: - Preview
+
+struct Weather_Previews: PreviewProvider {
+    static var previews: some View {
+        ViewFactories.buildWeatherView()
     }
 }

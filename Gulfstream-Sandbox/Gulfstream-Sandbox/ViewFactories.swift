@@ -37,4 +37,20 @@ struct ViewFactories {
         return view
     }
     
+    static func buildShadesView() -> Shades {
+        let viewModel = ShadesViewModel()
+        let api = ShadesAPI(viewModel: viewModel)
+        
+        let view = Shades(viewModel: viewModel, api: api)
+        return view
+    }
+    
+    static func buildLightsView() -> Lights {
+        let viewModel = LightsViewModel()
+        let api = LightsAPI(viewModel: viewModel)
+        
+        let view = Lights(viewModel: viewModel, api: api)
+        return view
+    }
+    
 }

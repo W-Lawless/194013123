@@ -265,27 +265,32 @@ class ViewFactory_Tests: XCTestCase {
     
 }
 
+
+
+
+
+
 /*
 class TimerControllerTests: XCTestCase {
 
-    // MARK: - Properties
+    // MARK - Properties
 
     var timerController: TimerController!
 
-    // MARK: - Setup
+    // MARK - Setup
 
     override func setUp() {
         timerController = TimerController(seconds: 1)
     }
 
-    // MARK: - Teardown
+    // MARK - Teardown
 
     override func tearDown() {
         timerController.resetTimer()
         super.tearDown()
     }
 
-    // MARK: - Time
+    // MARK - Time
 
     func test_TimerController_DurationInSeconds_IsSet() {
         let expected: TimeInterval = 60
@@ -305,7 +310,7 @@ class TimerControllerTests: XCTestCase {
         waitForExpectations(timeout: numberOfSeconds + 1, handler: nil)
     }
 
-    // MARK: - Timer State
+    // MARK - Timer State
 
     func test_TimerController_TimerIsValidAfterTimerStarts() {
         let timerValidityExpectation = expectation(description: "timerValidity")
@@ -338,17 +343,3 @@ class TimerControllerTests: XCTestCase {
 
 }
 */
-
-
-//class NetworkIntegrationTests: XCTestCase {
-//    func testSuccessfullyPerformingRequest() throws {
-//        let session = URLSession(mockResponder: Item.MockDataURLResponder.self)
-//        let accessToken = AccessToken(rawValue: "12345")
-//
-//        let publisher = session.publisher(for: .latestItem, using: accessToken)
-//        let result = try awaitCompletion(of: publisher)
-//
-//        XCTAssertEqual(result, [Item.MockDataURLResponder.item])
-//    }
-//}
-

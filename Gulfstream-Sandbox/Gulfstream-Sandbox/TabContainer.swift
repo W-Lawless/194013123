@@ -11,13 +11,15 @@ struct TabContainer: View {
         
     var body: some View {
         TabView {
+            
             Home()
                 .tabItem{
                     Label("Home", systemImage: "house.fill")
                 }
+            
             ViewFactories.buildSeatSelection()
                 .tabItem{
-                    Label("Media", systemImage: "play.tv")
+                    Label("Seats", systemImage: "s.circle")
                 }
             
             ViewFactories.buildWeatherView()
@@ -30,16 +32,24 @@ struct TabContainer: View {
                     Label("My Flight", systemImage: "airplane.circle")
                         .background(Color.secondary)
                 }
-            ViewFactories.buildFlightInfo()
-                .tabItem{
-                    Label("Shades", systemImage: "uiwindow.split.2x1")
-                        .background(Color.secondary)
-                }
-//            ViewFactories.buildFlightInfo()
+            
+//            ViewFactories.buildLightsView()
 //                .tabItem{
 //                    Label("Lights", systemImage: "lightbulb")
 //                        .background(Color.secondary)
 //                }
+            
+            ViewFactories.buildShadesView()
+                .tabItem{
+                    Label("Shades", systemImage: "uiwindow.split.2x1")
+                        .background(Color.secondary)
+                }
+            
+///            ViewFactories.buildFlightInfo()
+//                .tabItem{
+//                    Label("Media", systemImage: "play.tv")
+//                }
+
 //            ViewFactories.buildFlightInfo()
 //                .tabItem{
 //                    Label("HVAC", systemImage: "thermometer.sun")
@@ -59,7 +69,7 @@ struct TabContainer: View {
 //                .tabItem{
 //                    Label("Volume", systemImage: "speaker.wave.2")
 //                        .background(Color.secondary)
-//                }
+///                }
             
         }
         .navigationBarBackButtonHidden(true)
