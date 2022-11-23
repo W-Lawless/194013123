@@ -59,9 +59,9 @@ struct LightControl: View {
     
     func dragCircle(value: DragGesture.Value) {
         let vector = CGVector(dx: value.location.x, dy: value.location.y)
-        var xOffset = vector.dx
+        let xOffset = vector.dx
         
-        if (xOffset < (300/2 + 7) && xOffset > (-300/2 - 7)) {
+        if (xOffset < ((300/2) + 3.5) && xOffset > ((-300/2) - 7)) {
             withAnimation(Animation.linear(duration: 0.1)) { self.circleOffset = xOffset }
         }
     }
