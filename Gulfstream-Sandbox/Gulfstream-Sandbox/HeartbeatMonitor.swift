@@ -31,3 +31,8 @@ class HeartBeatMonitor {
     }
 
 }
+
+protocol RealtimeAPI {
+    func fetch()
+    func monitorCallback()
+}

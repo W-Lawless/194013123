@@ -38,22 +38,23 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 
 final class SceneDelegate: NSObject, UIWindowSceneDelegate {
         
-    private let coordinator: Coordinator<Router> = .init(startingRoute: .home)
-    
-    var window: UIWindow?
+    var appCoordinator: AppCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = coordinator.navigationController
-        window?.makeKeyAndVisible()
-        coordinator.start()
+        
+        let window = UIWindow(windowScene: windowScene)
+        let appCoordinator = AppCoordinator(window: window)
+        appCoordinator.start()
+        self.appCoordinator = appCoordinator
+        window.makeKeyAndVisible()
     }
 }
 
 
 //MARK: - Coordinator
 
+/*
 open class Coordinator<Router: NavigationRouter>: ObservableObject {
     
     public let navigationController: UINavigationController
@@ -101,10 +102,10 @@ open class Coordinator<Router: NavigationRouter>: ObservableObject {
         }
     }
 }
-
+*/
 
 //MARK: - Protocols & Enums
-
+/*
 protocol CoordinatorProtocol {
 
     var navigationController: UINavigationController { get }
@@ -160,3 +161,4 @@ public enum NavigationTranisitionStyle {
     case presentModally
     case presentFullscreen
 }
+*/

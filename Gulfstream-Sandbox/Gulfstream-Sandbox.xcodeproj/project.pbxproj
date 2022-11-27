@@ -11,6 +11,8 @@
 		2B10DD24292D4C2400AB98F3 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD23292D4C2400AB98F3 /* Weather.swift */; };
 		2B10DD26292D572500AB98F3 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD25292D572500AB98F3 /* WeatherAPI.swift */; };
 		2B10DD28292D656B00AB98F3 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD27292D656B00AB98F3 /* Endpoint.swift */; };
+		2B1170442933E3C100A1CB8F /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1170432933E3C100A1CB8F /* Coordinator.swift */; };
+		2B1170462933E43800A1CB8F /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1170452933E43800A1CB8F /* AppCoordinator.swift */; };
 		2B183F4C2913F8BD0087654E /* EntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B183F4B2913F8BD0087654E /* EntryPoint.swift */; };
 		2B183F4E2913F8BD0087654E /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B183F4D2913F8BD0087654E /* Loading.swift */; };
 		2B183F502913F8C00087654E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B183F4F2913F8C00087654E /* Assets.xcassets */; };
@@ -101,6 +103,8 @@
 		2B10DD23292D4C2400AB98F3 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		2B10DD25292D572500AB98F3 /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		2B10DD27292D656B00AB98F3 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		2B1170432933E3C100A1CB8F /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		2B1170452933E43800A1CB8F /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		2B183F482913F8BD0087654E /* Gulfstream-Sandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gulfstream-Sandbox.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B183F4B2913F8BD0087654E /* EntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPoint.swift; sourceTree = "<group>"; };
 		2B183F4D2913F8BD0087654E /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
@@ -185,6 +189,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B1170422933E3B400A1CB8F /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				2B1170432933E3C100A1CB8F /* Coordinator.swift */,
+				2B1170452933E43800A1CB8F /* AppCoordinator.swift */,
+			);
+			name = Navigation;
+			sourceTree = "<group>";
+		};
 		2B183F3F2913F8BD0087654E = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +221,7 @@
 		2B183F4A2913F8BD0087654E /* Gulfstream-Sandbox */ = {
 			isa = PBXGroup;
 			children = (
+				2B1170422933E3B400A1CB8F /* Navigation */,
 				2BE97D5C291C47EB00149BA4 /* UI */,
 				2B183F5A2913F9520087654E /* Networking */,
 				2B183F4B2913F8BD0087654E /* EntryPoint.swift */,
@@ -649,10 +663,12 @@
 				2BB135FF292708750016444C /* ShadesAPI.swift in Sources */,
 				2BD75A1B292EB256004360A3 /* AppDelegate.swift in Sources */,
 				2BA8F61A29258F78005621D3 /* ElementsAPI.swift in Sources */,
+				2B1170462933E43800A1CB8F /* AppCoordinator.swift in Sources */,
 				2BA8F60329251C0C005621D3 /* FlightModels.swift in Sources */,
 				2BA7B4CD291D504900942CB5 /* Session.swift in Sources */,
 				2B10DD24292D4C2400AB98F3 /* Weather.swift in Sources */,
 				2B41EF4C292C21E50062CA2B /* FlightAPI.swift in Sources */,
+				2B1170442933E3C100A1CB8F /* Coordinator.swift in Sources */,
 				2B41EF4A292C105E0062CA2B /* Cabin.swift in Sources */,
 				2B183F4C2913F8BD0087654E /* EntryPoint.swift in Sources */,
 				2BA7B4CB291D4A3A00942CB5 /* SeatsAPI.swift in Sources */,
