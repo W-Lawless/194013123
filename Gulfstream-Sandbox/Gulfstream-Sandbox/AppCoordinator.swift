@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import Combine
 
 class AppCoordinator: CoordinatorSlim {
     
@@ -14,19 +15,41 @@ class AppCoordinator: CoordinatorSlim {
     var children = [CoordinatorSlim]()
     let cabin = CabinAPI()
     
+    let cabinConnection = CurrentValueSubject<Bool, Never>(false)
+    var subscriptions = Set<AnyCancellable>()
+    
     init(window: UIWindow) {
         self.window = window
     }
     
     func start() {
         
-//        cabin.monitor.startMonitor(interval: 3.0, callback: cabin.monitorCallback)
-        
-        
         let tabs = TabViewCoordinator()
         tabs.start()
         
-        window.rootViewController = tabs.tabView
+        let loading = UIHostingController(rootView: Loading(loading: cabin.loading))
+        
+//        cabin.monitor.startMonitor(interval: 3.0, callback: cabin.monitorCallback)
+//        if(!cabin.pulse){
+//            print(" ✅ ALIVE!")
+            window.rootViewController = tabs.tabView
+//        } else {
+//            print(" ❌ NO CABIN")
+//            window.rootViewController = loading
+//        }
+        
+//        cabinConnection.sink { [weak self] _ in
+//            if(cabin.pulse){
+//                print(" ✅ ALIVE!")
+//                window.rootViewController = tabs.tabView
+//            } else {
+//                print(" ❌ NO CABIN")
+//                window.rootViewController = loading
+//            }
+//        }
+        
+        
+        
         //        self.children.append(weatherCoordinator)
     }
 }

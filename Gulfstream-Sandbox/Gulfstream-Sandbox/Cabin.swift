@@ -12,9 +12,11 @@ class CabinAPI: ObservableObject {
     
     //MARK: - ViewModel
     
+    @Published var loading: Bool = true
     @Published var pulse: Bool = false
 
     @MainActor func updateValues(_ alive: Bool, _ data: String?) -> Void {
+        self.loading = false
         if (alive) {
             self.pulse = true
         } else {

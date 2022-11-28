@@ -9,6 +9,8 @@ import SwiftUI
 
 struct Loading: View {
     
+    @State var loading: Bool
+    
     var body: some View {
         VStack {
             
@@ -19,7 +21,9 @@ struct Loading: View {
             
             Spacer()
             
-            ProgressView()
+            if(loading) {
+                ProgressView()
+            }
             
             Spacer()
             
@@ -35,6 +39,6 @@ struct Loading: View {
 
 struct Loading_Previews: PreviewProvider {
     static var previews: some View {
-        Loading()
+        Loading(loading: true)
     }
 }
