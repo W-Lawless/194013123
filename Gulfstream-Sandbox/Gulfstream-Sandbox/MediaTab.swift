@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Media: View {
+struct MediaTab: View {
     var body: some View {
         Text("Monitors")
         TabView {
@@ -21,6 +21,6 @@ struct Media: View {
 
 struct Media_Previews: PreviewProvider {
     static var previews: some View {
-        Media()
+        MediaTab()
     }
 }

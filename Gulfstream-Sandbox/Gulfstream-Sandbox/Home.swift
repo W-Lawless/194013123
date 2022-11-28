@@ -13,30 +13,104 @@ struct Home: View {
     var navCallback: (_ route: MenuRouter) -> () = { _ in }
     
     var body: some View {
-        
-        Spacer()
-        
-        Button("Lights") {
-            print("clicked")
-            navCallback(.lights)
+        Group {
+            HStack(alignment: .center, spacing: 72) {
+                
+                VStack(alignment: .center, spacing: 12) {
+                    Image(systemName: "lightbulb")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 56, height: 56)
+                        .onTapGesture {
+                            navCallback(.lights)
+                        }
+                    Text("Lights")
+                } //: VSTQ
+                
+                VStack(alignment: .center, spacing: 12) {
+                    Image(systemName: "uiwindow.split.2x1")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 56, height: 56)
+                    Button("Shades") {
+                        print("clicked")
+                        navCallback(.shades)
+                    }
+                    .foregroundColor(.white)
+                } //: VSTQ
+            } //:HSTQ
+            .frame(height:120)
+            .padding(.horizontal, 24)
+            .padding(.vertical, 12)
+            
+            
+            HStack(alignment: .center, spacing: 32) {
+                
+                VStack(alignment: .center, spacing: 12) {
+                    Image(systemName: "thermometer.sun")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 56, height: 56)
+                    Button("Temperature") {
+                        print("HVAC")
+                    }
+                    .foregroundColor(.white)
+                } //: VSTQ
+                .frame(width: 98)
+                .clipShape(RoundedRectangle(cornerRadius: 4))
+                
+                VStack(alignment: .center, spacing: 12) {
+                    Image(systemName: "s.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 56, height: 56)
+                    Button("Seats") {
+                        print("clicked")
+                        navCallback(.seats)
+                    }
+                    .foregroundColor(.white)
+                } //:VSTQ
+                .frame(width: 98)
+            } //:HSTQ
+            .frame(height:120)
+            .padding(.horizontal, 24)
+            .padding(.vertical, 12)
+            
+            
+            HStack(alignment: .center, spacing: 72) {
+                
+                VStack(alignment: .center, spacing: 12) {
+                    Image(systemName: "list.bullet.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 56, height: 56)
+                    Button("Presets") {
+                        print("Presets")
+                    }
+                    .foregroundColor(.white)
+                } //: VSTQ
+                
+                VStack(alignment: .center, spacing: 12) {
+                    Image(systemName: "gear")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 56, height: 56)
+                    Button("Settings") {
+                        print("Settings")
+                    }
+                    .foregroundColor(.white)
+                } //: VSTQ
+            } //: HSTQ
+            .frame(height:120)
+            .padding(.horizontal, 24)
+            .padding(.vertical, 12)
+            
         }
-        
-        Spacer()
-        
-        Button("Shades") {
-            print("clicked")
-            navCallback(.shades)
-        }
-        
-        Spacer()
-        
-        Button("Seats") {
-            print("clicked")
-            navCallback(.seats)
-        }
-        
-        Spacer()
-//        Curves()
+        .overlay(
+            RoundedRectangle(cornerRadius: 24)
+                .stroke(Color.white, lineWidth: 2)
+        )
+        //        Curves()
         
 //        Pulse()
         

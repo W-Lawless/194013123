@@ -17,7 +17,7 @@ struct Navigator {
         switch route {
         case .loading:
             return AnyView(
-                NavigationLink(destination: Media()) {
+                NavigationLink(destination: MediaTab()) {
                     content()
                 }
             )

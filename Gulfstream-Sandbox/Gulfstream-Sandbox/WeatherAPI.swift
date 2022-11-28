@@ -29,7 +29,7 @@ class WeatherApi {
                 case .failure(let error):
                     print(error)
                 case .finished:
-                    print()
+                    return
                 }
             },
             receiveValue: { weather in

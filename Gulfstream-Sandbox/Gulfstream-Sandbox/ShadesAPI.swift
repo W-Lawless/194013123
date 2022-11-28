@@ -50,7 +50,6 @@ class ShadesAPI {
                 case .failure(let error):
                     print("there was an error", error)
                 case .finished:
-                    print("Put request made")
                     return
                 }
             },

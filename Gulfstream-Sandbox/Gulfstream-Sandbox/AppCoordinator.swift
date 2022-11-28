@@ -12,52 +12,34 @@ class AppCoordinator: CoordinatorSlim {
     
     let window: UIWindow
     var children = [CoordinatorSlim]()
+    let cabin = CabinAPI()
     
     init(window: UIWindow) {
         self.window = window
     }
     
     func start() {
+        
+//        cabin.monitor.startMonitor(interval: 3.0, callback: cabin.monitorCallback)
+        
+        
         let tabs = TabViewCoordinator()
         tabs.start()
-//        let weatherCoordinator = WeatherCoordinator()
-//        weatherCoordinator.start()
-//
-//        self.children.append(weatherCoordinator)
         
-//        window.rootViewController = weatherCoordinator.view
         window.rootViewController = tabs.tabView
+        //        self.children.append(weatherCoordinator)
     }
 }
 
-class TabsCoordinator: CoordinatorSlim {
-    var view = UIViewController()
-    
-    func start() {
-        let swiftUIview = TabContainer()
-        view = UIHostingController(rootView: swiftUIview)
-    }
-    
-}
 
-class WeatherCoordinator: CoordinatorSlim {
-    
-    var view = UIViewController()
-    
-    func start() {
-        let swiftUIview = ViewFactories.buildWeatherView()
-        view = UIHostingController(rootView: swiftUIview)
-    }
-    
-}
 
 class TabViewCoordinator: CoordinatorSlim {
     
     var tabView = UITabBarController()
-//    var tabOne = UIHostingController(rootView: Home())
+
     var tabOne = HomeMenuCoordinator()
-    var tabTwo = UIHostingController(rootView: Media())
-    var tabThree = UIHostingController(rootView: ViewFactories.buildFlightInfo())
+    var tabTwo = UIHostingController(rootView: MediaTab())
+    var tabThree = UIHostingController(rootView: FlightTab())
     
     func start() {
         tabOne.start()
@@ -65,6 +47,7 @@ class TabViewCoordinator: CoordinatorSlim {
         tabTwo.tabBarItem = UITabBarItem(title: "Media", image: UIImage(systemName: "play"), selectedImage: UIImage(systemName: "play.fill"))
         tabThree.tabBarItem = UITabBarItem(title: "Flight", image: UIImage(systemName: "airplane"), selectedImage: UIImage(systemName: "airplane.circle"))
         self.tabView.viewControllers = [tabOne.navView, tabTwo, tabThree]
+        self.tabView.tabBar.tintColor = .white
     }
     
 }
@@ -76,28 +59,50 @@ class HomeMenuCoordinator: NSObject, CoordinatorSlim {
     var seatsMenu = UIHostingController(rootView: ViewFactories.buildSeatSelection())
     var shadesMenu = UIHostingController(rootView: ViewFactories.buildShadesView())
     
-    lazy var topLevelMenu = {
-        let view = UIHostingController(rootView: Home(navCallback: self.goTo))
-        
-
-//        view.title = "First title"
-        return view
-    }()
+    var topLevelMenu: UIHostingController<Home>!
     
     func goTo(_ route: MenuRouter) {
-//        print("opening")
         let destination = route.view()
         navView.pushViewController(destination, animated: true)
     }
     
     override init() {
         self.navView = UINavigationController()
-        navView.navigationBar.prefersLargeTitles = true
+//        navView.navigationBar.prefersLargeTitles = true
+        navView.navigationBar.tintColor = .white
         super.init()
+        
+        let topView = UIHostingController(rootView: Home(navCallback: goTo))
+        topView.title = "Home"
+        let volume = UIBarButtonItem(image: UIImage(systemName: "speaker"), style: .plain, target: self, action: #selector(toolBarClick))
+        let icon = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(toolBarClick))
+        
+        
+//        topView.toolbarItems = [volume]
+//        topView.setToolbarItems(topView.toolbarItems, animated: true)
+        
+        
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+//        navigationBarAppearance.backgroundColor = .systemIndigo
+//        navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.shadow: al]
+        
+        topView.navigationItem.standardAppearance = navigationBarAppearance
+        topView.navigationItem.compactAppearance = navigationBarAppearance
+        topView.navigationItem.scrollEdgeAppearance = navigationBarAppearance
+        
+        
+        topView.navigationItem.rightBarButtonItems = [volume, icon]
+        
+        self.topLevelMenu = topView
         
         navView.delegate = self
     }
     
+    @objc func toolBarClick() {
+        print("volume!")
+    }
+
     func start() {
         navView.setViewControllers([topLevelMenu], animated: false)
     }
@@ -115,4 +120,16 @@ extension HomeMenuCoordinator: UINavigationControllerDelegate {
 //        }
         
     }
+}
+
+
+class WeatherCoordinator: CoordinatorSlim {
+    
+    var view = UIViewController()
+    
+    func start() {
+        let swiftUIview = ViewFactories.buildWeatherView()
+        view = UIHostingController(rootView: swiftUIview)
+    }
+    
 }

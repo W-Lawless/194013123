@@ -29,7 +29,7 @@ class FlightAPI {
                 case .failure(let error):
                     print(error)
                 case .finished:
-                    print()
+                    return
                 }
             },
             receiveValue: { shades in
