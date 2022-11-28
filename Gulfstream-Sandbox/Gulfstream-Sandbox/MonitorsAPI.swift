@@ -36,10 +36,10 @@ class MonitorsAPI {
         )
     }
     
-    func toggleLight(_ light: LightModel, cmd: LightState) {
+    func togglePower(_ monitor: MonitorModel, cmd: Bool) {
         
-        let endpoint = Endpoint<EndpointFormats.Put<LightModel.state>, LightModel.state>(path: "/api/v1/lights/\(light.id)/state")
-        let encodeObj = LightModel.state(on: cmd.rawValue, brightness: cmd.rawValue == true ? 100 : 0)
+        let endpoint = Endpoint<EndpointFormats.Put<MonitorPowerState>, MonitorModel.state>(path: "/api/v1/monitors/\(monitor.id)/state")
+        let encodeObj = MonitorPowerState(on: cmd)
                 
         let publisher = Session.shared.publisher(for: endpoint, using: encodeObj)
         

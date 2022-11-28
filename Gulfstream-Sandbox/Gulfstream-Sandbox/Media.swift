@@ -10,7 +10,11 @@ import SwiftUI
 struct Media: View {
     var body: some View {
         Text("Monitors")
-        ViewFactories.buildMonitorsView()
+        TabView {
+            ViewFactories.buildMonitorsView()
+            ViewFactories.buildSourcesView()
+        }
+        .tabViewStyle(.page)
     }
 }
 

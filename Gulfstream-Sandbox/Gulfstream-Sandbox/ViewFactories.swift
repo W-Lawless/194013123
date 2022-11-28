@@ -61,4 +61,12 @@ struct ViewFactories {
         return view
     }
     
+    static func buildSourcesView() -> Sources {
+        let viewModel = SourceViewModel()
+        let api = SourceAPI(viewModel: viewModel)
+        
+        let view = Sources(viewModel: viewModel, api: api)
+        return view
+    }
+    
 }

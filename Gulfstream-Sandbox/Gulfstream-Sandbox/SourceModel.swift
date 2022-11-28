@@ -1,5 +1,5 @@
 //
-//  MonitorsModel.swift
+//  SourcesModel.swift
 //  Gulfstream-Sandbox
 //
 //  Created by Lawless on 11/28/22.
@@ -7,9 +7,13 @@
 
 import Foundation
 
-struct MonitorModel: Codable, Identifiable {
+struct SourceModel: Codable, Identifiable {
     var id: String
     var name: String
+    var allowRename: Bool
+    var defaultName: String
+    var visible: Bool
+    var order: Int
     struct rect: Codable {
         var x: Float
         var y: Float
@@ -24,16 +28,10 @@ struct MonitorModel: Codable, Identifiable {
     }
     var type: String
     struct capabilities: Codable {
-        var deploy: Bool
-        var rotate: Bool
+        var audio: Bool
+        var video: Bool
     }
-    struct state: Codable {
-        var on: Bool
-        var source: String
-        var sourceShortName: String
-    }
-}
-
-struct MonitorPowerState: Codable {
-    var on: Bool
+    var shortName: String
+    var personalDevice: Bool
+    var seatOnly: Bool
 }

@@ -1,21 +1,21 @@
 //
-//  LightsAPI.swift
+//  SourcesAPI.swift
 //  Gulfstream-Sandbox
 //
-//  Created by Lawless on 11/23/22.
+//  Created by Lawless on 11/28/22.
 //
 
-import Foundation
 import Combine
 
-class LightsAPI {
+
+class SourceAPI {
     
-    let viewModel: LightsViewModel
+    let viewModel: SourceViewModel
     var cancelToken: Cancellable?
 
-    let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: "/api/v1/lights")
+    let endpoint = Endpoint<EndpointFormats.Get, SourceModel>(path: "/api/v1/sources")
     
-    init(viewModel: LightsViewModel) {
+    init(viewModel: SourceViewModel) {
         self.viewModel = viewModel
     }
     
@@ -31,16 +31,17 @@ class LightsAPI {
                     print("Success")
                 }
             },
-            receiveValue: { lights in
-                self.viewModel.updateValues(true, lights)
+            receiveValue: { monitors in
+                self.viewModel.updateValues(true, monitors)
             }
         )
     }
     
-    func toggleLight(_ light: LightModel, cmd: LightState) {
+    /*
+    func togglePower(_ monitor: MonitorModel, cmd: Bool) {
         
-        let endpoint = Endpoint<EndpointFormats.Put<LightModel.state>, LightModel.state>(path: "/api/v1/lights/\(light.id)/state")
-        let encodeObj = LightModel.state(on: cmd.rawValue, brightness: cmd.rawValue == true ? 100 : 0)
+        let endpoint = Endpoint<EndpointFormats.Put<MonitorPowerState>, MonitorModel.state>(path: "/api/v1/monitors/\(monitor.id)/state")
+        let encodeObj = MonitorPowerState(on: cmd)
                 
         let publisher = Session.shared.publisher(for: endpoint, using: encodeObj)
         
@@ -54,10 +55,11 @@ class LightsAPI {
                     return
                 }
             },
-            receiveValue: { light in
-                    print("put request data", light)
+            receiveValue: { shade in
+                    print("put request data", shade)
             }
         )
     }
-    
+    */
 }
+

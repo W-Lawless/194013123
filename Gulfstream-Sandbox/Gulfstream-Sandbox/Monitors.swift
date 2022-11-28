@@ -18,7 +18,15 @@ struct Monitors: View {
                 ProgressView()
             } else {                
                 List(viewModel.monitorsList ?? [MonitorModel]()) { monitor in
-                    Text(monitor.name)
+                    Group {
+                        Text(monitor.id)
+                        Button("Power On") {
+                            api.togglePower(monitor, cmd: true)
+                        }
+                        Button("Power Off") {
+                            api.togglePower(monitor, cmd: false)
+                        }
+                    }
                 }
             }
         }.onAppear {

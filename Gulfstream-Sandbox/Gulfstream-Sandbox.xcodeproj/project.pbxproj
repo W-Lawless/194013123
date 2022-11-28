@@ -20,6 +20,9 @@
 		2B1170552935338D00A1CB8F /* Speakers.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B1170522935338D00A1CB8F /* Speakers.json */; };
 		2B1170562935338D00A1CB8F /* Monitors.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B1170532935338D00A1CB8F /* Monitors.json */; };
 		2B1170572935338D00A1CB8F /* Sources.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B1170542935338D00A1CB8F /* Sources.json */; };
+		2B11705A29353C0E00A1CB8F /* SourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11705929353C0E00A1CB8F /* SourceModel.swift */; };
+		2B11705C29353DBF00A1CB8F /* SourceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11705B29353DBF00A1CB8F /* SourceAPI.swift */; };
+		2B11705E29353DED00A1CB8F /* Sources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11705D29353DED00A1CB8F /* Sources.swift */; };
 		2B183F4C2913F8BD0087654E /* EntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B183F4B2913F8BD0087654E /* EntryPoint.swift */; };
 		2B183F4E2913F8BD0087654E /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B183F4D2913F8BD0087654E /* Loading.swift */; };
 		2B183F502913F8C00087654E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B183F4F2913F8C00087654E /* Assets.xcassets */; };
@@ -119,6 +122,9 @@
 		2B1170522935338D00A1CB8F /* Speakers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Speakers.json; sourceTree = "<group>"; };
 		2B1170532935338D00A1CB8F /* Monitors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Monitors.json; sourceTree = "<group>"; };
 		2B1170542935338D00A1CB8F /* Sources.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Sources.json; sourceTree = "<group>"; };
+		2B11705929353C0E00A1CB8F /* SourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceModel.swift; sourceTree = "<group>"; };
+		2B11705B29353DBF00A1CB8F /* SourceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceAPI.swift; sourceTree = "<group>"; };
+		2B11705D29353DED00A1CB8F /* Sources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources.swift; sourceTree = "<group>"; };
 		2B183F482913F8BD0087654E /* Gulfstream-Sandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gulfstream-Sandbox.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B183F4B2913F8BD0087654E /* EntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPoint.swift; sourceTree = "<group>"; };
 		2B183F4D2913F8BD0087654E /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
@@ -215,6 +221,7 @@
 		2B11704729352ADE00A1CB8F /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				2B11705829353C0000A1CB8F /* Sources */,
 				2B11704829352AE300A1CB8F /* Monitors */,
 			);
 			name = Media;
@@ -233,8 +240,18 @@
 			isa = PBXGroup;
 			children = (
 				2B11705029352D7A00A1CB8F /* Monitors.swift */,
+				2B11705D29353DED00A1CB8F /* Sources.swift */,
 			);
 			name = Media;
+			sourceTree = "<group>";
+		};
+		2B11705829353C0000A1CB8F /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				2B11705929353C0E00A1CB8F /* SourceModel.swift */,
+				2B11705B29353DBF00A1CB8F /* SourceAPI.swift */,
+			);
+			name = Sources;
 			sourceTree = "<group>";
 		};
 		2B183F3F2913F8BD0087654E = {
@@ -692,7 +709,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B183F4E2913F8BD0087654E /* Loading.swift in Sources */,
+				2B11705C29353DBF00A1CB8F /* SourceAPI.swift in Sources */,
 				2B8F7139292D763C00073637 /* Shades.swift in Sources */,
+				2B11705E29353DED00A1CB8F /* Sources.swift in Sources */,
 				2B8F713E292E5C5800073637 /* Lights.swift in Sources */,
 				2BB135EC2926D6AB0016444C /* WeatherModels.swift in Sources */,
 				2BE97D67291C69F700149BA4 /* Haptics.swift in Sources */,
@@ -722,6 +741,7 @@
 				2B41EF4A292C105E0062CA2B /* Cabin.swift in Sources */,
 				2B11704E29352D0A00A1CB8F /* MonitorsModel.swift in Sources */,
 				2B183F4C2913F8BD0087654E /* EntryPoint.swift in Sources */,
+				2B11705A29353C0E00A1CB8F /* SourceModel.swift in Sources */,
 				2BA7B4CB291D4A3A00942CB5 /* SeatsAPI.swift in Sources */,
 				2B11704A29352AF100A1CB8F /* MonitorsAPI.swift in Sources */,
 				2BA8F61729257848005621D3 /* Navigator.swift in Sources */,
