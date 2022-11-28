@@ -9,8 +9,8 @@ import SwiftUI
 
 struct Sources: View {
     
-    @StateObject var viewModel: SourceViewModel
-    var api: SourceAPI
+    @StateObject var viewModel: SourcesViewModel
+    var api: SourcesAPI
     
     var body: some View {
         Group{
@@ -37,7 +37,7 @@ struct Sources: View {
 }
 
 
-class SourceViewModel: ObservableObject {
+class SourcesViewModel: ObservableObject {
     
     @Published var loading: Bool = false
     @Published var sourceList: [SourceModel]?

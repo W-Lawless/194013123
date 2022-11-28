@@ -8,14 +8,14 @@
 import Combine
 
 
-class SourceAPI {
+class SourcesAPI {
     
-    let viewModel: SourceViewModel
+    let viewModel: SourcesViewModel
     var cancelToken: Cancellable?
 
     let endpoint = Endpoint<EndpointFormats.Get, SourceModel>(path: "/api/v1/sources")
     
-    init(viewModel: SourceViewModel) {
+    init(viewModel: SourcesViewModel) {
         self.viewModel = viewModel
     }
     

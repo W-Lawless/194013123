@@ -62,10 +62,18 @@ struct ViewFactories {
     }
     
     static func buildSourcesView() -> Sources {
-        let viewModel = SourceViewModel()
-        let api = SourceAPI(viewModel: viewModel)
+        let viewModel = SourcesViewModel()
+        let api = SourcesAPI(viewModel: viewModel)
         
         let view = Sources(viewModel: viewModel, api: api)
+        return view
+    }
+    
+    static func buildSpeakersView() -> Speakers {
+        let viewModel = SpeakersViewModel()
+        let api = SpeakersAPI(viewModel: viewModel)
+        
+        let view = Speakers(viewModel: viewModel, api: api)
         return view
     }
     

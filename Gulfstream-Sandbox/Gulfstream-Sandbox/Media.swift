@@ -13,6 +13,7 @@ struct Media: View {
         TabView {
             ViewFactories.buildMonitorsView()
             ViewFactories.buildSourcesView()
+            ViewFactories.buildSpeakersView()
         }
         .tabViewStyle(.page)
     }
