@@ -17,6 +17,9 @@
 		2B11704C29352CDE00A1CB8F /* LightsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11704B29352CDE00A1CB8F /* LightsModel.swift */; };
 		2B11704E29352D0A00A1CB8F /* MonitorsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11704D29352D0A00A1CB8F /* MonitorsModel.swift */; };
 		2B11705129352D7A00A1CB8F /* Monitors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11705029352D7A00A1CB8F /* Monitors.swift */; };
+		2B1170552935338D00A1CB8F /* Speakers.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B1170522935338D00A1CB8F /* Speakers.json */; };
+		2B1170562935338D00A1CB8F /* Monitors.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B1170532935338D00A1CB8F /* Monitors.json */; };
+		2B1170572935338D00A1CB8F /* Sources.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B1170542935338D00A1CB8F /* Sources.json */; };
 		2B183F4C2913F8BD0087654E /* EntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B183F4B2913F8BD0087654E /* EntryPoint.swift */; };
 		2B183F4E2913F8BD0087654E /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B183F4D2913F8BD0087654E /* Loading.swift */; };
 		2B183F502913F8C00087654E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B183F4F2913F8C00087654E /* Assets.xcassets */; };
@@ -113,6 +116,9 @@
 		2B11704B29352CDE00A1CB8F /* LightsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightsModel.swift; sourceTree = "<group>"; };
 		2B11704D29352D0A00A1CB8F /* MonitorsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorsModel.swift; sourceTree = "<group>"; };
 		2B11705029352D7A00A1CB8F /* Monitors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monitors.swift; sourceTree = "<group>"; };
+		2B1170522935338D00A1CB8F /* Speakers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Speakers.json; sourceTree = "<group>"; };
+		2B1170532935338D00A1CB8F /* Monitors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Monitors.json; sourceTree = "<group>"; };
+		2B1170542935338D00A1CB8F /* Sources.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Sources.json; sourceTree = "<group>"; };
 		2B183F482913F8BD0087654E /* Gulfstream-Sandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gulfstream-Sandbox.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B183F4B2913F8BD0087654E /* EntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPoint.swift; sourceTree = "<group>"; };
 		2B183F4D2913F8BD0087654E /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
@@ -431,6 +437,9 @@
 		2BB135DF2926D2C80016444C /* MockData */ = {
 			isa = PBXGroup;
 			children = (
+				2B1170532935338D00A1CB8F /* Monitors.json */,
+				2B1170542935338D00A1CB8F /* Sources.json */,
+				2B1170522935338D00A1CB8F /* Speakers.json */,
 				2BD75A16292E7503004360A3 /* Lights.json */,
 				2BB135EF2926DD610016444C /* Flight.json */,
 				2BB135EE2926DD610016444C /* Seats.json */,
@@ -655,11 +664,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B1170572935338D00A1CB8F /* Sources.json in Resources */,
 				2BB135F22926DD610016444C /* Flight.json in Resources */,
 				2BB135F12926DD610016444C /* Seats.json in Resources */,
 				2BB135F02926DD610016444C /* Weather.json in Resources */,
+				2B1170552935338D00A1CB8F /* Speakers.json in Resources */,
 				2BB13601292713570016444C /* Shades.json in Resources */,
 				2BD75A17292E7503004360A3 /* Lights.json in Resources */,
+				2B1170562935338D00A1CB8F /* Monitors.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

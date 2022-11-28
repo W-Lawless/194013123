@@ -1,0 +1,365 @@
+{
+    "results": [
+        {
+            "@type": "Speaker",
+            "id": "CREW-REST-HEADPHONE",
+            "name": "Headphone",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "RIGHT",
+            "sub": [],
+            "assoc": [],
+            "type": "PERSONAL",
+            "state": {
+                "mute": false,
+                "volume": 20,
+                "source": "",
+                "trebleLevel": 0,
+                "bassLevel": 0,
+                "sourceShortName": ""
+            }
+        },
+        {
+            "@type": "Speaker",
+            "id": "L-SEAT-1-SPK-1",
+            "name": "Headphones",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "PERSONAL",
+            "state": {
+                "mute": false,
+                "volume": 20,
+                "source": "",
+                "trebleLevel": 0,
+                "bassLevel": 0,
+                "sourceShortName": ""
+            }
+        },
+        {
+            "@type": "Speaker",
+            "id": "L-SEAT-2-SPK-1",
+            "name": "Headphones",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "PERSONAL",
+            "state": {
+                "mute": false,
+                "volume": 20,
+                "source": "",
+                "trebleLevel": 0,
+                "bassLevel": 0,
+                "sourceShortName": ""
+            }
+        },
+        {
+            "@type": "Speaker",
+            "id": "R-SEAT-1-SPK-1",
+            "name": "Headphones",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "PERSONAL",
+            "state": {
+                "mute": false,
+                "volume": 20,
+                "source": "",
+                "trebleLevel": 0,
+                "bassLevel": 0,
+                "sourceShortName": ""
+            }
+        },
+        {
+            "@type": "Speaker",
+            "id": "R-SEAT-2-SPK-1",
+            "name": "Headphones",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "PERSONAL",
+            "state": {
+                "mute": false,
+                "volume": 20,
+                "source": "",
+                "trebleLevel": 0,
+                "bassLevel": 0,
+                "sourceShortName": ""
+            }
+        },
+        {
+            "@type": "Speaker",
+            "id": "4-Seat-Group-Spk-1",
+            "name": "Fwd Cabin",
+            "rect": {
+                "x": 0.96,
+                "y": 1.95,
+                "w": 1.05,
+                "h": 1.05,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "CABIN",
+            "state": {
+                "mute": false,
+                "volume": 20,
+                "source": "",
+                "trebleLevel": 0,
+                "bassLevel": 0,
+                "sourceShortName": ""
+            }
+        },
+        {
+            "@type": "Speaker",
+            "id": "CONF-AFT-IB-SPK-3",
+            "name": "Headphones",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "PERSONAL",
+            "state": {
+                "mute": false,
+                "volume": 20,
+                "source": "",
+                "trebleLevel": 0,
+                "bassLevel": 0,
+                "sourceShortName": ""
+            }
+        },
+        {
+            "@type": "Speaker",
+            "id": "CONF-AFT-OB-SPK-3",
+            "name": "Headphones",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "PERSONAL",
+            "state": {
+                "mute": false,
+                "volume": 20,
+                "source": "",
+                "trebleLevel": 0,
+                "bassLevel": 0,
+                "sourceShortName": ""
+            }
+        },
+        {
+            "@type": "Speaker",
+            "id": "CONF-FWD-IB-SPK-3",
+            "name": "Headphones",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "PERSONAL",
+            "state": {
+                "mute": false,
+                "volume": 20,
+                "source": "",
+                "trebleLevel": 0,
+                "bassLevel": 0,
+                "sourceShortName": ""
+            }
+        },
+        {
+            "@type": "Speaker",
+            "id": "CONF-FWD-OB-SPK-3",
+            "name": "Headphones",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "PERSONAL",
+            "state": {
+                "mute": false,
+                "volume": 20,
+                "source": "",
+                "trebleLevel": 0,
+                "bassLevel": 0,
+                "sourceShortName": ""
+            }
+        },
+        {
+            "@type": "Speaker",
+            "id": "SEAT-1-SPK-2",
+            "name": "Headphones",
+            "rect": {
+                "x": 0.1,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "PERSONAL",
+            "state": {
+                "mute": false,
+                "volume": 20,
+                "source": "",
+                "trebleLevel": 0,
+                "bassLevel": 0,
+                "sourceShortName": ""
+            }
+        },
+        {
+            "@type": "Speaker",
+            "id": "DIVAN-FWD-SPK-2",
+            "name": "Headphones",
+            "rect": {
+                "x": 2.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "RIGHT",
+            "sub": [],
+            "assoc": [],
+            "type": "PERSONAL",
+            "state": {
+                "mute": false,
+                "volume": 47,
+                "source": "HDMI2",
+                "trebleLevel": 0,
+                "bassLevel": 0,
+                "sourceShortName": "HDML"
+            }
+        },
+        {
+            "@type": "Speaker",
+            "id": "AREA-SPK-3",
+            "name": "Aft Cabin",
+            "rect": {
+                "x": 0.96,
+                "y": 0.96,
+                "w": 1.05,
+                "h": 1.05,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "CABIN",
+            "state": {
+                "mute": false,
+                "volume": 20,
+                "source": "",
+                "trebleLevel": 0,
+                "bassLevel": 0,
+                "sourceShortName": ""
+            }
+        },
+        {
+            "@type": "Speaker",
+            "id": "SEAT-2-SPK-2",
+            "name": "Headphones",
+            "rect": {
+                "x": 0.1,
+                "y": 2.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "PERSONAL",
+            "state": {
+                "mute": false,
+                "volume": 20,
+                "source": "",
+                "trebleLevel": 0,
+                "bassLevel": 0,
+                "sourceShortName": ""
+            }
+        },
+        {
+            "@type": "Speaker",
+            "id": "DIVAN-AFT-SPK-2",
+            "name": "Headphones",
+            "rect": {
+                "x": 2.0,
+                "y": 2.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "RIGHT",
+            "sub": [],
+            "assoc": [],
+            "type": "PERSONAL",
+            "state": {
+                "mute": false,
+                "volume": 47,
+                "source": "HDMI2",
+                "trebleLevel": 0,
+                "bassLevel": 0,
+                "sourceShortName": "HDML"
+            }
+        }
+    ],
+    "length": 15
+}

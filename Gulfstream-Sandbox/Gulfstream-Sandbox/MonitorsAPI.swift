@@ -31,8 +31,7 @@ class MonitorsAPI {
                 }
             },
             receiveValue: { monitors in
-                print(monitors)
-//                self.viewModel.updateValues(true, lights)
+                self.viewModel.updateValues(true, monitors)
             }
         )
     }
