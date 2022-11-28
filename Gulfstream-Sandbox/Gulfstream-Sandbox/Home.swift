@@ -10,9 +10,33 @@ import Combine
 
 struct Home: View {
     
+    var navCallback: (_ route: MenuRouter) -> () = { _ in }
+    
     var body: some View {
         
-        Curves()
+        Spacer()
+        
+        Button("Lights") {
+            print("clicked")
+            navCallback(.lights)
+        }
+        
+        Spacer()
+        
+        Button("Shades") {
+            print("clicked")
+            navCallback(.shades)
+        }
+        
+        Spacer()
+        
+        Button("Seats") {
+            print("clicked")
+            navCallback(.seats)
+        }
+        
+        Spacer()
+//        Curves()
         
 //        Pulse()
         
@@ -28,11 +52,11 @@ struct Home: View {
     }
 }
 
-struct Home_Previews: PreviewProvider {
-    static var previews: some View {
-        Home()
-    }
-}
+//struct Home_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Home()
+//    }
+//}
 
 
 //MARK: - Custom Curves

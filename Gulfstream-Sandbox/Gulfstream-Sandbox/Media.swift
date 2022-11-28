@@ -9,7 +9,8 @@ import SwiftUI
 
 struct Media: View {
     var body: some View {
-        Text("Media")
+        Text("Monitors")
+        ViewFactories.buildMonitorsView()
     }
 }
 

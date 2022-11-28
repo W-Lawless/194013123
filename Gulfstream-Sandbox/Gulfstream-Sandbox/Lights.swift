@@ -11,29 +11,32 @@ struct Lights: View {
     
     @StateObject var viewModel: LightsViewModel
     var api: LightsAPI
+    @State var luminosity: Int = 0
         
     var body: some View {
         
-        LightControl()
+//        LightControl()
         
-//        TabView{
-//
-//            List(viewModel.lightList ?? [LightModel]()) { light in
-//                Button("ON \(light.id)") {
-//                    api.toggleLight(light, cmd: .ON)
-//                }
-//            }//: LIST
-//
-//            List(viewModel.lightList ?? [LightModel]()) { light in
-//                Button("OFF \(light.id)") {
-//                    api.toggleLight(light, cmd: .OFF)
-//                }
-//            }//: LIST
-//        }
-//        .tabViewStyle(.page)
-//        .onAppear {
-//            api.fetch()
-//        } //: TABVIEW
+        TabView{
+
+            List(viewModel.lightList ?? [LightModel]()) { light in
+                
+                Button("ON \(light.id)") {
+                    api.toggleLight(light, cmd: .ON)
+                }
+                
+                Button("OFF \(light.id)") {
+                    api.toggleLight(light, cmd: .OFF)
+                }
+                
+                Stepper("Brightness", value: $luminosity)
+                
+            }//: LIST
+        }
+        .tabViewStyle(.page)
+        .onAppear {
+            api.fetch()
+        } //: TABVIEW
         
     }
 }

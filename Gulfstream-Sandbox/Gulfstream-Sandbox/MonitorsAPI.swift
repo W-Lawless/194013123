@@ -1,21 +1,20 @@
 //
-//  LightsAPI.swift
+//  MonitorsAPI.swift
 //  Gulfstream-Sandbox
 //
-//  Created by Lawless on 11/23/22.
+//  Created by Lawless on 11/28/22.
 //
 
-import Foundation
 import Combine
 
-class LightsAPI {
+class MonitorsAPI {
     
-    let viewModel: LightsViewModel
+    let viewModel: MonitorsViewModel
     var cancelToken: Cancellable?
 
-    let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: "/api/v1/lights")
+    let endpoint = Endpoint<EndpointFormats.Get, MonitorModel>(path: "/api/v1/monitors")
     
-    init(viewModel: LightsViewModel) {
+    init(viewModel: MonitorsViewModel) {
         self.viewModel = viewModel
     }
     
@@ -31,8 +30,9 @@ class LightsAPI {
                     print("Success")
                 }
             },
-            receiveValue: { lights in
-                self.viewModel.updateValues(true, lights)
+            receiveValue: { monitors in
+                print(monitors)
+//                self.viewModel.updateValues(true, lights)
             }
         )
     }
@@ -61,3 +61,4 @@ class LightsAPI {
     }
     
 }
+

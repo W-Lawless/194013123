@@ -53,4 +53,12 @@ struct ViewFactories {
         return view
     }
     
+    static func buildMonitorsView() -> Monitors {
+        let viewModel = MonitorsViewModel()
+        let api = MonitorsAPI(viewModel: viewModel)
+        
+        let view = Monitors(viewModel: viewModel, api: api)
+        return view
+    }
+    
 }

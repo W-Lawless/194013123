@@ -12,7 +12,9 @@ struct TabContainer: View {
     var body: some View {
         TabView {
             
-            Home()
+            Home(navCallback: { _ in
+                print("navcallback from tabview swift ui")
+            })
                 .tabItem{
                     Label("Home", systemImage: "house.fill")
                 }
