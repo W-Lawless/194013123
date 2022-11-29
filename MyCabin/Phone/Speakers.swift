@@ -25,7 +25,7 @@ struct Speakers: View {
                 }
             }
         }.onAppear {
-            api.fetch()
+//            api.fetch()
         }
     }
 }
@@ -42,6 +42,15 @@ class SpeakersViewModel: ObservableObject {
             print(data[0].state.volume)
             self.speakerList = data
         }
+    }
+    
+    func updateState(for speaker: SpeakerModel) {
+        self.speakerList?.mapInPlace({ value in
+            if(value.id == speaker.id) {
+                print("match", value)
+                value = speaker
+            }
+        })
     }
     
 }

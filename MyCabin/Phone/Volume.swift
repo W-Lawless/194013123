@@ -9,36 +9,57 @@ import SwiftUI
 
 struct Volume: View {
     
-    @StateObject var viewModel: VolumeViewModel
+    @StateObject var viewModel: SpeakersViewModel
     var api: SpeakersAPI
     @State var vol: Int = 0
     
+    func callback(_ speaker: SpeakerModel) {
+        viewModel.updateState(for: speaker)
+    }
+    
     var body: some View {
         Group {
-            if (viewModel.loading) {
-                ProgressView()
-            } else {
+            
                 List(viewModel.speakerList ?? [SpeakerModel]() ) { speaker in
-                    VolumeControl(speaker: speaker)
+                    VolumeControl(speaker: speaker, cb: callback)
                 }
-            }
+
         }.onAppear {
             api.fetch()
         }
     }
 }
 
+
+ /// Use mutating function on Swift UI view ?
 struct VolumeControl: View {
-    var speaker: SpeakerModel
-    @State var vol: Int = 0
+    
+    let speaker: SpeakerModel
+    @State var vol: Int
+    var callback: (_ speaker: SpeakerModel) -> ()
+    
+    init(speaker: SpeakerModel, vol: Int = 0, cb: @escaping (_ speaker: SpeakerModel) -> ()) {
+        self.speaker = speaker
+        self.vol = speaker.state.volume
+        self.callback = cb
+    }
+    
+    func onInc() {
+        self.vol += 1
+        var copy = speaker
+        copy.state.volume = vol
+        self.callback(copy)
+    }
+    
+    func onDec() {
+        self.vol -= 1
+    }
     
     var body: some View {
         Group {
             Text(speaker.id)
             HStack {
-                Text("\(speaker.state.volume)")
-                Text(String(describing:$vol.wrappedValue))
-                Stepper("Volume", value: $vol)
+                Stepper("Volume \(String(describing:$vol.wrappedValue))", onIncrement: onInc, onDecrement: onDec)
             }
         }
     }
@@ -56,7 +77,14 @@ class VolumeViewModel: SpeakersViewModel {
 //            self.speakerList = data
 //        }
 //    }
-    
+}
+
+extension Array {
+    mutating func mapInPlace(_ x: (inout Element) -> ()) {
+        for i in indices {
+            x(&self[i])
+        }
+    }
 }
 
 

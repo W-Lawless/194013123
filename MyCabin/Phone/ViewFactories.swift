@@ -13,6 +13,8 @@ import SwiftUI
 
 struct ViewFactories {
     
+    static let speakersViewModel = SpeakersViewModel()
+    
     static func buildFlightInfo() -> FlightInfo {
         let viewModel = FlightViewModel()
         let api = FlightAPI(viewModel: viewModel)
@@ -70,18 +72,16 @@ struct ViewFactories {
     }
     
     static func buildSpeakersView() -> Speakers {
-        let viewModel = SpeakersViewModel()
-        let api = SpeakersAPI(viewModel: viewModel)
+        let api = SpeakersAPI(viewModel: self.speakersViewModel)
         
-        let view = Speakers(viewModel: viewModel, api: api)
+        let view = Speakers(viewModel: self.speakersViewModel, api: api)
         return view
     }
     
     static func buildVolumeView() -> Volume {
-        let viewModel = VolumeViewModel()
-        let api = SpeakersAPI(viewModel: viewModel)
+        let api = SpeakersAPI(viewModel: self.speakersViewModel)
         
-        let view = Volume(viewModel: viewModel, api: api)
+        let view = Volume(viewModel: self.speakersViewModel, api: api)
         return view
     }
     

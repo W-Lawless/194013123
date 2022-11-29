@@ -26,6 +26,49 @@ protocol CoordinatorProtocol {
 }
 
 
+public enum MenuRouter: NavigationRouter {
+    
+    case lights
+    case shades
+    case seats
+    
+    public var transition: NavigationTranisitionStyle {
+        switch self {
+        case .lights:
+            return .push
+        case .shades:
+            return .push
+        case .seats:
+            return .presentModally
+        }
+    }
+    
+    public func view() -> UIViewController {
+        switch self {
+        case .lights:
+           return UIHostingController(rootView: ViewFactories.buildLightsView())
+        case .shades:
+            return UIHostingController(rootView: ViewFactories.buildShadesView())
+        case .seats:
+            return UIHostingController(rootView: ViewFactories.buildSeatSelection())
+        }
+    }
+}
+
+public protocol NavigationRouter {
+
+    var transition: NavigationTranisitionStyle { get }
+    
+    func view() -> UIViewController
+}
+
+public enum NavigationTranisitionStyle {
+    case push
+    case presentModally
+    case presentFullscreen
+}
+
+
 
 //MARK: - Coordinator
 
@@ -78,46 +121,3 @@ protocol CoordinatorProtocol {
 //    }
 //}
 //
-
-
-public enum MenuRouter: NavigationRouter {
-    
-    case lights
-    case shades
-    case seats
-    
-    public var transition: NavigationTranisitionStyle {
-        switch self {
-        case .lights:
-            return .push
-        case .shades:
-            return .push
-        case .seats:
-            return .presentModally
-        }
-    }
-    
-    public func view() -> UIViewController {
-        switch self {
-        case .lights:
-           return UIHostingController(rootView: ViewFactories.buildLightsView())
-        case .shades:
-            return UIHostingController(rootView: ViewFactories.buildShadesView())
-        case .seats:
-            return UIHostingController(rootView: ViewFactories.buildSeatSelection())
-        }
-    }
-}
-
-public protocol NavigationRouter {
-
-    var transition: NavigationTranisitionStyle { get }
-    
-    func view() -> UIViewController
-}
-
-public enum NavigationTranisitionStyle {
-    case push
-    case presentModally
-    case presentFullscreen
-}

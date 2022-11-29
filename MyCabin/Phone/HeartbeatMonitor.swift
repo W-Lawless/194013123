@@ -15,21 +15,17 @@ class HeartBeatMonitor {
         return timer.isValid
     }
     
-    func startMonitor(interval: Double, callback cb: @escaping () async -> Void) {
-//        print(" ⏱ 🏁: \(interval)")
-        self.timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
-//            print(" ⏱: \(interval)")
+    func startMonitor(interval: Double, callback cb: @escaping () async -> Void) { /// print(" ⏱ 🏁: \(interval)")
+        self.timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in /// print(" ⏱: \(interval)")
             Task(priority: .background) {
                 await cb()
             }
         }
     }
     
-    func stopMonitor() {
-//        print(" ⏱ ❌ ")
+    func stopMonitor() { /// print(" ⏱ ❌ ")
         timer.invalidate()
     }
-
 }
 
 protocol RealtimeAPI {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B02B9BF2936729100C6387A /* Volume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9BE2936729100C6387A /* Volume.swift */; };
+		2B02B9C12936968600C6387A /* LoadAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9C02936968600C6387A /* LoadAll.swift */; };
 		2B10DD24292D4C2400AB98F3 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD23292D4C2400AB98F3 /* Weather.swift */; };
 		2B10DD26292D572500AB98F3 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD25292D572500AB98F3 /* WeatherAPI.swift */; };
 		2B10DD28292D656B00AB98F3 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD27292D656B00AB98F3 /* Endpoint.swift */; };
@@ -44,7 +45,6 @@
 		2BA8F60329251C0C005621D3 /* FlightModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8F60229251C0C005621D3 /* FlightModels.swift */; };
 		2BA8F60629252166005621D3 /* SeatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8F60529252166005621D3 /* SeatModels.swift */; };
 		2BA8F60E292536AB005621D3 /* ViewFactories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8F60D292536AB005621D3 /* ViewFactories.swift */; };
-		2BA8F61729257848005621D3 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8F61629257848005621D3 /* Navigator.swift */; };
 		2BA8F61A29258F78005621D3 /* ElementsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8F61929258F78005621D3 /* ElementsAPI.swift */; };
 		2BB135D92926D1290016444C /* MainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135D82926D1290016444C /* MainTests.swift */; };
 		2BB135E72926D66E0016444C /* +Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC49CD32922BEE5007DA457 /* +Weather.swift */; };
@@ -114,6 +114,7 @@
 
 /* Begin PBXFileReference section */
 		2B02B9BE2936729100C6387A /* Volume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volume.swift; sourceTree = "<group>"; };
+		2B02B9C02936968600C6387A /* LoadAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAll.swift; sourceTree = "<group>"; };
 		2B10DD23292D4C2400AB98F3 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		2B10DD25292D572500AB98F3 /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		2B10DD27292D656B00AB98F3 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -153,7 +154,6 @@
 		2BA8F60229251C0C005621D3 /* FlightModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightModels.swift; sourceTree = "<group>"; };
 		2BA8F60529252166005621D3 /* SeatModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatModels.swift; sourceTree = "<group>"; };
 		2BA8F60D292536AB005621D3 /* ViewFactories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactories.swift; sourceTree = "<group>"; };
-		2BA8F61629257848005621D3 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		2BA8F61929258F78005621D3 /* ElementsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsAPI.swift; sourceTree = "<group>"; };
 		2BB135D62926D1290016444C /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BB135D82926D1290016444C /* MainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTests.swift; sourceTree = "<group>"; };
@@ -229,7 +229,6 @@
 			isa = PBXGroup;
 			children = (
 				2B1170432933E3C100A1CB8F /* Coordinator.swift */,
-				2BA8F61629257848005621D3 /* Navigator.swift */,
 				2B1170452933E43800A1CB8F /* AppCoordinator.swift */,
 			);
 			name = Navigation;
@@ -349,6 +348,7 @@
 				2BB3A586292445C90094B787 /* HeartbeatMonitor.swift */,
 				2BB135FB292703970016444C /* CodableWrapper.swift */,
 				2B10DD27292D656B00AB98F3 /* Endpoint.swift */,
+				2B02B9C02936968600C6387A /* LoadAll.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -773,9 +773,9 @@
 				2B11704E29352D0A00A1CB8F /* MonitorModel.swift in Sources */,
 				2B183F4C2913F8BD0087654E /* EntryPoint.swift in Sources */,
 				2B11705A29353C0E00A1CB8F /* SourceModel.swift in Sources */,
+				2B02B9C12936968600C6387A /* LoadAll.swift in Sources */,
 				2BA7B4CB291D4A3A00942CB5 /* SeatsAPI.swift in Sources */,
 				2B11704A29352AF100A1CB8F /* MonitorsAPI.swift in Sources */,
-				2BA8F61729257848005621D3 /* Navigator.swift in Sources */,
 				2BA8F60E292536AB005621D3 /* ViewFactories.swift in Sources */,
 				2B117068293551AD00A1CB8F /* FlightTab.swift in Sources */,
 				2B10DD28292D656B00AB98F3 /* Endpoint.swift in Sources */,
