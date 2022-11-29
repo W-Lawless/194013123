@@ -7,7 +7,7 @@
 
 import XCTest
 import Combine
-@testable import Gulfstream_Sandbox
+@testable import MyCabin
 
 // MARK: - Network Layer
 

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2B183F472913F8BD0087654E"
-               BuildableName = "Gulfstream-Sandbox.app"
-               BlueprintName = "Gulfstream-Sandbox"
-               ReferencedContainer = "container:Gulfstream-Sandbox.xcodeproj">
+               BuildableName = "MyCabin.app"
+               BlueprintName = "MyCabin"
+               ReferencedContainer = "container:MyCabin.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2BB135D52926D1290016444C"
-               BuildableName = "Sandbox-Tests.xctest"
-               BlueprintName = "Sandbox-Tests"
-               ReferencedContainer = "container:Gulfstream-Sandbox.xcodeproj">
+               BuildableName = "Tests.xctest"
+               BlueprintName = "Tests"
+               ReferencedContainer = "container:MyCabin.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2B183F472913F8BD0087654E"
-            BuildableName = "Gulfstream-Sandbox.app"
-            BlueprintName = "Gulfstream-Sandbox"
-            ReferencedContainer = "container:Gulfstream-Sandbox.xcodeproj">
+            BuildableName = "MyCabin.app"
+            BlueprintName = "MyCabin"
+            ReferencedContainer = "container:MyCabin.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2B183F472913F8BD0087654E"
-            BuildableName = "Gulfstream-Sandbox.app"
-            BlueprintName = "Gulfstream-Sandbox"
-            ReferencedContainer = "container:Gulfstream-Sandbox.xcodeproj">
+            BuildableName = "MyCabin.app"
+            BlueprintName = "MyCabin"
+            ReferencedContainer = "container:MyCabin.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
