@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B02B9BF2936729100C6387A /* Volume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9BE2936729100C6387A /* Volume.swift */; };
-		2B02B9C12936968600C6387A /* ViewFactoriesA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9C02936968600C6387A /* ViewFactoriesA.swift */; };
+		2B02B9C12936968600C6387A /* ViewFactories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9C02936968600C6387A /* ViewFactories.swift */; };
 		2B10DD24292D4C2400AB98F3 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD23292D4C2400AB98F3 /* Weather.swift */; };
 		2B10DD26292D572500AB98F3 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD25292D572500AB98F3 /* WeatherAPI.swift */; };
 		2B10DD28292D656B00AB98F3 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD27292D656B00AB98F3 /* Endpoint.swift */; };
@@ -113,7 +113,7 @@
 
 /* Begin PBXFileReference section */
 		2B02B9BE2936729100C6387A /* Volume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volume.swift; sourceTree = "<group>"; };
-		2B02B9C02936968600C6387A /* ViewFactoriesA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactoriesA.swift; sourceTree = "<group>"; };
+		2B02B9C02936968600C6387A /* ViewFactories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactories.swift; sourceTree = "<group>"; };
 		2B10DD23292D4C2400AB98F3 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		2B10DD25292D572500AB98F3 /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		2B10DD27292D656B00AB98F3 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -317,7 +317,7 @@
 				2BE97D5C291C47EB00149BA4 /* UI */,
 				2B183F5A2913F9520087654E /* Networking */,
 				2B183F4B2913F8BD0087654E /* EntryPoint.swift */,
-				2B02B9C02936968600C6387A /* ViewFactoriesA.swift */,
+				2B02B9C02936968600C6387A /* ViewFactories.swift */,
 				2B183F512913F8C00087654E /* MyCabin.entitlements */,
 				2B183F4F2913F8C00087654E /* Assets.xcassets */,
 				2B7FE8102919C692002C64FF /* Info.plist */,
@@ -770,7 +770,7 @@
 				2B11704E29352D0A00A1CB8F /* MonitorModel.swift in Sources */,
 				2B183F4C2913F8BD0087654E /* EntryPoint.swift in Sources */,
 				2B11705A29353C0E00A1CB8F /* SourceModel.swift in Sources */,
-				2B02B9C12936968600C6387A /* ViewFactoriesA.swift in Sources */,
+				2B02B9C12936968600C6387A /* ViewFactories.swift in Sources */,
 				2BA7B4CB291D4A3A00942CB5 /* SeatsAPI.swift in Sources */,
 				2B11704A29352AF100A1CB8F /* MonitorsAPI.swift in Sources */,
 				2B117068293551AD00A1CB8F /* FlightTab.swift in Sources */,
