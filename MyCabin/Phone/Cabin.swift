@@ -51,13 +51,13 @@ class CabinAPI: ObservableObject {
             var request = URLRequest(url: self.endpoint, timeoutInterval: 5);
             request.httpMethod = "HEAD"
             let (_,response) = try await Session.shared.data(for: request)
-            if let res = response as? HTTPURLResponse { print(" ✅: Cabin Responsed with Status:\(res.statusCode)")
+            if response is HTTPURLResponse { //print(" ✅: Cabin Responsed with Status:\(res.statusCode)")
 //                await updateValues(true, nil)
                 self.statePublisher.send(true)
             }
         } catch {
-            let cast = error as NSError;
-            print(" ❌: Cabin Connection Error \(cast.code)")
+//            let cast = error as NSError;
+//            print(" ❌: Cabin Connection Error \(cast.code)")
 //            await updateValues(false, nil)
             self.statePublisher.send(false)
         }

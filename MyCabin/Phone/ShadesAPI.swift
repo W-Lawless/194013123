@@ -28,7 +28,7 @@ class ShadesAPI {
                 case .failure(let error):
                     print(error)
                 case .finished:
-                    print("Success")
+                    return
                 }
             },
             receiveValue: { shades in

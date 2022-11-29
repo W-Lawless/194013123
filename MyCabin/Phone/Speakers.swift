@@ -20,7 +20,7 @@ struct Speakers: View {
                 List(viewModel.speakerList ?? [SpeakerModel]() ) { speaker in
                     Group {
                         Text(speaker.id)
-                        Text(speaker.name)
+                        Text("\(speaker.state.volume)")
                     }
                 }
             }
@@ -37,9 +37,9 @@ class SpeakersViewModel: ObservableObject {
     @Published var speakerList: [SpeakerModel]?
     
     func updateValues(_ alive: Bool, _ data: [SpeakerModel]?) {
-        print("updating values with data")
         self.loading = !alive
         if let data = data {
+            print(data[0].state.volume)
             self.speakerList = data
         }
     }

@@ -16,9 +16,9 @@ class HeartBeatMonitor {
     }
     
     func startMonitor(interval: Double, callback cb: @escaping () async -> Void) {
-        print(" ⏱ 🏁: \(interval)")
+//        print(" ⏱ 🏁: \(interval)")
         self.timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
-            print(" ⏱: \(interval)")
+//            print(" ⏱: \(interval)")
             Task(priority: .background) {
                 await cb()
             }
@@ -26,7 +26,7 @@ class HeartBeatMonitor {
     }
     
     func stopMonitor() {
-        print(" ⏱ ❌ ")
+//        print(" ⏱ ❌ ")
         timer.invalidate()
     }
 

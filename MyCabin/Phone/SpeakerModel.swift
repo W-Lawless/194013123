@@ -21,12 +21,14 @@ struct SpeakerModel: Codable, Identifiable {
     var sub: [String]?
     var assoc: [String]?
     var type: String
-    struct state: Codable {
-        var mute: Bool
-        var volume: Int
-        var source: String
-        var trebleLevel: Int
-        var bassLevel: Int
-        var shortSourceName: String
-    }
+    var state: SpeakerState
+}
+
+struct SpeakerState: Codable {
+    var mute: Bool
+    var volume: Int
+    var source: String
+    var trebleLevel: Int
+    var bassLevel: Int
+    var shortSourceName: String?
 }

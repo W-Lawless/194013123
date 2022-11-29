@@ -28,7 +28,7 @@ class SourcesAPI {
                 case .failure(let error):
                     print(error)
                 case .finished:
-                    print("Success")
+                    return
                 }
             },
             receiveValue: { monitors in

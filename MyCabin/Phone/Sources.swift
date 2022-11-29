@@ -43,7 +43,6 @@ class SourcesViewModel: ObservableObject {
     @Published var sourceList: [SourceModel]?
     
     func updateValues(_ alive: Bool, _ data: [SourceModel]?) {
-        print("updating values with data")
         self.loading = !alive
         if let data = data {
             self.sourceList = data

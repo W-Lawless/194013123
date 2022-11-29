@@ -28,7 +28,7 @@ class LightsAPI {
                 case .failure(let error):
                     print(error)
                 case .finished:
-                    print("Success")
+                    return
                 }
             },
             receiveValue: { lights in

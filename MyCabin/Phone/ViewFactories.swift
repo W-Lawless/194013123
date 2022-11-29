@@ -77,4 +77,12 @@ struct ViewFactories {
         return view
     }
     
+    static func buildVolumeView() -> Volume {
+        let viewModel = VolumeViewModel()
+        let api = SpeakersAPI(viewModel: viewModel)
+        
+        let view = Volume(viewModel: viewModel, api: api)
+        return view
+    }
+    
 }

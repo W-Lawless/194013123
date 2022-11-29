@@ -16,7 +16,6 @@ class AppCoordinator: CoordinatorSlim {
     
     let connectionPublisher = CurrentValueSubject<Bool, Never>(false)
     var subscriptions = Set<AnyCancellable>()
-//    var cancelToken: Cancellable?
 
     init(window: UIWindow) {
         self.window = window
@@ -24,7 +23,6 @@ class AppCoordinator: CoordinatorSlim {
     
     func start() {
         
-        let rootNavView = UINavigationController()
         let cabin = CabinAPI(publisher: connectionPublisher)
 
         let tabs = TabViewCoordinator(api: cabin)
@@ -32,13 +30,9 @@ class AppCoordinator: CoordinatorSlim {
         
         let loading = UIHostingController(rootView: Loading(api: cabin))
         
+        let rootNavView = UINavigationController()
         rootNavView.navigationBar.isHidden = true
-        
-        
         rootNavView.setViewControllers([tabs.tabView,loading], animated: true)
-        
-        
-        
         self.window.rootViewController = rootNavView
         
         connectionPublisher
@@ -48,12 +42,8 @@ class AppCoordinator: CoordinatorSlim {
                         let last = (rootNavView.viewControllers.count - 1)
                         if(rootNavView.viewControllers[last] === loading) {
                             cabin.monitor.stopMonitor()
-//                            print("pop!")
                             rootNavView.popViewController(animated: true)
                         }
-
-//                        rootNavView.popViewController(animated: true)
-//                        cabin.monitor.startMonitor(interval: 30, callback: cabin.monitorCallback)
                     }
                 } else {
                     DispatchQueue.main.async {
@@ -61,13 +51,10 @@ class AppCoordinator: CoordinatorSlim {
                         if(rootNavView.viewControllers[last] !== loading) {
                             rootNavView.pushViewController(loading, animated: true)
                         }
-//                        cabin.monitor.stopMonitor()
-//                        self?.window.rootViewController = loading
                     }
                 }
             }
             .store(in: &subscriptions)
-        
     }
 }
 
@@ -106,6 +93,7 @@ class HomeMenuCoordinator: NSObject, CoordinatorSlim {
     var lightsMenu = UIHostingController(rootView: ViewFactories.buildLightsView())
     var seatsMenu = UIHostingController(rootView: ViewFactories.buildSeatSelection())
     var shadesMenu = UIHostingController(rootView: ViewFactories.buildShadesView())
+    let volumeMenu = UIHostingController(rootView: ViewFactories.buildVolumeView())
     
     var topLevelMenu: UIHostingController<Home>!
     
@@ -122,12 +110,8 @@ class HomeMenuCoordinator: NSObject, CoordinatorSlim {
         
         let topView = UIHostingController(rootView: Home(navCallback: goTo))
         topView.title = "Home"
-        let volume = UIBarButtonItem(image: UIImage(systemName: "speaker"), style: .plain, target: self, action: #selector(toolBarClick))
-        let icon = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(toolBarClick))
-        
-        
-//        topView.toolbarItems = [volume]
-//        topView.setToolbarItems(topView.toolbarItems, animated: true)
+        let volume = UIBarButtonItem(image: UIImage(systemName: "speaker"), style: .plain, target: self, action: #selector(volumeClick))
+        let icon = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(attendantClick))
         
         
         let navigationBarAppearance = UINavigationBarAppearance()
@@ -147,8 +131,13 @@ class HomeMenuCoordinator: NSObject, CoordinatorSlim {
         navView.delegate = self
     }
     
-    @objc func toolBarClick() {
+    @objc func volumeClick() {
         print("volume!")
+        navView.pushViewController(self.volumeMenu, animated: true)
+    }
+    
+    @objc func attendantClick() {
+        print("plane waitress")
     }
 
     func start() {
@@ -171,16 +160,7 @@ extension HomeMenuCoordinator: UINavigationControllerDelegate {
 }
 
 
-class WeatherCoordinator: CoordinatorSlim {
-    
-    var view = UIViewController()
-    
-    func start() {
-        let swiftUIview = ViewFactories.buildWeatherView()
-        view = UIHostingController(rootView: swiftUIview)
-    }
-    
-}
+
 
 class HomeTabs: UITabBarController {
     
@@ -204,3 +184,16 @@ class HomeTabs: UITabBarController {
 //        api.monitor.stopMonitor()
     }
 }
+
+
+
+//class WeatherCoordinator: CoordinatorSlim {
+//
+//    var view = UIViewController()
+//
+//    func start() {
+//        let swiftUIview = ViewFactories.buildWeatherView()
+//        view = UIHostingController(rootView: swiftUIview)
+//    }
+//
+//}

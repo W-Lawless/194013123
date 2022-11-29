@@ -43,7 +43,6 @@ class MonitorsViewModel: ObservableObject {
     @Published var monitorsList: [MonitorModel]?
     
     func updateValues(_ alive: Bool, _ data: [MonitorModel]?) {
-        print("updating values with data")
         self.loading = !alive
         if let data = data {
             self.monitorsList = data
