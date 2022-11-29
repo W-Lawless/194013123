@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ViewFactories {
+final class ViewFactories {
     
     //MARK: - Properties
     
