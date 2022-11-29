@@ -1,0 +1,820 @@
+{
+    "results": [
+        {
+            "@type": "Seat",
+            "id": "CREDENZA-SEAT-3",
+            "name": "Credenza",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "SINGLE",
+            "short_name": "CRD",
+            "chirality": "LEFT",
+            "state": {
+                "call": false,
+                "identifier": "CREDENZA-SEAT-3"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "FLIGHT-DECK",
+            "name": "Flight Deck",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "SINGLE",
+            "short_name": "FTDK",
+            "chirality": "LEFT",
+            "state": {
+                "call": false,
+                "identifier": "FLIGHT-DECK"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "FWD-LAV-SEAT",
+            "name": "FLAV",
+            "rect": {
+                "x": 0.37,
+                "y": 0.7,
+                "w": 0.69,
+                "h": 0.93,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "LAVATORY",
+            "short_name": "FLAV",
+            "chirality": "LEFT",
+            "state": {
+                "call": false,
+                "identifier": "FWD-LAV-SEAT"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "CREWREST-SEAT",
+            "name": "CREWREST-SEAT",
+            "rect": {
+                "x": 0.44,
+                "y": 0.9,
+                "w": 0.75,
+                "h": 0.75,
+                "r": 0
+            },
+            "side": "RIGHT",
+            "sub": [],
+            "assoc": [
+                {
+                    "@type": "Monitor",
+                    "id": "CREWREST-BLKHD-MON"
+                },
+                {
+                    "@type": "Window",
+                    "id": "CREWREST-WDO"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "CREWREST-SEAT-SPK"
+                }
+            ],
+            "type": "SINGLE",
+            "short_name": "CRW",
+            "chirality": "RIGHT",
+            "state": {
+                "call": false,
+                "identifier": "CREWREST-SEAT"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "L-SEAT-1-1",
+            "name": "L-SEAT-1",
+            "rect": {
+                "x": 0.43,
+                "y": 0.15,
+                "w": 0.75,
+                "h": 0.75,
+                "r": 180
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [
+                {
+                    "@type": "Light",
+                    "id": "FWD-L-LEDGE-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "L-SEAT-1-MON-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-L-PSU-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "FWD-RBLKHD-MON"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "L-SEAT-1-SPK-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "L-SEAT-1-READ-1"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-SEAT-1-WDO-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "L-TBL-LT-1"
+                }
+            ],
+            "type": "SINGLE",
+            "short_name": "LS1",
+            "chirality": "RIGHT",
+            "state": {
+                "call": false,
+                "identifier": "L-SEAT-1-1"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "R-SEAT-1-1",
+            "name": "Right Seat 1",
+            "rect": {
+                "x": 2.14,
+                "y": 0.15,
+                "w": 0.75,
+                "h": 0.75,
+                "r": 180
+            },
+            "side": "RIGHT",
+            "sub": [],
+            "assoc": [
+                {
+                    "@type": "Light",
+                    "id": "FWD-R-LEDGE-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "R-SEAT-1-MON-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-R-PSU-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "FWD-RBLKHD-MON"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "R-SEAT-1-SPK-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "R-SEAT-1-READ-1"
+                },
+                {
+                    "@type": "Window",
+                    "id": "R-SEAT-1-WDO-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "R-TBL-LT-1"
+                }
+            ],
+            "type": "SINGLE",
+            "short_name": "RS1",
+            "chirality": "LEFT",
+            "state": {
+                "call": false,
+                "identifier": "R-SEAT-1-1"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "L-SEAT-2-1",
+            "name": "L-SEAT-2",
+            "rect": {
+                "x": 0.43,
+                "y": 2.09,
+                "w": 0.75,
+                "h": 0.75,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [
+                {
+                    "@type": "Light",
+                    "id": "FWD-L-LEDGE-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "L-SEAT-2-MON-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-L-PSU-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "FWD-RBLKHD-MON"
+                },
+                {
+                    "@type": "Light",
+                    "id": "L-TBL-LT-1"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-SEAT-2-WDO-1"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "L-SEAT-2-SPK-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "L-SEAT-2-READ-1"
+                }
+            ],
+            "type": "SINGLE",
+            "short_name": "LS2",
+            "chirality": "LEFT",
+            "state": {
+                "call": false,
+                "identifier": "L-SEAT-2-1"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "R-SEAT-2-1",
+            "name": "R-SEAT-2",
+            "rect": {
+                "x": 2.14,
+                "y": 2.09,
+                "w": 0.75,
+                "h": 0.75,
+                "r": 0
+            },
+            "side": "RIGHT",
+            "sub": [],
+            "assoc": [
+                {
+                    "@type": "Light",
+                    "id": "FWD-R-LEDGE-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "R-SEAT-2-MON-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-R-PSU-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "FWD-RBLKHD-MON"
+                },
+                {
+                    "@type": "Light",
+                    "id": "R-TBL-LT-1"
+                },
+                {
+                    "@type": "Window",
+                    "id": "R-SEAT-2-WDO-1"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "R-SEAT-2-SPK-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "R-SEAT-2-READ-1"
+                }
+            ],
+            "type": "SINGLE",
+            "short_name": "RS2",
+            "chirality": "RIGHT",
+            "state": {
+                "call": false,
+                "identifier": "R-SEAT-2-1"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "CONF-FWD-OB-2",
+            "name": "CONF-FWD-OB",
+            "rect": {
+                "x": 0.43,
+                "y": 0.2,
+                "w": 0.7,
+                "h": 0.7,
+                "r": 180
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [
+                {
+                    "@type": "Light",
+                    "id": "MID-L-LEDGE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "MID-L-PSU-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CONF-FWD-READ-LT-2"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-CONF-GRP-WDO-1-2"
+                },
+                {
+                    "@type": "Light",
+                    "id": "L-CONF-GRP-TBL-LT-2"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "CREDENZA-MON"
+                }
+            ],
+            "type": "SINGLE",
+            "short_name": "LS3",
+            "chirality": "RIGHT",
+            "state": {
+                "call": false,
+                "identifier": "CONF-FWD-OB-2"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "CONF-FWD-IB-2",
+            "name": "CONF-FWD-IB",
+            "rect": {
+                "x": 1.11,
+                "y": 0.2,
+                "w": 0.7,
+                "h": 0.7,
+                "r": 180
+            },
+            "side": "RIGHT",
+            "sub": [],
+            "assoc": [
+                {
+                    "@type": "Light",
+                    "id": "MID-L-LEDGE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "MID-L-PSU-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CONF-FWD-READ-LT-2"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-CONF-GRP-WDO-1-2"
+                },
+                {
+                    "@type": "Light",
+                    "id": "L-CONF-GRP-TBL-LT-2"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "CREDENZA-MON"
+                }
+            ],
+            "type": "SINGLE",
+            "short_name": "LS3",
+            "chirality": "LEFT",
+            "state": {
+                "call": false,
+                "identifier": "CONF-FWD-IB-2"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "CONF-AFT-OB-2",
+            "name": "CONF-AFT-OB",
+            "rect": {
+                "x": 0.43,
+                "y": 2.1,
+                "w": 0.7,
+                "h": 0.7,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [
+                {
+                    "@type": "Light",
+                    "id": "MID-L-LEDGE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "MID-L-PSU-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "L-CONF-GRP-TBL-LT-2"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "CREDENZA-MON"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-CONF-GRP-WDO-2-2"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CONF-AFT-READ-LT-2"
+                }
+            ],
+            "type": "SINGLE",
+            "short_name": "LS4",
+            "chirality": "LEFT",
+            "state": {
+                "call": false,
+                "identifier": "CONF-AFT-OB-2"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "CONF-AFT-IB-2",
+            "name": "CONF-AFT-IB",
+            "rect": {
+                "x": 1.11,
+                "y": 2.1,
+                "w": 0.7,
+                "h": 0.7,
+                "r": 0
+            },
+            "side": "RIGHT",
+            "sub": [],
+            "assoc": [
+                {
+                    "@type": "Light",
+                    "id": "MID-L-LEDGE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "MID-L-PSU-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "L-CONF-GRP-TBL-LT-2"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "CREDENZA-MON"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-CONF-GRP-WDO-2-2"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CONF-AFT-READ-LT-2"
+                }
+            ],
+            "type": "SINGLE",
+            "short_name": "LS4",
+            "chirality": "RIGHT",
+            "state": {
+                "call": false,
+                "identifier": "CONF-AFT-IB-2"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "R-SEAT-1-3",
+            "name": "Seat 1",
+            "rect": {
+                "x": 2.14,
+                "y": 0.15,
+                "w": 0.75,
+                "h": 0.75,
+                "r": 180
+            },
+            "side": "RIGHT",
+            "sub": [],
+            "assoc": [
+                {
+                    "@type": "Light",
+                    "id": "AFT-R-LEDGE-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "R-SEAT-1-MON-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-R-PSU-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "AFT-BLKHD-MON"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "AFT-BLKHD-4K-MON"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "SEAT-1-SPK-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "SEAT-1-READ-LT-3"
+                },
+                {
+                    "@type": "Window",
+                    "id": "WDO-1-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DIVAN-GRP-TBL-LT-3"
+                }
+            ],
+            "type": "SINGLE",
+            "short_name": "LS5",
+            "chirality": "LEFT",
+            "state": {
+                "call": false,
+                "identifier": "R-SEAT-1-3"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "DIVAN-FWD-3",
+            "name": "DIVAN-FWD",
+            "rect": {
+                "x": 0.0,
+                "y": 0.33,
+                "w": 0.7,
+                "h": 0.5,
+                "r": 90
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [
+                {
+                    "@type": "Light",
+                    "id": "AFT-L-LEDGE-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "DIVAN-FWD-MON-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-L-PSU-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "AFT-BLKHD-MON"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "AFT-BLKHD-4K-MON"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "DIVAN-FWD-SPK-3"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-DIVAN-GRP-WDO-1-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DIVAN-GRP-ACCENT-LT-3"
+                }
+            ],
+            "type": "DIVAN",
+            "short_name": "RS3",
+            "chirality": "RIGHT",
+            "state": {
+                "call": false,
+                "identifier": "DIVAN-FWD-3"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "DIVAN-MID-3",
+            "name": "DIVAN-MID",
+            "rect": {
+                "x": 0.0,
+                "y": 0.82,
+                "w": 0.7,
+                "h": 0.5,
+                "r": 90
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [
+                {
+                    "@type": "Light",
+                    "id": "AFT-L-LEDGE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-L-PSU-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "AFT-BLKHD-MON"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "AFT-BLKHD-4K-MON"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-DIVAN-GRP-WDO-1-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DIVAN-GRP-ACCENT-LT-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DIVAN-MID-READ-LT-3"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-DIVAN-GRP-WDO-2-3"
+                }
+            ],
+            "type": "DIVAN",
+            "short_name": "RS4",
+            "chirality": "RIGHT",
+            "state": {
+                "call": false,
+                "identifier": "DIVAN-MID-3"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "DIVAN-AFT-3",
+            "name": "DIVAN-AFT",
+            "rect": {
+                "x": 0.0,
+                "y": 1.3,
+                "w": 0.7,
+                "h": 0.5,
+                "r": 90
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [
+                {
+                    "@type": "Light",
+                    "id": "AFT-L-LEDGE-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "DIVAN-AFT-MON-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-L-PSU-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "AFT-BLKHD-MON"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "AFT-BLKHD-4K-MON"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DIVAN-GRP-ACCENT-LT-3"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "DIVAN-AFT-SPK-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DIVAN-AFT-READ-LT-3"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-DIVAN-GRP-WDO-2-3"
+                }
+            ],
+            "type": "DIVAN",
+            "short_name": "RS5",
+            "chirality": "RIGHT",
+            "state": {
+                "call": false,
+                "identifier": "DIVAN-AFT-3"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "R-SEAT-2-3",
+            "name": "seat 2",
+            "rect": {
+                "x": 2.14,
+                "y": 2.09,
+                "w": 0.75,
+                "h": 0.75,
+                "r": 0
+            },
+            "side": "RIGHT",
+            "sub": [],
+            "assoc": [
+                {
+                    "@type": "Light",
+                    "id": "AFT-R-LEDGE-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "R-SEAT-2-MON-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-R-PSU-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "AFT-BLKHD-4K-MON"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DIVAN-GRP-TBL-LT-3"
+                },
+                {
+                    "@type": "Window",
+                    "id": "WDO-2-3"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "SEAT-2-SPK-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "SEAT-2-READ-LT-3"
+                }
+            ],
+            "type": "SINGLE",
+            "short_name": "LS6",
+            "chirality": "RIGHT",
+            "state": {
+                "call": false,
+                "identifier": "R-SEAT-2-3"
+            }
+        },
+        {
+            "@type": "Seat",
+            "id": "AFT-LAV-SEAT",
+            "name": "Aft Lav Seat",
+            "rect": {
+                "x": 0.05,
+                "y": 0.5,
+                "w": 1.08,
+                "h": 0.88,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "LAVATORY",
+            "short_name": "ALAV",
+            "chirality": "LEFT",
+            "state": {
+                "call": false,
+                "identifier": "AFT-LAV-SEAT"
+            }
+        }
+    ],
+    "length": 18
+}
+

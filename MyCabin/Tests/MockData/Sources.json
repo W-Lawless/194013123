@@ -1,0 +1,373 @@
+{
+    "results": [
+        {
+            "@type": "Source",
+            "id": "HDMI2",
+            "name": "HDMI Left",
+            "allowRename": true,
+            "defaultName": "HDMI L/H",
+            "visible": true,
+            "order": 0,
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [
+                {
+                    "@type": "Area",
+                    "id": "L-CONF-GRP-R-CREDENZA-3"
+                },
+                {
+                    "@type": "Table",
+                    "id": "CREDENZA-3"
+                }
+            ],
+            "type": "AUX",
+            "capabilities": {
+                "audio": true,
+                "video": true
+            },
+            "shortName": "HDML",
+            "personalDevice": false,
+            "seatOnly": false
+        },
+        {
+            "@type": "Source",
+            "id": "HDMI1",
+            "name": "DVD Right",
+            "allowRename": true,
+            "defaultName": "HDMI R/H",
+            "visible": true,
+            "order": 1,
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [
+                {
+                    "@type": "Area",
+                    "id": "L-2-SEATS-R-DIVAN-GRP-2"
+                },
+                {
+                    "@type": "Seat",
+                    "id": "DIVAN-FWD-2"
+                }
+            ],
+            "type": "AUX",
+            "capabilities": {
+                "audio": true,
+                "video": true
+            },
+            "shortName": "DVDR",
+            "personalDevice": false,
+            "seatOnly": false
+        },
+        {
+            "@type": "Source",
+            "id": "CAMERA_FWD",
+            "name": "Fwd Belly",
+            "allowRename": true,
+            "defaultName": "Fwd Belly Camera",
+            "visible": true,
+            "order": 2,
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "CAMERA",
+            "capabilities": {
+                "zoom": false,
+                "audio": false,
+                "video": true
+            },
+            "shortName": "FwdB",
+            "personalDevice": false,
+            "seatOnly": false
+        },
+        {
+            "@type": "Source",
+            "id": "CABIN_VIEW",
+            "name": "CabinView",
+            "allowRename": false,
+            "defaultName": "Cabin View",
+            "visible": true,
+            "order": 3,
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "CABIN_VIEW",
+            "capabilities": {
+                "audio": false,
+                "video": true
+            },
+            "shortName": "Cabn",
+            "state": {
+                "views": [
+                    "Auto",
+                    "Logo 1",
+                    "Side Right",
+                    "Rear",
+                    "Side Left",
+                    "Front",
+                    "1x Zoom",
+                    "2x Zoom",
+                    "25x Zoom",
+                    "75x Zoom",
+                    "300x Zoom",
+                    "Right Window",
+                    "Flight Deck",
+                    "Left Window",
+                    "Day/Night",
+                    "Flight Data",
+                    "World Clocks 2",
+                    "Logo 3"
+                ],
+                "activeView": "Auto"
+            },
+            "personalDevice": false,
+            "seatOnly": false
+        },
+        {
+            "@type": "Source",
+            "id": "CAMERA_TAIL",
+            "name": "Tail",
+            "allowRename": true,
+            "defaultName": "Tail Camera",
+            "visible": true,
+            "order": 4,
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "CAMERA",
+            "capabilities": {
+                "zoom": false,
+                "audio": false,
+                "video": true
+            },
+            "shortName": "Tail",
+            "personalDevice": false,
+            "seatOnly": false
+        },
+        {
+            "@type": "Source",
+            "id": "CAMERA_AFT",
+            "name": "Aft Belly",
+            "allowRename": true,
+            "defaultName": "Aft Belly Camera",
+            "visible": true,
+            "order": 5,
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "CAMERA",
+            "capabilities": {
+                "zoom": false,
+                "audio": false,
+                "video": true
+            },
+            "shortName": "AftB",
+            "personalDevice": false,
+            "seatOnly": false
+        },
+        {
+            "@type": "Source",
+            "id": "BLUETOOTH_1",
+            "name": "Bluetooth Receiver",
+            "allowRename": true,
+            "defaultName": "Bluetooth Receiver",
+            "visible": true,
+            "order": 6,
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "BLUETOOTH",
+            "capabilities": {
+                "audio": true,
+                "video": false
+            },
+            "shortName": "Bltt",
+            "personalDevice": false,
+            "seatOnly": false
+        },
+        {
+            "@type": "Source",
+            "id": "SAT_TV1",
+            "name": "SAT_TV1",
+            "allowRename": true,
+            "defaultName": "SAT_TV1",
+            "visible": true,
+            "order": 7,
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "SAT",
+            "capabilities": {
+                "audio": true,
+                "video": true
+            },
+            "shortName": "SAT1",
+            "personalDevice": false,
+            "seatOnly": false
+        },
+        {
+            "@type": "Source",
+            "id": "SAT_TV2",
+            "name": "SAT_TV2",
+            "allowRename": true,
+            "defaultName": "SAT_TV2",
+            "visible": true,
+            "order": 8,
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "SAT",
+            "capabilities": {
+                "audio": true,
+                "video": true
+            },
+            "shortName": "SAT2",
+            "personalDevice": false,
+            "seatOnly": false
+        },
+        {
+            "@type": "Source",
+            "id": "SAT_TV3",
+            "name": "SAT_TV3",
+            "allowRename": true,
+            "defaultName": "SAT_TV3",
+            "visible": true,
+            "order": 9,
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "SAT",
+            "capabilities": {
+                "audio": true,
+                "video": true
+            },
+            "shortName": "SAT3",
+            "personalDevice": false,
+            "seatOnly": false
+        },
+        {
+            "@type": "Source",
+            "id": "SAT_TV4",
+            "name": "SAT_TV4",
+            "allowRename": true,
+            "defaultName": "SAT_TV4",
+            "visible": true,
+            "order": 10,
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "SAT",
+            "capabilities": {
+                "audio": true,
+                "video": true
+            },
+            "shortName": "SAT4",
+            "personalDevice": false,
+            "seatOnly": false
+        },
+        {
+            "@type": "Source",
+            "id": "AVOD_1",
+            "name": "VHF-AUDIO",
+            "allowRename": true,
+            "defaultName": "VHF-AUDIO",
+            "visible": true,
+            "order": 11,
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "type": "AUX",
+            "capabilities": {
+                "audio": true,
+                "video": false
+            },
+            "shortName": "VHFD",
+            "personalDevice": false,
+            "seatOnly": false
+        }
+    ],
+    "length": 12
+}
