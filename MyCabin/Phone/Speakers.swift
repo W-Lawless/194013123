@@ -48,7 +48,6 @@ class SpeakersViewModel: ObservableObject {
     func updateState(for speaker: SpeakerModel) {
         self.speakerList?.mapInPlace({ value in
             if(value.id == speaker.id) {
-                print("match", value)
                 value = speaker
             }
         })

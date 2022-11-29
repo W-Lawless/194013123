@@ -25,9 +25,6 @@ struct Volume: View {
                 }
 
         }
-//        .onAppear {
-//            api.fetch()
-//        }
     }
 }
 
@@ -54,6 +51,9 @@ struct VolumeControl: View {
     
     func onDec() {
         self.vol -= 1
+        var copy = speaker
+        copy.state.volume = vol
+        self.callback(copy)
     }
     
     var body: some View {
@@ -80,13 +80,7 @@ class VolumeViewModel: SpeakersViewModel {
 //    }
 }
 
-extension Array {
-    mutating func mapInPlace(_ x: (inout Element) -> ()) {
-        for i in indices {
-            x(&self[i])
-        }
-    }
-}
+
 
 
 struct Volume_Previews: PreviewProvider {

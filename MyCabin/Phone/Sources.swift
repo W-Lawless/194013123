@@ -21,18 +21,13 @@ struct Sources: View {
                     Group {
                         Text(source.id)
                         Text(source.shortName)
-//                        Button("Power On") {
-//                            api.togglePower(monitor, cmd: true)
-//                        }
-//                        Button("Power Off") {
-//                            api.togglePower(monitor, cmd: false)
-//                        }
                     }
                 }
             }
-        }.onAppear {
-            api.fetch()
         }
+//        .onAppear {
+//            api.fetch()
+//        }
     }
 }
 

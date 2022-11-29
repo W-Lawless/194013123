@@ -95,7 +95,7 @@ final class ViewFactories {
     static func fetchAll() {
         lightsAPI.fetch()
         shadesAPI.fetch()
-        seatsAPI.getSeats() ///TODO
+        seatsAPI.fetch() 
 
         monitorsAPI.fetch()
         speakersAPI.fetch()

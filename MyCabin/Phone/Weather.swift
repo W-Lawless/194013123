@@ -43,9 +43,9 @@ struct Weather: View {
                 Text("\(viewModel.sundown)")
             }
         }
-        .onAppear {
-            api.fetch()
-        }
+//        .onAppear {
+//            api.fetch()
+//        }
     }
 }
 

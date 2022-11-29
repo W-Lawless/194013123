@@ -19,9 +19,9 @@ struct SeatSelection: View {
                 api.call(seat: seat)
             }
         } //: LIST
-        .onAppear {
-            api.getSeats()
-        }
+//        .onAppear {
+//            api.getSeats()
+//        }
         
     }
 }

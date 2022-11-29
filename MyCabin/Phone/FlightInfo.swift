@@ -29,7 +29,7 @@ struct FlightInfo: View {
             }
         }
         .onAppear() {
-            api.fetch()
+//            api.fetch()
             api.monitor.startMonitor(interval: 3.0, callback: api.monitorCallback)
         }
         .onDisappear() {

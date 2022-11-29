@@ -1,0 +1,45 @@
+{
+    "results": [
+        {
+            "@type": "TemperatureController",
+            "id": "first-temp-ctrl",
+            "name": "Fwd Cabin",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 3.0,
+                "h": 5.5,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "state": {
+                "temp": 0,
+                "setPoint": 80,
+                "sensor": 34
+            }
+        },
+        {
+            "@type": "TemperatureController",
+            "id": "second-temp-ctrl",
+            "name": "Aft Cabin",
+            "rect": {
+                "x": 0.0,
+                "y": 5.5,
+                "w": 3.0,
+                "h": 9.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [],
+            "assoc": [],
+            "state": {
+                "temp": 6,
+                "setPoint": 80,
+                "sensor": 33
+            }
+        }
+    ],
+    "length": 2
+}

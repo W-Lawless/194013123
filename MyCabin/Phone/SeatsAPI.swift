@@ -19,7 +19,7 @@ class SeatsAPI {
         self.viewModel = viewModel
     }
     
-    func getSeats() {
+    func fetch() {
 
         let publisher = Session.shared.publisher(for: self.getEndpoint, using: nil)
         
