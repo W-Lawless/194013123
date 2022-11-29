@@ -24,9 +24,10 @@ struct Volume: View {
                     VolumeControl(speaker: speaker, cb: callback)
                 }
 
-        }.onAppear {
-            api.fetch()
         }
+//        .onAppear {
+//            api.fetch()
+//        }
     }
 }
 

@@ -29,9 +29,10 @@ struct Monitors: View {
                     }
                 }
             }
-        }.onAppear {
-            api.fetch()
         }
+//        .onAppear {
+//            api.fetch()
+//        }
     }
     
 }

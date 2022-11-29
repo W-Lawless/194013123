@@ -7,11 +7,7 @@
 
 import SwiftUI
 
-/// In order to avoid Singeltons, compose all views using dependency injection
-/// Unfortunately, this pattern does not seem to work at the root view level, the entry point, so I have
-/// had to use a singelton for the CabinAPI class.
-
-struct ViewFactories {
+struct XViewFactories {
     
     static let speakersViewModel = SpeakersViewModel()
     

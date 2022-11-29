@@ -24,9 +24,10 @@ struct Speakers: View {
                     }
                 }
             }
-        }.onAppear {
-//            api.fetch()
         }
+//        .onAppear {
+//            api.fetch()
+//        }
     }
 }
 

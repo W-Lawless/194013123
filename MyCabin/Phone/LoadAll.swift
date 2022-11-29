@@ -7,38 +7,102 @@
 
 import Foundation
 
-class LoadAllElements {
+class ViewFactories {
+    
+    //MARK: - Properties
     
     //Menus
         ///Lights
     static let lightsViewModel = LightsViewModel()
-    let lightsAPI = LightsAPI(viewModel: lightsViewModel)
+    static let lightsAPI = LightsAPI(viewModel: lightsViewModel)
         ///Shades
     static let shadesViewModel = ShadesViewModel()
-    let shadesAPI = ShadesAPI(viewModel: shadesViewModel)
+    static let shadesAPI = ShadesAPI(viewModel: shadesViewModel)
         ///Seats
     static let seatsViewModel = SeatsViewModel()
-    let seatsAPI = SeatsAPI(viewModel: seatsViewModel)
+    static let seatsAPI = SeatsAPI(viewModel: seatsViewModel)
     
     //Media
         ///Monitors
     static let monitorsViewModel = MonitorsViewModel()
-    let monitorsAPI = MonitorsAPI(viewModel: monitorsViewModel)
+    static let monitorsAPI = MonitorsAPI(viewModel: monitorsViewModel)
         ///Speakers
     static let speakersViewModel = SpeakersViewModel()
-    let speakersAPI = SpeakersAPI(viewModel: speakersViewModel)
+    static let speakersAPI = SpeakersAPI(viewModel: speakersViewModel)
         ///Sources
     static let sourcesViewModel = SourcesViewModel()
-    let sourcesAPI = SourcesAPI(viewModel: sourcesViewModel)
+    static let sourcesAPI = SourcesAPI(viewModel: sourcesViewModel)
     
     //Flight
         ///Flight Info
     static let flightViewModel = FlightViewModel()
-    let flightAPI = FlightAPI(viewModel: flightViewModel)
+    static let flightAPI = FlightAPI(viewModel: flightViewModel)
         ///Weather
     static let weatherViewModel = WeatherViewModel()
-    let weatherAPI = WeatherApi(viewModel: weatherViewModel)
+    static let weatherAPI = WeatherApi(viewModel: weatherViewModel)
+    
+    //MARK: - View Builders
+    
+    static func buildFlightInfo() -> FlightInfo {
+        let view = FlightInfo(viewModel: flightViewModel, api: flightAPI)
+        return view
+    }
+    
+    static func buildSeatSelection() -> SeatSelection {
+        let view = SeatSelection(viewModel: seatsViewModel, api: seatsAPI)
+        return view
+    }
+    
+    static func buildWeatherView() -> Weather {
+        let view = Weather(viewModel: weatherViewModel, api: weatherAPI)
+        return view
+    }
+    
+    static func buildShadesView() -> Shades {
+        let view = Shades(viewModel: shadesViewModel, api: shadesAPI)
+        return view
+    }
+    
+    static func buildLightsView() -> Lights {
+        let view = Lights(viewModel: lightsViewModel, api: lightsAPI)
+        return view
+    }
+    
+    static func buildMonitorsView() -> Monitors {
+        let view = Monitors(viewModel: monitorsViewModel, api: monitorsAPI)
+        return view
+    }
+    
+    static func buildSourcesView() -> Sources {
+        let view = Sources(viewModel: sourcesViewModel, api: sourcesAPI)
+        return view
+    }
+    
+    static func buildSpeakersView() -> Speakers {
+        let view = Speakers(viewModel: speakersViewModel, api: speakersAPI)
+        return view
+    }
+    
+    static func buildVolumeView() -> Volume {
+        let view = Volume(viewModel: speakersViewModel, api: speakersAPI)
+        return view
+    }
     
     
+    //MARK: - Fetch Methods
+    ///TODO: ASYNCSEQUENCE / ASYNCSTREAM
+    
+    static func fetchAll() {
+        lightsAPI.fetch()
+        shadesAPI.fetch()
+        seatsAPI.getSeats() ///TODO
+
+        monitorsAPI.fetch()
+        speakersAPI.fetch()
+        sourcesAPI.fetch()
+        
+        flightAPI.fetch()
+        weatherAPI.fetch()
+    }
     
 }

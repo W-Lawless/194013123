@@ -42,6 +42,7 @@ class AppCoordinator: CoordinatorSlim {
                         let last = (rootNavView.viewControllers.count - 1)
                         if(rootNavView.viewControllers[last] === loading) {
                             cabin.monitor.stopMonitor()
+                            ViewFactories.fetchAll()
                             rootNavView.popViewController(animated: true)
                         }
                     }
