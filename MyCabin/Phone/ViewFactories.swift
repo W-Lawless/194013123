@@ -5,7 +5,7 @@
 //  Created by Lawless on 11/29/22.
 //
 
-import Foundation
+import UIKit
 
 final class ViewFactories {
     
@@ -21,6 +21,9 @@ final class ViewFactories {
         ///Seats
     static let seatsViewModel = SeatsViewModel()
     static let seatsAPI = SeatsAPI(viewModel: seatsViewModel)
+        ///Climate
+    static let climateViewModel = CabinClimateViewModel()
+    static let cabinClimateAPI = CabinClimateAPI(viewModel: climateViewModel)
     
     //Media
         ///Monitors
@@ -43,18 +46,10 @@ final class ViewFactories {
     
     //MARK: - View Builders
     
-    static func buildFlightInfo() -> FlightInfo {
-        let view = FlightInfo(viewModel: flightViewModel, api: flightAPI)
-        return view
-    }
+    //Menus
     
     static func buildSeatSelection() -> SeatSelection {
         let view = SeatSelection(viewModel: seatsViewModel, api: seatsAPI)
-        return view
-    }
-    
-    static func buildWeatherView() -> Weather {
-        let view = Weather(viewModel: weatherViewModel, api: weatherAPI)
         return view
     }
     
@@ -63,10 +58,17 @@ final class ViewFactories {
         return view
     }
     
-    static func buildLightsView() -> Lights {
-        let view = Lights(viewModel: lightsViewModel, api: lightsAPI)
+    static func buildLightsView(navigationCallback cb: @escaping () -> ()) -> Lights {
+        let view = Lights(viewModel: lightsViewModel, api: lightsAPI, navCb: cb)
         return view
     }
+    
+    static func buildCabinClimateView() -> CabinClimate {
+        let view = CabinClimate(viewModel: climateViewModel, api: cabinClimateAPI)
+        return view
+    }
+    
+    // Media
     
     static func buildMonitorsView() -> Monitors {
         let view = Monitors(viewModel: monitorsViewModel, api: monitorsAPI)
@@ -88,6 +90,18 @@ final class ViewFactories {
         return view
     }
     
+    //Flight
+    
+    static func buildFlightInfo() -> FlightInfo {
+        let view = FlightInfo(viewModel: flightViewModel, api: flightAPI)
+        return view
+    }
+    
+    static func buildWeatherView() -> Weather {
+        let view = Weather(viewModel: weatherViewModel, api: weatherAPI)
+        return view
+    }
+    
     
     //MARK: - Fetch Methods
     ///TODO: ASYNCSEQUENCE / ASYNCSTREAM
@@ -95,7 +109,8 @@ final class ViewFactories {
     static func fetchAll() {
         lightsAPI.fetch()
         shadesAPI.fetch()
-        seatsAPI.fetch() 
+        seatsAPI.fetch()
+        cabinClimateAPI.fetch()
 
         monitorsAPI.fetch()
         speakersAPI.fetch()

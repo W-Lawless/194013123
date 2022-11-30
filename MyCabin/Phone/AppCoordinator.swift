@@ -91,16 +91,21 @@ class TabViewCoordinator: CoordinatorSlim {
 class HomeMenuCoordinator: NSObject, CoordinatorSlim {
     
     var navView: UINavigationController
-    var lightsMenu = UIHostingController(rootView: ViewFactories.buildLightsView())
-    var seatsMenu = UIHostingController(rootView: ViewFactories.buildSeatSelection())
-    var shadesMenu = UIHostingController(rootView: ViewFactories.buildShadesView())
+//    var lightsMenu = UIHostingController(rootView: ViewFactories.buildLightsView(navigationCallback: popView))
+//    var seatsMenu = UIHostingController(rootView: ViewFactories.buildSeatSelection())
+//    var shadesMenu = UIHostingController(rootView: ViewFactories.buildShadesView())
     let volumeMenu = UIHostingController(rootView: ViewFactories.buildVolumeView())
     
     var topLevelMenu: UIHostingController<Home>!
     
     func goTo(_ route: MenuRouter) {
-        let destination = route.view()
+        let destination = route.view(navCallback: popView)
         navView.pushViewController(destination, animated: true)
+    }
+    
+    func popView() {
+        print("pop view!")
+        navView.popViewController(animated: true)
     }
     
     override init() {

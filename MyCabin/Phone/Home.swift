@@ -52,7 +52,7 @@ struct Home: View {
                         .scaledToFit()
                         .frame(width: 56, height: 56)
                     Button("Temperature") {
-                        print("HVAC")
+                        navCallback(.climate)
                     }
                     .foregroundColor(.white)
                 } //: VSTQ
@@ -85,7 +85,7 @@ struct Home: View {
                         .scaledToFit()
                         .frame(width: 56, height: 56)
                     Button("Presets") {
-                        print("Presets")
+                        navCallback(.presets)
                     }
                     .foregroundColor(.white)
                 } //: VSTQ
@@ -96,7 +96,7 @@ struct Home: View {
                         .scaledToFit()
                         .frame(width: 56, height: 56)
                     Button("Settings") {
-                        print("Settings")
+                        navCallback(.settings)
                     }
                     .foregroundColor(.white)
                 } //: VSTQ

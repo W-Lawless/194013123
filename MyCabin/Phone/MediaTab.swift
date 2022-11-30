@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MediaTab: View {
     var body: some View {
-        Text("Monitors")
         TabView {
             ViewFactories.buildMonitorsView()
             ViewFactories.buildSourcesView()

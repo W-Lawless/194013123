@@ -31,6 +31,9 @@ public enum MenuRouter: NavigationRouter {
     case lights
     case shades
     case seats
+    case climate
+    case presets
+    case settings
     
     public var transition: NavigationTranisitionStyle {
         switch self {
@@ -40,17 +43,25 @@ public enum MenuRouter: NavigationRouter {
             return .push
         case .seats:
             return .presentModally
+        default:
+            return .push
         }
     }
     
-    public func view() -> UIViewController {
+    public func view(navCallback: @escaping () -> ()) -> UIViewController {
         switch self {
         case .lights:
-           return UIHostingController(rootView: ViewFactories.buildLightsView())
+           return UIHostingController(rootView: ViewFactories.buildLightsView(navigationCallback: navCallback))
         case .shades:
             return UIHostingController(rootView: ViewFactories.buildShadesView())
         case .seats:
             return UIHostingController(rootView: ViewFactories.buildSeatSelection())
+        case .climate:
+            return UIHostingController(rootView: ViewFactories.buildCabinClimateView())
+        case .presets:
+            return UIHostingController(rootView: Presets())
+        case .settings:
+            return UIHostingController(rootView: Settings())
         }
     }
 }
@@ -59,7 +70,7 @@ public protocol NavigationRouter {
 
     var transition: NavigationTranisitionStyle { get }
     
-    func view() -> UIViewController
+    func view(navCallback: @escaping () -> ()) -> UIViewController
 }
 
 public enum NavigationTranisitionStyle {
@@ -72,7 +83,7 @@ public enum NavigationTranisitionStyle {
 
 //MARK: - Coordinator
 
-//
+
 //open class Coordinator<Router: NavigationRouter>: ObservableObject {
 //
 //    public let navigationController: UINavigationController
