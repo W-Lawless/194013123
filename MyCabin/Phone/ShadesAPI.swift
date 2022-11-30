@@ -33,6 +33,8 @@ class ShadesAPI {
             },
             receiveValue: { shades in
                 self.viewModel.updateValues(true, shades)
+//                print("shades")
+//                PersistenceUtil.cacheToFile(data: shades)
             }
         ) 
     }

@@ -11,8 +11,10 @@ import Combine
 struct Home: View {
     
     var navCallback: (_ route: MenuRouter) -> () = { _ in }
+    @State var someSetting: String = (UserDefaults.standard.string(forKey: "someSetting") ?? "DefaultValue")
     
     var body: some View {
+        
         Group {
             HStack(alignment: .center, spacing: 72) {
                 

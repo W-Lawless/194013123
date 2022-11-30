@@ -33,6 +33,9 @@ class LightsAPI {
             },
             receiveValue: { lights in
                 self.viewModel.updateValues(true, lights)
+//                print("lights received - - - caching . . .")
+//                CacheUtil.store("Lights", data: lights)
+//                PersistenceUtil.cacheToFile(data: lights)
             }
         )
     }
@@ -53,8 +56,8 @@ class LightsAPI {
                     return
                 }
             },
-            receiveValue: { light in
-                    print("put request data", light)
+            receiveValue: { lightState in
+                    print("put request data", lightState)
             }
         )
     }

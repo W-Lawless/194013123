@@ -83,7 +83,6 @@ class TabViewCoordinator: CoordinatorSlim {
         
         self.tabView.viewControllers = [tabOne.navView, tabTwo, tabThree]
         self.tabView.tabBar.tintColor = .white
-        
     }
     
 }
@@ -91,26 +90,12 @@ class TabViewCoordinator: CoordinatorSlim {
 class HomeMenuCoordinator: NSObject, CoordinatorSlim {
     
     var navView: UINavigationController
-//    var lightsMenu = UIHostingController(rootView: ViewFactories.buildLightsView(navigationCallback: popView))
-//    var seatsMenu = UIHostingController(rootView: ViewFactories.buildSeatSelection())
-//    var shadesMenu = UIHostingController(rootView: ViewFactories.buildShadesView())
+    let planeMenu = UIHostingController(rootView: PlaneSchematic())
     let volumeMenu = UIHostingController(rootView: ViewFactories.buildVolumeView())
-    
     var topLevelMenu: UIHostingController<Home>!
-    
-    func goTo(_ route: MenuRouter) {
-        let destination = route.view(navCallback: popView)
-        navView.pushViewController(destination, animated: true)
-    }
-    
-    func popView() {
-        print("pop view!")
-        navView.popViewController(animated: true)
-    }
     
     override init() {
         self.navView = UINavigationController()
-//        navView.navigationBar.prefersLargeTitles = true
         navView.navigationBar.tintColor = .white
         super.init()
         
@@ -119,12 +104,10 @@ class HomeMenuCoordinator: NSObject, CoordinatorSlim {
         let volume = UIBarButtonItem(image: UIImage(systemName: "speaker"), style: .plain, target: self, action: #selector(volumeClick))
         let icon = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(attendantClick))
         
-        
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
 //        navigationBarAppearance.backgroundColor = .systemIndigo
 //        navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.shadow: al]
-        
         topView.navigationItem.standardAppearance = navigationBarAppearance
         topView.navigationItem.compactAppearance = navigationBarAppearance
         topView.navigationItem.scrollEdgeAppearance = navigationBarAppearance
@@ -133,39 +116,41 @@ class HomeMenuCoordinator: NSObject, CoordinatorSlim {
         topView.navigationItem.rightBarButtonItems = [volume, icon]
         
         self.topLevelMenu = topView
-        
         navView.delegate = self
-    }
-    
-    @objc func volumeClick() {
-        print("volume!")
-        navView.pushViewController(self.volumeMenu, animated: true)
-    }
-    
-    @objc func attendantClick() {
-        print("plane waitress")
     }
 
     func start() {
         navView.setViewControllers([topLevelMenu], animated: false)
     }
+    
+    func goTo(_ route: MenuRouter) {
+        let destination = route.view(navCallback: popView)
+        navView.pushViewController(destination, animated: true)
+    }
+    
+    func popView() {
+        navView.popViewController(animated: true)
+    }
+//    
+    @objc func volumeClick() {
+        //self.volumeMenu.modalPresentationStyle = .fullScreen
+        navView.present(self.volumeMenu, animated: true)
+    }
+    
+    @objc func attendantClick() {
+        navView.present(self.planeMenu, animated: true)
+    }
 }
 
 extension HomeMenuCoordinator: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController,
-                              willShow viewController: UIViewController,
-                              animated: Bool) {
-        
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
 //        if viewController as? UIHostingController<FirstDetailView> != nil {
 //            print("detail will be shown")
 //        } else if viewController as? FirstViewController != nil {
 //            print("first will be shown")
 //        }
-        
     }
 }
-
-
 
 
 class HomeTabs: UITabBarController {
@@ -186,20 +171,7 @@ class HomeTabs: UITabBarController {
         api.monitor.startMonitor(interval: 30, callback: api.monitorCallback)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+//    override func viewDidDisappear(_ animated: Bool) {
 //        api.monitor.stopMonitor()
-    }
-}
-
-
-
-//class WeatherCoordinator: CoordinatorSlim {
-//
-//    var view = UIViewController()
-//
-//    func start() {
-//        let swiftUIview = ViewFactories.buildWeatherView()
-//        view = UIHostingController(rootView: swiftUIview)
 //    }
-//
-//}
+}

@@ -130,6 +130,16 @@ class NetworkIntegration_Test: XCTestCase {
     }
 }
 
+class ConcurrencyTimeBenchmark_Tests: XCTestCase {
+    
+    func testBulkFetch() throws {
+        measure {
+            ViewFactories.fetchAll()
+        }
+    }
+    
+}
+
 /// Configuration
 
 extension URLHost {

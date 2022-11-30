@@ -9,21 +9,6 @@ import SwiftUI
 import Combine
 import UIKit
 
-protocol CoordinatorSlim {
-    func start()
-}
-
-
-protocol CoordinatorProtocol {
-
-    var navigationController: UINavigationController { get }
-    
-    func start()
-    func show(_ route: any NavigationRouter)
-    func pop()
-    func popToRoot()
-    func dismiss()
-}
 
 
 public enum MenuRouter: NavigationRouter {
@@ -34,6 +19,7 @@ public enum MenuRouter: NavigationRouter {
     case climate
     case presets
     case settings
+    case plane
     
     public var transition: NavigationTranisitionStyle {
         switch self {
@@ -62,6 +48,8 @@ public enum MenuRouter: NavigationRouter {
             return UIHostingController(rootView: Presets())
         case .settings:
             return UIHostingController(rootView: Settings())
+        case .plane:
+            return UIHostingController(rootView: PlaneSchematic())
         }
     }
 }
@@ -79,29 +67,44 @@ public enum NavigationTranisitionStyle {
     case presentFullscreen
 }
 
+protocol CoordinatorSlim {
+    func start()
+}
+
+protocol CoordinatorProtocol {
+
+    var navigationController: UINavigationController { get }
+    
+    func start()
+    func show(_ route: any NavigationRouter)
+    func pop()
+    func popToRoot()
+    func dismiss()
+}
+
 
 
 //MARK: - Coordinator
 
 
-//open class Coordinator<Router: NavigationRouter>: ObservableObject {
-//
-//    public let navigationController: UINavigationController
-//    public let startingRoute: Router?
-//
-//    public init(navigationController: UINavigationController = .init(), startingRoute: Router? = nil) {
-//        self.navigationController = navigationController
-//        self.startingRoute = startingRoute
-//    }
-//
-//    public func start() {
-//        print("opening. . .")
-//        guard let route = startingRoute else { return }
-//        show(route)
-//    }
-//
-//    public func show(_ route: Router, animated: Bool = true) {
-//        let view = route.view()
+open class Coordinator<Router: NavigationRouter>: ObservableObject {
+
+    public let navigationController: UINavigationController
+    public let startingRoute: Router?
+
+    public init(navigationController: UINavigationController = .init(), startingRoute: Router? = nil) {
+        self.navigationController = navigationController
+        self.startingRoute = startingRoute
+    }
+
+    public func start() {
+        print("opening. . .")
+        guard let route = startingRoute else { return }
+        show(route)
+    }
+
+    public func show(_ route: Router, animated: Bool = true) {
+        let view = route.view(navCallback: pop)
 //        let viewWithCoordinator = view.environmentObject(self)
 //        let viewController = UIHostingController(rootView: viewWithCoordinator)
 //        switch route.transition {
@@ -114,21 +117,21 @@ public enum NavigationTranisitionStyle {
 //            viewController.modalPresentationStyle = .fullScreen
 //            navigationController.present(viewController, animated: animated)
 //        }
-//    }
-//
-//    public func pop(animated: Bool = true) {
-//        navigationController.popViewController(animated: animated)
-//    }
-//
-//    public func popToRoot(animated: Bool = true) {
-//        navigationController.popToRootViewController(animated: animated)
-//    }
-//
-//    open func dismiss(animated: Bool = true) {
-//        navigationController.dismiss(animated: true) { [weak self] in
-//            /// because there is a leak in UIHostingControllers that prevents from deallocation
-//            self?.navigationController.viewControllers = []
-//        }
-//    }
-//}
-//
+    }
+
+    public func pop() {
+        navigationController.popViewController(animated: true)
+    }
+
+    public func popToRoot(animated: Bool = true) {
+        navigationController.popToRootViewController(animated: animated)
+    }
+
+    open func dismiss(animated: Bool = true) {
+        navigationController.dismiss(animated: true) { [weak self] in
+            /// because there is a leak in UIHostingControllers that prevents from deallocation
+            self?.navigationController.viewControllers = []
+        }
+    }
+}
+

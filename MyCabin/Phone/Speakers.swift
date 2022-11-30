@@ -40,7 +40,6 @@ class SpeakersViewModel: ObservableObject {
     func updateValues(_ alive: Bool, _ data: [SpeakerModel]?) {
         self.loading = !alive
         if let data = data {
-            print(data[0].state.volume)
             self.speakerList = data
         }
     }

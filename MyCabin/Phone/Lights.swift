@@ -20,30 +20,31 @@ struct Lights: View {
 //        LightControl()
         
         TabView{
-            
-            Rectangle()
-                .background(Color.red)
-                .frame(width: 100, height: 5)
-            
-//            List(viewModel.lightList ?? [LightModel]()) { light in
-//
-//                Button("ON \(light.id)") {
-//                    api.toggleLight(light, cmd: .ON)
-//                }
-//
-//                Button("OFF \(light.id)") {
-//                    api.toggleLight(light, cmd: .OFF)
-//                }
-//
-//                Stepper("Brightness", value: $luminosity)
-//
-//            }//: LIST
+//            Rectangle()
+//                .background(Color.red)
+//                .frame(width: 100, height: 5)
+            List(viewModel.lightList ?? [LightModel]()) { light in
+
+                Button("ON \(light.id)") {
+                    api.toggleLight(light, cmd: .ON)
+                }
+
+                Button("OFF \(light.id)") {
+                    api.toggleLight(light, cmd: .OFF)
+                }
+
+                Stepper("Brightness", value: $luminosity)
+
+            }//: LIST
         }  //: TABVIEW
         .tabViewStyle(.page)
         .onAppear {
             api.fetch()
+//            var cachedLights2 = CacheUtil.cache.object(forKey: "Lights")
+//            if let cachedLights3 = cachedLights2 {
+//                dump(cachedLights3)
+//            }
         }
-//        .position(location)
         .gesture(dragGesture)
     }
     

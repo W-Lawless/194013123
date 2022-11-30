@@ -107,7 +107,16 @@ final class ViewFactories {
     ///TODO: ASYNCSEQUENCE / ASYNCSTREAM
     
     static func fetchAll() {
-        lightsAPI.fetch()
+//        cache.objectForKey("Whatever") as? YourStructHolder)?.thing
+//        var cachedLights2 = CacheUtil.cache.object(forKey: "Lights")
+//        print(cachedLights2)
+//        if let cachedLights = CacheUtil.cache.object(forKey: "Lights") {
+//            print("Cached Lights Exist:")
+//            print(cachedLights)
+//        } else {
+//            print("Cached Lights do not exist:")
+            lightsAPI.fetch()
+//        }
         shadesAPI.fetch()
         seatsAPI.fetch()
         cabinClimateAPI.fetch()
