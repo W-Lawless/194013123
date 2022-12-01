@@ -9,10 +9,10 @@ import SwiftUI
 import UIKit
 import Combine
 
-class AppCoordinator: CoordinatorSlim {
+class AppCoordinator: Coordinator {
     
     let window: UIWindow
-    var children = [CoordinatorSlim]()
+    var children = [Coordinator]()
     
     let connectionPublisher = CurrentValueSubject<Bool, Never>(false)
     var subscriptions = Set<AnyCancellable>()
@@ -59,7 +59,7 @@ class AppCoordinator: CoordinatorSlim {
 //MARK: - TabView
 
 
-class TabViewCoordinator: CoordinatorSlim {
+class TabViewCoordinator: Coordinator {
     
     var api: CabinAPI
     var tabView: HomeTabs
@@ -87,7 +87,7 @@ class TabViewCoordinator: CoordinatorSlim {
 
 //MARK: - Home Tab
 
-class HomeMenuCoordinator: NSObject {
+class HomeMenuCoordinator: NSObject, MenuCoordinatorProtocol {
     
     var navigationController: UINavigationController
     
@@ -104,7 +104,7 @@ class HomeMenuCoordinator: NSObject {
     }
     
     func goTo(_ route: MenuRouter) {
-        let destination = route.view(navCallback: popView)
+        let destination = route.view()
         navigationController.pushViewController(destination, animated: true)
     }
     
@@ -112,11 +112,11 @@ class HomeMenuCoordinator: NSObject {
         navigationController.popViewController(animated: true)
     }
     
-    public func popToRoot() {
+    func popToRoot() {
         navigationController.popToRootViewController(animated: true)
     }
     
-    open func dismiss(animated: Bool = true) {
+    open func dismiss() {
         navigationController.dismiss(animated: true) { [weak self] in
             /// because there is a leak in UIHostingControllers that prevents from deallocation
             self?.navigationController.viewControllers = []
@@ -147,7 +147,6 @@ class HomeTabs: UITabBarController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     override func viewDidAppear(_ animated: Bool) {
         api.monitor.startMonitor(interval: 30, callback: api.monitorCallback)

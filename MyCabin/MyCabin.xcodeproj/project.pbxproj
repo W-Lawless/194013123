@@ -45,6 +45,7 @@
 		2B183F542913F8C00087654E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B183F532913F8C00087654E /* Preview Assets.xcassets */; };
 		2B41EF4A292C105E0062CA2B /* Cabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B41EF49292C105E0062CA2B /* Cabin.swift */; };
 		2B41EF4C292C21E50062CA2B /* FlightAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B41EF4B292C21E50062CA2B /* FlightAPI.swift */; };
+		2B865803293900E600982BBB /* Routers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B865802293900E600982BBB /* Routers.swift */; };
 		2B8F7139292D763C00073637 /* Shades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F7138292D763C00073637 /* Shades.swift */; };
 		2B8F713C292E566300073637 /* LightsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F713B292E566300073637 /* LightsAPI.swift */; };
 		2B8F713E292E5C5800073637 /* Lights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F713D292E5C5800073637 /* Lights.swift */; };
@@ -164,6 +165,7 @@
 		2B41EF49292C105E0062CA2B /* Cabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cabin.swift; sourceTree = "<group>"; };
 		2B41EF4B292C21E50062CA2B /* FlightAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightAPI.swift; sourceTree = "<group>"; };
 		2B7FE8102919C692002C64FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		2B865802293900E600982BBB /* Routers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routers.swift; sourceTree = "<group>"; };
 		2B8F7138292D763C00073637 /* Shades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shades.swift; sourceTree = "<group>"; };
 		2B8F713B292E566300073637 /* LightsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightsAPI.swift; sourceTree = "<group>"; };
 		2B8F713D292E5C5800073637 /* Lights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lights.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 			children = (
 				2B1170452933E43800A1CB8F /* AppCoordinator.swift */,
 				2B1170432933E3C100A1CB8F /* Coordinator+.swift */,
+				2B865802293900E600982BBB /* Routers.swift */,
 			);
 			name = Navigation;
 			sourceTree = "<group>";
@@ -817,6 +820,7 @@
 				2BA8F61A29258F78005621D3 /* ElementsAPI.swift in Sources */,
 				2B1170462933E43800A1CB8F /* AppCoordinator.swift in Sources */,
 				2BA8F60329251C0C005621D3 /* FlightModels.swift in Sources */,
+				2B865803293900E600982BBB /* Routers.swift in Sources */,
 				2BA7B4CD291D504900942CB5 /* Session.swift in Sources */,
 				2B10DD24292D4C2400AB98F3 /* Weather.swift in Sources */,
 				2B02B9D42936BBEA00C6387A /* Settings.swift in Sources */,
