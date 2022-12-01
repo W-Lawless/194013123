@@ -7,7 +7,7 @@
 
 import Foundation
 
-class WeatherApi: ObservableObject {
+class WeatherAPI: ObservableObject {
     
     @Published var condition: String = "Cloudy"
     @Published var currentTemp: Int = 0

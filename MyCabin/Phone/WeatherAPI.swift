@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class WeatherApi {
+class WeatherAPI {
     
     let viewModel: WeatherViewModel
     let monitor = HeartBeatMonitor()

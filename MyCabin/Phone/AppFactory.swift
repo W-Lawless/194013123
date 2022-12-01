@@ -7,12 +7,21 @@
 
 import UIKit
 import SwiftUI
+import Combine
+
 
 final class AppFactory {
     
     //MARK: - Properties
     
-    //Menus
+    //: State Handling
+    //Cabin Connection
+    static let cabinConnectionPublisher = CurrentValueSubject<Bool, Never>(false)
+    static var cabinConnectionSubscriptions = Set<AnyCancellable>()
+    
+    static let cabinAPI = CabinAPI()
+    
+    //: Menus
     //Navigation
     static let homeMenuCoordinator = HomeMenuCoordinator()
     //Views
@@ -47,10 +56,12 @@ final class AppFactory {
     static let flightAPI = FlightAPI(viewModel: flightViewModel)
         ///Weather
     static let weatherViewModel = WeatherViewModel()
-    static let weatherAPI = WeatherApi(viewModel: weatherViewModel)
+    static let weatherAPI = WeatherAPI(viewModel: weatherViewModel)
 
-    //Nav Menus
-    static let volumeMenu = UIHostingController(rootView: Volume(viewModel: speakersViewModel, api: speakersAPI))
+    //Auxillary Views
+    static let loadingView = UIHostingController(rootView: Loading(api: cabinAPI))
+    static let volumeMenu = UIHostingController(rootView: buildVolumeView())
+
     
     //MARK: - View Builders
     
@@ -140,6 +151,23 @@ final class AppFactory {
     
     
     //MARK: - Navigation Builders
+
+    static func buildRootTabNavigation() -> RootTabCoordinator {
+        let coordinator = RootTabCoordinator()
+        coordinator.navigationController.tabBar.tintColor = .white
+        
+        let tabOne = AppFactory.buildHomeMenu()
+        let tabTwo = UIHostingController(rootView: MediaTab())
+        let tabThree = UIHostingController(rootView: FlightTab())
+        
+        tabOne.navigationController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
+        tabTwo.tabBarItem = UITabBarItem(title: "Media", image: UIImage(systemName: "play"), selectedImage: UIImage(systemName: "play.fill"))
+        tabThree.tabBarItem = UITabBarItem(title: "Flight", image: UIImage(systemName: "airplane"), selectedImage: UIImage(systemName: "airplane.circle"))
+     
+        
+        coordinator.start(subviews: [tabOne.navigationController,tabTwo,tabThree])
+        return coordinator
+    }
     
     static func buildHomeMenu() -> HomeMenuCoordinator {
         

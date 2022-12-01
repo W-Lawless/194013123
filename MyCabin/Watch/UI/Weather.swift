@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Weather: View {
     
-    @ObservedObject var api = WeatherApi()
+    @ObservedObject var api = WeatherAPI()
     
     var body: some View {
         List{

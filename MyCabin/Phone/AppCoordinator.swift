@@ -9,13 +9,9 @@ import SwiftUI
 import UIKit
 import Combine
 
-class AppCoordinator: Coordinator {
+class AppCoordinator {
     
     let window: UIWindow
-    var children = [Coordinator]()
-    
-    let connectionPublisher = CurrentValueSubject<Bool, Never>(false)
-    var subscriptions = Set<AnyCancellable>()
 
     init(window: UIWindow) {
         self.window = window
@@ -23,18 +19,17 @@ class AppCoordinator: Coordinator {
     
     func start() {
         
-        let cabin = CabinAPI(publisher: connectionPublisher)
-        let tabs = TabViewCoordinator(api: cabin)
-        tabs.start()
+        let cabin = AppFactory.cabinAPI
+        let tabs = AppFactory.buildRootTabNavigation()
         
-        let loading = UIHostingController(rootView: Loading(api: cabin))
+        let loading = AppFactory.loadingView
         
         let rootNavView = UINavigationController()
         rootNavView.navigationBar.isHidden = true
-        rootNavView.setViewControllers([tabs.tabView,loading], animated: true)
+        rootNavView.setViewControllers([tabs.navigationController,loading], animated: true)
         self.window.rootViewController = rootNavView
         
-        connectionPublisher
+        AppFactory.cabinConnectionPublisher
             .sink{ pulse in
                 DispatchQueue.main.async {
                     let last = (rootNavView.viewControllers.count - 1)
@@ -51,7 +46,7 @@ class AppCoordinator: Coordinator {
                     }
                 }
             }
-            .store(in: &subscriptions)
+            .store(in: &AppFactory.cabinConnectionSubscriptions)
     }
 }
 
@@ -59,35 +54,19 @@ class AppCoordinator: Coordinator {
 //MARK: - TabView
 
 
-class TabViewCoordinator: Coordinator {
-    
-    var api: CabinAPI
-    var tabView: HomeTabs
+class RootTabCoordinator {
 
-    init(api: CabinAPI) {
-        self.api = api
-        self.tabView = HomeTabs(api: api)
-    }
+    var navigationController = HomeTabs()
     
-    var tabOne = AppFactory.buildHomeMenu()
-    var tabTwo = UIHostingController(rootView: MediaTab())
-    var tabThree = UIHostingController(rootView: FlightTab())
-    
-    func start() {
-        tabOne.navigationController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
-        tabTwo.tabBarItem = UITabBarItem(title: "Media", image: UIImage(systemName: "play"), selectedImage: UIImage(systemName: "play.fill"))
-        tabThree.tabBarItem = UITabBarItem(title: "Flight", image: UIImage(systemName: "airplane"), selectedImage: UIImage(systemName: "airplane.circle"))
-        
-        self.tabView.viewControllers = [tabOne.navigationController, tabTwo, tabThree]
-        self.tabView.tabBar.tintColor = .white
+    func start(subviews: [UIViewController]) {
+        navigationController.setViewControllers(subviews, animated: true)
     }
     
 }
 
-
 //MARK: - Home Tab
 
-class HomeMenuCoordinator: NSObject, MenuCoordinatorProtocol {
+class HomeMenuCoordinator: NSObject, Coordinator {
     
     var navigationController: UINavigationController
     
@@ -99,7 +78,7 @@ class HomeMenuCoordinator: NSObject, MenuCoordinatorProtocol {
         navigationController.delegate = self
     }
 
-    func start<T>(subviews: [UIHostingController<T>]) {
+    func start(subviews: [UIViewController]) {
         navigationController.setViewControllers(subviews, animated: false)
     }
     
@@ -137,10 +116,7 @@ extension HomeMenuCoordinator: UINavigationControllerDelegate {
 
 class HomeTabs: UITabBarController {
     
-    var api: CabinAPI
-
-    init(api: CabinAPI) {
-        self.api = api
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -149,7 +125,7 @@ class HomeTabs: UITabBarController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        api.monitor.startMonitor(interval: 30, callback: api.monitorCallback)
+        AppFactory.cabinAPI.monitor.startMonitor(interval: 30, callback: AppFactory.cabinAPI.monitorCallback)
     }
     
 //    override func viewDidDisappear(_ animated: Bool) {

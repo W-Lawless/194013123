@@ -10,7 +10,7 @@ import SwiftUI
 struct Weather: View {
     
     @StateObject var viewModel: WeatherViewModel
-    var api: WeatherApi
+    var api: WeatherAPI
     
     var body: some View {
         List{
