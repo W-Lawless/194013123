@@ -15,11 +15,12 @@ final class AppFactory {
     //MARK: - Properties
     
     //: State Handling
-    //Cabin Connection
+        ///Cabin Connection
     static let cabinConnectionPublisher = CurrentValueSubject<Bool, Never>(false)
     static var cabinConnectionSubscriptions = Set<AnyCancellable>()
-    
     static let cabinAPI = CabinAPI()
+        ///Access Levels
+    static let accessAPI = AccessAPI()
     
     //: Menus
     //Navigation
@@ -127,12 +128,15 @@ final class AppFactory {
     ///TODO: ASYNCSEQUENCE / ASYNCSTREAM
     
     static func fetchAll() {
+        accessAPI.fetch()
+        
 //        cache.objectForKey("Whatever") as? YourStructHolder)?.thing
 //        var cachedLights2 = CacheUtil.cache.object(forKey: "Lights")
 //        print(cachedLights2)
-//        if let cachedLights = CacheUtil.cache.object(forKey: "Lights") {
+//        let cachedResult = try? FileCacheUtil.retrieveCachedFile(dataModel: [LightModel]())
+//        if let cachedResult = cachedResult {
 //            print("Cached Lights Exist:")
-//            print(cachedLights)
+//            print(cachedResult)
 //        } else {
 //            print("Cached Lights do not exist:")
             lightsAPI.fetch()

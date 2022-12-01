@@ -48,6 +48,8 @@
 		2B865803293900E600982BBB /* Routers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B865802293900E600982BBB /* Routers.swift */; };
 		2B86580629393AC200982BBB /* Devices.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B86580429393AC200982BBB /* Devices.json */; };
 		2B86580729393AC200982BBB /* AccessLevels.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B86580529393AC200982BBB /* AccessLevels.json */; };
+		2B86580A29393E9500982BBB /* AccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86580929393E9500982BBB /* AccessModel.swift */; };
+		2B86580C2939414A00982BBB /* AccessAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86580B2939414A00982BBB /* AccessAPI.swift */; };
 		2B8F7139292D763C00073637 /* Shades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F7138292D763C00073637 /* Shades.swift */; };
 		2B8F713C292E566300073637 /* LightsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F713B292E566300073637 /* LightsAPI.swift */; };
 		2B8F713E292E5C5800073637 /* Lights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F713D292E5C5800073637 /* Lights.swift */; };
@@ -170,6 +172,8 @@
 		2B865802293900E600982BBB /* Routers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routers.swift; sourceTree = "<group>"; };
 		2B86580429393AC200982BBB /* Devices.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Devices.json; sourceTree = "<group>"; };
 		2B86580529393AC200982BBB /* AccessLevels.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AccessLevels.json; sourceTree = "<group>"; };
+		2B86580929393E9500982BBB /* AccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessModel.swift; sourceTree = "<group>"; };
+		2B86580B2939414A00982BBB /* AccessAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessAPI.swift; sourceTree = "<group>"; };
 		2B8F7138292D763C00073637 /* Shades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shades.swift; sourceTree = "<group>"; };
 		2B8F713B292E566300073637 /* LightsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightsAPI.swift; sourceTree = "<group>"; };
 		2B8F713D292E5C5800073637 /* Lights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lights.swift; sourceTree = "<group>"; };
@@ -413,6 +417,15 @@
 			name = Networking;
 			sourceTree = "<group>";
 		};
+		2B86580829393E4400982BBB /* Access */ = {
+			isa = PBXGroup;
+			children = (
+				2B86580929393E9500982BBB /* AccessModel.swift */,
+				2B86580B2939414A00982BBB /* AccessAPI.swift */,
+			);
+			name = Access;
+			sourceTree = "<group>";
+		};
 		2B8F713A292E564400073637 /* Lights */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,6 +447,7 @@
 		2BA7B4C9291D37A600942CB5 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				2B86580829393E4400982BBB /* Access */,
 				2B02B9CA2936B63900C6387A /* CabinClimate */,
 				2B11704729352ADE00A1CB8F /* Media */,
 				2B8F713A292E564400073637 /* Lights */,
@@ -811,6 +825,7 @@
 				2B11704C29352CDE00A1CB8F /* LightsModel.swift in Sources */,
 				2BE97D5A291C46ED00149BA4 /* Watch.swift in Sources */,
 				2BD75A19292E7ACE004360A3 /* LightControl.swift in Sources */,
+				2B86580A29393E9500982BBB /* AccessModel.swift in Sources */,
 				2B1170632935491000A1CB8F /* SpeakersAPI.swift in Sources */,
 				2B10DD26292D572500AB98F3 /* WeatherAPI.swift in Sources */,
 				2B1170652935491D00A1CB8F /* SpeakerModel.swift in Sources */,
@@ -839,6 +854,7 @@
 				2B02B9DB2937FD4500C6387A /* PlaneSchematic.swift in Sources */,
 				2B11704E29352D0A00A1CB8F /* MonitorModel.swift in Sources */,
 				2B183F4C2913F8BD0087654E /* EntryPoint.swift in Sources */,
+				2B86580C2939414A00982BBB /* AccessAPI.swift in Sources */,
 				2B11705A29353C0E00A1CB8F /* SourceModel.swift in Sources */,
 				2B02B9C12936968600C6387A /* AppFactory.swift in Sources */,
 				2BA7B4CB291D4A3A00942CB5 /* SeatsAPI.swift in Sources */,

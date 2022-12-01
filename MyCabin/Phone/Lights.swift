@@ -17,12 +17,7 @@ struct Lights: View {
         
     var body: some View {
         
-//        LightControl()
-        
         TabView{
-//            Rectangle()
-//                .background(Color.red)
-//                .frame(width: 100, height: 5)
             List(viewModel.lightList ?? [LightModel]()) { light in
 
                 Button("ON \(light.id)") {
@@ -39,10 +34,10 @@ struct Lights: View {
         }  //: TABVIEW
         .tabViewStyle(.page)
         .onAppear {
-            api.fetch()
-//            var cachedLights2 = CacheUtil.cache.object(forKey: "Lights")
-//            if let cachedLights3 = cachedLights2 {
-//                dump(cachedLights3)
+//            api.fetch()
+//            let cachedLights = CacheUtil.cache.object(forKey: "Lights") as? StructWrapper<[LightModel]>
+//            if let cachedLights = cachedLights {
+//                print("unwrapped:", cachedLights)
 //            }
         }
         .gesture(dragGesture)

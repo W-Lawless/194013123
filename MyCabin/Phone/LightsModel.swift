@@ -49,3 +49,4 @@ struct LightModel: Codable, Identifiable {
         var brightness: Int
     }
 }
+

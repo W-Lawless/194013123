@@ -60,4 +60,19 @@ extension URLSession {
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
+    
+    func publisherForArrayResponse<Format, ResponseModel>( for endpoint: Endpoint<Format, ResponseModel>,
+        using requestData: Format.RequestData, decoder: JSONDecoder = .init() ) -> AnyPublisher<[ResponseModel], Error> {
+        
+        guard let request = endpoint.makeRequest(with: requestData) else {
+            return Fail(error: InvalidEndpoint())
+                .eraseToAnyPublisher()
+        }
+
+        return dataTaskPublisher(for: request)
+            .map(\.data)
+            .decode(type: [ResponseModel].self, decoder: decoder)
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
 }

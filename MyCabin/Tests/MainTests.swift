@@ -8,6 +8,41 @@
 import XCTest
 import Combine
 @testable import MyCabin
+import SwiftUI
+
+
+//MARK: - UI Layer
+
+class ViewFactory_Tests: XCTestCase {
+    
+    /// API & View must always share same ViewModel instance
+    
+    func testFlightInfoFactory() throws {
+        let testView = AppFactory.buildFlightInfo()
+        XCTAssertTrue(testView.api.viewModel === testView.viewModel)
+    }
+    
+    func testSeatSelection() throws {
+        let testView = AppFactory.buildSeatSelection()
+        XCTAssertTrue(testView.api.viewModel === testView.viewModel)
+    }
+    
+}
+
+class Navigation_Tests: XCTestCase {
+    
+    func testMenuRouter() throws {
+        let coordinator = AppFactory.buildHomeMenu()
+        let targetView = MenuRouter.lights.view()
+
+        coordinator.navigationController.pushViewController(targetView, animated: false)
+        
+        let visible = coordinator.navigationController.visibleViewController
+        
+        XCTAssertTrue(visible === targetView)
+    }
+    
+}
 
 // MARK: - Network Layer
 
@@ -205,7 +240,7 @@ extension URLSession {
 }
 
 extension FlightModel {
-    enum MockDataURLResponder: MockURLResponder {
+    struct MockDataURLResponder: MockURLResponder {
         static let dummyModel = FlightModel(latitude: 0.0, longitude: 0.0, altitude: 0, air_speed: 0, ground_speed: 0, estimated_arrival: 0, destination_timezone: "UTC", time_remaining: 0, current_time: 0, total_time: 0, external_temperature: 0, forward_cabin_temp: 0, aft_cabin_temp: 0, on_ground: true, mach: 0.0, mode: true)
 
         static func respond(to request: URLRequest) throws -> Data {
@@ -257,30 +292,8 @@ extension XCTestCase {
 }
 
 
-//MARK: - UI Layer
-
-class ViewFactory_Tests: XCTestCase {
-    
-    /// API & View must always share same ViewModel instance
-    
-    func testFlightInfoFactory() throws {
-        let testView = AppFactory.buildFlightInfo()
-        XCTAssertTrue(testView.api.viewModel === testView.viewModel)
-    }
-    
-    func testSeatSelection() throws {
-        let testView = AppFactory.buildSeatSelection()
-        XCTAssertTrue(testView.api.viewModel === testView.viewModel)
-    }
-    
-}
-
-
-
-
-
-
 /*
+ /// This was a very hard to find example of thorough testing of the Timer class, please leave for future reference
 class TimerControllerTests: XCTestCase {
 
     // MARK - Properties
