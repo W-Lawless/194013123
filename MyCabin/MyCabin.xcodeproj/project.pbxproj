@@ -46,6 +46,8 @@
 		2B41EF4A292C105E0062CA2B /* Cabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B41EF49292C105E0062CA2B /* Cabin.swift */; };
 		2B41EF4C292C21E50062CA2B /* FlightAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B41EF4B292C21E50062CA2B /* FlightAPI.swift */; };
 		2B865803293900E600982BBB /* Routers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B865802293900E600982BBB /* Routers.swift */; };
+		2B86580629393AC200982BBB /* Devices.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B86580429393AC200982BBB /* Devices.json */; };
+		2B86580729393AC200982BBB /* AccessLevels.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B86580529393AC200982BBB /* AccessLevels.json */; };
 		2B8F7139292D763C00073637 /* Shades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F7138292D763C00073637 /* Shades.swift */; };
 		2B8F713C292E566300073637 /* LightsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F713B292E566300073637 /* LightsAPI.swift */; };
 		2B8F713E292E5C5800073637 /* Lights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F713D292E5C5800073637 /* Lights.swift */; };
@@ -166,6 +168,8 @@
 		2B41EF4B292C21E50062CA2B /* FlightAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightAPI.swift; sourceTree = "<group>"; };
 		2B7FE8102919C692002C64FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		2B865802293900E600982BBB /* Routers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routers.swift; sourceTree = "<group>"; };
+		2B86580429393AC200982BBB /* Devices.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Devices.json; sourceTree = "<group>"; };
+		2B86580529393AC200982BBB /* AccessLevels.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AccessLevels.json; sourceTree = "<group>"; };
 		2B8F7138292D763C00073637 /* Shades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shades.swift; sourceTree = "<group>"; };
 		2B8F713B292E566300073637 /* LightsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightsAPI.swift; sourceTree = "<group>"; };
 		2B8F713D292E5C5800073637 /* Lights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lights.swift; sourceTree = "<group>"; };
@@ -530,6 +534,8 @@
 		2BB135DF2926D2C80016444C /* MockData */ = {
 			isa = PBXGroup;
 			children = (
+				2B86580529393AC200982BBB /* AccessLevels.json */,
+				2B86580429393AC200982BBB /* Devices.json */,
 				2B02B9C22936A73100C6387A /* Temperature.json */,
 				2B1170532935338D00A1CB8F /* Monitors.json */,
 				2B1170542935338D00A1CB8F /* Sources.json */,
@@ -758,11 +764,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B86580729393AC200982BBB /* AccessLevels.json in Resources */,
 				2B1170572935338D00A1CB8F /* Sources.json in Resources */,
 				2B02B9C32936A73100C6387A /* Temperature.json in Resources */,
 				2BB135F22926DD610016444C /* Flight.json in Resources */,
 				2BB135F12926DD610016444C /* Seats.json in Resources */,
 				2BB135F02926DD610016444C /* Weather.json in Resources */,
+				2B86580629393AC200982BBB /* Devices.json in Resources */,
 				2B1170552935338D00A1CB8F /* Speakers.json in Resources */,
 				2BB13601292713570016444C /* Shades.json in Resources */,
 				2BD75A17292E7503004360A3 /* Lights.json in Resources */,

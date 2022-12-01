@@ -1,0 +1,169 @@
+[
+    {
+        "id": "GUEST",
+        "name": "Guest Access",
+        "system": true,
+        "visible": true,
+        "default": true,
+        "description": "Access to all presets and controls in Guest Group",
+        "roles": [],
+        "capabilities": {
+            "manageAreas": false,
+            "managePresets": false,
+            "manageElements": false
+        },
+        "components": {
+            "areas": [
+                "Fwd Lavatory",
+                "Aft-Galley",
+                "AFT_CABIN",
+                "ZONE-3-L-CONF-R-CREDENZA",
+                "FWD_CABIN",
+                "ZONE-1-L-GRP-R-GRP",
+                "Aft-Lav",
+                "ZONE-2-L-GRP-R-DIVAN",
+                "Vestibule"
+            ],
+            "presets": [
+                "564c9aea-f8cb-48a5-8b6f-eb2194a6dd67",
+                "6148632b-8a34-41c6-bbf9-029419192342",
+                "6259194d-0de5-47f5-af7a-03bc1856d62d",
+                "5fd06609-a39e-4ae2-945a-b2f5eea32ecb"
+            ],
+            "elements": []
+        }
+    },
+    {
+        "id": "PRINCIPAL",
+        "name": "Principal",
+        "system": true,
+        "visible": true,
+        "default": false,
+        "description": "Access to all presets and controls in Principal Group",
+        "roles": [],
+        "capabilities": {
+            "manageAreas": true,
+            "managePresets": true,
+            "manageElements": false
+        },
+        "components": {
+            "areas": [
+                "Fwd Lavatory",
+                "Aft-Galley",
+                "AFT_CABIN",
+                "ZONE-3-L-CONF-R-CREDENZA",
+                "FWD_CABIN",
+                "ZONE-1-L-GRP-R-GRP",
+                "Aft-Lav",
+                "ZONE-2-L-GRP-R-DIVAN",
+                "Vestibule"
+            ],
+            "presets": [
+                "564c9aea-f8cb-48a5-8b6f-eb2194a6dd67",
+                "6148632b-8a34-41c6-bbf9-029419192342",
+                "6259194d-0de5-47f5-af7a-03bc1856d62d"
+            ],
+            "elements": []
+        }
+    },
+    {
+        "id": "LEDGE",
+        "name": "Side Ledge Panels",
+        "system": true,
+        "visible": false,
+        "default": false,
+        "description": "",
+        "roles": [],
+        "capabilities": {
+            "manageAreas": false,
+            "managePresets": false,
+            "manageElements": false
+        },
+        "components": {
+            "areas": [
+                "ZONE-3-L-CONF-R-CREDENZA",
+                "ZONE-1-L-GRP-R-GRP",
+                "ZONE-2-L-GRP-R-DIVAN"
+            ],
+            "presets": [
+                "6148632b-8a34-41c6-bbf9-029419192342",
+                "6259194d-0de5-47f5-af7a-03bc1856d62d"
+            ],
+            "elements": []
+        }
+    },
+    {
+        "id": "CREW",
+        "name": "Crew/Maintenance",
+        "system": true,
+        "visible": true,
+        "default": false,
+        "description": "Access to all presets, controls, and advanced crew features",
+        "roles": [],
+        "capabilities": {
+            "manageAreas": true,
+            "managePresets": true,
+            "manageElements": true
+        },
+        "components": {
+            "areas": [
+                "Fwd Lavatory",
+                "Aft-Galley",
+                "ZONE-3-L-CONF-R-CREDENZA",
+                "AFT_CABIN",
+                "FWD_CABIN",
+                "AIRPLANE_AREA",
+                "ZONE-1-L-GRP-R-GRP",
+                "Aft-Lav",
+                "PASSENGER_CABIN",
+                "ZONE-2-L-GRP-R-DIVAN",
+                "Vestibule"
+            ],
+            "presets": [
+                "564c9aea-f8cb-48a5-8b6f-eb2194a6dd67",
+                "6148632b-8a34-41c6-bbf9-029419192342",
+                "5fd06609-a39e-4ae2-945a-b2f5eea32ecb"
+            ],
+            "elements": []
+        }
+    },
+    {
+        "id": "GTS",
+        "name": "GTS",
+        "system": true,
+        "visible": true,
+        "default": false,
+        "description": "",
+        "roles": [],
+        "capabilities": {
+            "manageAreas": true,
+            "managePresets": true,
+            "manageElements": true
+        },
+        "components": {
+            "areas": [
+                "Fwd Lavatory",
+                "Aft-Galley",
+                "ZONE-3-L-CONF-R-CREDENZA",
+                "AFT_CABIN",
+                "FWD_CABIN",
+                "AIRPLANE_AREA",
+                "ZONE-1-L-GRP-R-GRP",
+                "Aft-Lav",
+                "PASSENGER_CABIN",
+                "ZONE-2-L-GRP-R-DIVAN",
+                "Vestibule"
+            ],
+            "presets": [
+                "7698ac12-4cf8-4243-bebb-1c3d9adbd8af",
+                "564c9aea-f8cb-48a5-8b6f-eb2194a6dd67",
+                "6148632b-8a34-41c6-bbf9-029419192342",
+                "6259194d-0de5-47f5-af7a-03bc1856d62d",
+                "181a82be-e273-4e30-8a71-baca1f22f494",
+                "4670b503-0584-4a39-ad9f-4dd82d0ceee7",
+                "5fd06609-a39e-4ae2-945a-b2f5eea32ecb"
+            ],
+            "elements": []
+        }
+    }
+]
