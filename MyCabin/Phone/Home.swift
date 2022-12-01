@@ -10,7 +10,8 @@ import Combine
 
 struct Home: View {
     
-    var navCallback: (_ route: MenuRouter) -> () = { _ in }
+//    var navCallback: (_ route: MenuRouter) -> () = { _ in }
+    let navigation: HomeMenuCoordinator
     @State var someSetting: String = (UserDefaults.standard.string(forKey: "someSetting") ?? "DefaultValue")
     
     var body: some View {
@@ -24,7 +25,7 @@ struct Home: View {
                         .scaledToFit()
                         .frame(width: 56, height: 56)
                         .onTapGesture {
-                            navCallback(.lights)
+                            navigation.goTo(.lights)
                         }
                     Text("Lights")
                 } //: VSTQ
@@ -36,7 +37,7 @@ struct Home: View {
                         .frame(width: 56, height: 56)
                     Button("Shades") {
                         print("clicked")
-                        navCallback(.shades)
+                        navigation.goTo(.shades)
                     }
                     .foregroundColor(.white)
                 } //: VSTQ
@@ -54,7 +55,7 @@ struct Home: View {
                         .scaledToFit()
                         .frame(width: 56, height: 56)
                     Button("Temperature") {
-                        navCallback(.climate)
+                        navigation.goTo(.climate)
                     }
                     .foregroundColor(.white)
                 } //: VSTQ
@@ -68,7 +69,7 @@ struct Home: View {
                         .frame(width: 56, height: 56)
                     Button("Seats") {
                         print("clicked")
-                        navCallback(.seats)
+                        navigation.goTo(.seats)
                     }
                     .foregroundColor(.white)
                 } //:VSTQ
@@ -87,7 +88,7 @@ struct Home: View {
                         .scaledToFit()
                         .frame(width: 56, height: 56)
                     Button("Presets") {
-                        navCallback(.presets)
+                        navigation.goTo(.presets)
                     }
                     .foregroundColor(.white)
                 } //: VSTQ
@@ -98,7 +99,7 @@ struct Home: View {
                         .scaledToFit()
                         .frame(width: 56, height: 56)
                     Button("Settings") {
-                        navCallback(.settings)
+                        navigation.goTo(.settings)
                     }
                     .foregroundColor(.white)
                 } //: VSTQ

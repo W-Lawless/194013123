@@ -134,7 +134,7 @@ class ConcurrencyTimeBenchmark_Tests: XCTestCase {
     
     func testBulkFetch() throws {
         measure {
-            ViewFactories.fetchAll()
+            AppFactory.fetchAll()
         }
     }
     
@@ -264,12 +264,12 @@ class ViewFactory_Tests: XCTestCase {
     /// API & View must always share same ViewModel instance
     
     func testFlightInfoFactory() throws {
-        let testView = ViewFactories.buildFlightInfo()
+        let testView = AppFactory.buildFlightInfo()
         XCTAssertTrue(testView.api.viewModel === testView.viewModel)
     }
     
     func testSeatSelection() throws {
-        let testView = ViewFactories.buildSeatSelection()
+        let testView = AppFactory.buildSeatSelection()
         XCTAssertTrue(testView.api.viewModel === testView.viewModel)
     }
     

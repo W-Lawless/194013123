@@ -37,6 +37,6 @@ class SeatsViewModel: ObservableObject {
 
 struct Seats_Previews: PreviewProvider {
     static var previews: some View {
-        ViewFactories.buildSeatSelection()
+        AppFactory.buildSeatSelection()
     }
 }

@@ -12,62 +12,62 @@ struct TabContainer: View {
     var body: some View {
         TabView {
             
-            Home(navCallback: { _ in
-                print("navcallback from tabview swift ui")
-            })
-                .tabItem{
-                    Label("Home", systemImage: "house.fill")
-                }
+//            Home(navCallback: { _ in
+//                print("navcallback from tabview swift ui")
+//            })
+//                .tabItem{
+//                    Label("Home", systemImage: "house.fill")
+//                }
             
-            ViewFactories.buildSeatSelection()
+            AppFactory.buildSeatSelection()
                 .tabItem{
                     Label("Seats", systemImage: "s.circle")
                 }
             
-            ViewFactories.buildWeatherView()
+            AppFactory.buildWeatherView()
                 .tabItem{
                     Label("Weather", systemImage: "cloud")
                 }
             
-            ViewFactories.buildFlightInfo()
+            AppFactory.buildFlightInfo()
                 .tabItem{
                     Label("My Flight", systemImage: "airplane.circle")
                         .background(Color.secondary)
                 }
             
-//            ViewFactories.buildLightsView()
+//            AppFactory.buildLightsView()
 //                .tabItem{
 //                    Label("Lights", systemImage: "lightbulb")
 //                        .background(Color.secondary)
 //                }
             
-            ViewFactories.buildShadesView()
+            AppFactory.buildShadesView()
                 .tabItem{
                     Label("Shades", systemImage: "uiwindow.split.2x1")
                         .background(Color.secondary)
                 }
             
-///            ViewFactories.buildFlightInfo()
+///            AppFactory.buildFlightInfo()
 //                .tabItem{
 //                    Label("Media", systemImage: "play.tv")
 //                }
 
-//            ViewFactories.buildFlightInfo()
+//            AppFactory.buildFlightInfo()
 //                .tabItem{
 //                    Label("HVAC", systemImage: "thermometer.sun")
 //                        .background(Color.secondary)
 //                }
-//            ViewFactories.buildFlightInfo()
+//            AppFactory.buildFlightInfo()
 //                .tabItem{
 //                    Label("Settings", systemImage: "gear")
 //                        .background(Color.secondary)
 //                }
-//            ViewFactories.buildFlightInfo()
+//            AppFactory.buildFlightInfo()
 //                .tabItem{
 //                    Label("Presets", systemImage: "list.bullet.circle")
 //                        .background(Color.secondary)
 //                }
-//            ViewFactories.buildFlightInfo()
+//            AppFactory.buildFlightInfo()
 //                .tabItem{
 //                    Label("Volume", systemImage: "speaker.wave.2")
 //                        .background(Color.secondary)

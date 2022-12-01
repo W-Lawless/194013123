@@ -11,7 +11,7 @@ struct Lights: View {
     
     @StateObject var viewModel: LightsViewModel
     var api: LightsAPI
-    var navCb: () -> ()
+    var navigation: HomeMenuCoordinator
     @State var luminosity: Int = 0
 //    @State var location: CGPoint = CGPoint(x: 0, y: 0)
         
@@ -58,7 +58,7 @@ struct Lights: View {
                 
                 if( (ends - begins) > 100 ) {
                     print("navigate back")
-                    navCb()
+                    navigation.popView()
                 }
             }
     }
@@ -88,7 +88,7 @@ class LightsViewModel: ObservableObject {
 
 //struct Lights_Previews: PreviewProvider {
 //    static var previews: some View {
-//        ViewFactories.buildLightsView()
+//        AppFactory.buildLightsView()
 //    }
 //}
 

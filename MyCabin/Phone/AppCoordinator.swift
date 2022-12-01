@@ -24,7 +24,6 @@ class AppCoordinator: CoordinatorSlim {
     func start() {
         
         let cabin = CabinAPI(publisher: connectionPublisher)
-
         let tabs = TabViewCoordinator(api: cabin)
         tabs.start()
         
@@ -36,20 +35,17 @@ class AppCoordinator: CoordinatorSlim {
         self.window.rootViewController = rootNavView
         
         connectionPublisher
-            .sink{ value in
-                if(value){
-                    DispatchQueue.main.async {
-                        let last = (rootNavView.viewControllers.count - 1)
-                        if(rootNavView.viewControllers[last] === loading) {
+            .sink{ pulse in
+                DispatchQueue.main.async {
+                    let last = (rootNavView.viewControllers.count - 1)
+                    if(pulse){
+                        if(rootNavView.viewControllers[last] === loading) { ///Check view order
+                            AppFactory.fetchAll()
                             cabin.monitor.stopMonitor()
-                            ViewFactories.fetchAll()
                             rootNavView.popViewController(animated: true)
                         }
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        let last = (rootNavView.viewControllers.count - 1)
-                        if(rootNavView.viewControllers[last] !== loading) {
+                    } else { //: Pulse false
+                        if(rootNavView.viewControllers[last] !== loading) { /// Check already loading
                             rootNavView.pushViewController(loading, animated: true)
                         }
                     }
@@ -59,6 +55,8 @@ class AppCoordinator: CoordinatorSlim {
     }
 }
 
+
+//MARK: - TabView
 
 
 class TabViewCoordinator: CoordinatorSlim {
@@ -71,87 +69,71 @@ class TabViewCoordinator: CoordinatorSlim {
         self.tabView = HomeTabs(api: api)
     }
     
-    var tabOne = HomeMenuCoordinator()
+    var tabOne = AppFactory.buildHomeMenu()
     var tabTwo = UIHostingController(rootView: MediaTab())
     var tabThree = UIHostingController(rootView: FlightTab())
     
     func start() {
-        tabOne.start()
-        tabOne.navView.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
+        tabOne.navigationController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
         tabTwo.tabBarItem = UITabBarItem(title: "Media", image: UIImage(systemName: "play"), selectedImage: UIImage(systemName: "play.fill"))
         tabThree.tabBarItem = UITabBarItem(title: "Flight", image: UIImage(systemName: "airplane"), selectedImage: UIImage(systemName: "airplane.circle"))
         
-        self.tabView.viewControllers = [tabOne.navView, tabTwo, tabThree]
+        self.tabView.viewControllers = [tabOne.navigationController, tabTwo, tabThree]
         self.tabView.tabBar.tintColor = .white
     }
     
 }
 
-class HomeMenuCoordinator: NSObject, CoordinatorSlim {
+
+//MARK: - Home Tab
+
+class HomeMenuCoordinator: NSObject {
     
-    var navView: UINavigationController
-    let planeMenu = UIHostingController(rootView: PlaneSchematic())
-    let volumeMenu = UIHostingController(rootView: ViewFactories.buildVolumeView())
-    var topLevelMenu: UIHostingController<Home>!
+    var navigationController: UINavigationController
     
     override init() {
-        self.navView = UINavigationController()
-        navView.navigationBar.tintColor = .white
+        self.navigationController = UINavigationController()
+        navigationController.navigationBar.tintColor = .white
         super.init()
         
-        let topView = UIHostingController(rootView: Home(navCallback: goTo))
-        topView.title = "Home"
-        let volume = UIBarButtonItem(image: UIImage(systemName: "speaker"), style: .plain, target: self, action: #selector(volumeClick))
-        let icon = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(attendantClick))
-        
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithOpaqueBackground()
-//        navigationBarAppearance.backgroundColor = .systemIndigo
-//        navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.shadow: al]
-        topView.navigationItem.standardAppearance = navigationBarAppearance
-        topView.navigationItem.compactAppearance = navigationBarAppearance
-        topView.navigationItem.scrollEdgeAppearance = navigationBarAppearance
-        
-        
-        topView.navigationItem.rightBarButtonItems = [volume, icon]
-        
-        self.topLevelMenu = topView
-        navView.delegate = self
+        navigationController.delegate = self
     }
 
-    func start() {
-        navView.setViewControllers([topLevelMenu], animated: false)
+    func start<T>(subviews: [UIHostingController<T>]) {
+        navigationController.setViewControllers(subviews, animated: false)
     }
     
     func goTo(_ route: MenuRouter) {
         let destination = route.view(navCallback: popView)
-        navView.pushViewController(destination, animated: true)
+        navigationController.pushViewController(destination, animated: true)
     }
     
     func popView() {
-        navView.popViewController(animated: true)
-    }
-//    
-    @objc func volumeClick() {
-        //self.volumeMenu.modalPresentationStyle = .fullScreen
-        navView.present(self.volumeMenu, animated: true)
+        navigationController.popViewController(animated: true)
     }
     
-    @objc func attendantClick() {
-        navView.present(self.planeMenu, animated: true)
+    public func popToRoot() {
+        navigationController.popToRootViewController(animated: true)
     }
+    
+    open func dismiss(animated: Bool = true) {
+        navigationController.dismiss(animated: true) { [weak self] in
+            /// because there is a leak in UIHostingControllers that prevents from deallocation
+            self?.navigationController.viewControllers = []
+        }
+    }
+    
 }
 
 extension HomeMenuCoordinator: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-//        if viewController as? UIHostingController<FirstDetailView> != nil {
-//            print("detail will be shown")
-//        } else if viewController as? FirstViewController != nil {
-//            print("first will be shown")
-//        }
+        if viewController as? UIHostingController<Home> != nil {
+            print("Home Menu")
+        } else if viewController as? UIHostingController<Lights> != nil {
+            print("Lights Opened")
+        }
     }
 }
-
 
 class HomeTabs: UITabBarController {
     

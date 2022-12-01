@@ -54,6 +54,6 @@ class ShadesViewModel: ObservableObject {
 
 struct Shades_Previews: PreviewProvider {
     static var previews: some View {
-        ViewFactories.buildShadesView()
+        AppFactory.buildShadesView()
     }
 }

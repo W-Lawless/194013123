@@ -48,6 +48,6 @@ class SourcesViewModel: ObservableObject {
 
 struct Sources_Previews: PreviewProvider {
     static var previews: some View {
-        ViewFactories.buildSourcesView()
+        AppFactory.buildSourcesView()
     }
 }

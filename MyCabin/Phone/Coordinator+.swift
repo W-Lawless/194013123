@@ -37,13 +37,13 @@ public enum MenuRouter: NavigationRouter {
     public func view(navCallback: @escaping () -> ()) -> UIViewController {
         switch self {
         case .lights:
-           return UIHostingController(rootView: ViewFactories.buildLightsView(navigationCallback: navCallback))
+           return UIHostingController(rootView: AppFactory.buildLightsView())
         case .shades:
-            return UIHostingController(rootView: ViewFactories.buildShadesView())
+            return UIHostingController(rootView: AppFactory.buildShadesView())
         case .seats:
-            return UIHostingController(rootView: ViewFactories.buildSeatSelection())
+            return UIHostingController(rootView: AppFactory.buildSeatSelection())
         case .climate:
-            return UIHostingController(rootView: ViewFactories.buildCabinClimateView())
+            return UIHostingController(rootView: AppFactory.buildCabinClimateView())
         case .presets:
             return UIHostingController(rootView: Presets())
         case .settings:
@@ -104,7 +104,7 @@ open class Coordinator<Router: NavigationRouter>: ObservableObject {
     }
 
     public func show(_ route: Router, animated: Bool = true) {
-        let view = route.view(navCallback: pop)
+//        let view = route.view(navCallback: pop)
 //        let viewWithCoordinator = view.environmentObject(self)
 //        let viewController = UIHostingController(rootView: viewWithCoordinator)
 //        switch route.transition {

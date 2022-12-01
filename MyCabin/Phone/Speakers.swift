@@ -56,6 +56,6 @@ class SpeakersViewModel: ObservableObject {
 
 struct Speakers_Previews: PreviewProvider {
     static var previews: some View {
-        ViewFactories.buildSpeakersView()
+        AppFactory.buildSpeakersView()
     }
 }

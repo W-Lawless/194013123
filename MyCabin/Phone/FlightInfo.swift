@@ -58,6 +58,6 @@ class FlightViewModel: ObservableObject {
 
 struct FlightInfo_Previews: PreviewProvider {
     static var previews: some View {
-        ViewFactories.buildFlightInfo()
+        AppFactory.buildFlightInfo()
     }
 }

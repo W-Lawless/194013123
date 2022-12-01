@@ -55,6 +55,6 @@ class MonitorsViewModel: ObservableObject {
 
 struct Monitors_Previews: PreviewProvider {
     static var previews: some View {
-        ViewFactories.buildMonitorsView()
+        AppFactory.buildMonitorsView()
     }
 }

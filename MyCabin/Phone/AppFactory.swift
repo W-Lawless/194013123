@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import SwiftUI
 
-final class ViewFactories {
+final class AppFactory {
     
     //MARK: - Properties
     
     //Menus
+    //Navigation
+    static let homeMenuCoordinator = HomeMenuCoordinator()
+    //Views
         ///Lights
     static let lightsViewModel = LightsViewModel()
     static let lightsAPI = LightsAPI(viewModel: lightsViewModel)
@@ -24,6 +28,7 @@ final class ViewFactories {
         ///Climate
     static let climateViewModel = CabinClimateViewModel()
     static let cabinClimateAPI = CabinClimateAPI(viewModel: climateViewModel)
+        
     
     //Media
         ///Monitors
@@ -43,6 +48,9 @@ final class ViewFactories {
         ///Weather
     static let weatherViewModel = WeatherViewModel()
     static let weatherAPI = WeatherApi(viewModel: weatherViewModel)
+
+    //Nav Menus
+    static let volumeMenu = UIHostingController(rootView: Volume(viewModel: speakersViewModel, api: speakersAPI))
     
     //MARK: - View Builders
     
@@ -58,8 +66,8 @@ final class ViewFactories {
         return view
     }
     
-    static func buildLightsView(navigationCallback cb: @escaping () -> ()) -> Lights {
-        let view = Lights(viewModel: lightsViewModel, api: lightsAPI, navCb: cb)
+    static func buildLightsView() -> Lights {
+        let view = Lights(viewModel: lightsViewModel, api: lightsAPI, navigation: homeMenuCoordinator)
         return view
     }
     
@@ -84,6 +92,7 @@ final class ViewFactories {
         let view = Speakers(viewModel: speakersViewModel, api: speakersAPI)
         return view
     }
+    
     
     static func buildVolumeView() -> Volume {
         let view = Volume(viewModel: speakersViewModel, api: speakersAPI)
@@ -127,6 +136,45 @@ final class ViewFactories {
         
         flightAPI.fetch()
         weatherAPI.fetch()
+    }
+    
+    
+    //MARK: - Navigation Builders
+    
+    static func buildHomeMenu() -> HomeMenuCoordinator {
+        
+        let rootMenuView = UIHostingController(rootView: Home(navigation: homeMenuCoordinator))
+        rootMenuView.title = "Home"
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+        //        navigationBarAppearance.backgroundColor = .systemIndigo
+        rootMenuView.navigationItem.standardAppearance = navigationBarAppearance
+        rootMenuView.navigationItem.compactAppearance = navigationBarAppearance
+        rootMenuView.navigationItem.scrollEdgeAppearance = navigationBarAppearance
+
+        let planeMenu = UIHostingController(rootView: PlaneSchematic())
+        planeMenu.title = "Select your seat"
+        
+        let volumeMenu = UIHostingController(rootView: AppFactory.buildVolumeView())
+        volumeMenu.title = "Volume"
+        
+        let volume = UIBarButtonItem(image: UIImage(systemName: "speaker"), style: .plain, target: self, action: #selector(volumeClick))
+        let icon = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(attendantClick))
+        rootMenuView.navigationItem.rightBarButtonItems = [volume, icon]
+        
+        homeMenuCoordinator.start(subviews: [rootMenuView])
+        
+        return homeMenuCoordinator
+    }
+    
+    //MARK: - Nav Utils
+    
+    @objc static func volumeClick() {
+        homeMenuCoordinator.navigationController.present(self.volumeMenu, animated: true)
+    }
+    
+    @objc static func attendantClick() {
+        homeMenuCoordinator.navigationController.present(UIHostingController(rootView: PlaneSchematic()), animated: true)
     }
     
 }

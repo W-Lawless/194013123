@@ -10,8 +10,8 @@ import SwiftUI
 struct FlightTab: View {
     var body: some View {
         TabView {
-            ViewFactories.buildFlightInfo()
-            ViewFactories.buildWeatherView()
+            AppFactory.buildFlightInfo()
+            AppFactory.buildWeatherView()
         }
         .tabViewStyle(.page)
     }
