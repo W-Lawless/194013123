@@ -33,8 +33,6 @@ class LightsAPI {
             },
             receiveValue: { lights in
                 self.viewModel.updateValues(true, lights)
-                print("lights received - - - caching . . .")
-//                CacheUtil.store("Lights", data: lights)
                 FileCacheUtil.cacheToFile(data: lights)
             }
         )

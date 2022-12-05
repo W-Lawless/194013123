@@ -32,6 +32,7 @@ class MonitorsAPI {
             },
             receiveValue: { monitors in
                 self.viewModel.updateValues(true, monitors)
+                FileCacheUtil.cacheToFile(data: monitors)
             }
         )
     }

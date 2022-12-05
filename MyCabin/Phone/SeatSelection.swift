@@ -27,7 +27,7 @@ class SeatsViewModel: ObservableObject {
 
     @Published var seatList: [SeatModel]?
     
-    func updateValues(_ alive: Bool, data: [SeatModel]) {
+    func updateValues(_ alive: Bool, _ data: [SeatModel]) {
         self.seatList = data
     }
     

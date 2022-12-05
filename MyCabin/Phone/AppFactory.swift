@@ -128,27 +128,69 @@ final class AppFactory {
     ///TODO: ASYNCSEQUENCE / ASYNCSTREAM
     
     static func fetchAll() {
-        accessAPI.fetch()
         
-//        cache.objectForKey("Whatever") as? YourStructHolder)?.thing
-//        var cachedLights2 = CacheUtil.cache.object(forKey: "Lights")
-//        print(cachedLights2)
-//        let cachedResult = try? FileCacheUtil.retrieveCachedFile(dataModel: [LightModel]())
-//        if let cachedResult = cachedResult {
-//            print("Cached Lights Exist:")
-//            print(cachedResult)
-//        } else {
-//            print("Cached Lights do not exist:")
+        accessAPI.registerDevice()
+        
+        do {
+            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: AccessModel.self)
+//            accessViewModel.updateValues(true, readout)
+        } catch {
+            accessAPI.fetch()
+        }
+        
+        
+        do {
+            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: LightModel.self)
+            lightsViewModel.updateValues(true, readout)
+        } catch {
+            print("Light cache empty")
             lightsAPI.fetch()
-//        }
-        shadesAPI.fetch()
-        seatsAPI.fetch()
+        }
+
+        do {
+            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: ShadeModel.self)
+            shadesViewModel.updateValues(true, readout)
+        } catch {
+            print("Shades cache empty")
+            shadesAPI.fetch()
+        }
+        
+        do {
+            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: SeatModel.self)
+            seatsViewModel.updateValues(true, readout)
+        } catch {
+            print("Seats cache empty")
+            seatsAPI.fetch()
+        }
+        
+        ///Non Caching
         cabinClimateAPI.fetch()
 
-        monitorsAPI.fetch()
-        speakersAPI.fetch()
-        sourcesAPI.fetch()
+        do {
+            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: MonitorModel.self)
+            monitorsViewModel.updateValues(true, readout)
+        } catch {
+            print("Monitors cache empty")
+            monitorsAPI.fetch()
+        }
         
+        do {
+            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: SpeakerModel.self)
+            speakersViewModel.updateValues(true, readout)
+        } catch {
+            print("Speakers cache empty")
+            speakersAPI.fetch()
+        }
+        
+        do {
+            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: SourceModel.self)
+            sourcesViewModel.updateValues(true, readout)
+        } catch {
+            print("Sources cache empty")
+            sourcesAPI.fetch()
+        }
+        
+        ///Non Caching
         flightAPI.fetch()
         weatherAPI.fetch()
     }

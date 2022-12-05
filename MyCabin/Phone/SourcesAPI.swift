@@ -31,35 +31,11 @@ class SourcesAPI {
                     return
                 }
             },
-            receiveValue: { monitors in
-                self.viewModel.updateValues(true, monitors)
+            receiveValue: { sources in
+                self.viewModel.updateValues(true, sources)
+                FileCacheUtil.cacheToFile(data: sources)
             }
         )
     }
-    
-    /*
-    func togglePower(_ monitor: MonitorModel, cmd: Bool) {
-        
-        let endpoint = Endpoint<EndpointFormats.Put<MonitorPowerState>, MonitorModel.state>(path: "/api/v1/monitors/\(monitor.id)/state")
-        let encodeObj = MonitorPowerState(on: cmd)
-                
-        let publisher = Session.shared.publisher(for: endpoint, using: encodeObj)
-        
-        self.cancelToken = publisher.sink(
-            receiveCompletion: { completion in
-                switch completion {
-                case .failure(let error):
-                    print("there was an error", error)
-                case .finished:
-                    print("Put request made")
-                    return
-                }
-            },
-            receiveValue: { shade in
-                    print("put request data", shade)
-            }
-        )
-    }
-    */
 }
 
