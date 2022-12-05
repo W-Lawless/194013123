@@ -121,6 +121,14 @@ class Endpoint_Tests: XCTestCase {
 }
 
 class Decoder_Tests: XCTestCase {
+    
+    func testAreaDecoder() throws {
+        let pathString = Bundle(for: type(of: self)).path(forResource: "Areas", ofType: "json")!
+        let jsonString = try String(contentsOfFile: pathString, encoding: .utf8)
+        let jsonData = jsonString.data(using: .utf8)!
+        
+        let _ = try! JSONDecoder().decode(NetworkResponse<AreaModel>.self, from: jsonData)
+    }
 
     func testSeatDecoder() throws {
         let pathString = Bundle(for: type(of: self)).path(forResource: "Seats", ofType: "json")!

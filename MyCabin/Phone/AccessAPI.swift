@@ -118,18 +118,4 @@ enum NetworkInterface: String {
     case vpn = "utun1"
 }
 
-struct DeviceModel: Codable {
-    var id: String
-    var name: String
-    var label: String
-    var ipAddress: String
-    var macAddress: String
-    var accessLevel: String
-    var enabled: Bool
-    var immutable: Bool
-    var pin: String
-    var accessLevelRequested: Bool
-    var deviceType: String
-    var createdAt: Int
-    var lastSeenAt: Int
-}
+

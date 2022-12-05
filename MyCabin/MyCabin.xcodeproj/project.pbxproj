@@ -56,6 +56,7 @@
 		2B939C8A293E90AB0014AD13 /* Areas.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B939C89293E90AB0014AD13 /* Areas.json */; };
 		2B939C8D293E91010014AD13 /* AreasAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B939C8C293E91010014AD13 /* AreasAPI.swift */; };
 		2B939C8F293E910F0014AD13 /* AreasModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B939C8E293E910F0014AD13 /* AreasModel.swift */; };
+		2B939C91293E9DC80014AD13 /* RenderCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B939C90293E9DC80014AD13 /* RenderCoordinates.swift */; };
 		2BA7B4CB291D4A3A00942CB5 /* SeatsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4CA291D4A3A00942CB5 /* SeatsAPI.swift */; };
 		2BA7B4CD291D504900942CB5 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4CC291D504900942CB5 /* Session.swift */; };
 		2BA7B4CF291D551A00942CB5 /* SeatSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4CE291D551A00942CB5 /* SeatSelection.swift */; };
@@ -183,6 +184,7 @@
 		2B939C89293E90AB0014AD13 /* Areas.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Areas.json; sourceTree = "<group>"; };
 		2B939C8C293E91010014AD13 /* AreasAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasAPI.swift; sourceTree = "<group>"; };
 		2B939C8E293E910F0014AD13 /* AreasModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasModel.swift; sourceTree = "<group>"; };
+		2B939C90293E9DC80014AD13 /* RenderCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderCoordinates.swift; sourceTree = "<group>"; };
 		2BA7B4CA291D4A3A00942CB5 /* SeatsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatsAPI.swift; sourceTree = "<group>"; };
 		2BA7B4CC291D504900942CB5 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		2BA7B4CE291D551A00942CB5 /* SeatSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatSelection.swift; sourceTree = "<group>"; };
@@ -473,6 +475,7 @@
 				2BA8F60129251BFB005621D3 /* FlightInfo */,
 				2BB135E82926D67F0016444C /* Weather */,
 				2B02B9C82936ABAB00C6387A /* GeneralAPI.swift */,
+				2B939C90293E9DC80014AD13 /* RenderCoordinates.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -828,6 +831,7 @@
 			files = (
 				2B183F4E2913F8BD0087654E /* Loading.swift in Sources */,
 				2B11705C29353DBF00A1CB8F /* SourcesAPI.swift in Sources */,
+				2B939C91293E9DC80014AD13 /* RenderCoordinates.swift in Sources */,
 				2B8F7139292D763C00073637 /* Shades.swift in Sources */,
 				2B939C8D293E91010014AD13 /* AreasAPI.swift in Sources */,
 				2B11705E29353DED00A1CB8F /* Sources.swift in Sources */,

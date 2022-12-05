@@ -7,13 +7,28 @@
 
 import Foundation
 
+enum ElementTypes: String {
+    case LIGHT = "Light"
+    case SEAT = "Seat"
+    case SPEAKER = "Speaker"
+    case MONITOR = "Monitor"
+    case WINDOW = "Window"
+    case SOURCE = "Source"
+    case WATERH = "WaterHeater"
+    case WATERT = "Tank"
+    case WATERS = "WaterSystem"
+    case AREA = "Area"
+    case TEMPCTRL = "TemperatureController"
+    case BREAKER = "CircuitBreaker"
+}
+
 struct AreaModel: Codable {
     var id: String
     var name: String
-    var rect: AreaRender
+    var rect: RenderCoordinates
     var side: String
-    var sub: [SubArea]
-    var assoc: [String]?
+    var sub: [SubElement]
+    var assoc: [GroupElement]
     struct icon_position: Codable {
         var x: Float
         var y: Float
@@ -26,14 +41,25 @@ struct AreaModel: Codable {
     }
 }
 
-struct SubArea: Codable {
+struct SubElement: Codable {
+    var type: String
     var id: String
+    
+    enum CodingKeys: String, CodingKey {
+        case type = "@type"
+        case id
+    }
 }
 
-struct AreaRender: Codable {
-    var x: Float
-    var y: Float
-    var w: Float
-    var h: Float
-    var r: Int
+struct GroupElement: Codable {
+    var type: String
+    var id: String
+    
+    enum CodingKeys: String, CodingKey {
+        case type = "@type"
+        case id
+    }
 }
+
+
+

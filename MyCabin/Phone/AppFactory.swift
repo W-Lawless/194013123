@@ -19,6 +19,7 @@ final class AppFactory {
     static let cabinConnectionPublisher = CurrentValueSubject<Bool, Never>(false)
     static var cabinConnectionSubscriptions = Set<AnyCancellable>()
     static let cabinAPI = CabinAPI()
+    static let areasAPI = AreasAPI()
         ///Access Levels
     static let accessAPI = AccessAPI()
     
@@ -134,14 +135,16 @@ final class AppFactory {
     
     static func fetchAll() {
         
+        areasAPI.fetch()
+        
 //        accessAPI.registerDevice()
         
-        do {
-            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: AccessModel.self)
+//        do {
+//            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: AccessModel.self)
 //            accessViewModel.updateValues(true, readout)
-        } catch {
-            accessAPI.fetch()
-        }
+//        } catch {
+//            accessAPI.fetch()
+//        }
         
         
         do {
