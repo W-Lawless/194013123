@@ -46,7 +46,7 @@ enum MenuRouter: NavigationRouter {
         case .settings:
             return UIHostingController(rootView: Settings())
         case .plane:
-            return UIHostingController(rootView: PlaneSchematic())
+            return UIHostingController(rootView: AppFactory.buildPlaneSchematic())
         }
     }
 }

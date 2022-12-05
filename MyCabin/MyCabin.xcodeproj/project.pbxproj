@@ -53,6 +53,9 @@
 		2B8F7139292D763C00073637 /* Shades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F7138292D763C00073637 /* Shades.swift */; };
 		2B8F713C292E566300073637 /* LightsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F713B292E566300073637 /* LightsAPI.swift */; };
 		2B8F713E292E5C5800073637 /* Lights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F713D292E5C5800073637 /* Lights.swift */; };
+		2B939C8A293E90AB0014AD13 /* Areas.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B939C89293E90AB0014AD13 /* Areas.json */; };
+		2B939C8D293E91010014AD13 /* AreasAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B939C8C293E91010014AD13 /* AreasAPI.swift */; };
+		2B939C8F293E910F0014AD13 /* AreasModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B939C8E293E910F0014AD13 /* AreasModel.swift */; };
 		2BA7B4CB291D4A3A00942CB5 /* SeatsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4CA291D4A3A00942CB5 /* SeatsAPI.swift */; };
 		2BA7B4CD291D504900942CB5 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4CC291D504900942CB5 /* Session.swift */; };
 		2BA7B4CF291D551A00942CB5 /* SeatSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4CE291D551A00942CB5 /* SeatSelection.swift */; };
@@ -177,6 +180,9 @@
 		2B8F7138292D763C00073637 /* Shades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shades.swift; sourceTree = "<group>"; };
 		2B8F713B292E566300073637 /* LightsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightsAPI.swift; sourceTree = "<group>"; };
 		2B8F713D292E5C5800073637 /* Lights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lights.swift; sourceTree = "<group>"; };
+		2B939C89293E90AB0014AD13 /* Areas.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Areas.json; sourceTree = "<group>"; };
+		2B939C8C293E91010014AD13 /* AreasAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasAPI.swift; sourceTree = "<group>"; };
+		2B939C8E293E910F0014AD13 /* AreasModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasModel.swift; sourceTree = "<group>"; };
 		2BA7B4CA291D4A3A00942CB5 /* SeatsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatsAPI.swift; sourceTree = "<group>"; };
 		2BA7B4CC291D504900942CB5 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		2BA7B4CE291D551A00942CB5 /* SeatSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatSelection.swift; sourceTree = "<group>"; };
@@ -435,6 +441,15 @@
 			name = Lights;
 			sourceTree = "<group>";
 		};
+		2B939C8B293E90F40014AD13 /* Areas */ = {
+			isa = PBXGroup;
+			children = (
+				2B939C8C293E91010014AD13 /* AreasAPI.swift */,
+				2B939C8E293E910F0014AD13 /* AreasModel.swift */,
+			);
+			name = Areas;
+			sourceTree = "<group>";
+		};
 		2BA7B4C8291D379200942CB5 /* HardwareDevices */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,6 +462,7 @@
 		2BA7B4C9291D37A600942CB5 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				2B939C8B293E90F40014AD13 /* Areas */,
 				2B86580829393E4400982BBB /* Access */,
 				2B02B9CA2936B63900C6387A /* CabinClimate */,
 				2B11704729352ADE00A1CB8F /* Media */,
@@ -548,6 +564,7 @@
 		2BB135DF2926D2C80016444C /* MockData */ = {
 			isa = PBXGroup;
 			children = (
+				2B939C89293E90AB0014AD13 /* Areas.json */,
 				2B86580529393AC200982BBB /* AccessLevels.json */,
 				2B86580429393AC200982BBB /* Devices.json */,
 				2B02B9C22936A73100C6387A /* Temperature.json */,
@@ -780,6 +797,7 @@
 			files = (
 				2B86580729393AC200982BBB /* AccessLevels.json in Resources */,
 				2B1170572935338D00A1CB8F /* Sources.json in Resources */,
+				2B939C8A293E90AB0014AD13 /* Areas.json in Resources */,
 				2B02B9C32936A73100C6387A /* Temperature.json in Resources */,
 				2BB135F22926DD610016444C /* Flight.json in Resources */,
 				2BB135F12926DD610016444C /* Seats.json in Resources */,
@@ -811,8 +829,10 @@
 				2B183F4E2913F8BD0087654E /* Loading.swift in Sources */,
 				2B11705C29353DBF00A1CB8F /* SourcesAPI.swift in Sources */,
 				2B8F7139292D763C00073637 /* Shades.swift in Sources */,
+				2B939C8D293E91010014AD13 /* AreasAPI.swift in Sources */,
 				2B11705E29353DED00A1CB8F /* Sources.swift in Sources */,
 				2B8F713E292E5C5800073637 /* Lights.swift in Sources */,
+				2B939C8F293E910F0014AD13 /* AreasModel.swift in Sources */,
 				2B02B9D72937A75900C6387A /* UserDefaults.swift in Sources */,
 				2B02B9D92937C93300C6387A /* Cache.swift in Sources */,
 				2BB135EC2926D6AB0016444C /* WeatherModels.swift in Sources */,

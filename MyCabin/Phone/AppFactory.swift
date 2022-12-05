@@ -68,6 +68,11 @@ final class AppFactory {
     
     //Menus
     
+    static func buildPlaneSchematic() -> PlaneSchematic {
+        let view = PlaneSchematic(viewModel: seatsViewModel)
+        return view
+    }
+    
     static func buildSeatSelection() -> SeatSelection {
         let view = SeatSelection(viewModel: seatsViewModel, api: seatsAPI)
         return view
@@ -129,7 +134,7 @@ final class AppFactory {
     
     static func fetchAll() {
         
-        accessAPI.registerDevice()
+//        accessAPI.registerDevice()
         
         do {
             let readout = try FileCacheUtil.retrieveCachedFile(dataModel: AccessModel.self)
@@ -226,7 +231,7 @@ final class AppFactory {
         rootMenuView.navigationItem.compactAppearance = navigationBarAppearance
         rootMenuView.navigationItem.scrollEdgeAppearance = navigationBarAppearance
 
-        let planeMenu = UIHostingController(rootView: PlaneSchematic())
+        let planeMenu = UIHostingController(rootView: AppFactory.buildPlaneSchematic())
         planeMenu.title = "Select your seat"
         
         let volumeMenu = UIHostingController(rootView: AppFactory.buildVolumeView())
@@ -248,7 +253,7 @@ final class AppFactory {
     }
     
     @objc static func attendantClick() {
-        homeMenuCoordinator.navigationController.present(UIHostingController(rootView: PlaneSchematic()), animated: true)
+        homeMenuCoordinator.navigationController.present(UIHostingController(rootView: AppFactory.buildPlaneSchematic()), animated: true)
     }
     
 }

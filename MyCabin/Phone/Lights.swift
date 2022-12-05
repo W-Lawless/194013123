@@ -32,14 +32,10 @@ struct Lights: View {
 
             }//: LIST
         }  //: TABVIEW
-        .tabViewStyle(.page)
-        .onAppear {
-//            api.fetch()
-//            let cachedLights = CacheUtil.cache.object(forKey: "Lights") as? StructWrapper<[LightModel]>
-//            if let cachedLights = cachedLights {
-//                print("unwrapped:", cachedLights)
-//            }
+        .onAppear{
+             
         }
+        .tabViewStyle(.page)
         .gesture(dragGesture)
     }
     
@@ -81,10 +77,10 @@ class LightsViewModel: ObservableObject {
 
 //MARK: - Preview
 
-//struct Lights_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AppFactory.buildLightsView()
-//    }
-//}
+struct Lights_Previews: PreviewProvider {
+    static var previews: some View {
+        AppFactory.buildLightsView()
+    }
+}
 
 

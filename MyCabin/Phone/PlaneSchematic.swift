@@ -8,12 +8,62 @@
 import SwiftUI
 
 struct PlaneSchematic: View {
+    
+    let viewModel: SeatsViewModel
+    @State var selected: Bool = false
+    
     var body: some View {
-        IceCream(heightRadiusRatio: 6)
+//        IceCream(heightRadiusRatio: 6)
+        GeometryReader { geometry in
+            
+            HStack(alignment: .center) {
+                Image("plane_left_side")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: geometry.size.height * 0.4)
+                Spacer()
+                VStack(alignment: .center, spacing: 64) {
+                    ForEach(viewModel.seatList ?? [SeatModel]()) { seat in
+                        SeatButton()
+                    }
+//                    HStack {
+//                        SeatButton()
+//                        SeatButton()
+//                        SeatButton()
+//                    }
+                }
+                Spacer()
+                Image("plane_right_side")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: geometry.size.height * 0.4)
+            }
+            .padding(.vertical, 17)
+            .padding(.horizontal, 34)
+//            .border(Color.white)
+            .frame(height: geometry.size.height)
+        }
     }
 }
 
+
+
 //MARK: - Shapes
+
+struct SeatButton: View {
+    
+    @State var selected: Bool = false
+    
+    var body: some View {
+        Image(selected ? "seat_selected" : "seat_selectable")
+            .resizable()
+            .scaledToFit()
+            .frame(width:32, height: 32)
+            .onTapGesture {
+                selected.toggle()
+            }
+    }
+}
 
 struct IceCream: Shape {
     let heightRadiusRatio: CGFloat
@@ -38,6 +88,6 @@ struct IceCream: Shape {
 
 struct PlaneSchematic_Previews: PreviewProvider {
     static var previews: some View {
-        PlaneSchematic()
+        AppFactory.buildPlaneSchematic()
     }
 }

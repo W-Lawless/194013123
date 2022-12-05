@@ -1,0 +1,1617 @@
+{
+    "results": [
+        {
+            "@type": "Area",
+            "id": "FWD_CABIN",
+            "name": "FWD_CABIN",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 3.32,
+                "h": 4.2,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [
+                {
+                    "@type": "Area",
+                    "id": "Vestibule"
+                },
+                {
+                    "@type": "Area",
+                    "id": "Fwd Lavatory"
+                },
+                {
+                    "@type": "Area",
+                    "id": "CREW"
+                },
+                {
+                    "@type": "Area",
+                    "id": "Galley"
+                }
+            ],
+            "assoc": [],
+            "cat": "ForwardArea",
+            "icon_position": {
+                "x": 1.66,
+                "y": 2.1
+            },
+            "allowPrivacy": false,
+            "backlight": "DAY",
+            "absoluteY": 0.0,
+            "state": {
+                "privacy": false
+            }
+        },
+        {
+            "@type": "Area",
+            "id": "AIRPLANE_AREA",
+            "name": "Airplane Area",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 3.32,
+                "h": 14.5,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [
+                {
+                    "@type": "TemperatureController",
+                    "id": "first-temp-ctrl"
+                },
+                {
+                    "@type": "Source",
+                    "id": "CAMERA_FWD"
+                },
+                {
+                    "@type": "Area",
+                    "id": "FWD_CABIN"
+                },
+                {
+                    "@type": "Light",
+                    "id": "ALL_LIGHT"
+                },
+                {
+                    "@type": "Source",
+                    "id": "AUX_LS4"
+                },
+                {
+                    "@type": "Source",
+                    "id": "AUX_LS5"
+                },
+                {
+                    "@type": "Source",
+                    "id": "AUX_LS6"
+                },
+                {
+                    "@type": "Source",
+                    "id": "HDMI_L2"
+                },
+                {
+                    "@type": "Source",
+                    "id": "HDMI_R2"
+                },
+                {
+                    "@type": "Source",
+                    "id": "CABIN_VIEW"
+                },
+                {
+                    "@type": "Source",
+                    "id": "AUX_DIVAN_FWD"
+                },
+                {
+                    "@type": "WaterHeater",
+                    "id": "line-heater"
+                },
+                {
+                    "@type": "Source",
+                    "id": "AUX_LS2"
+                },
+                {
+                    "@type": "Source",
+                    "id": "HDMI_L1"
+                },
+                {
+                    "@type": "Source",
+                    "id": "DECODER1"
+                },
+                {
+                    "@type": "Source",
+                    "id": "DECODER2"
+                },
+                {
+                    "@type": "Source",
+                    "id": "DECODER3"
+                },
+                {
+                    "@type": "Source",
+                    "id": "HDMI_R1"
+                },
+                {
+                    "@type": "Source",
+                    "id": "AUX_DIVAN_AFT"
+                },
+                {
+                    "@type": "Source",
+                    "id": "AUX_LS3"
+                },
+                {
+                    "@type": "Source",
+                    "id": "SAT_TV1"
+                },
+                {
+                    "@type": "Source",
+                    "id": "SAT_TV2"
+                },
+                {
+                    "@type": "Source",
+                    "id": "CAMERA_TOP"
+                },
+                {
+                    "@type": "Source",
+                    "id": "USBC_LS3"
+                },
+                {
+                    "@type": "Source",
+                    "id": "VHF_COMM"
+                },
+                {
+                    "@type": "Tank",
+                    "id": "waste"
+                },
+                {
+                    "@type": "Tank",
+                    "id": "water-a"
+                },
+                {
+                    "@type": "Tank",
+                    "id": "water-b"
+                },
+                {
+                    "@type": "WaterSystem",
+                    "id": "water-system-a"
+                },
+                {
+                    "@type": "WaterSystem",
+                    "id": "water-system-b"
+                },
+                {
+                    "@type": "Source",
+                    "id": "XM_1"
+                },
+                {
+                    "@type": "Source",
+                    "id": "XM_2"
+                },
+                {
+                    "@type": "Source",
+                    "id": "CAMERA_AFT"
+                },
+                {
+                    "@type": "Area",
+                    "id": "PASSENGER_CABIN"
+                },
+                {
+                    "@type": "TemperatureController",
+                    "id": "second-temp-ctrl"
+                },
+                {
+                    "@type": "Area",
+                    "id": "AFT_CABIN"
+                }
+            ],
+            "assoc": [],
+            "cat": "AirplaneArea",
+            "icon_position": {
+                "x": 1.66,
+                "y": 7.25
+            },
+            "allowPrivacy": true,
+            "backlight": "DAY",
+            "absoluteY": 0.0,
+            "state": {
+                "privacy": false
+            }
+        },
+        {
+            "@type": "Area",
+            "id": "Vestibule",
+            "name": "Vestibule",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 3.32,
+                "h": 1.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [
+                {
+                    "@type": "Light",
+                    "id": "AIRSTAIR-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "VESTIBULE-ZONE-AISLE-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Vestibule-Aisle-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Vestibule-AVDS2-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Vestibule-AVDS3-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Vestibule-AVDS6-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Vestibule-AVDS7-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Vestibule-AVDS8-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Vestibule-AVDS9-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Vestibule-Bluray1-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Vestibule-Bluray2-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Vestibule-DomeLight-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "vestibule-dome"
+                },
+                {
+                    "@type": "CircuitBreakerGroup",
+                    "id": "Vestibule-CB"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "Vestibule-Touchscreen"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "XM-RADIO-CB"
+                }
+            ],
+            "assoc": [
+                {
+                    "@type": "TemperatureController",
+                    "id": "first-temp-ctrl"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AIRSTAIR-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "VESTIBULE-ZONE-AISLE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "vestibule-dome"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CREWREST-ACCENT-LT"
+                }
+            ],
+            "cat": "VestibuleArea",
+            "background": {
+                "image": "/img/api/vest.png",
+                "image_selected": "/img/api/lobby_pressed.png"
+            },
+            "icon_position": {
+                "x": 1.66,
+                "y": 0.5
+            },
+            "allowPrivacy": false,
+            "backlight": "DAY",
+            "absoluteY": 0.0,
+            "state": {
+                "privacy": false
+            }
+        },
+        {
+            "@type": "Area",
+            "id": "Fwd Lavatory",
+            "name": "Fwd Lav",
+            "rect": {
+                "x": 0.0,
+                "y": 1.0,
+                "w": 1.62,
+                "h": 1.8,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [
+                {
+                    "@type": "Valve",
+                    "id": "fwd-lav-valve"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Fwd Lavatory-Gasper-Gaspers-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-LAV-AREA-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Fwd Lavatory-SconceLight-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Fwd Lavatory-DomeLight-CB"
+                },
+                {
+                    "@type": "WaterHeater",
+                    "id": "fwd-lav-heater"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-LAV-DOME-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-LAV-MIRROR-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Fwd Lavatory-MirrorLight-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-LAV-READ-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Fwd Lavatory-ReadingLight-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-LAV-VANITY-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Fwd Lavatory-VanityLight-CB"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-FWD-LAV-WDO"
+                },
+                {
+                    "@type": "Seat",
+                    "id": "FWD-LAV-SEAT"
+                }
+            ],
+            "assoc": [
+                {
+                    "@type": "Light",
+                    "id": "FWD-LAV-AREA-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-LAV-DOME-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-LAV-MIRROR-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-LAV-READ-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-LAV-VANITY-LT"
+                }
+            ],
+            "cat": "FwdLavatoryArea",
+            "background": {
+                "image": "/img/api/fwd_lav_left.png",
+                "image_selected": "/img/api/fwd_lav_pressed.png"
+            },
+            "icon_position": {
+                "x": 0.81,
+                "y": 0.9
+            },
+            "allowPrivacy": false,
+            "backlight": "DAY",
+            "absoluteY": 1.0,
+            "state": {
+                "privacy": false
+            }
+        },
+        {
+            "@type": "Area",
+            "id": "CREW",
+            "name": "Crew",
+            "rect": {
+                "x": 1.7,
+                "y": 1.0,
+                "w": 1.62,
+                "h": 1.8,
+                "r": 0
+            },
+            "side": "RIGHT",
+            "sub": [
+                {
+                    "@type": "CircuitBreakerGroup",
+                    "id": "Crew Rest-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CREWREST-ACCENT-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Crew Rest-AccentLight-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Crew Rest-BulkheadMonitor-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CREWREST-BACKLIGHT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CREWREST-DOME-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Crew Rest-DomeLight-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "CREW-LEDGE-BACKLIGHT-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CREWREST-READ-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Crew Rest-ReadingLight-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CREWREST-SCONCE-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Crew Rest-SconceLight-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Crew Rest-OneChair-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CREWREST-TBL-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Crew Rest-Table-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Crew Rest-TableLight-CB"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "CREWREST-BLKHD-MON"
+                },
+                {
+                    "@type": "Table",
+                    "id": "CREWREST-TBL"
+                },
+                {
+                    "@type": "Window",
+                    "id": "CREWREST-WDO"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "CREWREST-SEAT-SPK"
+                },
+                {
+                    "@type": "Seat",
+                    "id": "CREWREST-SEAT"
+                }
+            ],
+            "assoc": [
+                {
+                    "@type": "TemperatureController",
+                    "id": "first-temp-ctrl"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CREWREST-BACKLIGHT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CREWREST-DOME-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CREWREST-READ-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CREWREST-SCONCE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CREWREST-TBL-LT"
+                }
+            ],
+            "cat": "CrewArea",
+            "icon_position": {
+                "x": 0.81,
+                "y": 0.9
+            },
+            "allowPrivacy": false,
+            "backlight": "DAY",
+            "absoluteY": 1.0,
+            "state": {
+                "privacy": false
+            }
+        },
+        {
+            "@type": "Area",
+            "id": "Galley",
+            "name": "Galley",
+            "rect": {
+                "x": 0.0,
+                "y": 2.8,
+                "w": 3.32,
+                "h": 1.4,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Galley-AccentLight-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Galley-Aisle-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Galley-DomeLight-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "GALLEY-EFF-LT-CB"
+                },
+                {
+                    "@type": "CircuitBreakerGroup",
+                    "id": "Galley-CB"
+                },
+                {
+                    "@type": "Valve",
+                    "id": "galley-valve"
+                },
+                {
+                    "@type": "WaterHeater",
+                    "id": "galley-water-heater"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Galley-WorkLight-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "GALLEY-ZONE-AISLE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "GAL-DOME-LT"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "galley-monitor"
+                },
+                {
+                    "@type": "Window",
+                    "id": "GAL-WDO"
+                },
+                {
+                    "@type": "Window",
+                    "id": "GAL-ANNEX-WDO"
+                },
+                {
+                    "@type": "Light",
+                    "id": "GAL-ACCENT-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "GAL-ANNEX-ACCENT-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "GAL-ANNEX-EFF-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "GAL-EFF-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "GAL-ANNEX-WRK-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "GAL-WRK-LT"
+                }
+            ],
+            "assoc": [
+                {
+                    "@type": "TemperatureController",
+                    "id": "first-temp-ctrl"
+                },
+                {
+                    "@type": "Light",
+                    "id": "GALLEY-ZONE-AISLE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "GAL-DOME-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "GAL-ACCENT-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "GAL-ANNEX-ACCENT-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "GAL-ANNEX-EFF-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "GAL-EFF-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "GAL-ANNEX-WRK-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "GAL-WRK-LT"
+                }
+            ],
+            "cat": "GalleyArea",
+            "background": {
+                "image": "/img/api/galley_fwd.png",
+                "image_selected": "/img/api/galley_selected.png"
+            },
+            "icon_position": {
+                "x": 1.66,
+                "y": 0.7
+            },
+            "allowPrivacy": false,
+            "backlight": "DAY",
+            "absoluteY": 2.8,
+            "state": {
+                "privacy": false
+            }
+        },
+        {
+            "@type": "Area",
+            "id": "FWD-GRP",
+            "name": "Fwd Cabin",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 3.32,
+                "h": 3.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "4-SEAT-GRP-1-AccentLights-CB"
+                },
+                {
+                    "@type": "CircuitBreakerGroup",
+                    "id": "FWD-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "4-SEAT-GRP-1-Aisle-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "ZONE-1-AISLE-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "FWD-BACKLIGHT-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "4-SEAT-GRP-1-BulkheadMonitor-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-ZONE-BACKLIGHT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-4-SEAT-GRP-1-OneChair-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-4-SEAT-GRP-1-MediumTable-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "4-SEAT-GRP-1-LedgePanel-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-L-LEDGE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-R-LEDGE-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "4-SEAT-GRP-1-DownwashLight-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DWN-EFF-LT-1"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "L-SEAT-1-MON-1"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "L-SEAT-2-MON-1"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "R-SEAT-1-MON-1"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "R-SEAT-2-MON-1"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "FWD-PERSONAL-MON-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Fwd Pocket-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "R-4-SEAT-GRP-1-OneChair-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "R-4-SEAT-GRP-1-MediumTable-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "4-SEAT-GRP-1-ReadingLight-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "4-SEAT-GRP-1-TableLight-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-L-PSU-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-R-PSU-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "4-SEAT-GRP-1-UpwashLight-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "UP-EFF-LT-1"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "FWD-RBLKHD-MON"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "L-SEAT-1-SPK-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "L-SEAT-1-READ-1"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "R-SEAT-1-SPK-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "R-SEAT-1-READ-1"
+                },
+                {
+                    "@type": "Seat",
+                    "id": "L-SEAT-1-1"
+                },
+                {
+                    "@type": "Seat",
+                    "id": "R-SEAT-1-1"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-SEAT-1-WDO-1"
+                },
+                {
+                    "@type": "Window",
+                    "id": "R-SEAT-1-WDO-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "L-TBL-LT-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "R-TBL-LT-1"
+                },
+                {
+                    "@type": "Table",
+                    "id": "L-TBL-1"
+                },
+                {
+                    "@type": "Table",
+                    "id": "R-TBL-1"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "FWD-SPK"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-SEAT-2-WDO-1"
+                },
+                {
+                    "@type": "Window",
+                    "id": "R-SEAT-2-WDO-1"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "L-SEAT-2-SPK-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "L-SEAT-2-READ-1"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "R-SEAT-2-SPK-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "R-SEAT-2-READ-1"
+                },
+                {
+                    "@type": "Seat",
+                    "id": "L-SEAT-2-1"
+                },
+                {
+                    "@type": "Seat",
+                    "id": "R-SEAT-2-1"
+                }
+            ],
+            "assoc": [
+                {
+                    "@type": "TemperatureController",
+                    "id": "first-temp-ctrl"
+                },
+                {
+                    "@type": "Light",
+                    "id": "ZONE-1-AISLE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "FWD-ZONE-BACKLIGHT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DWN-EFF-LT-1"
+                },
+                {
+                    "@type": "Light",
+                    "id": "UP-EFF-LT-1"
+                }
+            ],
+            "cat": "PassengerArea",
+            "icon_position": {
+                "x": 1.66,
+                "y": 1.5
+            },
+            "allowPrivacy": false,
+            "backlight": "DAY",
+            "absoluteY": 4.2,
+            "state": {
+                "privacy": false
+            }
+        },
+        {
+            "@type": "Area",
+            "id": "PASSENGER_CABIN",
+            "name": "PASSENGER_CABIN",
+            "rect": {
+                "x": 0.0,
+                "y": 4.2,
+                "w": 3.32,
+                "h": 9.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [
+                {
+                    "@type": "Area",
+                    "id": "FWD-GRP"
+                },
+                {
+                    "@type": "Area",
+                    "id": "MID-GRP"
+                },
+                {
+                    "@type": "Area",
+                    "id": "AFT-GRP"
+                }
+            ],
+            "assoc": [],
+            "cat": "PassengerCabinArea",
+            "icon_position": {
+                "x": 1.66,
+                "y": 4.5
+            },
+            "allowPrivacy": false,
+            "backlight": "DAY",
+            "absoluteY": 4.2,
+            "state": {
+                "privacy": false
+            }
+        },
+        {
+            "@type": "Area",
+            "id": "MID-GRP",
+            "name": "Mid Cabin",
+            "rect": {
+                "x": 0.0,
+                "y": 3.0,
+                "w": 3.32,
+                "h": 3.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-CONF-GRP-R-CREDENZA-2-AccentLight-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-CONF-GRP-R-CREDENZA-2-Aisle-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "ZONE-2-AISLE-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "MID-BACKLIGHT-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "MID-ZONE-BACKLIGHT"
+                },
+                {
+                    "@type": "MonitorLift",
+                    "id": "CREDENZA-MON-LIFT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-CONF-GRP-R-CREDENZA-2-CredenzaMonitor-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-L-CONF-GRP-R-CREDENZA-2-OneChair-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "MID-L-LEDGE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "MID-R-LEDGE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CONF-GRP-DWN-EFF-LT-2"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-CONF-GRP-R-CREDENZA-2-DownwashLight-CB"
+                },
+                {
+                    "@type": "CircuitBreakerGroup",
+                    "id": "L-CONF-GRP-R-CREDENZA-2-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Mid-Pocket-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-CONF-GRP-R-CREDENZA-2-ReadingLight-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-CONF-GRP-R-CREDENZA-2-TableLight-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "MID-L-PSU-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "MID-R-PSU-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CONF-GRP-UP-EFF-LT-2"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-CONF-GRP-R-CREDENZA-2-UpwashLight-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Chiller-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CONF-FWD-READ-LT-2"
+                },
+                {
+                    "@type": "Seat",
+                    "id": "CONF-FWD-OB-2"
+                },
+                {
+                    "@type": "Seat",
+                    "id": "CONF-FWD-IB-2"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CREDENZA-ACCENT-LT-2"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CREDENZA-AREA-LT-2"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CREDENZA-CTR-READ-LT-2"
+                },
+                {
+                    "@type": "Table",
+                    "id": "CREDENZA-2"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-CONF-GRP-WDO-1-2"
+                },
+                {
+                    "@type": "Window",
+                    "id": "R-CONF-GRP-WDO-1-2"
+                },
+                {
+                    "@type": "Light",
+                    "id": "L-CONF-GRP-TBL-LT-2"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "MID-SPK"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "CREDENZA-MON"
+                },
+                {
+                    "@type": "Table",
+                    "id": "CONF-SEAT-TBL-2"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-CONF-GRP-WDO-2-2"
+                },
+                {
+                    "@type": "Window",
+                    "id": "R-CONF-GRP-WDO-2-2"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CONF-AFT-READ-LT-2"
+                },
+                {
+                    "@type": "Seat",
+                    "id": "CONF-AFT-OB-2"
+                },
+                {
+                    "@type": "Seat",
+                    "id": "CONF-AFT-IB-2"
+                }
+            ],
+            "assoc": [
+                {
+                    "@type": "TemperatureController",
+                    "id": "second-temp-ctrl"
+                },
+                {
+                    "@type": "Light",
+                    "id": "ZONE-2-AISLE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "MID-ZONE-BACKLIGHT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CONF-GRP-DWN-EFF-LT-2"
+                },
+                {
+                    "@type": "Light",
+                    "id": "CONF-GRP-UP-EFF-LT-2"
+                }
+            ],
+            "cat": "PassengerArea",
+            "icon_position": {
+                "x": 1.66,
+                "y": 1.5
+            },
+            "allowPrivacy": false,
+            "backlight": "DAY",
+            "absoluteY": 7.2,
+            "state": {
+                "privacy": false
+            }
+        },
+        {
+            "@type": "Area",
+            "id": "AFT-GRP",
+            "name": "Aft Cabin",
+            "rect": {
+                "x": 0.0,
+                "y": 6.0,
+                "w": 3.32,
+                "h": 3.0,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-2-SEATS-R-DIVAN-GRP-3-AccentLight-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-2-SEATS-R-DIVAN-GRP-3-Aisle-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "ZONE-3-AISLE-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "AFT-BACKLIGHT-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-2-SEATS-R-DIVAN-GRP-3-BulkheadMonitor-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-ZONE-BACKLIGHT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-L-LEDGE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-R-LEDGE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DIVAN-GRP-DWN-EFF-LT-3"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-2-SEATS-R-DIVAN-GRP-3-DownwashLight-CB"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "DIVAN-AFT-MON-3"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "DIVAN-FWD-MON-3"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "R-SEAT-1-MON-3"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "R-SEAT-2-MON-3"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "AFT-PERSONAL-MON-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-L-2-SEATS-R-DIVAN-GRP-3-OneChair-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-L-2-SEATS-R-DIVAN-GRP-3-MediumTable-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-2-SEATS-R-DIVAN-GRP-3-ReadingLight-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-2-SEATS-R-DIVAN-GRP-3-TableLight-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-L-PSU-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-R-PSU-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DIVAN-GRP-UP-EFF-LT-3"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "L-2-SEATS-R-DIVAN-GRP-3-UpwashLight-CB"
+                },
+                {
+                    "@type": "CircuitBreakerGroup",
+                    "id": "L-2-SEATS-R-DIVAN-GRP-3-CB"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "AFT-BLKHD-MON"
+                },
+                {
+                    "@type": "Monitor",
+                    "id": "AFT-BLKHD-4K-MON"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "SEAT-1-SPK-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "SEAT-1-READ-LT-3"
+                },
+                {
+                    "@type": "Seat",
+                    "id": "R-SEAT-1-3"
+                },
+                {
+                    "@type": "Divan",
+                    "id": "DIVAN-3"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "DIVAN-FWD-SPK-3"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-DIVAN-GRP-WDO-1-3"
+                },
+                {
+                    "@type": "Window",
+                    "id": "WDO-1-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DIVAN-GRP-TBL-LT-3"
+                },
+                {
+                    "@type": "Table",
+                    "id": "DIVAN-GRP-R-TBL-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DIVAN-GRP-ACCENT-LT-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DIVAN-MID-READ-LT-3"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "AFT-SPK"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "DIVAN-AFT-SPK-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DIVAN-AFT-READ-LT-3"
+                },
+                {
+                    "@type": "Window",
+                    "id": "L-DIVAN-GRP-WDO-2-3"
+                },
+                {
+                    "@type": "Window",
+                    "id": "WDO-2-3"
+                },
+                {
+                    "@type": "Speaker",
+                    "id": "SEAT-2-SPK-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "SEAT-2-READ-LT-3"
+                },
+                {
+                    "@type": "Seat",
+                    "id": "R-SEAT-2-3"
+                }
+            ],
+            "assoc": [
+                {
+                    "@type": "TemperatureController",
+                    "id": "second-temp-ctrl"
+                },
+                {
+                    "@type": "Light",
+                    "id": "ZONE-3-AISLE-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-ZONE-BACKLIGHT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DIVAN-GRP-DWN-EFF-LT-3"
+                },
+                {
+                    "@type": "Light",
+                    "id": "DIVAN-GRP-UP-EFF-LT-3"
+                }
+            ],
+            "cat": "PassengerArea",
+            "icon_position": {
+                "x": 1.66,
+                "y": 1.5
+            },
+            "allowPrivacy": false,
+            "backlight": "DAY",
+            "absoluteY": 10.2,
+            "state": {
+                "privacy": false
+            }
+        },
+        {
+            "@type": "Area",
+            "id": "Aft-Lav",
+            "name": "Aft Lav",
+            "rect": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 3.32,
+                "h": 1.3,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [
+                {
+                    "@type": "Light",
+                    "id": "AFT-LAV-AREA-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Aft-Lav-SconceLight-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "BIDET-POWER-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "BIDET-SUPPLY-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-LAV-DOME-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Aft-Lav-DomeLight-CB"
+                },
+                {
+                    "@type": "WaterHeater",
+                    "id": "aft-lav-heater"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-L-LAV-ACCENT-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "AFT-L-LAV-ACCENT-LT-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-LAV-MIRROR-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Aft-Lav-MirrorLight-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-R-LAV-ACCENT-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Aft-R- Lav-AccentLight-CB"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-LAV-READ-LT"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Aft-Lav-ReadingLight-CB"
+                },
+                {
+                    "@type": "CircuitBreaker",
+                    "id": "Aft-Lav-Vent-CB"
+                },
+                {
+                    "@type": "CircuitBreakerGroup",
+                    "id": "Aft-Lav-CB"
+                },
+                {
+                    "@type": "Valve",
+                    "id": "aft-lav-sink-valve"
+                },
+                {
+                    "@type": "Valve",
+                    "id": "aft-lav-toilet-valve"
+                },
+                {
+                    "@type": "Seat",
+                    "id": "AFT-LAV-SEAT"
+                }
+            ],
+            "assoc": [
+                {
+                    "@type": "TemperatureController",
+                    "id": "second-temp-ctrl"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-LAV-AREA-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-LAV-DOME-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-L-LAV-ACCENT-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-LAV-MIRROR-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-R-LAV-ACCENT-LT"
+                },
+                {
+                    "@type": "Light",
+                    "id": "AFT-LAV-READ-LT"
+                }
+            ],
+            "cat": "AftLavatoryArea",
+            "background": {
+                "image": "/img/api/aft_lav2.png",
+                "image_selected": "/img/api/aft_lav_pressed.png"
+            },
+            "icon_position": {
+                "x": 1.66,
+                "y": 0.65
+            },
+            "allowPrivacy": false,
+            "backlight": "DAY",
+            "absoluteY": 13.2,
+            "state": {
+                "privacy": false
+            }
+        },
+        {
+            "@type": "Area",
+            "id": "AFT_CABIN",
+            "name": "AFT_CABIN",
+            "rect": {
+                "x": 0.0,
+                "y": 13.2,
+                "w": 3.32,
+                "h": 1.3,
+                "r": 0
+            },
+            "side": "LEFT",
+            "sub": [
+                {
+                    "@type": "Area",
+                    "id": "Aft-Lav"
+                }
+            ],
+            "assoc": [],
+            "cat": "AftArea",
+            "icon_position": {
+                "x": 1.66,
+                "y": 0.65
+            },
+            "allowPrivacy": false,
+            "backlight": "DAY",
+            "absoluteY": 13.2,
+            "state": {
+                "privacy": false
+            }
+        }
+    ],
+    "length": 12
+}
