@@ -10,17 +10,16 @@ import Combine
 
 class AreasAPI {
     
-//    let viewModel: LightsViewModel
+    let viewModel: PlaneViewModel
     var cancelToken: Cancellable?
 
     let endpoint = Endpoint<EndpointFormats.Get, AreaModel>(path: "/api/v1/areas")
     
-//    init(viewModel: LightsViewModel) {
-//        self.viewModel = viewModel
-//    }
+    init(viewModel: PlaneViewModel) {
+        self.viewModel = viewModel
+    }
     
     func fetch() {
-        print("pt2")
         let publisher = Session.shared.publisher(for: endpoint, using: nil)
         
         self.cancelToken = publisher.sink(
@@ -29,79 +28,142 @@ class AreasAPI {
                 case .failure(let error):
                     print(error)
                 case .finished:
-                    print("nothing?")
                     return
                 }
             },
             receiveValue: { areas in
                 
-                areas.forEach { element in
-                    var lights = []
-                    var seats = []
-                    var monitors = []
-                    var speakers = []
-                    var subAreas = []
-                    var sources = []
-                    
-                    print("🟨 ",element.name, terminator: "\n")
-                    print("  🟩 Sub Elements::")
-                    
-                    element.sub.forEach { subElement in
-                        
-                        switch(subElement.type) {
-                        case ElementTypes.LIGHT.rawValue:
-                            lights.append(subElement)
-                        case ElementTypes.SEAT.rawValue:
-                            seats.append(subElement)
-                        case ElementTypes.MONITOR.rawValue:
-                            monitors.append(subElement)
-                        case ElementTypes.SPEAKER.rawValue:
-                            speakers.append(subElement)
-                        case ElementTypes.SOURCE.rawValue:
-                            sources.append(subElement)
-                        case ElementTypes.AREA.rawValue:
-                            subAreas.append(subElement)
-                        default:
-                            Void()
-                        }
-//                        print("    > ",subElement.type)
-//                        print("        > ",subElement.id)
-                    }
-                    
-                    print("    💡 Lights::")
-                    lights.forEach { light in
-                        print("    ",light)
-                    }
-                    print("    💺 Seats::")
-                    seats.forEach { seat in
-                        print("    ",seat)
-                    }
-                    print("    📺 Monitors::")
-                    monitors.forEach { monitor in
-                        print("    ",monitor)
-                    }
-                    print("    🔊 Speakers::")
-                    speakers.forEach { speaker in
-                        print("    ",speaker)
-                    }
-                    print("    🔌 Sources::")
-                    sources.forEach { source in
-                        print("    ",source)
-                    }
-                    print("  🟦 Zone Elements::")
-                    
-                    element.assoc.forEach { item in
-                        print("    ",item.type)
-                        print("       ",item.id)
-                    }
-                }
-//                self.viewModel.updateValues(true, lights)
-//                FileCacheUtil.cacheToFile(data: lights)
             }
         )
+        
     }
     
-
-    
+    func mapPlane() async -> Plane {
+        var plane = Plane(areas: [PlaneArea](), id: "MyGulfstream007")
+        
+        let areaEndpoint = Endpoint<EndpointFormats.Get, AreaModel>(path: "/api/v1/areas").makeRequest(with: ())!
+        let lightsEndpoint = Endpoint<EndpointFormats.Get, LightModel>(path: "/api/v1/lights").makeRequest(with: ())!
+        let seatsEndpoint = Endpoint<EndpointFormats.Get, SeatModel>(path: "/api/v1/seats").makeRequest(with: ())!
+        let monitorsEndpoint = Endpoint<EndpointFormats.Get, MonitorModel>(path: "/api/v1/monitors").makeRequest(with: ())!
+        let speakersEndpoint = Endpoint<EndpointFormats.Get, SpeakerModel>(path: "/api/v1/speakers").makeRequest(with: ())!
+        let sourcesEndpoint = Endpoint<EndpointFormats.Get, SourceModel>(path: "/api/v1/sources").makeRequest(with: ())!
+        let shadesEndpoint = Endpoint<EndpointFormats.Get, ShadeModel>(path: "/api/v1/windows").makeRequest(with: ())!
+        let decoder = JSONDecoder()
+        //for each area, initialize a planearea struct with the mapped lights, seats, etc
+        do {
+            let (areaData,_) = try await Session.shared.data(for: areaEndpoint)
+            let (lightData,_) = try await Session.shared.data(for: lightsEndpoint)
+            let (seatsData,_) = try await Session.shared.data(for: seatsEndpoint)
+            let (monitorsData,_) = try await Session.shared.data(for: monitorsEndpoint)
+            let (speakersData,_) = try await Session.shared.data(for: speakersEndpoint)
+            let (sourcesData,_) = try await Session.shared.data(for: sourcesEndpoint)
+            let (shadesData,_) = try await Session.shared.data(for: shadesEndpoint)
+            
+            let areas = try decoder.decode(NetworkResponse<AreaModel>.self, from: areaData)
+            let allLights = try decoder.decode(NetworkResponse<LightModel>.self, from: lightData)
+            let allSeats = try decoder.decode(NetworkResponse<SeatModel>.self, from: seatsData)
+            let allMonitors = try decoder.decode(NetworkResponse<MonitorModel>.self, from: monitorsData)
+            let allSpeakers = try decoder.decode(NetworkResponse<SpeakerModel>.self, from: speakersData)
+            let allSources = try decoder.decode(NetworkResponse<SourceModel>.self, from: sourcesData)
+            let allShades = try decoder.decode(NetworkResponse<ShadeModel>.self, from: shadesData)
+            
+            areas.results.forEach { area in
+//                plane.areas[area.id] = area
+                var tempLights = [LightModel]()
+                var tempSeats = [SeatModel]()
+                var tempMonitors = [MonitorModel]()
+                var tempSpeakers = [SpeakerModel]()
+                var tempSources = [SourceModel]()
+                var tempShades = [ShadeModel]()
+                
+                area.sub.forEach { subElement in
+                    switch(subElement.type) {
+                    case ElementTypes.LIGHT.rawValue:
+                        let matching = allLights.results.filter {
+                            return $0.id == subElement.id
+                        }
+                        if (!matching.isEmpty) {
+                            tempLights.append(matching[0])
+                        }
+                    case ElementTypes.SEAT.rawValue:
+                        let matching = allSeats.results.filter {
+                            return $0.id == subElement.id
+                        }
+                        if (!matching.isEmpty) {
+                            tempSeats.append(matching[0])
+                        }
+                    case ElementTypes.WINDOW.rawValue:
+                        let matching = allShades.results.filter{
+                            return $0.id == subElement.id
+                        }
+                        if (!matching.isEmpty) {
+                            tempShades.append(matching[0])
+                        }
+                    case ElementTypes.MONITOR.rawValue:
+                        let matching = allMonitors.results.filter{
+                            return $0.id == subElement.id
+                        }
+                        if (!matching.isEmpty) {
+                            tempMonitors.append(matching[0])
+                        }
+                    case ElementTypes.SPEAKER.rawValue:
+                        let matching = allSpeakers.results.filter{
+                            return $0.id == subElement.id
+                        }
+                        if (!matching.isEmpty) {
+                            tempSpeakers.append(matching[0])
+                        }
+                    case ElementTypes.SOURCE.rawValue:
+                        let matching = allSources.results.filter{
+                            return $0.id == subElement.id
+                        }
+                        if (!matching.isEmpty) {
+                            tempSources.append(matching[0])
+                        }
+                    default:
+                        Void()
+                    }
+                }
+//                print(area.id, tempLights)
+                plane.areas.append(PlaneArea(id: area.id, rect: area.rect, lights: tempLights, seats: tempSeats, shades: tempShades, monitors: tempMonitors, speakers: tempSpeakers, sources: tempSources))
+            }
+            
+        } catch {
+            print(error)
+        }
+        
+        
+        plane.areas.forEach { value in
+            print("🟨",value.id)
+            print(value.rect)
+            print("    💡 Lights::")
+            value.lights?.forEach { light in
+                print("    ",light)
+            }
+            print("    💺 Seats::")
+            value.seats?.forEach { seat in
+                print("    ",seat)
+            }
+            print("    🪟 Shades::")
+            value.shades?.forEach { shade in
+                print("    ",shade)
+            }
+            print("    📺 Monitors::")
+            value.monitors?.forEach { monitor in
+                print("    ",monitor)
+            }
+            print("    🔊 Speakers::")
+            value.speakers?.forEach { speaker in
+                print("    ",speaker)
+            }
+            print("    🔌 Sources::")
+            value.sources?.forEach { source in
+                print("    ",source)
+            }
+            
+        }
+        viewModel.updateValues(true, plane)
+        return plane
+    }
 }
 

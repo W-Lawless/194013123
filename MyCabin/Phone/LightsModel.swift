@@ -19,13 +19,7 @@ enum LightState {
 struct LightModel: Codable, Identifiable {
     var id: String
     var name: String
-    struct rect: Codable {
-        var x: Float
-        var y: Float
-        var w: Float
-        var h: Float
-        var r: Int
-    }
+    var rect: RenderCoordinates
     var side: String
     var sub: [String?]
     struct assoc: Codable {

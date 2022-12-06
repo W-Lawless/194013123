@@ -9,46 +9,90 @@ import SwiftUI
 
 struct PlaneSchematic: View {
     
-    let viewModel: SeatsViewModel
-    @State var selected: Bool = false
+    @ObservedObject var viewModel: PlaneViewModel
+    
+    @State var viewHeight: CGFloat = 0
+    @State var viewWidth: CGFloat = 0
+    @State var widthUnit: CGFloat = 0
+    @State var heightUnit: CGFloat = 0
     
     var body: some View {
-//        IceCream(heightRadiusRatio: 6)
         GeometryReader { geometry in
-            
             HStack(alignment: .center) {
                 Image("plane_left_side")
                     .resizable()
-                    .scaledToFit()
-                    .frame(height: geometry.size.height * 0.4)
-                Spacer()
-                VStack(alignment: .center, spacing: 64) {
-                    ForEach(viewModel.seatList ?? [SeatModel]()) { seat in
-                        SeatButton()
-                    }
-//                    HStack {
-//                        SeatButton()
-//                        SeatButton()
-//                        SeatButton()
-//                    }
-                }
-                Spacer()
+                    .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
+//                Spacer()
+                VStack(alignment: .center, spacing: 0) { // VSTQ A
+                    VStack(alignment: .center, spacing: 0) { //VSTQ B
+                        ForEach(viewModel.plane?.areas ?? [PlaneArea]()) { area in
+                            if let area = area { //Unwrap
+                                if let seats = area.seats { //Unwrap seats
+                                    if(!seats.isEmpty) { //Discard areas without seats
+                                        if(area.id != "Fwd Lavatory" && area.id != "Aft-Lav" && area.id != "CREW") { //Discard Unneeded Seats
+                                            AreaSubView(area: area, widthUnit: widthUnit, heightUnit: heightUnit)
+                                        }
+                                    }
+                                }
+                            }
+                        } //: FOREACH
+                    } //: VSTQ B
+                } //: VSTQ A
+//                Spacer()
                 Image("plane_right_side")
                     .resizable()
-                    .scaledToFit()
-                    .frame(height: geometry.size.height * 0.4)
+                    .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
             }
             .padding(.vertical, 17)
             .padding(.horizontal, 34)
-//            .border(Color.white)
             .frame(height: geometry.size.height)
         }
+        .passGeometry { geo in
+            self.viewHeight = geo.size.height
+            self.viewWidth = geo.size.width
+            viewModel.plane?.areas.forEach { area in
+                if(area.id == "AIRPLANE_AREA") {
+                    self.widthUnit = (geo.size.width * 0.5) / CGFloat(area.rect.w)
+                    self.heightUnit = (geo.size.height * 0.85) / CGFloat(area.rect.h)
+                }
+            }
+        }
+        
     }
+    
 }
 
 
+//MARK: - Sub Element Views
 
-//MARK: - Shapes
+struct AreaSubView: View {
+    
+    let area: PlaneArea
+    let widthUnit: CGFloat
+    let heightUnit: CGFloat
+    @State var subviewHeight: CGFloat?
+    @State var subviewWidth: CGFloat?
+    
+    var body: some View {
+        HStack(alignment: .top){
+            ForEach(area.seats ?? [SeatModel]()) { seat in
+                SeatButton()
+            }
+        }
+        .frame(width: (widthUnit * area.rect.w), height: (heightUnit * area.rect.h))
+//        .offset(x: (widthUnit * area.rect.x), y: (heightUnit * area.rect.y))
+        .border(.white, width: 1)
+        .onAppear {
+            subviewHeight = heightUnit * area.rect.h
+            print(heightUnit * area.rect.h)
+            subviewWidth = widthUnit * area.rect.w
+            print(widthUnit * area.rect.w)
+        }
+    }
+    
+    
+}
+
 
 struct SeatButton: View {
     
@@ -65,6 +109,45 @@ struct SeatButton: View {
     }
 }
 
+
+
+//MARK: - Preview
+
+struct PlaneSchematic_Previews: PreviewProvider {
+    static var previews: some View {
+        AppFactory.buildPlaneSchematic()
+    }
+}
+
+
+
+//MARK: - Util Extension
+///TODO: Move to Util Folder
+
+public struct GeometryPasser: View {
+    private let op: (GeometryProxy) -> Void
+    public init(_ op: @escaping (GeometryProxy) -> Void) {
+        self.op = op
+    }
+    
+    public var body: some View {
+        GeometryReader { proxy in
+            Color.clear.onAppear {
+                op(proxy)
+            }
+        }
+    }
+}
+
+extension View {
+    public func passGeometry(_ op: @escaping (GeometryProxy) -> Void) -> some View {
+        self.background(
+            GeometryPasser(op)
+        )
+    }
+}
+
+
 struct IceCream: Shape {
     let heightRadiusRatio: CGFloat
     func path(in rect: CGRect) -> Path {
@@ -80,14 +163,5 @@ struct IceCream: Shape {
         path.move(to: right)
         path.addLine(to: bottom)
         return path
-    }
-}
-
-
-//MARK: - Preview
-
-struct PlaneSchematic_Previews: PreviewProvider {
-    static var previews: some View {
-        AppFactory.buildPlaneSchematic()
     }
 }

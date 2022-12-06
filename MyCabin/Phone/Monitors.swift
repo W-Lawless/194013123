@@ -49,7 +49,6 @@ class MonitorsViewModel: ObservableObject {
             self.monitorsList = data
         }
     }
-    
 }
 
 

@@ -77,6 +77,7 @@ struct ShadeModel: Codable, Identifiable {
     var id: String
     var name: String
     var side: String
+    var rect: RenderCoordinates
     var sub: [String?]
     var assoc: [String?]
     struct capabilities: Codable {
@@ -85,3 +86,4 @@ struct ShadeModel: Codable, Identifiable {
         var shadeCommands: [String]
     }
 }
+

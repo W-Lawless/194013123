@@ -37,6 +37,7 @@ class MonitorsAPI {
         )
     }
     
+    
     func togglePower(_ monitor: MonitorModel, cmd: Bool) {
         
         let endpoint = Endpoint<EndpointFormats.Put<MonitorPowerState>, MonitorModel.state>(path: "/api/v1/monitors/\(monitor.id)/state")

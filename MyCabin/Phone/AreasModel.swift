@@ -63,3 +63,22 @@ struct GroupElement: Codable {
 
 
 
+
+
+struct Plane: Identifiable {
+    var areas: [PlaneArea]
+    var id: String
+}
+
+struct PlaneArea: Identifiable {
+    var id: String
+    var rect: RenderCoordinates
+    var lights: [LightModel]?
+    var seats: [SeatModel]?
+    var shades: [ShadeModel]?
+    var monitors: [MonitorModel]?
+    var speakers: [SpeakerModel]?
+    var sources: [SourceModel]?
+    var zoneTemp: [ClimateControllerModel]?
+    var zoneLights: [LightModel]?
+}

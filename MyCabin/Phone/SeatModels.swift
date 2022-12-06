@@ -11,13 +11,7 @@ import Foundation
 struct SeatModel: Codable, Identifiable {
     var id: String
     var name: String
-    struct rect: Codable {
-        var x: Float
-        var y: Float
-        var w: Float
-        var h: Float
-        var r: Float
-    }
+    var rect: RenderCoordinates
     var side: String
     var sub: [String?]
     var assoc: [Assoc?]
