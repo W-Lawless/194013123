@@ -7,6 +7,16 @@
 
 import Foundation
 
+class MapViewModel: ObservableObject {
+    @Published var planeMap: PlaneMap!
+    
+    func updateValues(_ alive: Bool, _ data: PlaneMap?) {
+        if let data = data {
+            self.planeMap = data
+        }
+    }
+}
+
 class PlaneViewModel: ObservableObject {
     @Published var plane: Plane!
     

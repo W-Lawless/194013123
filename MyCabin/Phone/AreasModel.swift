@@ -7,21 +7,6 @@
 
 import Foundation
 
-enum ElementTypes: String {
-    case LIGHT = "Light"
-    case SEAT = "Seat"
-    case SPEAKER = "Speaker"
-    case MONITOR = "Monitor"
-    case WINDOW = "Window"
-    case SOURCE = "Source"
-    case WATERH = "WaterHeater"
-    case WATERT = "Tank"
-    case WATERS = "WaterSystem"
-    case AREA = "Area"
-    case TEMPCTRL = "TemperatureController"
-    case BREAKER = "CircuitBreaker"
-}
-
 struct AreaModel: Codable {
     var id: String
     var name: String
@@ -75,6 +60,21 @@ struct PlaneArea: Identifiable {
     var monitors: [MonitorModel]?
     var speakers: [SpeakerModel]?
     var sources: [SourceModel]?
+    var tables: [TableModel]?
+    var divans: [DivanModel]?
     var zoneTemp: [ClimateControllerModel]?
     var zoneLights: [LightModel]?
+}
+
+struct PlaneMap {
+    var mapAreas: [PlaneArea]
+    var apiAreas: [AreaModel]
+    var allLights: [LightModel]
+    var allSeats: [SeatModel]
+    var allMonitors: [MonitorModel]
+    var allSpeakers: [SpeakerModel]
+    var allSources: [SourceModel]
+    var allShades: [ShadeModel]
+    var allTables: [TableModel]
+    var allDivans: [DivanModel]
 }

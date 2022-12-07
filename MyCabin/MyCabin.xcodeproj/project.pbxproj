@@ -39,7 +39,6 @@
 		2B1170632935491000A1CB8F /* SpeakersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1170622935491000A1CB8F /* SpeakersAPI.swift */; };
 		2B1170652935491D00A1CB8F /* SpeakerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1170642935491D00A1CB8F /* SpeakerModel.swift */; };
 		2B117068293551AD00A1CB8F /* FlightTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B117067293551AD00A1CB8F /* FlightTab.swift */; };
-		2B183F4C2913F8BD0087654E /* EntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B183F4B2913F8BD0087654E /* EntryPoint.swift */; };
 		2B183F4E2913F8BD0087654E /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B183F4D2913F8BD0087654E /* Loading.swift */; };
 		2B183F502913F8C00087654E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B183F4F2913F8C00087654E /* Assets.xcassets */; };
 		2B183F542913F8C00087654E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B183F532913F8C00087654E /* Preview Assets.xcassets */; };
@@ -85,6 +84,9 @@
 		2BD75A17292E7503004360A3 /* Lights.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BD75A16292E7503004360A3 /* Lights.json */; };
 		2BD75A19292E7ACE004360A3 /* LightControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD75A18292E7ACE004360A3 /* LightControl.swift */; };
 		2BD75A1B292EB256004360A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD75A1A292EB256004360A3 /* AppDelegate.swift */; };
+		2BE4D4F22940FE3E0026FC01 /* ElementsEnumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE4D4F12940FE3E0026FC01 /* ElementsEnumModel.swift */; };
+		2BE4D4F5294107680026FC01 /* TableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE4D4F4294107680026FC01 /* TableModel.swift */; };
+		2BE4D4F72941096F0026FC01 /* DivanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE4D4F62941096F0026FC01 /* DivanModel.swift */; };
 		2BE97D3B291C137B00149BA4 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D3A291C137B00149BA4 /* Home.swift */; };
 		2BE97D3D291C174000149BA4 /* FlightInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D3C291C174000149BA4 /* FlightInfo.swift */; };
 		2BE97D3F291C175F00149BA4 /* MediaTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D3E291C175F00149BA4 /* MediaTab.swift */; };
@@ -166,7 +168,6 @@
 		2B1170642935491D00A1CB8F /* SpeakerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerModel.swift; sourceTree = "<group>"; };
 		2B117067293551AD00A1CB8F /* FlightTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightTab.swift; sourceTree = "<group>"; };
 		2B183F482913F8BD0087654E /* MyCabin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCabin.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2B183F4B2913F8BD0087654E /* EntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPoint.swift; sourceTree = "<group>"; };
 		2B183F4D2913F8BD0087654E /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		2B183F4F2913F8C00087654E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B183F512913F8C00087654E /* MyCabin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyCabin.entitlements; sourceTree = "<group>"; };
@@ -216,6 +217,9 @@
 		2BD75A16292E7503004360A3 /* Lights.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Lights.json; sourceTree = "<group>"; };
 		2BD75A18292E7ACE004360A3 /* LightControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightControl.swift; sourceTree = "<group>"; };
 		2BD75A1A292EB256004360A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2BE4D4F12940FE3E0026FC01 /* ElementsEnumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsEnumModel.swift; sourceTree = "<group>"; };
+		2BE4D4F4294107680026FC01 /* TableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableModel.swift; sourceTree = "<group>"; };
+		2BE4D4F62941096F0026FC01 /* DivanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivanModel.swift; sourceTree = "<group>"; };
 		2BE97D3A291C137B00149BA4 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		2BE97D3C291C174000149BA4 /* FlightInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightInfo.swift; sourceTree = "<group>"; };
 		2BE97D3E291C175F00149BA4 /* MediaTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTab.swift; sourceTree = "<group>"; };
@@ -394,7 +398,6 @@
 				2B1170422933E3B400A1CB8F /* Navigation */,
 				2BE97D5C291C47EB00149BA4 /* UI */,
 				2B183F5A2913F9520087654E /* Networking */,
-				2B183F4B2913F8BD0087654E /* EntryPoint.swift */,
 				2BD75A1A292EB256004360A3 /* AppDelegate.swift */,
 				2B02B9C02936968600C6387A /* AppFactory.swift */,
 				2B183F512913F8C00087654E /* MyCabin.entitlements */,
@@ -550,7 +553,10 @@
 		2BA8F61829258F3E005621D3 /* CabinElements */ = {
 			isa = PBXGroup;
 			children = (
+				2BE4D4F4294107680026FC01 /* TableModel.swift */,
 				2BA8F61929258F78005621D3 /* ElementsAPI.swift */,
+				2BE4D4F12940FE3E0026FC01 /* ElementsEnumModel.swift */,
+				2BE4D4F62941096F0026FC01 /* DivanModel.swift */,
 			);
 			name = CabinElements;
 			sourceTree = "<group>";
@@ -864,9 +870,11 @@
 				2B02B9CC2936B65200C6387A /* CabinClimateAPI.swift in Sources */,
 				2BA8F60629252166005621D3 /* SeatModels.swift in Sources */,
 				2BA7D906293FC63F004E2DF6 /* PlaneViewModel.swift in Sources */,
+				2BE4D4F72941096F0026FC01 /* DivanModel.swift in Sources */,
 				2BE97D3D291C174000149BA4 /* FlightInfo.swift in Sources */,
 				2BB135FF292708750016444C /* ShadesAPI.swift in Sources */,
 				2BD75A1B292EB256004360A3 /* AppDelegate.swift in Sources */,
+				2BE4D4F22940FE3E0026FC01 /* ElementsEnumModel.swift in Sources */,
 				2B11705129352D7A00A1CB8F /* Monitors.swift in Sources */,
 				2BA8F61A29258F78005621D3 /* ElementsAPI.swift in Sources */,
 				2B1170462933E43800A1CB8F /* AppCoordinator.swift in Sources */,
@@ -881,7 +889,6 @@
 				2B41EF4A292C105E0062CA2B /* Cabin.swift in Sources */,
 				2B02B9DB2937FD4500C6387A /* PlaneSchematic.swift in Sources */,
 				2B11704E29352D0A00A1CB8F /* MonitorModel.swift in Sources */,
-				2B183F4C2913F8BD0087654E /* EntryPoint.swift in Sources */,
 				2B86580C2939414A00982BBB /* AccessAPI.swift in Sources */,
 				2B11705A29353C0E00A1CB8F /* SourceModel.swift in Sources */,
 				2B02B9C12936968600C6387A /* AppFactory.swift in Sources */,
@@ -891,6 +898,7 @@
 				2B02B9D12936BBDD00C6387A /* Presets.swift in Sources */,
 				2B02B9CE2936B66500C6387A /* CabinClimateModel.swift in Sources */,
 				2B10DD28292D656B00AB98F3 /* Endpoint.swift in Sources */,
+				2BE4D4F5294107680026FC01 /* TableModel.swift in Sources */,
 				2B117060293548A100A1CB8F /* Speakers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
