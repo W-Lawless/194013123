@@ -72,7 +72,7 @@ final class AppFactory {
     //Menus
     
     static func buildPlaneSchematic() -> PlaneSchematic {
-        let view = PlaneSchematic(viewModel: planeViewModel)
+        let view = PlaneSchematic(viewModel: planeViewModel, navigation: homeMenuCoordinator)
         return view
     }
     

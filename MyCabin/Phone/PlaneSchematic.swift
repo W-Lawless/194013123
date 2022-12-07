@@ -11,6 +11,7 @@ struct PlaneSchematic: View {
     
     @ObservedObject var viewModel: PlaneViewModel
     @StateObject var coordinatesModel = PlaneViewCoordinates()
+    var navigation: HomeMenuCoordinator
     @State var viewHeight: CGFloat = 0
     @State var viewWidth: CGFloat = 0
     @State var widthUnit: CGFloat = 0
@@ -29,7 +30,7 @@ struct PlaneSchematic: View {
                                 if let seats = area.seats { //Unwrap seats
                                     if(!seats.isEmpty) { //Discard areas without seats
                                         if(area.id != "Fwd Lavatory" && area.id != "Aft-Lav" && area.id != "CREW") { //Discard Unneeded Seats
-                                            AreaSubView(area: area, coordinatesModel: coordinatesModel)
+                                            AreaSubView(area: area, coordinatesModel: coordinatesModel, navigation: navigation)
                                         } //: CONDITIONAL
                                     } //: CONDITIONAL
                                 } //: UNWRAP
@@ -76,13 +77,14 @@ struct AreaSubView: View {
     
     let area: PlaneArea
     @ObservedObject var coordinatesModel: PlaneViewCoordinates
+    var navigation: HomeMenuCoordinator
     @State var subviewHeightUnit: CGFloat = 0
     @State var subviewWidthUnit: CGFloat = 0
     
     var body: some View {
         ZStack(alignment: .topLeading) {
             ForEach(area.seats ?? [SeatModel]()) { seat in
-                SeatButton(seat: seat)
+                SeatButton(seat: seat, navigation: navigation)
                     .rotationEffect(Angle(degrees: seat.rect.r))
                     .position(x:
                                 /// Position Center according to API coordinate data & add half the width/height to the coordinate to align image by top left corner
@@ -108,6 +110,7 @@ struct AreaSubView: View {
 struct SeatButton: View {
 
     var seat: SeatModel
+    var navigation: HomeMenuCoordinator
     @State var selected: Bool = false
     
     var body: some View {
@@ -115,9 +118,13 @@ struct SeatButton: View {
             .resizable()
             .scaledToFit()
             .frame(width:32, height: 32)
-            .onTapGesture {
+            .hapticFeedback(feedbackStyle: .light) {
                 selected.toggle()
-                print(seat)
+                UserDefaults.standard.set(seat.id, forKey: "CurrentSeat")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    navigation.popToRoot()
+                }
             }
     }
 }

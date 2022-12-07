@@ -51,21 +51,21 @@ class AreasAPI {
         let decoder = JSONDecoder()
         //for each area, initialize a planearea struct with the mapped lights, seats, etc
         do {
-            let (areaData,_) = try await Session.shared.data(for: areaEndpoint)
-            let (lightData,_) = try await Session.shared.data(for: lightsEndpoint)
-            let (seatsData,_) = try await Session.shared.data(for: seatsEndpoint)
-            let (monitorsData,_) = try await Session.shared.data(for: monitorsEndpoint)
-            let (speakersData,_) = try await Session.shared.data(for: speakersEndpoint)
-            let (sourcesData,_) = try await Session.shared.data(for: sourcesEndpoint)
-            let (shadesData,_) = try await Session.shared.data(for: shadesEndpoint)
+            async let (areaData,_) = Session.shared.data(for: areaEndpoint)
+            async let (lightData,_) = Session.shared.data(for: lightsEndpoint)
+            async let (seatsData,_) = Session.shared.data(for: seatsEndpoint)
+            async let (monitorsData,_) = Session.shared.data(for: monitorsEndpoint)
+            async let (speakersData,_) = Session.shared.data(for: speakersEndpoint)
+            async let (sourcesData,_) = Session.shared.data(for: sourcesEndpoint)
+            async let (shadesData,_) = Session.shared.data(for: shadesEndpoint)
             
-            let areas = try decoder.decode(NetworkResponse<AreaModel>.self, from: areaData)
-            let allLights = try decoder.decode(NetworkResponse<LightModel>.self, from: lightData)
-            let allSeats = try decoder.decode(NetworkResponse<SeatModel>.self, from: seatsData)
-            let allMonitors = try decoder.decode(NetworkResponse<MonitorModel>.self, from: monitorsData)
-            let allSpeakers = try decoder.decode(NetworkResponse<SpeakerModel>.self, from: speakersData)
-            let allSources = try decoder.decode(NetworkResponse<SourceModel>.self, from: sourcesData)
-            let allShades = try decoder.decode(NetworkResponse<ShadeModel>.self, from: shadesData)
+            let areas = try decoder.decode(NetworkResponse<AreaModel>.self, from: await areaData)
+            let allLights = try decoder.decode(NetworkResponse<LightModel>.self, from: await lightData)
+            let allSeats = try decoder.decode(NetworkResponse<SeatModel>.self, from: await seatsData)
+            let allMonitors = try decoder.decode(NetworkResponse<MonitorModel>.self, from: await monitorsData)
+            let allSpeakers = try decoder.decode(NetworkResponse<SpeakerModel>.self, from: await speakersData)
+            let allSources = try decoder.decode(NetworkResponse<SourceModel>.self, from: await sourcesData)
+            let allShades = try decoder.decode(NetworkResponse<ShadeModel>.self, from: await shadesData)
             
             areas.results.forEach { area in
 //                plane.areas[area.id] = area

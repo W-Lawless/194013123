@@ -61,10 +61,6 @@ struct GroupElement: Codable {
     }
 }
 
-
-
-
-
 struct Plane: Identifiable {
     var areas: [PlaneArea]
     var id: String
