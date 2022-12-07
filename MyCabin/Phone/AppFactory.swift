@@ -23,7 +23,7 @@ final class AppFactory {
     static let accessAPI = AccessAPI()
         ///Plane Map
     static let mapViewModel = MapViewModel()
-    static let elementsAPI = ElementsAPI(viewModel: mapViewModel)
+    
     static let planeViewModel = PlaneViewModel()
     static let areasAPI = AreasAPI(viewModel: planeViewModel)
     
@@ -67,6 +67,9 @@ final class AppFactory {
     //Auxillary Views
     static let loadingView = UIHostingController(rootView: Loading(api: cabinAPI))
     static let volumeMenu = UIHostingController(rootView: buildVolumeView())
+    
+    //Aggregate API
+    static let elementsAPI = ElementsAPI(mapViewModel: mapViewModel, lightsViewModel: lightsViewModel)
 
     
     //MARK: - View Builders
@@ -74,7 +77,7 @@ final class AppFactory {
     //Menus
     
     static func buildPlaneSchematic() -> PlaneSchematic {
-        let view = PlaneSchematic(viewModel: planeViewModel, navigation: homeMenuCoordinator)
+        let view = PlaneSchematic(viewModel: mapViewModel, navigation: homeMenuCoordinator)
         return view
     }
     
@@ -142,7 +145,7 @@ final class AppFactory {
         
         Task{
             await elementsAPI.fetch()
-            await areasAPI.mapPlane()
+//            await areasAPI.mapPlane()
 //            accessAPI.registerDevice()
         }
         

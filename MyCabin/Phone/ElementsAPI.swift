@@ -9,7 +9,8 @@ import Foundation
 
 struct ElementsAPI {
     
-    let viewModel: MapViewModel
+    let mapViewModel: MapViewModel
+    let lightsViewModel: LightsViewModel
     private let endpoint = Endpoint<EndpointFormats.Get, AreaModel>(path: "/api/v1/elements").makeRequest(with: ())!
     
     func fetch() async -> PlaneMap {
@@ -137,7 +138,10 @@ struct ElementsAPI {
                 
             } //: AREA LOOP
             
-            print(plane)
+            
+            mapViewModel.updateValues(true, plane)
+            lightsViewModel.updateValues(true, allLights)
+            
             return plane
             
         } catch {
