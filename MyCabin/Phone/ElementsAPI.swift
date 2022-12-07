@@ -138,7 +138,6 @@ struct ElementsAPI {
                 
             } //: AREA LOOP
             
-            
             mapViewModel.updateValues(true, plane)
             lightsViewModel.updateValues(true, allLights)
             

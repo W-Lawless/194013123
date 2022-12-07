@@ -87,33 +87,25 @@ struct AreaSubView: View {
             ForEach(area.seats ?? [SeatModel]()) { seat in
                 SeatButton(seat: seat, navigation: navigation)
                     .rotationEffect(Angle(degrees: seat.rect.r))
-                    .position(x:
-                                /// Position Center according to API coordinate data & add half the width/height to the coordinate to align image by top left corner
-                              ((subviewWidthUnit * seat.rect.x) + ((subviewWidthUnit * seat.rect.w)/2)),
-                              y: ((subviewHeightUnit * seat.rect.y) + ((subviewHeightUnit * seat.rect.h)/2))
-                    )
+                    .position(x: ((subviewWidthUnit * seat.rect.x) + ((subviewWidthUnit * seat.rect.w)/2)),
+                              y: ((subviewHeightUnit * seat.rect.y) + ((subviewHeightUnit * seat.rect.h)/2)) )
+                /// Position Center according to API coordinate data & add half the width/height to the coordinate to align image by top left corner
             } //: FOR EACH
             
             ForEach(area.tables ?? [TableModel]()) { table in
                 MiniTable(table: table)
                     .rotationEffect(Angle(degrees: table.rect.r))
-                    .position(x:
-                                /// Position Center according to API coordinate data & add half the width/height to the coordinate to align image by top left corner
-                              ((subviewWidthUnit * table.rect.x) + ((subviewWidthUnit * table.rect.w)/2)),
-                              y: ((subviewHeightUnit * table.rect.y) + ((subviewHeightUnit * table.rect.h)/2))
-                    )
+                    .position(x: ((subviewWidthUnit * table.rect.x) + ((subviewWidthUnit * table.rect.w)/2)),
+                              y: ((subviewHeightUnit * table.rect.y) + ((subviewHeightUnit * table.rect.h)/2)) )
             } //: FOR EACH
             
             ForEach(area.divans ?? [DivanModel]()) { divan in
                 DivanSeat(divan: divan, navigation: navigation)
                     .rotationEffect(Angle(degrees: divan.rect.r))
-                    .position(x:
-                                /// Position Center according to API coordinate data & add half the width/height to the coordinate to align image by top left corner
-                              ((subviewWidthUnit * divan.rect.x) + ((subviewWidthUnit * divan.rect.w)/2)),
-                              y: ((subviewHeightUnit * divan.rect.y) + ((subviewHeightUnit * divan.rect.h)/2))
-                    )
+                    .position(x: ((subviewWidthUnit * divan.rect.x) + ((subviewWidthUnit * divan.rect.w)/2)),
+                              y: ((subviewHeightUnit * divan.rect.y) + ((subviewHeightUnit * divan.rect.h)/2)) )
             } //: FOR EACH
-            
+
         }
         .frame(width: (subviewWidthUnit * area.rect.w), height: (subviewHeightUnit * area.rect.h))
         .onAppear {
@@ -143,9 +135,10 @@ struct SeatButton: View {
                 selected.toggle()
                 UserDefaults.standard.set(seat.id, forKey: "CurrentSeat")
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                    navigation.popToRoot()
-                }
+                
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+//                    navigation.popToRoot()
+//                }
             }
     }
 }
@@ -158,10 +151,10 @@ struct DivanSeat: View {
     
     var body: some View {
         HStack(alignment: .bottom, spacing: 0) {
-            Image(selected ? "divan_selectable_left" : "divan_selected_left")
+            Image(selected ? "divan_selected_left" : "divan_selectable_left" )
                 .resizable()
                 .scaledToFit()
-                .frame(maxWidth: 35)
+                .frame(width: 41)
                 .hapticFeedback(feedbackStyle: .light) {
                     selected.toggle()
                     UserDefaults.standard.set(divan.id, forKey: "CurrentSeat")
@@ -170,10 +163,10 @@ struct DivanSeat: View {
                         navigation.popToRoot()
                     }
                 }
-            Image(selected ? "divan_selectable_middle" : "divan_selected_middle")
+            Image(selected ? "divan_selected_middle" : "divan_selectable_middle" )
                 .resizable()
                 .scaledToFit()
-                .frame(width: 26)
+                .frame(width: 30)
                 .hapticFeedback(feedbackStyle: .light) {
                     selected.toggle()
                     UserDefaults.standard.set(divan.id, forKey: "CurrentSeat")
@@ -182,10 +175,10 @@ struct DivanSeat: View {
                         navigation.popToRoot()
                     }
                 }
-            Image(selected ? "divan_selectable_right" : "divan_selected_right")
+            Image(selected ? "divan_selected_right" : "divan_selectable_right")
                 .resizable()
                 .scaledToFit()
-                .frame(maxWidth: 36)
+                .frame(width: 42)
                 .hapticFeedback(feedbackStyle: .light) {
                     selected.toggle()
                     UserDefaults.standard.set(divan.id, forKey: "CurrentSeat")
@@ -212,7 +205,7 @@ struct MiniTable: View {
             Image("table_medium_unavailable")
                 .resizable()
                 .scaledToFit()
-                .frame(maxWidth:62)
+                .frame(maxWidth:58)
 //                .offset(x: 2)
         } else {
             Image("table_mini_unavailable")

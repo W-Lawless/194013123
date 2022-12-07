@@ -16,7 +16,7 @@ struct Lights: View {
 //    @State var location: CGPoint = CGPoint(x: 0, y: 0)
         
     var body: some View {
-        
+//        AppFactory.buildPlaneSchematic()
         TabView{
             List(viewModel.lightList ?? [LightModel]()) { light in
 
