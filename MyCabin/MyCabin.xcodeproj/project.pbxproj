@@ -658,9 +658,9 @@
 				2B183F4D2913F8BD0087654E /* Loading.swift */,
 				2BE97D3A291C137B00149BA4 /* Home.swift */,
 				2B02B9DA2937FD4500C6387A /* PlaneSchematic.swift */,
+				2BA7D905293FC63F004E2DF6 /* PlaneViewModel.swift */,
 				2B1170662935516B00A1CB8F /* Flight */,
 				2B11704F29352D6300A1CB8F /* Media */,
-				2BA7D905293FC63F004E2DF6 /* PlaneViewModel.swift */,
 			);
 			name = MainViews;
 			sourceTree = "<group>";

@@ -12,5 +12,5 @@ struct RenderCoordinates: Codable {
     var y: CGFloat
     var w: CGFloat
     var h: CGFloat
-    var r: Int
+    var r: Double
 }

@@ -13,11 +13,12 @@ struct SeatSelection: View {
     var api: SeatsAPI
     
     var body: some View {
-        List(viewModel.seatList ?? [SeatModel]()) { seat in
-            Button(seat.id) {
-                api.call(seat: seat)
-            }
-        } //: LIST
+        AppFactory.buildPlaneSchematic()
+//        List(viewModel.seatList ?? [SeatModel]()) { seat in
+//            Button(seat.id) {
+//                api.call(seat: seat)
+//            }
+//        } //: LIST
     }
 }
 

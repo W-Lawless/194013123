@@ -16,3 +16,13 @@ class PlaneViewModel: ObservableObject {
         }
     }
 }
+
+
+class PlaneViewCoordinates: ObservableObject {
+    
+    @Published var containerViewHeight: CGFloat = 0
+    @Published var containerViewWidth: CGFloat = 0
+    @Published var containerWidthUnit: CGFloat = 0
+    @Published var containerHeightUnit: CGFloat = 0
+    
+}

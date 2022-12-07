@@ -143,68 +143,67 @@ final class AppFactory {
         
 //        accessAPI.registerDevice()
         
-//        do {
-//            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: AccessModel.self)
-//            accessViewModel.updateValues(true, readout)
-//        } catch {
-//            accessAPI.fetch()
-//        }
+        do {
+            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: AccessModel.self)
+        } catch {
+            accessAPI.fetch()
+        }
         
         
-//        do {
-//            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: LightModel.self)
-//            lightsViewModel.updateValues(true, readout)
-//        } catch {
-//            print("Light cache empty")
-//            lightsAPI.fetch()
-//        }
-//
-//        do {
-//            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: ShadeModel.self)
-//            shadesViewModel.updateValues(true, readout)
-//        } catch {
-//            print("Shades cache empty")
-//            shadesAPI.fetch()
-//        }
-//
-//        do {
-//            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: SeatModel.self)
-//            seatsViewModel.updateValues(true, readout)
-//        } catch {
-//            print("Seats cache empty")
-//            seatsAPI.fetch()
-//        }
-//
-//        ///Non Caching
-//        cabinClimateAPI.fetch()
-//
-//        do {
-//            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: MonitorModel.self)
-//            monitorsViewModel.updateValues(true, readout)
-//        } catch {
-//            print("Monitors cache empty")
-//            monitorsAPI.fetch()
-//        }
-//
-//        do {
-//            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: SpeakerModel.self)
-//            speakersViewModel.updateValues(true, readout)
-//        } catch {
-//            print("Speakers cache empty")
-//            speakersAPI.fetch()
-//        }
-//
-//        do {
-//            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: SourceModel.self)
-//            sourcesViewModel.updateValues(true, readout)
-//        } catch {
-//            print("Sources cache empty")
-//            sourcesAPI.fetch()
-//        }
-//
-//        ///Non Caching
-//        flightAPI.fetch()
-//        weatherAPI.fetch()
+        do {
+            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: LightModel.self)
+            lightsViewModel.updateValues(true, readout)
+        } catch {
+            print("Light cache empty")
+            lightsAPI.fetch()
+        }
+
+        do {
+            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: ShadeModel.self)
+            shadesViewModel.updateValues(true, readout)
+        } catch {
+            print("Shades cache empty")
+            shadesAPI.fetch()
+        }
+
+        do {
+            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: SeatModel.self)
+            seatsViewModel.updateValues(true, readout)
+        } catch {
+            print("Seats cache empty")
+            seatsAPI.fetch()
+        }
+
+        ///Non Caching
+        cabinClimateAPI.fetch()
+
+        do {
+            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: MonitorModel.self)
+            monitorsViewModel.updateValues(true, readout)
+        } catch {
+            print("Monitors cache empty")
+            monitorsAPI.fetch()
+        }
+
+        do {
+            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: SpeakerModel.self)
+            speakersViewModel.updateValues(true, readout)
+        } catch {
+            print("Speakers cache empty")
+            speakersAPI.fetch()
+        }
+
+        do {
+            let readout = try FileCacheUtil.retrieveCachedFile(dataModel: SourceModel.self)
+            sourcesViewModel.updateValues(true, readout)
+        } catch {
+            print("Sources cache empty")
+            sourcesAPI.fetch()
+        }
+
+        ///Non Caching
+        flightAPI.fetch()
+        weatherAPI.fetch()
     }
     
     
