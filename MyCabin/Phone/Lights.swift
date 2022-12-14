@@ -9,51 +9,33 @@ import SwiftUI
 
 struct Lights: View {
     
-    @StateObject var viewModel: LightsViewModel
-    var api: LightsAPI
-    var navigation: HomeMenuCoordinator
-    @State var luminosity: Int = 0
-//    @State var location: CGPoint = CGPoint(x: 0, y: 0)
-        
+    @StateObject var viewModel = LightsViewModel()
+    
     var body: some View {
-//        AppFactory.buildPlaneSchematic()
-        TabView{
-            List(viewModel.lightList ?? [LightModel]()) { light in
-
-                Button("ON \(light.id)") {
-                    api.toggleLight(light, cmd: .ON)
+        VStack {
+            AppFactory.buildPlaneSchematic(topLevelViewModel: viewModel, options: PlaneSchematicDisplayMode.showLights)
+            if(viewModel.showSubViews) {
+                if let view = viewModel.bottomPanel {
+                    view
                 }
-
-                Button("OFF \(light.id)") {
-                    api.toggleLight(light, cmd: .OFF)
-                }
-
-                Stepper("Brightness", value: $luminosity)
-
-            }//: LIST
-        }  //: TABVIEW
-        .onAppear{
-             
+            }
         }
-        .tabViewStyle(.page)
-        .gesture(dragGesture)
     }
     
     //MARK: - Gestures
     
-    var dragGesture: some Gesture {
-        DragGesture()
-            .onEnded { value in
-                let begins = value.startLocation.x
-                let ends = value.location.x
-                
-                if( (ends - begins) > 100 ) {
-                    print("navigate back")
-                    navigation.popView()
-                }
-            }
-    }
-    
+//    var dragGesture: some Gesture {
+//        DragGesture()
+//            .onEnded { value in
+//                let begins = value.startLocation.x
+//                let ends = value.location.x
+//
+//                if( (ends - begins) > 100 ) {
+//                    print("navigate back")
+//                    navigation.popView()
+//                }
+//            }
+//    }
 }
 
 
@@ -65,6 +47,8 @@ class LightsViewModel: ObservableObject {
     
     @Published var loading: Bool = true
     @Published var lightList: [LightModel]?
+    @Published var bottomPanel: LightsBottomPanel?
+    @Published var showSubViews: Bool = false
     
     func updateValues(_ alive: Bool, _ data: [LightModel]?) {
         self.loading = !alive
@@ -79,7 +63,7 @@ class LightsViewModel: ObservableObject {
 
 struct Lights_Previews: PreviewProvider {
     static var previews: some View {
-        AppFactory.buildLightsView()
+        AppFactory.buildLightsMenu()
     }
 }
 

@@ -13,7 +13,8 @@ struct SeatSelection: View {
     var api: SeatsAPI
     
     var body: some View {
-        AppFactory.buildPlaneSchematic()
+        Text("Sahdes")
+//        AppFactory.buildPlaneSchematic(options: PlaneSchematicDisplayMode.onlySeats)
 //        List(viewModel.seatList ?? [SeatModel]()) { seat in
 //            Button(seat.id) {
 //                api.call(seat: seat)

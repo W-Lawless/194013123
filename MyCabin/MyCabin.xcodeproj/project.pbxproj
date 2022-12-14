@@ -56,6 +56,7 @@
 		2B939C8D293E91010014AD13 /* AreasAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B939C8C293E91010014AD13 /* AreasAPI.swift */; };
 		2B939C8F293E910F0014AD13 /* AreasModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B939C8E293E910F0014AD13 /* AreasModel.swift */; };
 		2B939C91293E9DC80014AD13 /* RenderCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B939C90293E9DC80014AD13 /* RenderCoordinates.swift */; };
+		2B9ABC6D294A1CB600670EE0 /* LightsBottomPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9ABC6C294A1CB600670EE0 /* LightsBottomPanel.swift */; };
 		2BA7B4CB291D4A3A00942CB5 /* SeatsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4CA291D4A3A00942CB5 /* SeatsAPI.swift */; };
 		2BA7B4CD291D504900942CB5 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4CC291D504900942CB5 /* Session.swift */; };
 		2BA7B4CF291D551A00942CB5 /* SeatSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4CE291D551A00942CB5 /* SeatSelection.swift */; };
@@ -187,6 +188,7 @@
 		2B939C8C293E91010014AD13 /* AreasAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasAPI.swift; sourceTree = "<group>"; };
 		2B939C8E293E910F0014AD13 /* AreasModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasModel.swift; sourceTree = "<group>"; };
 		2B939C90293E9DC80014AD13 /* RenderCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderCoordinates.swift; sourceTree = "<group>"; };
+		2B9ABC6C294A1CB600670EE0 /* LightsBottomPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightsBottomPanel.swift; sourceTree = "<group>"; };
 		2BA7B4CA291D4A3A00942CB5 /* SeatsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatsAPI.swift; sourceTree = "<group>"; };
 		2BA7B4CC291D504900942CB5 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		2BA7B4CE291D551A00942CB5 /* SeatSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatSelection.swift; sourceTree = "<group>"; };
@@ -475,7 +477,7 @@
 				2B11704729352ADE00A1CB8F /* Media */,
 				2B8F713A292E564400073637 /* Lights */,
 				2BB135FD292708650016444C /* Shades */,
-				2BA8F61829258F3E005621D3 /* CabinElements */,
+				2BA8F61829258F3E005621D3 /* Elements */,
 				2BA8F60429252150005621D3 /* Seats */,
 				2BA8F60129251BFB005621D3 /* FlightInfo */,
 				2BB135E82926D67F0016444C /* Weather */,
@@ -530,6 +532,7 @@
 			children = (
 				2B8F713D292E5C5800073637 /* Lights.swift */,
 				2BD75A18292E7ACE004360A3 /* LightControl.swift */,
+				2B9ABC6C294A1CB600670EE0 /* LightsBottomPanel.swift */,
 			);
 			name = Lights;
 			sourceTree = "<group>";
@@ -550,15 +553,15 @@
 			name = SeatSelection;
 			sourceTree = "<group>";
 		};
-		2BA8F61829258F3E005621D3 /* CabinElements */ = {
+		2BA8F61829258F3E005621D3 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
-				2BE4D4F4294107680026FC01 /* TableModel.swift */,
 				2BA8F61929258F78005621D3 /* ElementsAPI.swift */,
 				2BE4D4F12940FE3E0026FC01 /* ElementsEnumModel.swift */,
 				2BE4D4F62941096F0026FC01 /* DivanModel.swift */,
+				2BE4D4F4294107680026FC01 /* TableModel.swift */,
 			);
-			name = CabinElements;
+			name = Elements;
 			sourceTree = "<group>";
 		};
 		2BB135D72926D1290016444C /* Tests */ = {
@@ -900,6 +903,7 @@
 				2B10DD28292D656B00AB98F3 /* Endpoint.swift in Sources */,
 				2BE4D4F5294107680026FC01 /* TableModel.swift in Sources */,
 				2B117060293548A100A1CB8F /* Speakers.swift in Sources */,
+				2B9ABC6D294A1CB600670EE0 /* LightsBottomPanel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,6 +22,7 @@ struct SeatModel: Codable, Identifiable {
         var call: Bool
         var identifier: String
     }
+    var lights: [LightModel]?
 }
 
 struct StateModel: Codable {

@@ -13,30 +13,32 @@ struct Shades: View {
     var api: ShadesAPI
     
     var body: some View {
-        TabView{
-            
-            List(viewModel.shadeList ?? [ShadeModel]()) { shade in
-                Button("OPEN \(shade.id.lowercased())") {
-                    api.commandShade(shade: shade, cmd: .OPEN)
-                }
-            }//: LIST
-            
-            List(viewModel.shadeList ?? [ShadeModel]()) { shade in
-                Button("SHEER \(shade.id.lowercased())") {
-                    api.commandShade(shade: shade, cmd: .SHEER)
-                }
-            }//: LIST
-            
-            List(viewModel.shadeList ?? [ShadeModel]()) { shade in
-                Button("CLOSE \(shade.id.lowercased())") {
-                    api.commandShade(shade: shade, cmd: .CLOSE)
-                }
-            }//: LIST
-        }
-        .tabViewStyle(.page)
-        .onAppear {
-            api.fetch()
-        }
+        Text("something")
+//        AppFactory.buildPlaneSchematic(options: PlaneSchematicDisplayMode.showShades)
+        
+//        TabView {
+//            List(viewModel.shadeList ?? [ShadeModel]()) { shade in
+//                Button("OPEN \(shade.id.lowercased())") {
+//                    api.commandShade(shade: shade, cmd: .OPEN)
+//                }
+//            }//: LIST
+//
+//            List(viewModel.shadeList ?? [ShadeModel]()) { shade in
+//                Button("SHEER \(shade.id.lowercased())") {
+//                    api.commandShade(shade: shade, cmd: .SHEER)
+//                }
+//            }//: LIST
+//
+//            List(viewModel.shadeList ?? [ShadeModel]()) { shade in
+//                Button("CLOSE \(shade.id.lowercased())") {
+//                    api.commandShade(shade: shade, cmd: .CLOSE)
+//                }
+//            }//: LIST
+//        }
+//        .tabViewStyle(.page)
+//        .onAppear {
+//            api.fetch()
+//        }
     }
 }
 

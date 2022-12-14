@@ -9,8 +9,7 @@ import Foundation
 
 struct ElementsAPI {
     
-    let mapViewModel: MapViewModel
-    let lightsViewModel: LightsViewModel
+    let planeViewModel: PlaneViewModel
     private let endpoint = Endpoint<EndpointFormats.Get, AreaModel>(path: "/api/v1/elements").makeRequest(with: ())!
     
     func fetch() async -> PlaneMap {
@@ -55,6 +54,35 @@ struct ElementsAPI {
                     ()
                 }
             } //: FOR LOOP
+            
+            allSeats.forEach { seat in
+//                print(seat.id, "\n")
+                var lightsINeed = [LightModel]()
+                seat.assoc.forEach { item in
+                    guard let item = item else { return }
+
+                    if (item.decoratorType == "Light") {
+                        
+                        let target = allLights.filter { light in
+                            return item.id == light.id
+                        }
+
+                        lightsINeed.append(target[0])
+
+                    }
+                }
+                
+//                print("lights>>", lightsINeed)
+                let seatLights = AppFactory.buildLightsPanel(lights: lightsINeed)
+                AppFactory.lightSubViews[seat.id] = seatLights
+            } //: FOR LOOP
+            
+            AppFactory.lightsViewModel.updateValues(true, allLights)
+            AppFactory.seatsViewModel.updateValues(true, allSeats)
+            AppFactory.monitorsViewModel.updateValues(true, allMonitors)
+            AppFactory.speakersViewModel.updateValues(true, allSpeakers)
+            AppFactory.sourcesViewModel.updateValues(true, allSources)
+            AppFactory.shadesViewModel.updateValues(true, allShades)
             
             var plane = PlaneMap(mapAreas: [PlaneArea](), apiAreas: allAreas, allLights: allLights, allSeats: allSeats, allMonitors: allMonitors, allSpeakers: allSpeakers, allSources: allSources, allShades: allShades, allTables: allTables, allDivans: allDivans)
             
@@ -134,12 +162,12 @@ struct ElementsAPI {
                     }
                 } //: SUB ELEMENT LOOP
                 
+                
                 plane.mapAreas.append(PlaneArea(id: area.id, rect: area.rect, lights: areaLights, seats: areaSeats, shades: areaShades, monitors: areaMonitors, speakers: areaSpeakers, sources: areaSources, tables: areaTables, divans: areaDivans))
                 
             } //: AREA LOOP
             
-            mapViewModel.updateValues(true, plane)
-            lightsViewModel.updateValues(true, allLights)
+            planeViewModel.updateValues(true, plane)
             
             return plane
             

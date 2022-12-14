@@ -20,15 +20,15 @@ struct Home: View {
             HStack(alignment: .center, spacing: 72) {
                 
                 VStack(alignment: .center, spacing: 12) {
-                    Image(systemName: "lightbulb")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 56, height: 56)
-                        .onTapGesture {
-                            navigation.goTo(.lights)
-                        }
-                    Text("Lights")
+                        Image(systemName: "lightbulb")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 56, height: 56)
+                        Text("Lights")
                 } //: VSTQ
+                .hapticFeedback(feedbackStyle: .light) {
+                    navigation.goTo(.lights)
+                }
                 
                 VStack(alignment: .center, spacing: 12) {
                     Image(systemName: "uiwindow.split.2x1")

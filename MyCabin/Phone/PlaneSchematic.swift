@@ -9,9 +9,13 @@ import SwiftUI
 
 struct PlaneSchematic: View {
     
-    @ObservedObject var viewModel: MapViewModel
     @StateObject var coordinatesModel = PlaneViewCoordinates()
+
+    @ObservedObject var topLevelViewModel: LightsViewModel
+    @ObservedObject var viewModel: PlaneViewModel
     var navigation: HomeMenuCoordinator
+    let options: PlaneSchematicDisplayMode
+    
     @State var viewHeight: CGFloat = 0
     @State var viewWidth: CGFloat = 0
     @State var widthUnit: CGFloat = 0
@@ -19,34 +23,36 @@ struct PlaneSchematic: View {
     
     var body: some View {
         GeometryReader { geometry in
-            HStack(alignment: .center) { // HSTQ
-                Image("plane_left_side")
-                    .resizable()
-                    .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
-                VStack(alignment: .center, spacing: 0) { // VSTQ A
-                    VStack(alignment: .center, spacing: 0) { //VSTQ B
-                        ForEach(viewModel.planeMap?.mapAreas ?? [PlaneArea]()) { area in
-                            if let area = area { //Unwrap
-                                if let seats = area.seats { //Unwrap seats
-                                    if(!seats.isEmpty) { //Discard areas without seats
-                                        if(area.id != "Fwd Lavatory" && area.id != "Aft-Lav" && area.id != "CREW") { //Discard Unneeded Seats
-                                            AreaSubView(area: area, coordinatesModel: coordinatesModel, navigation: navigation)
+            VStack {
+                HStack(alignment: .center) { // HSTQ
+                    Image("plane_left_side")
+                        .resizable()
+                        .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
+                    VStack(alignment: .center, spacing: 0) { // VSTQ A
+                        VStack(alignment: .center, spacing: 0) { //VSTQ B
+                            ForEach(viewModel.plane?.mapAreas ?? [PlaneArea]()) { area in
+                                if let area = area { //Unwrap area
+                                    if let seats = area.seats { //Unwrap seats array
+                                        if(!seats.isEmpty) { //Discard areas without seats
+                                            if(area.id != "Fwd Lavatory" && area.id != "Aft-Lav" && area.id != "CREW") { //Discard Unneeded Seats
+                                                AreaSubView(topLevelViewModel: topLevelViewModel, vm: viewModel, coordinatesModel: coordinatesModel, area: area, options: options, navigation: navigation)
+                                            } //: CONDITIONAL
                                         } //: CONDITIONAL
-                                    } //: CONDITIONAL
+                                    } //: UNWRAP
                                 } //: UNWRAP
-                            } //: UNWRAP
-                        } //: FOREACH
-                    } //: VSTQ B
-                } //: VSTQ A
-                Image("plane_right_side")
-                    .resizable()
-                    .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
-            } //: HSTQ
-            .padding(.vertical, 18)
-            .padding(.horizontal, 34)
-            .frame(height: geometry.size.height)
-            .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-        }
+                            } //: FOREACH
+                        } //: VSTQ B
+                    } //: VSTQ A
+                    Image("plane_right_side")
+                        .resizable()
+                        .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
+                } //: HSTQ
+                .padding(.vertical, 18)
+                .padding(.horizontal, 34)
+                .frame(height: geometry.size.height)
+                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+            } //: VSTQ
+        } //: GEO
         .passGeometry { geo in
             self.viewHeight = geo.size.height
             coordinatesModel.containerViewHeight = self.viewHeight
@@ -54,7 +60,7 @@ struct PlaneSchematic: View {
             self.viewWidth = geo.size.width
             coordinatesModel.containerViewWidth = self.viewWidth
             
-            viewModel.planeMap?.mapAreas.forEach { area in
+            viewModel.plane?.mapAreas.forEach { area in
                 if(area.id == "AIRPLANE_AREA") {
                     self.widthUnit = (geo.size.width * 0.39) / area.rect.w
                     coordinatesModel.containerWidthUnit = self.widthUnit
@@ -64,9 +70,9 @@ struct PlaneSchematic: View {
                     print("parent height", self.heightUnit * area.rect.h)
                 }
             }
-        }
+        } //: PASS GEO UTIL
         
-    }
+    } //: BODY
     
 }
 
@@ -75,20 +81,36 @@ struct PlaneSchematic: View {
 
 struct AreaSubView: View {
     
-    let area: PlaneArea
+    @ObservedObject var topLevelViewModel: LightsViewModel
+    @ObservedObject var vm: PlaneViewModel
     @ObservedObject var coordinatesModel: PlaneViewCoordinates
-    var navigation: HomeMenuCoordinator
+    let area: PlaneArea
+    let options: PlaneSchematicDisplayMode
+    let navigation: HomeMenuCoordinator
+
     @State var subviewHeightUnit: CGFloat = 0
     @State var subviewWidthUnit: CGFloat = 0
+
+    let selectedSeat: String = UserDefaults.standard.string(forKey: "CurrentSeat") ?? ""
     
     var body: some View {
         ZStack(alignment: .topLeading) {
             
             ForEach(area.seats ?? [SeatModel]()) { seat in
-                SeatButton(seat: seat, navigation: navigation)
-                    .rotationEffect(Angle(degrees: seat.rect.r))
-                    .position(x: ((subviewWidthUnit * seat.rect.x) + ((subviewWidthUnit * seat.rect.w)/2)),
-                              y: ((subviewHeightUnit * seat.rect.y) + ((subviewHeightUnit * seat.rect.h)/2)) )
+                
+                if(seat.id == selectedSeat) {
+                    SeatButton(topLevelViewModel: topLevelViewModel, vm: vm, seat: seat, navigation: navigation, options: options, selected: true)
+                        .rotationEffect(Angle(degrees: seat.rect.r))
+                        .position(x: ((subviewWidthUnit * seat.rect.x) + ((subviewWidthUnit * seat.rect.w)/2)),
+                                  y: ((subviewHeightUnit * seat.rect.y) + ((subviewHeightUnit * seat.rect.h)/2)) )
+                } else {
+                    SeatButton(topLevelViewModel: topLevelViewModel, vm: vm, seat: seat, navigation: navigation, options: options, selected: false)
+                        .rotationEffect(Angle(degrees: seat.rect.r))
+                        .position(x: ((subviewWidthUnit * seat.rect.x) + ((subviewWidthUnit * seat.rect.w)/2)),
+                                  y: ((subviewHeightUnit * seat.rect.y) + ((subviewHeightUnit * seat.rect.h)/2)) )
+                }
+                
+                
                 /// Position Center according to API coordinate data & add half the width/height to the coordinate to align image by top left corner
             } //: FOR EACH
             
@@ -122,8 +144,12 @@ struct AreaSubView: View {
 
 struct SeatButton: View {
 
+    @ObservedObject var topLevelViewModel: LightsViewModel
+    @ObservedObject var vm: PlaneViewModel
     var seat: SeatModel
     var navigation: HomeMenuCoordinator
+    let options: PlaneSchematicDisplayMode
+    
     @State var selected: Bool = false
     
     var body: some View {
@@ -132,22 +158,17 @@ struct SeatButton: View {
             .scaledToFit()
             .frame(width:32, height: 32)
             .hapticFeedback(feedbackStyle: .light) {
-                selected.toggle()
-                UserDefaults.standard.set(seat.id, forKey: "CurrentSeat")
-                
-                
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-//                    navigation.popToRoot()
-//                }
+                options.seatIconCallback(topLevelViewModel: topLevelViewModel, seatID: seat.id, vm: vm, nav: navigation)
             }
     }
 }
 
 struct DivanSeat: View {
     
+    @State var selected: Bool = false
+
     var divan: DivanModel
     var navigation: HomeMenuCoordinator
-    @State var selected: Bool = false
     
     var body: some View {
         HStack(alignment: .bottom, spacing: 0) {
@@ -217,17 +238,6 @@ struct MiniTable: View {
 }
 
 
-
-//MARK: - Preview
-
-struct PlaneSchematic_Previews: PreviewProvider {
-    static var previews: some View {
-        AppFactory.buildPlaneSchematic()
-    }
-}
-
-
-
 //MARK: - Util Extension
 ///TODO: Move to Util Folder
 
@@ -254,21 +264,11 @@ extension View {
     }
 }
 
+//MARK: - Preview
 
-struct IceCream: Shape {
-    let heightRadiusRatio: CGFloat
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        let radius = rect.height / (1 + heightRadiusRatio)
-        let bottom = CGPoint(x: rect.width / 2, y: rect.height)
-        let left = CGPoint(x: bottom.x - radius, y: radius)
-        let right = CGPoint(x: bottom.x + radius, y: radius)
-        path.move(to: bottom)
-        path.addLine(to: left)
-        path.addLine(to: right)
-        path.addArc(center: CGPoint(x: bottom.x, y: radius), radius: radius, startAngle: .degrees(180), endAngle: .degrees(360), clockwise: false)
-        path.move(to: right)
-        path.addLine(to: bottom)
-        return path
-    }
-}
+//struct PlaneSchematic_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AppFactory.buildPlaneSchematic(options: PlaneSchematicDisplayMode.onlySeats)
+//    }
+//}
+

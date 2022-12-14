@@ -66,6 +66,7 @@ class RootTabCoordinator {
 class HomeMenuCoordinator: NSObject, Coordinator {
     
     var navigationController: UINavigationController
+    var subviews: [UIViewController]!
     
     override init() {
         self.navigationController = UINavigationController()
@@ -76,12 +77,14 @@ class HomeMenuCoordinator: NSObject, Coordinator {
     }
 
     func start(subviews: [UIViewController]) {
+        self.subviews = subviews
         navigationController.setViewControllers(subviews, animated: false)
     }
     
     func goTo(_ route: MenuRouter) {
         let destination = route.view()
-        navigationController.pushViewController(destination, animated: true)
+        destination.modalTransitionStyle = .crossDissolve
+        navigationController.present(destination, animated: true)
     }
     
     func popView() {
@@ -95,11 +98,19 @@ class HomeMenuCoordinator: NSObject, Coordinator {
     open func dismiss() {
         navigationController.dismiss(animated: true) { [weak self] in
             /// because there is a leak in UIHostingControllers that prevents from deallocation
-            self?.navigationController.viewControllers = []
+            self?.navigationController.viewControllers = self?.subviews ?? [UIViewController()]
         }
     }
-    
 }
+
+//        switch(route.transition){
+//        case .presentFullscreen(let presentation):
+//            ()
+//        case .presentModally(let presentation):
+//            destination.modalPresentationStyle = presentation
+//        case .push(let presentation):
+//            destination.modalPresentationStyle = presentation
+//        }
 
 extension HomeMenuCoordinator: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {

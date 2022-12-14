@@ -9,51 +9,59 @@ import SwiftUI
 
 struct LightControl: View {
     
-//    let light: LightModel
-//    var api: LightsAPI
+    let light: LightModel
 
-//    @State var sliderValue: Float = 0
+    @State var luminosity: Int = 0
     @State var circleOffset: Double = 0
     
     var body: some View {
         VStack{
             
-            ZStack {
-                Rectangle()
-                    .frame(width:300, height: 1)
-                
-                Rectangle()
-                    .frame(width:1, height: 24)
-                    .offset(x: -300/2, y: 0)
-                
-                Rectangle()
-                    .frame(width:1, height: 24)
-                    .offset(x: -300/4, y: 0)
-                
-                Rectangle()
-                    .frame(width:1, height: 24)
-                    .offset(x: 300/2, y: 0)
-                
-                Rectangle()
-                    .frame(width:1, height: 24)
-                    .offset(x: 0, y: 0)
-                
-                Rectangle()
-                    .frame(width:1, height: 24)
-                    .offset(x: 300/4, y: 0)
-                
-                Circle()
-                    .strokeBorder(Color.white, lineWidth: 1)
-                    .background(Circle().fill(Color.black))
-//                    .fill(Color.white)
-                    .frame(width: 14, height: 14)
-                    .offset(x: circleOffset)
-                    .gesture(DragGesture().onChanged(dragCircle(value:)))
-                
+            Button("ON \(light.id)") {
+                AppFactory.lightsAPI.toggleLight(light, cmd: .ON)
             }
+
+            Button("OFF \(light.id)") {
+                AppFactory.lightsAPI.toggleLight(light, cmd: .OFF)
+            }
+
+            Stepper("Brightness", value: $luminosity)
+
+            
+//            ZStack {
+//                Rectangle()
+//                    .frame(width:300, height: 1)
+//
+//                Rectangle()
+//                    .frame(width:1, height: 24)
+//                    .offset(x: -300/2, y: 0)
+//
+//                Rectangle()
+//                    .frame(width:1, height: 24)
+//                    .offset(x: -300/4, y: 0)
+//
+//                Rectangle()
+//                    .frame(width:1, height: 24)
+//                    .offset(x: 300/2, y: 0)
+//
+//                Rectangle()
+//                    .frame(width:1, height: 24)
+//                    .offset(x: 0, y: 0)
+//
+//                Rectangle()
+//                    .frame(width:1, height: 24)
+//                    .offset(x: 300/4, y: 0)
+//
+//                Circle()
+//                    .strokeBorder(Color.white, lineWidth: 1)
+//                    .background(Circle().fill(Color.black))
+//                    .frame(width: 14, height: 14)
+//                    .offset(x: circleOffset)
+//                    .gesture(DragGesture().onChanged(dragCircle(value:)))
+//
+//            }
             
         }
-//        Slider(value: $sliderValue, in: 0...4)
         
     } //: BODY
     
@@ -67,8 +75,8 @@ struct LightControl: View {
     }
 }
 
-struct LightControl_Previews: PreviewProvider {
-    static var previews: some View {
-        LightControl()
-    }
-}
+//struct LightControl_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LightControl()
+//    }
+//}

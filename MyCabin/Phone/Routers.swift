@@ -10,31 +10,34 @@ import UIKit
 
 enum MenuRouter: NavigationRouter {
     
+    case toplevel
     case lights
     case shades
     case seats
     case climate
     case presets
     case settings
-    case plane
+//    case plane
     
     var transition: NavigationTranisitionStyle {
         switch self {
         case .lights:
-            return .push
+            return .presentFullscreen(presentation: UIModalPresentationStyle.fullScreen)
         case .shades:
-            return .push
+            return .push(presentation: UIModalPresentationStyle.automatic)
         case .seats:
-            return .presentModally
+            return .presentModally(presentation: UIModalPresentationStyle.pageSheet)
         default:
-            return .push
+            return .push(presentation: UIModalPresentationStyle.automatic)
         }
     }
     
     func view() -> UIViewController {
         switch self {
+        case .toplevel:
+            return UIHostingController(rootView: AppFactory.buildMenuOverview())
         case .lights:
-           return UIHostingController(rootView: AppFactory.buildLightsView())
+           return UIHostingController(rootView: AppFactory.buildLightsMenu())
         case .shades:
             return UIHostingController(rootView: AppFactory.buildShadesView())
         case .seats:
@@ -45,8 +48,8 @@ enum MenuRouter: NavigationRouter {
             return UIHostingController(rootView: Presets())
         case .settings:
             return UIHostingController(rootView: Settings())
-        case .plane:
-            return UIHostingController(rootView: AppFactory.buildPlaneSchematic())
+//        case .plane:
+//            return UIHostingController(rootView: AppFactory.buildPlaneSchematic())
         }
     }
 }
@@ -57,7 +60,7 @@ protocol NavigationRouter {
 }
 
 enum NavigationTranisitionStyle {
-    case push
-    case presentModally
-    case presentFullscreen
+    case push(presentation: UIModalPresentationStyle)
+    case presentModally(presentation: UIModalPresentationStyle)
+    case presentFullscreen(presentation: UIModalPresentationStyle)
 }

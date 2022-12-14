@@ -22,10 +22,8 @@ final class AppFactory {
         ///Access Levels
     static let accessAPI = AccessAPI()
         ///Plane Map
-    static let mapViewModel = MapViewModel()
-    
     static let planeViewModel = PlaneViewModel()
-    static let areasAPI = AreasAPI(viewModel: planeViewModel)
+//    static let areasAPI = AreasAPI(viewModel: planeViewModel)
     
     //: Menus
     //Navigation
@@ -69,17 +67,38 @@ final class AppFactory {
     static let volumeMenu = UIHostingController(rootView: buildVolumeView())
     
     //Aggregate API
-    static let elementsAPI = ElementsAPI(mapViewModel: mapViewModel, lightsViewModel: lightsViewModel)
-
+    static let elementsAPI = ElementsAPI(planeViewModel: planeViewModel)
     
     //MARK: - View Builders
     
     //Menus
     
-    static func buildPlaneSchematic() -> PlaneSchematic {
-        let view = PlaneSchematic(viewModel: mapViewModel, navigation: homeMenuCoordinator)
+    static func buildPlaneSchematic(topLevelViewModel: LightsViewModel, options: PlaneSchematicDisplayMode) -> PlaneSchematic {
+        let view = PlaneSchematic(topLevelViewModel: topLevelViewModel, viewModel: planeViewModel, navigation: homeMenuCoordinator, options: options)
         return view
     }
+    
+    static func buildMenuOverview() -> Home {
+        let view = Home(navigation: homeMenuCoordinator)
+        return view
+    }
+    
+    static func buildLightsMenu() -> Lights {
+        let view = Lights()
+        return view
+    }
+    
+    static func buildLightsPanel(lights: [LightModel] = lightsViewModel.lightList ?? [LightModel]()) -> LightsBottomPanel {
+        let view = LightsBottomPanel(lights: lights)//viewModel: lightsViewModel)
+        return view
+    }
+    
+    static func buildLightSubView(light: LightModel) -> LightControl {
+        let view = LightControl(light: light)
+        return view
+    }
+    
+    static var lightSubViews: [String:LightsBottomPanel] = [:]
     
     static func buildSeatSelection() -> SeatSelection {
         let view = SeatSelection(viewModel: seatsViewModel, api: seatsAPI)
@@ -91,10 +110,6 @@ final class AppFactory {
         return view
     }
     
-    static func buildLightsView() -> Lights {
-        let view = Lights(viewModel: lightsViewModel, api: lightsAPI, navigation: homeMenuCoordinator)
-        return view
-    }
     
     static func buildCabinClimateView() -> CabinClimate {
         let view = CabinClimate(viewModel: climateViewModel, api: cabinClimateAPI)
@@ -235,7 +250,7 @@ final class AppFactory {
     
     static func buildHomeMenu() -> HomeMenuCoordinator {
         
-        let rootMenuView = UIHostingController(rootView: Home(navigation: homeMenuCoordinator))
+        let rootMenuView = UIHostingController(rootView: buildMenuOverview())
         rootMenuView.title = "Home"
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
@@ -243,9 +258,9 @@ final class AppFactory {
         rootMenuView.navigationItem.standardAppearance = navigationBarAppearance
         rootMenuView.navigationItem.compactAppearance = navigationBarAppearance
         rootMenuView.navigationItem.scrollEdgeAppearance = navigationBarAppearance
-
-        let planeMenu = UIHostingController(rootView: AppFactory.buildPlaneSchematic())
-        planeMenu.title = "Select your seat"
+//
+//        let planeMenu = UIHostingController(rootView: AppFactory.buildPlaneSchematic())
+//        planeMenu.title = "Select your seat"
         
         let volumeMenu = UIHostingController(rootView: AppFactory.buildVolumeView())
         volumeMenu.title = "Volume"
@@ -266,7 +281,7 @@ final class AppFactory {
     }
     
     @objc static func attendantClick() {
-        homeMenuCoordinator.navigationController.present(UIHostingController(rootView: AppFactory.buildPlaneSchematic()), animated: true)
+//        homeMenuCoordinator.navigationController.present(UIHostingController(rootView: AppFactory.buildPlaneSchematic()), animated: true)
     }
     
 }
