@@ -13,8 +13,15 @@ struct Shades: View {
     var api: ShadesAPI
     
     var body: some View {
-        Text("something")
-//        AppFactory.buildPlaneSchematic(options: PlaneSchematicDisplayMode.showShades)
+        
+        AppFactory.buildPlaneSchematic(topLevelViewModel: viewModel, options: PlaneSchematicDisplayMode.showShades)
+        
+        VStack{
+//                Text(viewModel.activeSeat)
+            if(viewModel.showPanel) {
+                Text("Shade Control")
+            }
+        }
         
 //        TabView {
 //            List(viewModel.shadeList ?? [ShadeModel]()) { shade in
@@ -42,14 +49,19 @@ struct Shades: View {
     }
 }
 
-class ShadesViewModel: ObservableObject {
+class ShadesViewModel: ViewModelWithSubViews, ObservableObject {
 
+    @Published var showPanel: Bool = false
     @Published var shadeList: [ShadeModel]?
     
     func updateValues(_ alive: Bool, _ data: [ShadeModel]?) {
         if let data = data {
             self.shadeList = data
         }
+    }
+    
+    func showSubView(forID: String) {
+        self.showPanel = true
     }
     
 }

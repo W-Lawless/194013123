@@ -14,9 +14,10 @@ struct Lights: View {
     var body: some View {
         VStack {
             AppFactory.buildPlaneSchematic(topLevelViewModel: viewModel, options: PlaneSchematicDisplayMode.showLights)
-            if(viewModel.showSubViews) {
-                if let view = viewModel.bottomPanel {
-                    view
+            VStack{
+//                Text(viewModel.activeSeat)
+                if(viewModel.showPanel) {
+                    LightsBottomPanel()
                 }
             }
         }
@@ -43,18 +44,30 @@ struct Lights: View {
 
 //MARK: - View Model
 
-class LightsViewModel: ObservableObject {
+protocol ViewModelWithSubViews {
+    func showSubView(forID: String)
+}
+
+class LightsViewModel: ViewModelWithSubViews, ObservableObject {
     
+    @Published var activeSeat: String = ""
     @Published var loading: Bool = true
     @Published var lightList: [LightModel]?
-    @Published var bottomPanel: LightsBottomPanel?
-    @Published var showSubViews: Bool = false
+    @Published var showPanel: Bool = false
     
     func updateValues(_ alive: Bool, _ data: [LightModel]?) {
         self.loading = !alive
         if let data = data {
             self.lightList = data
         }
+    }
+    
+    func showSubView(forID seat: String) {
+        showPanel = true
+        if(activeSeat == seat){
+            showPanel = false
+        }
+        activeSeat = seat
     }
     
 }

@@ -55,8 +55,7 @@ struct ElementsAPI {
                 }
             } //: FOR LOOP
             
-            allSeats.forEach { seat in
-//                print(seat.id, "\n")
+            let transformedSeats = allSeats.map { seat in
                 var lightsINeed = [LightModel]()
                 seat.assoc.forEach { item in
                     guard let item = item else { return }
@@ -72,19 +71,20 @@ struct ElementsAPI {
                     }
                 }
                 
-//                print("lights>>", lightsINeed)
-                let seatLights = AppFactory.buildLightsPanel(lights: lightsINeed)
-                AppFactory.lightSubViews[seat.id] = seatLights
+                var copy = seat
+                copy.lights = lightsINeed
+                return copy
             } //: FOR LOOP
             
+            
             AppFactory.lightsViewModel.updateValues(true, allLights)
-            AppFactory.seatsViewModel.updateValues(true, allSeats)
+            AppFactory.seatsViewModel.updateValues(true, transformedSeats)
             AppFactory.monitorsViewModel.updateValues(true, allMonitors)
             AppFactory.speakersViewModel.updateValues(true, allSpeakers)
             AppFactory.sourcesViewModel.updateValues(true, allSources)
             AppFactory.shadesViewModel.updateValues(true, allShades)
             
-            var plane = PlaneMap(mapAreas: [PlaneArea](), apiAreas: allAreas, allLights: allLights, allSeats: allSeats, allMonitors: allMonitors, allSpeakers: allSpeakers, allSources: allSources, allShades: allShades, allTables: allTables, allDivans: allDivans)
+            var plane = PlaneMap(mapAreas: [PlaneArea](), apiAreas: allAreas, allLights: allLights, allSeats: transformedSeats, allMonitors: allMonitors, allSpeakers: allSpeakers, allSources: allSources, allShades: allShades, allTables: allTables, allDivans: allDivans)
             
             // CATEGORIZE ELEMENTS BY AREA
             
@@ -167,8 +167,10 @@ struct ElementsAPI {
                 
             } //: AREA LOOP
             
-            planeViewModel.updateValues(true, plane)
-            
+            AppFactory.planeElements = plane
+
+            await planeViewModel.updateValues(true, plane)
+
             return plane
             
         } catch {

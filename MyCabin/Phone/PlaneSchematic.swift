@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct PlaneSchematic: View {
+struct PlaneSchematic<AViewModel: ViewModelWithSubViews & ObservableObject>: View {
     
     @StateObject var coordinatesModel = PlaneViewCoordinates()
 
-    @ObservedObject var topLevelViewModel: LightsViewModel
+    @ObservedObject var topLevelViewModel: AViewModel
     @ObservedObject var viewModel: PlaneViewModel
     var navigation: HomeMenuCoordinator
     let options: PlaneSchematicDisplayMode
@@ -35,7 +35,7 @@ struct PlaneSchematic: View {
                                     if let seats = area.seats { //Unwrap seats array
                                         if(!seats.isEmpty) { //Discard areas without seats
                                             if(area.id != "Fwd Lavatory" && area.id != "Aft-Lav" && area.id != "CREW") { //Discard Unneeded Seats
-                                                AreaSubView(topLevelViewModel: topLevelViewModel, vm: viewModel, coordinatesModel: coordinatesModel, area: area, options: options, navigation: navigation)
+                                                AreaSubView(topLevelViewModel: topLevelViewModel, coordinatesModel: coordinatesModel, area: area, options: options, navigation: navigation)
                                             } //: CONDITIONAL
                                         } //: CONDITIONAL
                                     } //: UNWRAP
@@ -79,10 +79,9 @@ struct PlaneSchematic: View {
 
 //MARK: - Sub Element Views
 
-struct AreaSubView: View {
+struct AreaSubView<AViewModel: ViewModelWithSubViews & ObservableObject>: View {
     
-    @ObservedObject var topLevelViewModel: LightsViewModel
-    @ObservedObject var vm: PlaneViewModel
+    @ObservedObject var topLevelViewModel: AViewModel
     @ObservedObject var coordinatesModel: PlaneViewCoordinates
     let area: PlaneArea
     let options: PlaneSchematicDisplayMode
@@ -99,12 +98,12 @@ struct AreaSubView: View {
             ForEach(area.seats ?? [SeatModel]()) { seat in
                 
                 if(seat.id == selectedSeat) {
-                    SeatButton(topLevelViewModel: topLevelViewModel, vm: vm, seat: seat, navigation: navigation, options: options, selected: true)
+                    SeatButton(topLevelViewModel: topLevelViewModel, seat: seat, navigation: navigation, options: options, selected: true)
                         .rotationEffect(Angle(degrees: seat.rect.r))
                         .position(x: ((subviewWidthUnit * seat.rect.x) + ((subviewWidthUnit * seat.rect.w)/2)),
                                   y: ((subviewHeightUnit * seat.rect.y) + ((subviewHeightUnit * seat.rect.h)/2)) )
                 } else {
-                    SeatButton(topLevelViewModel: topLevelViewModel, vm: vm, seat: seat, navigation: navigation, options: options, selected: false)
+                    SeatButton(topLevelViewModel: topLevelViewModel, seat: seat, navigation: navigation, options: options, selected: false)
                         .rotationEffect(Angle(degrees: seat.rect.r))
                         .position(x: ((subviewWidthUnit * seat.rect.x) + ((subviewWidthUnit * seat.rect.w)/2)),
                                   y: ((subviewHeightUnit * seat.rect.y) + ((subviewHeightUnit * seat.rect.h)/2)) )
@@ -139,13 +138,11 @@ struct AreaSubView: View {
         }
     }
     
-    
 }
 
-struct SeatButton: View {
+struct SeatButton<AViewModel: ViewModelWithSubViews & ObservableObject>: View {
 
-    @ObservedObject var topLevelViewModel: LightsViewModel
-    @ObservedObject var vm: PlaneViewModel
+    @ObservedObject var topLevelViewModel: AViewModel
     var seat: SeatModel
     var navigation: HomeMenuCoordinator
     let options: PlaneSchematicDisplayMode
@@ -158,7 +155,7 @@ struct SeatButton: View {
             .scaledToFit()
             .frame(width:32, height: 32)
             .hapticFeedback(feedbackStyle: .light) {
-                options.seatIconCallback(topLevelViewModel: topLevelViewModel, seatID: seat.id, vm: vm, nav: navigation)
+                options.seatIconCallback(topLevelViewModel: topLevelViewModel, seatID: seat.id, nav: navigation)
             }
     }
 }

@@ -68,13 +68,14 @@ final class AppFactory {
     
     //Aggregate API
     static let elementsAPI = ElementsAPI(planeViewModel: planeViewModel)
+    static var planeElements: PlaneMap?
     
     //MARK: - View Builders
     
     //Menus
     
-    static func buildPlaneSchematic(topLevelViewModel: LightsViewModel, options: PlaneSchematicDisplayMode) -> PlaneSchematic {
-        let view = PlaneSchematic(topLevelViewModel: topLevelViewModel, viewModel: planeViewModel, navigation: homeMenuCoordinator, options: options)
+    static func buildPlaneSchematic<AViewModel: ViewModelWithSubViews>(topLevelViewModel: AViewModel, options: PlaneSchematicDisplayMode) -> PlaneSchematic<AViewModel> {
+        let view = PlaneSchematic<AViewModel>(topLevelViewModel: topLevelViewModel, viewModel: planeViewModel, navigation: homeMenuCoordinator, options: options)
         return view
     }
     
@@ -87,19 +88,7 @@ final class AppFactory {
         let view = Lights()
         return view
     }
-    
-    static func buildLightsPanel(lights: [LightModel] = lightsViewModel.lightList ?? [LightModel]()) -> LightsBottomPanel {
-        let view = LightsBottomPanel(lights: lights)//viewModel: lightsViewModel)
-        return view
-    }
-    
-    static func buildLightSubView(light: LightModel) -> LightControl {
-        let view = LightControl(light: light)
-        return view
-    }
-    
-    static var lightSubViews: [String:LightsBottomPanel] = [:]
-    
+            
     static func buildSeatSelection() -> SeatSelection {
         let view = SeatSelection(viewModel: seatsViewModel, api: seatsAPI)
         return view

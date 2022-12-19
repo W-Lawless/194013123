@@ -91,7 +91,6 @@
 		2BE97D3B291C137B00149BA4 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D3A291C137B00149BA4 /* Home.swift */; };
 		2BE97D3D291C174000149BA4 /* FlightInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D3C291C174000149BA4 /* FlightInfo.swift */; };
 		2BE97D3F291C175F00149BA4 /* MediaTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D3E291C175F00149BA4 /* MediaTab.swift */; };
-		2BE97D41291C178E00149BA4 /* TabContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D40291C178E00149BA4 /* TabContainer.swift */; };
 		2BE97D49291C348800149BA4 /* EntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D48291C348800149BA4 /* EntryPoint.swift */; };
 		2BE97D4B291C348800149BA4 /* CallAttendant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D4A291C348800149BA4 /* CallAttendant.swift */; };
 		2BE97D4D291C348900149BA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE97D4C291C348900149BA4 /* Assets.xcassets */; };
@@ -225,7 +224,6 @@
 		2BE97D3A291C137B00149BA4 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		2BE97D3C291C174000149BA4 /* FlightInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightInfo.swift; sourceTree = "<group>"; };
 		2BE97D3E291C175F00149BA4 /* MediaTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTab.swift; sourceTree = "<group>"; };
-		2BE97D40291C178E00149BA4 /* TabContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContainer.swift; sourceTree = "<group>"; };
 		2BE97D46291C348800149BA4 /* My Cabin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My Cabin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE97D48291C348800149BA4 /* EntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPoint.swift; sourceTree = "<group>"; };
 		2BE97D4A291C348800149BA4 /* CallAttendant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallAttendant.swift; sourceTree = "<group>"; };
@@ -459,6 +457,15 @@
 			name = Areas;
 			sourceTree = "<group>";
 		};
+		2BA2F82229509FDD007C26E5 /* Plane */ = {
+			isa = PBXGroup;
+			children = (
+				2B02B9DA2937FD4500C6387A /* PlaneSchematic.swift */,
+				2BA7D905293FC63F004E2DF6 /* PlaneViewModel.swift */,
+			);
+			name = Plane;
+			sourceTree = "<group>";
+		};
 		2BA7B4C8291D379200942CB5 /* HardwareDevices */ = {
 			isa = PBXGroup;
 			children = (
@@ -482,7 +489,6 @@
 				2BA8F60129251BFB005621D3 /* FlightInfo */,
 				2BB135E82926D67F0016444C /* Weather */,
 				2B02B9C82936ABAB00C6387A /* GeneralAPI.swift */,
-				2B939C90293E9DC80014AD13 /* RenderCoordinates.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -560,6 +566,7 @@
 				2BE4D4F12940FE3E0026FC01 /* ElementsEnumModel.swift */,
 				2BE4D4F62941096F0026FC01 /* DivanModel.swift */,
 				2BE4D4F4294107680026FC01 /* TableModel.swift */,
+				2B939C90293E9DC80014AD13 /* RenderCoordinates.swift */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -656,7 +663,6 @@
 			children = (
 				2BE97D5D291C484900149BA4 /* MainViews */,
 				2BA8F6072925231E005621D3 /* Menus */,
-				2BE97D40291C178E00149BA4 /* TabContainer.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -666,8 +672,7 @@
 			children = (
 				2B183F4D2913F8BD0087654E /* Loading.swift */,
 				2BE97D3A291C137B00149BA4 /* Home.swift */,
-				2B02B9DA2937FD4500C6387A /* PlaneSchematic.swift */,
-				2BA7D905293FC63F004E2DF6 /* PlaneViewModel.swift */,
+				2BA2F82229509FDD007C26E5 /* Plane */,
 				2B1170662935516B00A1CB8F /* Flight */,
 				2B11704F29352D6300A1CB8F /* Media */,
 			);
@@ -856,7 +861,6 @@
 				2BB3A587292445C90094B787 /* HeartbeatMonitor.swift in Sources */,
 				2BB135FC292703970016444C /* CodableWrapper.swift in Sources */,
 				2BA7B4CF291D551A00942CB5 /* SeatSelection.swift in Sources */,
-				2BE97D41291C178E00149BA4 /* TabContainer.swift in Sources */,
 				2BE97D3F291C175F00149BA4 /* MediaTab.swift in Sources */,
 				2B11704C29352CDE00A1CB8F /* LightsModel.swift in Sources */,
 				2BE97D5A291C46ED00149BA4 /* Watch.swift in Sources */,
