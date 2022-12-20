@@ -13,8 +13,7 @@ struct SeatSelection: View {
     var api: SeatsAPI
     
     var body: some View {
-        Text("Sahdes")
-//        AppFactory.buildPlaneSchematic(options: PlaneSchematicDisplayMode.onlySeats)
+        AppFactory.buildPlaneSchematic(topLevelViewModel: viewModel, options: PlaneSchematicDisplayMode.onlySeats)
 //        List(viewModel.seatList ?? [SeatModel]()) { seat in
 //            Button(seat.id) {
 //                api.call(seat: seat)
@@ -25,12 +24,17 @@ struct SeatSelection: View {
 
 //MARK: - View Model
 
-class SeatsViewModel: ObservableObject {
-
+class SeatsViewModel: ViewModelWithSubViews, ObservableObject {
+    
+    @Published var showPanel: Bool = false
     @Published var seatList: [SeatModel]?
     
     func updateValues(_ alive: Bool, _ data: [SeatModel]) {
         self.seatList = data
+    }
+    
+    func showSubView(forID: String) {
+        
     }
     
 }

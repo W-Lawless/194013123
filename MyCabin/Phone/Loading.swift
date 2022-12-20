@@ -42,12 +42,10 @@ struct Loading: View {
     }
 }
 
-// TODO::
-//struct Loading_Previews: PreviewProvider {
-//    let connectionPublisher = CurrentValueSubject<Bool, Never>(false)
-//    let cabin = CabinAPI(publisher: connectionPublisher)
-//
-//    static var previews: some View {
-//        Loading(api: cabin)
-//    }
-//}
+
+struct Loading_Previews: PreviewProvider {
+
+    static var previews: some View {
+        Loading(api: AppFactory.cabinAPI)
+    }
+}

@@ -12,15 +12,22 @@ struct Lights: View {
     @StateObject var viewModel = LightsViewModel()
     
     var body: some View {
-        VStack {
+        ZStack(alignment: .bottom) {
+            
             AppFactory.buildPlaneSchematic(topLevelViewModel: viewModel, options: PlaneSchematicDisplayMode.showLights)
-            VStack{
-//                Text(viewModel.activeSeat)
+            
+            VStack(alignment: .center) {
                 if(viewModel.showPanel) {
                     LightsBottomPanel()
                 }
             }
-        }
+            .edgesIgnoringSafeArea(.bottom)
+            .frame(height:132)
+            .background(Color.black)
+            
+            
+        } //: ZSTQ
+        .edgesIgnoringSafeArea(.bottom)
     }
     
     //MARK: - Gestures
@@ -51,23 +58,24 @@ protocol ViewModelWithSubViews {
 class LightsViewModel: ViewModelWithSubViews, ObservableObject {
     
     @Published var activeSeat: String = ""
-    @Published var loading: Bool = true
-    @Published var lightList: [LightModel]?
+//    @Published var loading: Bool = true
+//    @Published var lightList: [LightModel]?
     @Published var showPanel: Bool = false
     
     func updateValues(_ alive: Bool, _ data: [LightModel]?) {
-        self.loading = !alive
-        if let data = data {
-            self.lightList = data
-        }
+//        self.loading = !alive
+//        if let data = data {
+//            self.lightList = data
+//        }
     }
     
     func showSubView(forID seat: String) {
-        showPanel = true
-        if(activeSeat == seat){
-            showPanel = false
+        if(activeSeat != seat){
+            showPanel = true
+            activeSeat = seat
+        } else {
+            showPanel.toggle()
         }
-        activeSeat = seat
     }
     
 }

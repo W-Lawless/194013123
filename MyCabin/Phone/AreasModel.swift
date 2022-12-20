@@ -46,35 +46,4 @@ struct GroupElement: Codable {
     }
 }
 
-struct Plane: Identifiable {
-    var areas: [PlaneArea]
-    var id: String
-}
 
-struct PlaneArea: Identifiable {
-    var id: String
-    var rect: RenderCoordinates
-    var lights: [LightModel]?
-    var seats: [SeatModel]?
-    var shades: [ShadeModel]?
-    var monitors: [MonitorModel]?
-    var speakers: [SpeakerModel]?
-    var sources: [SourceModel]?
-    var tables: [TableModel]?
-    var divans: [DivanModel]?
-    var zoneTemp: [ClimateControllerModel]?
-    var zoneLights: [LightModel]?
-}
-
-struct PlaneMap {
-    var mapAreas: [PlaneArea]
-    var apiAreas: [AreaModel]
-    var allLights: [LightModel]
-    var allSeats: [SeatModel]
-    var allMonitors: [MonitorModel]
-    var allSpeakers: [SpeakerModel]
-    var allSources: [SourceModel]
-    var allShades: [ShadeModel]
-    var allTables: [TableModel]
-    var allDivans: [DivanModel]
-}

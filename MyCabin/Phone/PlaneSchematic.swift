@@ -23,31 +23,24 @@ struct PlaneSchematic<AViewModel: ViewModelWithSubViews & ObservableObject>: Vie
     
     var body: some View {
         GeometryReader { geometry in
-            VStack {
+            VStack { // VSTQ
                 HStack(alignment: .center) { // HSTQ
                     Image("plane_left_side")
                         .resizable()
                         .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
-                    VStack(alignment: .center, spacing: 0) { // VSTQ A
-                        VStack(alignment: .center, spacing: 0) { //VSTQ B
-                            ForEach(viewModel.plane?.mapAreas ?? [PlaneArea]()) { area in
-                                if let area = area { //Unwrap area
-                                    if let seats = area.seats { //Unwrap seats array
-                                        if(!seats.isEmpty) { //Discard areas without seats
-                                            if(area.id != "Fwd Lavatory" && area.id != "Aft-Lav" && area.id != "CREW") { //Discard Unneeded Seats
-                                                AreaSubView(topLevelViewModel: topLevelViewModel, coordinatesModel: coordinatesModel, area: area, options: options, navigation: navigation)
-                                            } //: CONDITIONAL
-                                        } //: CONDITIONAL
-                                    } //: UNWRAP
-                                } //: UNWRAP
-                            } //: FOREACH
-                        } //: VSTQ B
-                    } //: VSTQ A
+                    VStack(alignment: .center, spacing: 0) { //VSTQ B
+                        ForEach(viewModel.plane.mapAreas) { area in
+                            if(regexFilter(area.id)) { // Filter Areas
+                                if area.seats?.isEmpty != true {
+                                    AreaSubView(topLevelViewModel: topLevelViewModel, coordinatesModel: coordinatesModel, area: area, options: options, navigation: navigation)
+                                } //: CONDITIONAL
+                            } //: FILTER
+                        } //: FOREACH
+                    } //: VSTQ B
                     Image("plane_right_side")
                         .resizable()
                         .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
                 } //: HSTQ
-                .padding(.vertical, 18)
                 .padding(.horizontal, 34)
                 .frame(height: geometry.size.height)
                 .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
@@ -60,12 +53,12 @@ struct PlaneSchematic<AViewModel: ViewModelWithSubViews & ObservableObject>: Vie
             self.viewWidth = geo.size.width
             coordinatesModel.containerViewWidth = self.viewWidth
             
-            viewModel.plane?.mapAreas.forEach { area in
+            viewModel.plane.mapAreas.forEach { area in
                 if(area.id == "AIRPLANE_AREA") {
                     self.widthUnit = (geo.size.width * 0.39) / area.rect.w
                     coordinatesModel.containerWidthUnit = self.widthUnit
                     
-                    self.heightUnit = (geo.size.height * 0.85) / area.rect.h
+                    self.heightUnit = (geo.size.height) / area.rect.h
                     coordinatesModel.containerHeightUnit = self.heightUnit
                     print("parent height", self.heightUnit * area.rect.h)
                 }
@@ -74,10 +67,24 @@ struct PlaneSchematic<AViewModel: ViewModelWithSubViews & ObservableObject>: Vie
         
     } //: BODY
     
+    private func regexFilter(_ target: String) -> Bool {
+        let range = NSRange(location: 0, length: target.utf16.count)
+        let lav = try! NSRegularExpression(pattern: "lav|LAV")
+        let crew = try! NSRegularExpression(pattern: "crew|CREW")
+        
+        let lookUpOne = lav.firstMatch(in: target, range: range)
+        let lookUpTwo = crew.firstMatch(in: target, range: range)
+        
+        if(lookUpOne == nil && lookUpTwo == nil) {
+            return true
+        }
+        
+        return false
+    }
 }
 
 
-//MARK: - Sub Element Views
+//MARK: - Area Sub Element Views
 
 struct AreaSubView<AViewModel: ViewModelWithSubViews & ObservableObject>: View {
     
@@ -90,7 +97,8 @@ struct AreaSubView<AViewModel: ViewModelWithSubViews & ObservableObject>: View {
     @State var subviewHeightUnit: CGFloat = 0
     @State var subviewWidthUnit: CGFloat = 0
 
-    let selectedSeat: String = UserDefaults.standard.string(forKey: "CurrentSeat") ?? ""
+    @AppStorage("CurrentSeat") var selectedSeat: String = ""
+//    let selectedSeat: String = UserDefaults.standard.string(forKey: "CurrentSeat") ?? ""
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -140,6 +148,8 @@ struct AreaSubView<AViewModel: ViewModelWithSubViews & ObservableObject>: View {
     
 }
 
+//MARK: - Seat Icon Sub View
+
 struct SeatButton<AViewModel: ViewModelWithSubViews & ObservableObject>: View {
 
     @ObservedObject var topLevelViewModel: AViewModel
@@ -153,12 +163,14 @@ struct SeatButton<AViewModel: ViewModelWithSubViews & ObservableObject>: View {
         Image(selected ? "seat_selected" : "seat_selectable")
             .resizable()
             .scaledToFit()
-            .frame(width:32, height: 32)
+            .frame(width:30, height: 30)
             .hapticFeedback(feedbackStyle: .light) {
                 options.seatIconCallback(topLevelViewModel: topLevelViewModel, seatID: seat.id, nav: navigation)
             }
     }
 }
+
+//MARK: - Divan Icon Sub View
 
 struct DivanSeat: View {
     
@@ -210,6 +222,8 @@ struct DivanSeat: View {
     }
 }
 
+//MARK: - Table Sub View
+
 struct MiniTable: View {
     var table: TableModel
     
@@ -223,13 +237,13 @@ struct MiniTable: View {
             Image("table_medium_unavailable")
                 .resizable()
                 .scaledToFit()
-                .frame(maxWidth:58)
+                .frame(maxWidth:56)
 //                .offset(x: 2)
         } else {
             Image("table_mini_unavailable")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 32, height: 32)
+                .frame(width: 30, height: 30)
         }
     }
 }
@@ -263,9 +277,9 @@ extension View {
 
 //MARK: - Preview
 
-//struct PlaneSchematic_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AppFactory.buildPlaneSchematic(options: PlaneSchematicDisplayMode.onlySeats)
-//    }
-//}
+struct PlaneSchematic_Previews: PreviewProvider {
+    static var previews: some View {
+        AppFactory.buildPlaneSchematic(topLevelViewModel: SeatsViewModel(), options: PlaneSchematicDisplayMode.onlySeats)
+    }
+}
 

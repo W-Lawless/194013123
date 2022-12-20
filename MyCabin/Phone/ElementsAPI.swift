@@ -76,7 +76,6 @@ struct ElementsAPI {
                 return copy
             } //: FOR LOOP
             
-            
             AppFactory.lightsViewModel.updateValues(true, allLights)
             AppFactory.seatsViewModel.updateValues(true, transformedSeats)
             AppFactory.monitorsViewModel.updateValues(true, allMonitors)
@@ -175,7 +174,8 @@ struct ElementsAPI {
             
         } catch {
             print(error)
-            return PlaneMap(mapAreas: [PlaneArea](), apiAreas: [AreaModel](), allLights: [LightModel](), allSeats: [SeatModel](), allMonitors: [MonitorModel](), allSpeakers: [SpeakerModel](), allSources: [SourceModel](), allShades: [ShadeModel](), allTables: [TableModel](), allDivans: [DivanModel]())
+            await planeViewModel.updateValues(false, nil)
+            return PlaneMap()
         }
     } //: FETCH
 }
