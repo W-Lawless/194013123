@@ -12,7 +12,7 @@ import Combine
 
 final class AppFactory {
     
-    //MARK: - Properties
+    //MARK: - ViewModels & API Adaptors
     
     //: State Handling
         ///Cabin Connection

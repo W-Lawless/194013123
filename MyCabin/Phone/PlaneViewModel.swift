@@ -75,8 +75,6 @@ enum PlaneSchematicDisplayMode: String {
         switch self {
         case .showLights:
             topLevelViewModel.showSubView(forID: seatID)
-        case .showShades:
-            topLevelViewModel.showSubView(forID: seatID)
         default:
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                 nav.dismiss()
@@ -84,6 +82,10 @@ enum PlaneSchematicDisplayMode: String {
         } //: SWITCH
     }
     
+    func shadeIconCallback(topLevelViewModel: ShadesViewModel, shade: ShadeModel) {
+        topLevelViewModel.showSubView(forID: shade.id)
+        topLevelViewModel.activeShade = shade
+    }
 }
     
 

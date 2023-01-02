@@ -22,8 +22,9 @@ struct Lights: View {
                 }
             }
             .edgesIgnoringSafeArea(.bottom)
-            .frame(height:132)
+            .padding(.bottom, 18)
             .background(Color.black)
+            .frame(height:108, alignment: .top)
             
             
         } //: ZSTQ

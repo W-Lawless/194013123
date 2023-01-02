@@ -60,7 +60,6 @@ struct PlaneSchematic<AViewModel: ViewModelWithSubViews & ObservableObject>: Vie
                     
                     self.heightUnit = (geo.size.height) / area.rect.h
                     coordinatesModel.containerHeightUnit = self.heightUnit
-                    print("parent height", self.heightUnit * area.rect.h)
                 }
             }
         } //: PASS GEO UTIL
@@ -68,17 +67,19 @@ struct PlaneSchematic<AViewModel: ViewModelWithSubViews & ObservableObject>: Vie
     } //: BODY
     
     private func regexFilter(_ target: String) -> Bool {
+    
         let range = NSRange(location: 0, length: target.utf16.count)
-        let lav = try! NSRegularExpression(pattern: "lav|LAV")
-        let crew = try! NSRegularExpression(pattern: "crew|CREW")
+        let lav = try! NSRegularExpression(pattern: "lav", options: .caseInsensitive)
+        let crew = try! NSRegularExpression(pattern: "crew", options: .caseInsensitive)
         
         let lookUpOne = lav.firstMatch(in: target, range: range)
         let lookUpTwo = crew.firstMatch(in: target, range: range)
         
         if(lookUpOne == nil && lookUpTwo == nil) {
+            print(target)
             return true
         }
-        
+        print("failed:", target)
         return false
     }
 }
@@ -134,6 +135,15 @@ struct AreaSubView<AViewModel: ViewModelWithSubViews & ObservableObject>: View {
                     .position(x: ((subviewWidthUnit * divan.rect.x) + ((subviewWidthUnit * divan.rect.w)/2)),
                               y: ((subviewHeightUnit * divan.rect.y) + ((subviewHeightUnit * divan.rect.h)/2)) )
             } //: FOR EACH
+            
+            if(options == .showShades) {
+                ForEach(area.shades ?? [ShadeModel]()) { shade in
+                    ShadeButton(topLevelViewModel: topLevelViewModel as! ShadesViewModel, shade: shade, options: options)
+                        .rotationEffect(Angle(degrees: shade.rect.r))
+                        .position(x: ((subviewWidthUnit * shade.rect.x) + ((subviewWidthUnit * shade.rect.w)/2)),
+                                  y: ((subviewHeightUnit * shade.rect.y) + ((subviewHeightUnit * shade.rect.h)/2)) )
+                } //: FOR EACH
+            }
 
         }
         .frame(width: (subviewWidthUnit * area.rect.w), height: (subviewHeightUnit * area.rect.h))
@@ -160,13 +170,20 @@ struct SeatButton<AViewModel: ViewModelWithSubViews & ObservableObject>: View {
     @State var selected: Bool = false
     
     var body: some View {
-        Image(selected ? "seat_selected" : "seat_selectable")
-            .resizable()
-            .scaledToFit()
-            .frame(width:30, height: 30)
-            .hapticFeedback(feedbackStyle: .light) {
-                options.seatIconCallback(topLevelViewModel: topLevelViewModel, seatID: seat.id, nav: navigation)
-            }
+        if(options == .onlySeats || options == .showLights ) {
+            Image(selected ? "seat_selected" : "seat_selectable")
+                .resizable()
+                .scaledToFit()
+                .frame(width:30, height: 30)
+                .hapticFeedback(feedbackStyle: .light) {
+                    options.seatIconCallback(topLevelViewModel: topLevelViewModel, seatID: seat.id, nav: navigation)
+                }
+        } else {
+            Image("seat_unavailable")
+                .resizable()
+                .scaledToFit()
+                .frame(width:30, height: 30)
+        }
     }
 }
 
@@ -180,6 +197,7 @@ struct DivanSeat: View {
     var navigation: HomeMenuCoordinator
     
     var body: some View {
+        
         HStack(alignment: .bottom, spacing: 0) {
             Image(selected ? "divan_selected_left" : "divan_selectable_left" )
                 .resizable()
@@ -187,11 +205,6 @@ struct DivanSeat: View {
                 .frame(width: 41)
                 .hapticFeedback(feedbackStyle: .light) {
                     selected.toggle()
-                    UserDefaults.standard.set(divan.id, forKey: "CurrentSeat")
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                        navigation.popToRoot()
-                    }
                 }
             Image(selected ? "divan_selected_middle" : "divan_selectable_middle" )
                 .resizable()
@@ -199,11 +212,6 @@ struct DivanSeat: View {
                 .frame(width: 30)
                 .hapticFeedback(feedbackStyle: .light) {
                     selected.toggle()
-                    UserDefaults.standard.set(divan.id, forKey: "CurrentSeat")
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                        navigation.popToRoot()
-                    }
                 }
             Image(selected ? "divan_selected_right" : "divan_selectable_right")
                 .resizable()
@@ -211,11 +219,6 @@ struct DivanSeat: View {
                 .frame(width: 42)
                 .hapticFeedback(feedbackStyle: .light) {
                     selected.toggle()
-                    UserDefaults.standard.set(divan.id, forKey: "CurrentSeat")
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                        navigation.popToRoot()
-                    }
                 }
         }
         .offset(x: 2, y: 5)
@@ -237,17 +240,39 @@ struct MiniTable: View {
             Image("table_medium_unavailable")
                 .resizable()
                 .scaledToFit()
-                .frame(maxWidth:56)
+                .frame(maxWidth:64)
 //                .offset(x: 2)
         } else {
             Image("table_mini_unavailable")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 30, height: 30)
+                .frame(width: 36, height: 36)
         }
     }
 }
 
+//MARK: - Shade Icon Sub View
+
+struct ShadeButton: View {
+    
+    @ObservedObject var topLevelViewModel: ShadesViewModel
+    var shade: ShadeModel
+    let options: PlaneSchematicDisplayMode
+    
+    @State var selected: Bool = false
+    
+    var body: some View {
+            Image(selected ? "windows_selected" : "windows_selectable")
+                .resizable()
+                .scaledToFit()
+                .frame(width:21, height: 44)
+                .hapticFeedback(feedbackStyle: .light) {
+                    selected.toggle()
+                    options.shadeIconCallback(topLevelViewModel: topLevelViewModel, shade: shade)
+                }
+
+    }
+}
 
 //MARK: - Util Extension
 ///TODO: Move to Util Folder

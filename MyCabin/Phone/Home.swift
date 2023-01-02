@@ -17,6 +17,7 @@ struct Home: View {
     var body: some View {
         
         Group {
+            
             HStack(alignment: .center, spacing: 72) {
                 
                 VStack(alignment: .center, spacing: 12) {

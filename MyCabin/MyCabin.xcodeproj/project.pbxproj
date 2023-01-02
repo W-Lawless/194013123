@@ -17,7 +17,6 @@
 		2B02B9CE2936B66500C6387A /* CabinClimateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9CD2936B66500C6387A /* CabinClimateModel.swift */; };
 		2B02B9D12936BBDD00C6387A /* Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9D02936BBDD00C6387A /* Presets.swift */; };
 		2B02B9D42936BBEA00C6387A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9D32936BBEA00C6387A /* Settings.swift */; };
-		2B02B9D72937A75900C6387A /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9D62937A75900C6387A /* UserDefaults.swift */; };
 		2B02B9D92937C93300C6387A /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9D82937C93300C6387A /* Cache.swift */; };
 		2B02B9DB2937FD4500C6387A /* PlaneSchematic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9DA2937FD4500C6387A /* PlaneSchematic.swift */; };
 		2B10DD24292D4C2400AB98F3 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD23292D4C2400AB98F3 /* Weather.swift */; };
@@ -39,6 +38,8 @@
 		2B1170632935491000A1CB8F /* SpeakersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1170622935491000A1CB8F /* SpeakersAPI.swift */; };
 		2B1170652935491D00A1CB8F /* SpeakerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1170642935491D00A1CB8F /* SpeakerModel.swift */; };
 		2B117068293551AD00A1CB8F /* FlightTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B117067293551AD00A1CB8F /* FlightTab.swift */; };
+		2B1479C229520BB900FA51C5 /* LightPowerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1479C129520BB900FA51C5 /* LightPowerButton.swift */; };
+		2B1479C429525BD000FA51C5 /* ShadeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1479C329525BD000FA51C5 /* ShadeControl.swift */; };
 		2B183F4E2913F8BD0087654E /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B183F4D2913F8BD0087654E /* Loading.swift */; };
 		2B183F502913F8C00087654E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B183F4F2913F8C00087654E /* Assets.xcassets */; };
 		2B183F542913F8C00087654E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B183F532913F8C00087654E /* Preview Assets.xcassets */; };
@@ -66,6 +67,7 @@
 		2BA8F60329251C0C005621D3 /* FlightModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8F60229251C0C005621D3 /* FlightModels.swift */; };
 		2BA8F60629252166005621D3 /* SeatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8F60529252166005621D3 /* SeatModels.swift */; };
 		2BA8F61A29258F78005621D3 /* ElementsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8F61929258F78005621D3 /* ElementsAPI.swift */; };
+		2BA9DBE92963166300DF3EEC /* AdjustablePowerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA9DBE82963166300DF3EEC /* AdjustablePowerButton.swift */; };
 		2BB135D92926D1290016444C /* MainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135D82926D1290016444C /* MainTests.swift */; };
 		2BB135E72926D66E0016444C /* +Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC49CD32922BEE5007DA457 /* +Weather.swift */; };
 		2BB135EC2926D6AB0016444C /* WeatherModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135EB2926D6AB0016444C /* WeatherModels.swift */; };
@@ -145,7 +147,6 @@
 		2B02B9CD2936B66500C6387A /* CabinClimateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinClimateModel.swift; sourceTree = "<group>"; };
 		2B02B9D02936BBDD00C6387A /* Presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presets.swift; sourceTree = "<group>"; };
 		2B02B9D32936BBEA00C6387A /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		2B02B9D62937A75900C6387A /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		2B02B9D82937C93300C6387A /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		2B02B9DA2937FD4500C6387A /* PlaneSchematic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneSchematic.swift; sourceTree = "<group>"; };
 		2B10DD23292D4C2400AB98F3 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
@@ -167,6 +168,8 @@
 		2B1170622935491000A1CB8F /* SpeakersAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakersAPI.swift; sourceTree = "<group>"; };
 		2B1170642935491D00A1CB8F /* SpeakerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerModel.swift; sourceTree = "<group>"; };
 		2B117067293551AD00A1CB8F /* FlightTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightTab.swift; sourceTree = "<group>"; };
+		2B1479C129520BB900FA51C5 /* LightPowerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightPowerButton.swift; sourceTree = "<group>"; };
+		2B1479C329525BD000FA51C5 /* ShadeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadeControl.swift; sourceTree = "<group>"; };
 		2B183F482913F8BD0087654E /* MyCabin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCabin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B183F4D2913F8BD0087654E /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		2B183F4F2913F8C00087654E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -197,6 +200,7 @@
 		2BA8F60229251C0C005621D3 /* FlightModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightModels.swift; sourceTree = "<group>"; };
 		2BA8F60529252166005621D3 /* SeatModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatModels.swift; sourceTree = "<group>"; };
 		2BA8F61929258F78005621D3 /* ElementsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsAPI.swift; sourceTree = "<group>"; };
+		2BA9DBE82963166300DF3EEC /* AdjustablePowerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustablePowerButton.swift; sourceTree = "<group>"; };
 		2BB135D62926D1290016444C /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BB135D82926D1290016444C /* MainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTests.swift; sourceTree = "<group>"; };
 		2BB135EB2926D6AB0016444C /* WeatherModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModels.swift; sourceTree = "<group>"; };
@@ -297,7 +301,6 @@
 		2B02B9D52937A53000C6387A /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				2B02B9D62937A75900C6387A /* UserDefaults.swift */,
 				2B02B9D82937C93300C6387A /* Cache.swift */,
 			);
 			name = Persistence;
@@ -529,6 +532,7 @@
 			isa = PBXGroup;
 			children = (
 				2B8F7138292D763C00073637 /* Shades.swift */,
+				2B1479C329525BD000FA51C5 /* ShadeControl.swift */,
 			);
 			name = Shades;
 			sourceTree = "<group>";
@@ -539,6 +543,8 @@
 				2B8F713D292E5C5800073637 /* Lights.swift */,
 				2BD75A18292E7ACE004360A3 /* LightControl.swift */,
 				2B9ABC6C294A1CB600670EE0 /* LightsBottomPanel.swift */,
+				2B1479C129520BB900FA51C5 /* LightPowerButton.swift */,
+				2BA9DBE82963166300DF3EEC /* AdjustablePowerButton.swift */,
 			);
 			name = Lights;
 			sourceTree = "<group>";
@@ -854,7 +860,6 @@
 				2B11705E29353DED00A1CB8F /* Sources.swift in Sources */,
 				2B8F713E292E5C5800073637 /* Lights.swift in Sources */,
 				2B939C8F293E910F0014AD13 /* AreasModel.swift in Sources */,
-				2B02B9D72937A75900C6387A /* UserDefaults.swift in Sources */,
 				2B02B9D92937C93300C6387A /* Cache.swift in Sources */,
 				2BB135EC2926D6AB0016444C /* WeatherModels.swift in Sources */,
 				2BE97D67291C69F700149BA4 /* Haptics.swift in Sources */,
@@ -897,6 +902,7 @@
 				2B02B9DB2937FD4500C6387A /* PlaneSchematic.swift in Sources */,
 				2B11704E29352D0A00A1CB8F /* MonitorModel.swift in Sources */,
 				2B86580C2939414A00982BBB /* AccessAPI.swift in Sources */,
+				2B1479C429525BD000FA51C5 /* ShadeControl.swift in Sources */,
 				2B11705A29353C0E00A1CB8F /* SourceModel.swift in Sources */,
 				2B02B9C12936968600C6387A /* AppFactory.swift in Sources */,
 				2BA7B4CB291D4A3A00942CB5 /* SeatsAPI.swift in Sources */,
@@ -908,6 +914,8 @@
 				2BE4D4F5294107680026FC01 /* TableModel.swift in Sources */,
 				2B117060293548A100A1CB8F /* Speakers.swift in Sources */,
 				2B9ABC6D294A1CB600670EE0 /* LightsBottomPanel.swift in Sources */,
+				2BA9DBE92963166300DF3EEC /* AdjustablePowerButton.swift in Sources */,
+				2B1479C229520BB900FA51C5 /* LightPowerButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

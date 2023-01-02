@@ -10,25 +10,40 @@ import SwiftUI
 struct LightsBottomPanel: View {
     
     @State var lights = [LightModel]()
+    @State var showDimmable: Bool = false
     @AppStorage("CurrentSeat") var currentSeat: String = ""
     
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack{
-                Text(currentSeat)
-                ForEach(lights) { light in
-                    if (light.type == "READ") {
-                        Text("\(light.name)")
-                    } else {
-                        Text("\(light.name)")
+        
+        GeometryReader { geo in
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+            
+                if(showDimmable){
+                    AdjustablePowerButton(light: lights[0], display: $showDimmable)
+                } else {
+                    HStack(spacing: 18) {
+                        ForEach(lights) { light in
+                            if(light.brightness.dimmable){
+                                AdjustablePowerButton(light: light, display: $showDimmable)
+                            } else {
+                                LightPowerButton(light: light)
+                            }
+                        }
                     }
-//                    LightControl(light: light)
-//                        .background(Color.black)
-                } //: FOR EACH
-            } //: HSTQ
-        } //: SCROLL
+                    .frame(width:geo.size.width, alignment: .leading)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 9)
+                }
+                
+                
+            } //: SCROLL
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .top)
+            
+        }  //: GEO
         .onAppear {
             getLightsForSeat()
+            print(lights)
         }
         .onChange(of: currentSeat) { newValue in
             getLightsForSeat()

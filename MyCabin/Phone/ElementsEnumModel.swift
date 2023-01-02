@@ -68,6 +68,8 @@ enum ElementsEnum: Decodable {
             self = .ignore(())
         case .MONITORLIFT:
             self = .ignore(())
+        case .AIRVENT:
+            self = .ignore(())
         }
     }
 }
@@ -85,6 +87,7 @@ enum ElementTypes: String, Decodable {
     case WATERZ = "WaterZone"
     case AREA = "Area"
     case TEMPCTRL = "TemperatureController"
+    case AIRVENT = "AirVent"
     case BREAKER = "CircuitBreaker"
     case BREAKERGROUP = "CircuitBreakerGroup"
     case VALVE = "Valve"

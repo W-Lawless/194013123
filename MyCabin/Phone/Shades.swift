@@ -14,45 +14,33 @@ struct Shades: View {
     
     var body: some View {
         
-        AppFactory.buildPlaneSchematic(topLevelViewModel: viewModel, options: PlaneSchematicDisplayMode.showShades)
-        
-        VStack{
-//                Text(viewModel.activeSeat)
-            if(viewModel.showPanel) {
-                Text("Shade Control")
+        ZStack(alignment: .bottom) {
+            
+            AppFactory.buildPlaneSchematic(topLevelViewModel: viewModel, options: PlaneSchematicDisplayMode.showShades)
+            
+            VStack(alignment: .center) {
+                if(viewModel.showPanel) {
+                    ShadeControl(api: api)
+                }
             }
+            .edgesIgnoringSafeArea(.bottom)
+            .padding(.bottom, 18)
+            .background(Color.black)
+            .frame(height:108, alignment: .top)
+            
         }
+        .edgesIgnoringSafeArea(.bottom)
         
-//        TabView {
-//            List(viewModel.shadeList ?? [ShadeModel]()) { shade in
-//                Button("OPEN \(shade.id.lowercased())") {
-//                    api.commandShade(shade: shade, cmd: .OPEN)
-//                }
-//            }//: LIST
-//
-//            List(viewModel.shadeList ?? [ShadeModel]()) { shade in
-//                Button("SHEER \(shade.id.lowercased())") {
-//                    api.commandShade(shade: shade, cmd: .SHEER)
-//                }
-//            }//: LIST
-//
-//            List(viewModel.shadeList ?? [ShadeModel]()) { shade in
-//                Button("CLOSE \(shade.id.lowercased())") {
-//                    api.commandShade(shade: shade, cmd: .CLOSE)
-//                }
-//            }//: LIST
-//        }
-//        .tabViewStyle(.page)
-//        .onAppear {
-//            api.fetch()
-//        }
     }
+    
 }
 
 class ShadesViewModel: ViewModelWithSubViews, ObservableObject {
 
+    @Published var activeShadeID: String = ""
     @Published var showPanel: Bool = false
     @Published var shadeList: [ShadeModel]?
+    @Published var activeShade: ShadeModel?
     
     func updateValues(_ alive: Bool, _ data: [ShadeModel]?) {
         if let data = data {
@@ -60,8 +48,13 @@ class ShadesViewModel: ViewModelWithSubViews, ObservableObject {
         }
     }
     
-    func showSubView(forID: String) {
-        self.showPanel = true
+    func showSubView(forID shade: String) {
+        if(activeShadeID != shade){
+            showPanel = true
+            activeShadeID = shade
+        } else {
+            showPanel.toggle()
+        }
     }
     
 }

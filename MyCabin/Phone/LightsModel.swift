@@ -30,10 +30,7 @@ struct LightModel: Codable, Identifiable {
         var color_type: String
         var palettes: [String]?
     }
-    struct brightness: Codable {
-        var dimmable: Bool
-        var range: [Int]
-    }
+    var brightness: LightBrightness
     struct icons: Codable {
         var on: String
         var off: String
@@ -44,3 +41,7 @@ struct LightModel: Codable, Identifiable {
     }
 }
 
+struct LightBrightness: Codable {
+    var dimmable: Bool
+    var range: [Int]
+}

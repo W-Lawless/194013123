@@ -9,16 +9,13 @@ import SwiftUI
 
 struct Settings: View {
     
-    @State var someSetting: String = (UserDefaults.standard.string(forKey: "someSetting") ?? "DefaultValue")
-    
+    @AppStorage("someSetting") var address: String = "http://10.0.0.41"
+
     var body: some View {
         Text("SETTINGS")
-        TextField("Some Setting:", text: $someSetting)
+        TextField("Some Setting:", text: $address)
         Button("Save") {
-            @UserDefaultUtil("someSetting", defaultValue: "http://10.0.0.41")
-            var abc: String
             
-            abc = self.someSetting
         }
     }
 }
