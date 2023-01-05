@@ -71,15 +71,19 @@ struct PlaneSchematic<AViewModel: ViewModelWithSubViews & ObservableObject>: Vie
         let range = NSRange(location: 0, length: target.utf16.count)
         let lav = try! NSRegularExpression(pattern: "lav", options: .caseInsensitive)
         let crew = try! NSRegularExpression(pattern: "crew", options: .caseInsensitive)
+        let galley = try! NSRegularExpression(pattern: "galley", options: .caseInsensitive)
+        let vestibule = try! NSRegularExpression(pattern: "vestibule", options: .caseInsensitive)
         
         let lookUpOne = lav.firstMatch(in: target, range: range)
         let lookUpTwo = crew.firstMatch(in: target, range: range)
+        let lookUpThree = galley.firstMatch(in: target, range: range)
+        let lookUpFour = vestibule.firstMatch(in: target, range: range)
         
-        if(lookUpOne == nil && lookUpTwo == nil) {
-            print(target)
+        if(lookUpOne == nil && lookUpTwo == nil && lookUpThree == nil && lookUpFour == nil) {
+//            print(target)
             return true
         }
-        print("failed:", target)
+//        print("failed:", target)
         return false
     }
 }

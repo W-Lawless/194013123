@@ -169,7 +169,9 @@ struct ElementsAPI {
             AppFactory.planeElements = plane
 
             await planeViewModel.updateValues(true, plane)
-
+            
+            FileCacheUtil.cacheToFile(data: plane)
+            
             return plane
             
         } catch {

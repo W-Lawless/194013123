@@ -19,9 +19,9 @@ struct Session {
     }
 
     private init() {
-        let cache = URLCache(memoryCapacity: 8 * 1024 * 1024, diskCapacity: 16 * 1024 * 1024)
-        let customNetworkReqConfig = URLSessionConfiguration.default
-        customNetworkReqConfig.urlCache = cache
+//        let cache = URLCache(memoryCapacity: 8 * 1024 * 1024, diskCapacity: 16 * 1024 * 1024)
+        let customNetworkReqConfig = URLSessionConfiguration.ephemeral
+//        customNetworkReqConfig.urlCache = cache
         customNetworkReqConfig.timeoutIntervalForRequest = 29
         customNetworkReqConfig.timeoutIntervalForResource = 29
         self.session = URLSession(configuration: customNetworkReqConfig)

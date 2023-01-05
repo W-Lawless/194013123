@@ -147,7 +147,7 @@ final class AppFactory {
     static func fetchAll() {
         
         Task{
-            await elementsAPI.fetch()
+//            let _ = await elementsAPI.fetch()
 //            await areasAPI.mapPlane()
 //            accessAPI.registerDevice()
         }
@@ -214,6 +214,19 @@ final class AppFactory {
 //        ///Non Caching
 //        flightAPI.fetch()
 //        weatherAPI.fetch()
+    }
+    
+    //MARK: - Cache Methods
+    
+    static func retrieveElementsFromCache() async throws {
+            do {
+                let cacheData = try FileCacheUtil.retrieveCachedFile(dataModel: PlaneMap())
+                await planeViewModel.updateValues(true, cacheData)
+            } catch {
+                print("No cache retrieved")
+                fetchAll()
+                throw error
+            }
     }
     
     

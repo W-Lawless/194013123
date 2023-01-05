@@ -12,7 +12,7 @@ struct Plane: Identifiable {
     var id: String
 }
 
-struct PlaneArea: Identifiable {
+struct PlaneArea: Identifiable, Codable {
     var id: String
     var rect: RenderCoordinates
     var lights: [LightModel]? = nil
@@ -27,7 +27,7 @@ struct PlaneArea: Identifiable {
     var zoneLights: [LightModel]? = nil
 }
 
-struct PlaneMap {
+struct PlaneMap: Codable {
     var mapAreas: [PlaneArea] = [PlaneArea]()   /// Full-bodied area struct with populated fields for lights, seats, etc 
     var apiAreas: [AreaModel] = [AreaModel]()  /// Areas as described by API results
     var allLights: [LightModel] = [LightModel]()

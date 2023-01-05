@@ -29,7 +29,7 @@ class AppCoordinator {
         self.window.rootViewController = rootNavView
         
         AppFactory.cabinConnectionPublisher
-            .sink{ pulse in
+            .sink { pulse in
                 DispatchQueue.main.async {
                     let last = (rootNavView.viewControllers.count - 1)
                     if(pulse){
@@ -39,8 +39,19 @@ class AppCoordinator {
                             rootNavView.popViewController(animated: true)
                         }
                     } else { //: Pulse false
-                        if(rootNavView.viewControllers[last] !== loading) { /// Check already loading
-                            rootNavView.pushViewController(loading, animated: true)
+                        Task {
+                            do {
+                                try await AppFactory.retrieveElementsFromCache()
+                                if(rootNavView.viewControllers[last] === loading) { ///Check view order
+//                                    AppFactory.fetchAll()
+                                    cabin.monitor.stopMonitor()
+                                    rootNavView.popViewController(animated: true)
+                                }
+                            } catch {
+                                if(rootNavView.viewControllers[last] !== loading) { /// Check already loading
+                                    rootNavView.pushViewController(loading, animated: true)
+                                }
+                            }
                         }
                     }
                 }
