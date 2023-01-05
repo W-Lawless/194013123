@@ -60,13 +60,13 @@ class LightsViewModel: ViewModelWithSubViews, ObservableObject {
     
     @Published var activeSeat: String = ""
 //    @Published var loading: Bool = true
-//    @Published var lightList: [LightModel]?
+    @Published var lightList: [LightModel]?
     @Published var showPanel: Bool = false
     
-    func updateValues(_ alive: Bool, _ data: [LightModel]?) {
+    func updateValues(_ alive: Bool, data: [LightModel]) {
 //        self.loading = !alive
 //        if let data = data {
-//            self.lightList = data
+            self.lightList = data 
 //        }
     }
     

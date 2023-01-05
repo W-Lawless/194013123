@@ -32,7 +32,7 @@ class ShadesAPI {
                 }
             },
             receiveValue: { shades in
-                self.viewModel.updateValues(true, shades)
+                self.viewModel.updateValues(true, data: shades)
                 FileCacheUtil.cacheToFile(data: shades)
             }
         ) 

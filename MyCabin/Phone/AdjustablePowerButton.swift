@@ -16,8 +16,11 @@ struct AdjustablePowerButton: View {
     var body: some View {
         if(display) {
             VStack{
-                Toggle(isOn: $display) {
+                Toggle(isOn: $power) {
                     Text("Power")
+                }
+                .onChange(of: power) { newValue in
+                    AppFactory.lightsAPI.toggleLight(light, cmd: newValue ? .ON : .OFF)
                 }
                 Stepper("Brightness", value: $luminosity)
             }

@@ -36,16 +36,18 @@ struct Shades: View {
 }
 
 class ShadesViewModel: ViewModelWithSubViews, ObservableObject {
+    typealias ResponseModel = ShadeModel
+    
 
     @Published var activeShadeID: String = ""
     @Published var showPanel: Bool = false
     @Published var shadeList: [ShadeModel]?
     @Published var activeShade: ShadeModel?
     
-    func updateValues(_ alive: Bool, _ data: [ShadeModel]?) {
-        if let data = data {
+    func updateValues(_ alive: Bool, data: [ShadeModel]) {
+//        if let data = data {
             self.shadeList = data
-        }
+//        }
     }
     
     func showSubView(forID shade: String) {

@@ -75,13 +75,13 @@ class AccessAPI {
         let createdAt = Int((Date().timeIntervalSince1970 * 1000).rounded())
         let name = "SANDBOX-DEVICE-\(random)"
         let encodedName = name.data(using: .utf8)?.base64EncodedString()
-        print(encodedName)
+//        print(encodedName)
         let encodedID = id.data(using: .utf8)?.base64EncodedString()
-        print(encodedID)
+//        print(encodedID)
         
         let newDevice = DeviceModel(id: id, name: "SANDBOX-DEVICE-\(random)", label: "", ipAddress: address ?? "", macAddress: id, accessLevel: "GUEST", enabled: true, immutable: false, pin: pin, accessLevelRequested: false, deviceType: "IPHONE", createdAt: createdAt, lastSeenAt: createdAt)
         
-        print(newDevice)
+//        print(newDevice)
         
         let endpoint = Endpoint<EndpointFormats.Put<DeviceModel>, DeviceModel>(path: "/api/v1/security/clients")
         let ipRequestHeader: [String:String] = ["gcms-ip-address": "4.2.6.7"]

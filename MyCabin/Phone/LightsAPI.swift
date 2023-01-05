@@ -32,7 +32,7 @@ class LightsAPI {
                 }
             },
             receiveValue: { lights in
-                self.viewModel.updateValues(true, lights)
+                self.viewModel.updateValues(true, data: lights)
                 FileCacheUtil.cacheToFile(data: lights)
             }
         )

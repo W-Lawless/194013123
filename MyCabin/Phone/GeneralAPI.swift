@@ -7,28 +7,21 @@
 
 import Foundation
 import Combine
+
+//protocol GCMS_API {
 //
-//protocol GCMS_API<Format, ResultModel> {
-//    associatedtype Format: EndpointFormat
-//    associatedtype ResultModel: Codable
-//    associatedtype ViewModel: GCMSViewModel
-//    var viewModel: ViewModel { get set }
-//    var endpoint: Endpoint<Format, ResultModel> { get set }
-//    var cancelToken: Cancellable { get set }
-//    func fetch()
+//    var cancelToken: AnyCancellable { get set }
+//    mutating func fetch(for endpoint: Endpoint<some EndpointFormat, some Codable>, viewModel: some GCMSViewModel)
 //}
 //
 //protocol GCMSViewModel {
-//    associatedtype ResponseModel
-//    func updateValues(_: Bool, data: [ResponseModel])
+//    func updateValues(_: Bool, data: [some Codable])
 //}
 //
 //extension GCMS_API {
-//    mutating func fetch() {
+//    mutating func fetch(for endpoint: Endpoint<some EndpointFormat, some Codable>, viewModel: some GCMSViewModel) {
 //
-//        let generalEndpoint = self.endpoint
-//
-//        let publisher = Session.shared.publisher(for: self.endpoint, using: Self.Format.RequestData.self as! Self.Format.RequestData)
+//        let publisher = Session.shared.publisher(for: endpoint, using: nil)
 //
 //        self.cancelToken = publisher.sink(
 //            receiveCompletion: { completion in
@@ -40,8 +33,13 @@ import Combine
 //                }
 //            },
 //            receiveValue: { data in
-//                self.viewModel.updateValues(true, data: data)
+//                viewModel.updateValues(true, data: data)
 //            }
 //        )
+//
 //    }
+//}
+//
+//struct TestGeneral: GCMS_API {
+//    var cancelToken = AnyCancellable {}
 //}

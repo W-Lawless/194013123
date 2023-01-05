@@ -16,7 +16,15 @@ enum LightState {
     case OFF
 }
 
-struct LightModel: Codable, Identifiable {
+struct LightModel: Codable, Identifiable, Hashable {
+    static func == (lhs: LightModel, rhs: LightModel) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
+    }
+    
     var id: String
     var name: String
     var rect: RenderCoordinates

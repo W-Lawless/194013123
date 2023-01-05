@@ -23,17 +23,17 @@ struct LightsBottomPanel: View {
                     AdjustablePowerButton(light: lights[0], display: $showDimmable)
                 } else {
                     HStack(spacing: 18) {
-                        ForEach(lights) { light in
-                            if(light.brightness.dimmable){
-                                AdjustablePowerButton(light: light, display: $showDimmable)
+                        ForEach(Array(lights.enumerated()), id: \.element) { index, element in
+                            if(lights[index].brightness.dimmable){
+                                AdjustablePowerButton(light: lights[index], display: $showDimmable)
                             } else {
-                                LightPowerButton(light: light)
+                                LightPowerButton(light: lights[index])
                             }
                         }
                     }
                     .frame(width:geo.size.width, alignment: .leading)
                     .padding(.horizontal, 24)
-                    .padding(.vertical, 9)
+                    .padding(.vertical, 16)
                 }
                 
                 

@@ -76,12 +76,12 @@ struct ElementsAPI {
                 return copy
             } //: FOR LOOP
             
-            AppFactory.lightsViewModel.updateValues(true, allLights)
+            AppFactory.lightsViewModel.updateValues(true, data: allLights)
             AppFactory.seatsViewModel.updateValues(true, transformedSeats)
             AppFactory.monitorsViewModel.updateValues(true, allMonitors)
             AppFactory.speakersViewModel.updateValues(true, allSpeakers)
             AppFactory.sourcesViewModel.updateValues(true, allSources)
-            AppFactory.shadesViewModel.updateValues(true, allShades)
+            AppFactory.shadesViewModel.updateValues(true, data: allShades)
             
             var plane = PlaneMap(mapAreas: [PlaneArea](), apiAreas: allAreas, allLights: allLights, allSeats: transformedSeats, allMonitors: allMonitors, allSpeakers: allSpeakers, allSources: allSources, allShades: allShades, allTables: allTables, allDivans: allDivans)
             

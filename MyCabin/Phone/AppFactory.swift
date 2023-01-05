@@ -145,7 +145,6 @@ final class AppFactory {
     ///TODO: ASYNCSEQUENCE / ASYNCSTREAM
     
     static func fetchAll() {
-
         
         Task{
             await elementsAPI.fetch()

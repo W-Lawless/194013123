@@ -183,7 +183,81 @@ class ConcurrencyTimeBenchmark_Tests: XCTestCase {
     
 }
 
-/// Configuration
+class Network_Tests: XCTestCase {
+    
+//    func test_init_doesNotRequestData() {
+//        let spy = SessionSpy()
+//        XCTAssertTrue(spy.messages.isEmpty)
+//    }
+//    
+////    func test_
+//    
+//    func test_returnsErrorOnBadURL() {
+//        let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: "^#@&^@")
+//        let publisher = Session.shared.publisher(for: endpoint, using: nil)
+//        
+//        let exp = expectation(description: "Wait for completion")
+//        let cancelToken = publisher.sink(
+//            receiveCompletion: { completion in
+//                switch completion {
+//                case .failure(let error as InvalidEndpoint):
+//                    XCTAssertEqual(error.message, "Invalid Endpoint")
+//                    exp.fulfill()
+//                default:
+//                    return
+//                }
+//            },
+//            receiveValue: { _ in }
+//        )
+//        
+//        
+//        wait(for: [exp], timeout: 1.0)
+//    }
+    
+    
+    
+}
+
+//MARK: - Network Test Infrastructure
+
+//private class SessionSpy: URLSession {
+//    var messages = [(path: String, request: URLRequest)]()
+//
+//    func get(from path: String, request: URLRequest){
+//        messages.append((path, request))
+//    }
+//
+////    func complete(with error: Error, at index: Int = 0){
+////        messages[index].completion(Result.failure(error))
+////    }
+////
+////    func complete(withStatusCode code: Int, data: Data, at index: Int = 0){
+////        let response = HTTPURLResponse(url: requestedURLs[index], statusCode: code, httpVersion: nil, headerFields: nil)!
+////        messages[index].completion(Result.success())
+////    }
+//    
+//    func spyPublisher<Format, ResponseModel>(
+//        for endpoint: Endpoint<Format, ResponseModel>,
+//        using requestData: Format.RequestData,
+//        decoder: JSONDecoder = .init()
+//    ) -> Result<Any, Error> {
+//        
+//        
+//        guard let request = endpoint.makeRequest(with: requestData) else {
+//            return Result.failure(InvalidEndpoint())
+//        }
+//        messages.append((path: endpoint.path, request: request))
+//        
+////        return dataTaskPublisher(for: request)
+////            .map(\.data)
+////            .decode(type: NetworkResponse<ResponseModel>.self, decoder: decoder)
+////            .map(\.results)
+////            .receive(on: DispatchQueue.main)
+////            .eraseToAnyPublisher()
+////        return Result
+//    }
+//}
+
 
 extension URLHost {
     func expectedURL(withPath path: String) throws -> URL {

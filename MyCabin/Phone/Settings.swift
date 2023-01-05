@@ -12,10 +12,15 @@ struct Settings: View {
     @AppStorage("someSetting") var address: String = "http://10.0.0.41"
 
     var body: some View {
-        Text("SETTINGS")
-        TextField("Some Setting:", text: $address)
-        Button("Save") {
-            
+        VStack {
+            Text("SETTINGS")
+            TextField("Some Setting:", text: $address)
+            Button("Save") {
+                
+            }
+        }
+        .onAppear {
+            AppFactory.fetchAll()
         }
     }
 }

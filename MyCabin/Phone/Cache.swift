@@ -11,23 +11,26 @@ struct FileCacheUtil {
     
     private static let encoder = JSONEncoder()
     
-    static func cacheToFile<T: Codable>(data: Array<T>) {
-        let key = T.self
+    static func cacheToFile<T: Codable>(data: Array<T>) throws {
         do {
-            let jsonPath = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("\(key).json")
+            let cacheDirectory = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("com.gulfstreamaero.myCabin.store")
             let dataEncoded = try encoder.encode(data)
-            try dataEncoded.write(to: jsonPath)
+            try dataEncoded.write(to: cacheDirectory)
         } catch {
-            print(error)
+            throw error
         }
     }
     
     
     static func retrieveCachedFile<T: Codable>(dataModel: T.Type) throws -> [T] {
-        let jsonPath = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("\(dataModel.self).json")
-        let fileData = try Data(contentsOf: jsonPath)
-        let out = try JSONDecoder().decode([T].self, from: fileData)
-        return out
+        do {
+            let cacheDirectory = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("com.gulfstreamaero.myCabin.store")
+            let fileData = try Data(contentsOf: cacheDirectory)
+            let out = try JSONDecoder().decode([T].self, from: fileData)
+            return out
+        } catch {
+            return error
+        }
     }
     
 }
