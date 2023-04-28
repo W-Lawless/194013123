@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MonitorModel: Codable, Identifiable {
+struct MonitorModel: Codable, Identifiable, ElementModel {
     var id: String
     var name: String
     var rect: RenderCoordinates

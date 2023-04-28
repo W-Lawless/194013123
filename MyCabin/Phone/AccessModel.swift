@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AccessModel: Codable {
+struct AccessModel: Codable, ElementModel {
     var id: String
     var name: String
     var system: Bool

@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class ShadesAPI {
+class ShadesAPI{
     
     let viewModel: ShadesViewModel
     var cancelToken: Cancellable?
@@ -32,7 +32,7 @@ class ShadesAPI {
                 }
             },
             receiveValue: { shades in
-                self.viewModel.updateValues(true, data: shades)
+                self.viewModel.updateValues(shades)
                 FileCacheUtil.cacheToFile(data: shades)
             }
         ) 
@@ -73,7 +73,7 @@ enum ShadeStates: String {
     case SHEER
 }
 
-struct ShadeModel: Codable, Identifiable {
+struct ShadeModel: Codable, Identifiable, ElementModel {
     var id: String
     var name: String
     var side: String

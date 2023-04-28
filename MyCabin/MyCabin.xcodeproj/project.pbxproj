@@ -22,7 +22,7 @@
 		2B10DD24292D4C2400AB98F3 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD23292D4C2400AB98F3 /* Weather.swift */; };
 		2B10DD26292D572500AB98F3 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD25292D572500AB98F3 /* WeatherAPI.swift */; };
 		2B10DD28292D656B00AB98F3 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD27292D656B00AB98F3 /* Endpoint.swift */; };
-		2B1170442933E3C100A1CB8F /* Coordinator+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1170432933E3C100A1CB8F /* Coordinator+.swift */; };
+		2B1170442933E3C100A1CB8F /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1170432933E3C100A1CB8F /* CoordinatorProtocol.swift */; };
 		2B1170462933E43800A1CB8F /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1170452933E43800A1CB8F /* AppCoordinator.swift */; };
 		2B11704A29352AF100A1CB8F /* MonitorsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11704929352AF100A1CB8F /* MonitorsAPI.swift */; };
 		2B11704C29352CDE00A1CB8F /* LightsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11704B29352CDE00A1CB8F /* LightsModel.swift */; };
@@ -54,12 +54,11 @@
 		2B8F713C292E566300073637 /* LightsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F713B292E566300073637 /* LightsAPI.swift */; };
 		2B8F713E292E5C5800073637 /* Lights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F713D292E5C5800073637 /* Lights.swift */; };
 		2B939C8A293E90AB0014AD13 /* Areas.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B939C89293E90AB0014AD13 /* Areas.json */; };
-		2B939C8D293E91010014AD13 /* AreasAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B939C8C293E91010014AD13 /* AreasAPI.swift */; };
 		2B939C8F293E910F0014AD13 /* AreasModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B939C8E293E910F0014AD13 /* AreasModel.swift */; };
 		2B939C91293E9DC80014AD13 /* RenderCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B939C90293E9DC80014AD13 /* RenderCoordinates.swift */; };
 		2B9ABC6D294A1CB600670EE0 /* LightsBottomPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9ABC6C294A1CB600670EE0 /* LightsBottomPanel.swift */; };
 		2BA7B4CB291D4A3A00942CB5 /* SeatsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4CA291D4A3A00942CB5 /* SeatsAPI.swift */; };
-		2BA7B4CD291D504900942CB5 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4CC291D504900942CB5 /* Session.swift */; };
+		2BA7B4CD291D504900942CB5 /* URLSession+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4CC291D504900942CB5 /* URLSession+.swift */; };
 		2BA7B4CF291D551A00942CB5 /* SeatSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4CE291D551A00942CB5 /* SeatSelection.swift */; };
 		2BA7B4F9291D9E9200942CB5 /* TabContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4F8291D9E9200942CB5 /* TabContainer.swift */; };
 		2BA7B4FB291DC0FF00942CB5 /* +Seats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B4FA291DC0FF00942CB5 /* +Seats.swift */; };
@@ -84,7 +83,9 @@
 		2BC49CD92923DD8F007DA457 /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC49CD82923DD8F007DA457 /* Loading.swift */; };
 		2BC49CDD2923E81C007DA457 /* +Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC49CDC2923E81C007DA457 /* +Session.swift */; };
 		2BC49CDF2923FC06007DA457 /* +Cabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC49CDE2923FC06007DA457 /* +Cabin.swift */; };
-		2BD75A17292E7503004360A3 /* Lights.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BD75A16292E7503004360A3 /* Lights.json */; };
+		2BCF9E6929F4686E007C7CA5 /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF9E6829F4686E007C7CA5 /* NetworkingTests.swift */; };
+		2BCF9E6D29F49CE1007C7CA5 /* Wheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF9E6C29F49CE1007C7CA5 /* Wheel.swift */; };
+		2BD75A17292E7503004360A3 /* LightsData.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BD75A16292E7503004360A3 /* LightsData.json */; };
 		2BD75A19292E7ACE004360A3 /* LightControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD75A18292E7ACE004360A3 /* LightControl.swift */; };
 		2BD75A1B292EB256004360A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD75A1A292EB256004360A3 /* AppDelegate.swift */; };
 		2BE4D4F22940FE3E0026FC01 /* ElementsEnumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE4D4F12940FE3E0026FC01 /* ElementsEnumModel.swift */; };
@@ -152,7 +153,7 @@
 		2B10DD23292D4C2400AB98F3 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		2B10DD25292D572500AB98F3 /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		2B10DD27292D656B00AB98F3 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
-		2B1170432933E3C100A1CB8F /* Coordinator+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+.swift"; sourceTree = "<group>"; };
+		2B1170432933E3C100A1CB8F /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		2B1170452933E43800A1CB8F /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		2B11704929352AF100A1CB8F /* MonitorsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorsAPI.swift; sourceTree = "<group>"; };
 		2B11704B29352CDE00A1CB8F /* LightsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightsModel.swift; sourceTree = "<group>"; };
@@ -187,12 +188,11 @@
 		2B8F713B292E566300073637 /* LightsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightsAPI.swift; sourceTree = "<group>"; };
 		2B8F713D292E5C5800073637 /* Lights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lights.swift; sourceTree = "<group>"; };
 		2B939C89293E90AB0014AD13 /* Areas.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Areas.json; sourceTree = "<group>"; };
-		2B939C8C293E91010014AD13 /* AreasAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasAPI.swift; sourceTree = "<group>"; };
 		2B939C8E293E910F0014AD13 /* AreasModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasModel.swift; sourceTree = "<group>"; };
 		2B939C90293E9DC80014AD13 /* RenderCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderCoordinates.swift; sourceTree = "<group>"; };
 		2B9ABC6C294A1CB600670EE0 /* LightsBottomPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightsBottomPanel.swift; sourceTree = "<group>"; };
 		2BA7B4CA291D4A3A00942CB5 /* SeatsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatsAPI.swift; sourceTree = "<group>"; };
-		2BA7B4CC291D504900942CB5 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		2BA7B4CC291D504900942CB5 /* URLSession+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+.swift"; sourceTree = "<group>"; };
 		2BA7B4CE291D551A00942CB5 /* SeatSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatSelection.swift; sourceTree = "<group>"; };
 		2BA7B4F8291D9E9200942CB5 /* TabContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContainer.swift; sourceTree = "<group>"; };
 		2BA7B4FA291DC0FF00942CB5 /* +Seats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Seats.swift"; sourceTree = "<group>"; };
@@ -219,7 +219,9 @@
 		2BC49CD82923DD8F007DA457 /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		2BC49CDC2923E81C007DA457 /* +Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Session.swift"; sourceTree = "<group>"; };
 		2BC49CDE2923FC06007DA457 /* +Cabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Cabin.swift"; sourceTree = "<group>"; };
-		2BD75A16292E7503004360A3 /* Lights.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Lights.json; sourceTree = "<group>"; };
+		2BCF9E6829F4686E007C7CA5 /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
+		2BCF9E6C29F49CE1007C7CA5 /* Wheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wheel.swift; sourceTree = "<group>"; };
+		2BD75A16292E7503004360A3 /* LightsData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LightsData.json; sourceTree = "<group>"; };
 		2BD75A18292E7ACE004360A3 /* LightControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightControl.swift; sourceTree = "<group>"; };
 		2BD75A1A292EB256004360A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BE4D4F12940FE3E0026FC01 /* ElementsEnumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsEnumModel.swift; sourceTree = "<group>"; };
@@ -310,7 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				2B1170452933E43800A1CB8F /* AppCoordinator.swift */,
-				2B1170432933E3C100A1CB8F /* Coordinator+.swift */,
+				2B1170432933E3C100A1CB8F /* CoordinatorProtocol.swift */,
 				2B865802293900E600982BBB /* Routers.swift */,
 			);
 			name = Navigation;
@@ -425,7 +427,7 @@
 			children = (
 				2BA7B4C9291D37A600942CB5 /* API */,
 				2BA7B4C8291D379200942CB5 /* HardwareDevices */,
-				2BA7B4CC291D504900942CB5 /* Session.swift */,
+				2BA7B4CC291D504900942CB5 /* URLSession+.swift */,
 				2BB3A586292445C90094B787 /* HeartbeatMonitor.swift */,
 				2BB135FB292703970016444C /* CodableWrapper.swift */,
 				2B10DD27292D656B00AB98F3 /* Endpoint.swift */,
@@ -454,7 +456,6 @@
 		2B939C8B293E90F40014AD13 /* Areas */ = {
 			isa = PBXGroup;
 			children = (
-				2B939C8C293E91010014AD13 /* AreasAPI.swift */,
 				2B939C8E293E910F0014AD13 /* AreasModel.swift */,
 			);
 			name = Areas;
@@ -580,6 +581,8 @@
 		2BB135D72926D1290016444C /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				2BBCCC6229FB533700DC6FD4 /* Cache Tests */,
+				2BCF9E6729F467DF007C7CA5 /* Networking Tests */,
 				2BB135F82926EAC90016444C /* Info.plist */,
 				2BB135F32926E1EB0016444C /* MockClasses */,
 				2BB135DF2926D2C80016444C /* MockData */,
@@ -598,7 +601,7 @@
 				2B1170532935338D00A1CB8F /* Monitors.json */,
 				2B1170542935338D00A1CB8F /* Sources.json */,
 				2B1170522935338D00A1CB8F /* Speakers.json */,
-				2BD75A16292E7503004360A3 /* Lights.json */,
+				2BD75A16292E7503004360A3 /* LightsData.json */,
 				2BB135EF2926DD610016444C /* Flight.json */,
 				2BB135EE2926DD610016444C /* Seats.json */,
 				2BB13600292713570016444C /* Shades.json */,
@@ -632,6 +635,13 @@
 			name = Shades;
 			sourceTree = "<group>";
 		};
+		2BBCCC6229FB533700DC6FD4 /* Cache Tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Cache Tests";
+			sourceTree = "<group>";
+		};
 		2BC49CD72923DD82007DA457 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -642,6 +652,14 @@
 				2BE97D4A291C348800149BA4 /* CallAttendant.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		2BCF9E6729F467DF007C7CA5 /* Networking Tests */ = {
+			isa = PBXGroup;
+			children = (
+				2BCF9E6829F4686E007C7CA5 /* NetworkingTests.swift */,
+			);
+			name = "Networking Tests";
 			sourceTree = "<group>";
 		};
 		2BE97D47291C348800149BA4 /* Watch */ = {
@@ -681,6 +699,7 @@
 				2BA2F82229509FDD007C26E5 /* Plane */,
 				2B1170662935516B00A1CB8F /* Flight */,
 				2B11704F29352D6300A1CB8F /* Media */,
+				2BCF9E6C29F49CE1007C7CA5 /* Wheel.swift */,
 			);
 			name = MainViews;
 			sourceTree = "<group>";
@@ -831,7 +850,7 @@
 				2B86580629393AC200982BBB /* Devices.json in Resources */,
 				2B1170552935338D00A1CB8F /* Speakers.json in Resources */,
 				2BB13601292713570016444C /* Shades.json in Resources */,
-				2BD75A17292E7503004360A3 /* Lights.json in Resources */,
+				2BD75A17292E7503004360A3 /* LightsData.json in Resources */,
 				2B1170562935338D00A1CB8F /* Monitors.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -856,7 +875,6 @@
 				2B11705C29353DBF00A1CB8F /* SourcesAPI.swift in Sources */,
 				2B939C91293E9DC80014AD13 /* RenderCoordinates.swift in Sources */,
 				2B8F7139292D763C00073637 /* Shades.swift in Sources */,
-				2B939C8D293E91010014AD13 /* AreasAPI.swift in Sources */,
 				2B11705E29353DED00A1CB8F /* Sources.swift in Sources */,
 				2B8F713E292E5C5800073637 /* Lights.swift in Sources */,
 				2B939C8F293E910F0014AD13 /* AreasModel.swift in Sources */,
@@ -892,12 +910,12 @@
 				2B1170462933E43800A1CB8F /* AppCoordinator.swift in Sources */,
 				2BA8F60329251C0C005621D3 /* FlightModels.swift in Sources */,
 				2B865803293900E600982BBB /* Routers.swift in Sources */,
-				2BA7B4CD291D504900942CB5 /* Session.swift in Sources */,
+				2BA7B4CD291D504900942CB5 /* URLSession+.swift in Sources */,
 				2B10DD24292D4C2400AB98F3 /* Weather.swift in Sources */,
 				2B02B9D42936BBEA00C6387A /* Settings.swift in Sources */,
 				2B02B9C52936AAA100C6387A /* CabinClimate.swift in Sources */,
 				2B41EF4C292C21E50062CA2B /* FlightAPI.swift in Sources */,
-				2B1170442933E3C100A1CB8F /* Coordinator+.swift in Sources */,
+				2B1170442933E3C100A1CB8F /* CoordinatorProtocol.swift in Sources */,
 				2B41EF4A292C105E0062CA2B /* Cabin.swift in Sources */,
 				2B02B9DB2937FD4500C6387A /* PlaneSchematic.swift in Sources */,
 				2B11704E29352D0A00A1CB8F /* MonitorModel.swift in Sources */,
@@ -910,6 +928,7 @@
 				2B117068293551AD00A1CB8F /* FlightTab.swift in Sources */,
 				2B02B9D12936BBDD00C6387A /* Presets.swift in Sources */,
 				2B02B9CE2936B66500C6387A /* CabinClimateModel.swift in Sources */,
+				2BCF9E6D29F49CE1007C7CA5 /* Wheel.swift in Sources */,
 				2B10DD28292D656B00AB98F3 /* Endpoint.swift in Sources */,
 				2BE4D4F5294107680026FC01 /* TableModel.swift in Sources */,
 				2B117060293548A100A1CB8F /* Speakers.swift in Sources */,
@@ -924,6 +943,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BB135FA2926FD760016444C /* MockTimer.swift in Sources */,
+				2BCF9E6929F4686E007C7CA5 /* NetworkingTests.swift in Sources */,
 				2BB135D92926D1290016444C /* MainTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

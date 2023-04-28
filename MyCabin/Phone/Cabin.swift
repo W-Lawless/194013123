@@ -29,11 +29,11 @@ class CabinAPI: ObservableObject {
             request.httpMethod = "HEAD"
             let (_,response) = try await Session.shared.data(for: request)
             if response is HTTPURLResponse { ///print(" ✅: Cabin Responsed with Status:\(res.statusCode)")
-                AppFactory.cabinConnectionPublisher.send(true)
+                PlaneFactory.cabinConnectionPublisher.send(true)
             }
         } catch {
             /// let cast = error as NSError; print(" ❌: Cabin Connection Error \(cast.code)")
-            AppFactory.cabinConnectionPublisher.send(false)
+            PlaneFactory.cabinConnectionPublisher.send(false)
         }
     }
     

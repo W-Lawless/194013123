@@ -10,9 +10,9 @@ import SwiftUI
 struct MediaTab: View {
     var body: some View {
         TabView {
-            AppFactory.buildMonitorsView()
-            AppFactory.buildSourcesView()
-            AppFactory.buildSpeakersView()
+            ViewFactory.buildMonitorsView()
+            ViewFactory.buildSourcesView()
+            ViewFactory.buildSpeakersView()
         }
         .tabViewStyle(.page)
     }

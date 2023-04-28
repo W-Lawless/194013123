@@ -16,10 +16,14 @@ struct Home: View {
     
     var body: some View {
         
+//        RotatingWheel()
+        
+        
         Group {
-            
+
+
             HStack(alignment: .center, spacing: 72) {
-                
+
                 VStack(alignment: .center, spacing: 12) {
                         Image(systemName: "lightbulb")
                             .resizable()
@@ -30,7 +34,7 @@ struct Home: View {
                 .hapticFeedback(feedbackStyle: .light) {
                     navigation.goTo(.lights)
                 }
-                
+
                 VStack(alignment: .center, spacing: 12) {
                     Image(systemName: "uiwindow.split.2x1")
                         .resizable()
@@ -46,10 +50,10 @@ struct Home: View {
             .frame(height:120)
             .padding(.horizontal, 24)
             .padding(.vertical, 12)
-            
-            
+
+
             HStack(alignment: .center, spacing: 32) {
-                
+
                 VStack(alignment: .center, spacing: 12) {
                     Image(systemName: "thermometer.sun")
                         .resizable()
@@ -62,7 +66,7 @@ struct Home: View {
                 } //: VSTQ
                 .frame(width: 98)
                 .clipShape(RoundedRectangle(cornerRadius: 4))
-                
+
                 VStack(alignment: .center, spacing: 12) {
                     Image(systemName: "s.circle")
                         .resizable()
@@ -79,10 +83,10 @@ struct Home: View {
             .frame(height:120)
             .padding(.horizontal, 24)
             .padding(.vertical, 12)
-            
-            
+
+
             HStack(alignment: .center, spacing: 72) {
-                
+
                 VStack(alignment: .center, spacing: 12) {
                     Image(systemName: "list.bullet.circle")
                         .resizable()
@@ -93,7 +97,7 @@ struct Home: View {
                     }
                     .foregroundColor(.white)
                 } //: VSTQ
-                
+
                 VStack(alignment: .center, spacing: 12) {
                     Image(systemName: "gear")
                         .resizable()
@@ -108,25 +112,17 @@ struct Home: View {
             .frame(height:120)
             .padding(.horizontal, 24)
             .padding(.vertical, 12)
-            
+
         }
         .overlay(
             RoundedRectangle(cornerRadius: 24)
                 .stroke(Color.white, lineWidth: 2)
         )
-        //        Curves()
         
+//        Curves()
 //        Pulse()
         
-//        VStack { //: VSTQ 1
-//            Image(systemName: "house.fill")
-//                .resizable()
-//                .scaledToFit()
-//                .frame(height: 72)
-//                .hapticFeedback()
-//        } //VSTQ: 1
-//        .frame(height: 300)
-//        .padding(.horizontal, 24)
+
     }
 }
 

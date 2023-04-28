@@ -32,7 +32,7 @@ class SpeakersAPI {
                 }
             },
             receiveValue: { speakers in
-                self.viewModel.updateValues(true, speakers)
+                self.viewModel.updateValues(speakers)
                 FileCacheUtil.cacheToFile(data: speakers)
             }
         )

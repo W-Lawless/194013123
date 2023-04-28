@@ -14,7 +14,7 @@ struct Lights: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             
-            AppFactory.buildPlaneSchematic(topLevelViewModel: viewModel, options: PlaneSchematicDisplayMode.showLights)
+            PlaneFactory.buildPlaneSchematic(topLevelViewModel: viewModel, options: PlaneSchematicDisplayMode.showLights)
             
             VStack(alignment: .center) {
                 if(viewModel.showPanel) {
@@ -25,6 +25,13 @@ struct Lights: View {
             .padding(.bottom, 18)
             .background(Color.black)
             .frame(height:108, alignment: .top)
+            .onAppear {
+                let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: "/api/v1/lights")
+                var sut = TestGeneral(endpoint: endpoint, viewModel: StateFactory.lightsViewModel)
+                sut.fetch(for: sut.endpoint, viewModel: sut.viewModel) { result in
+                    viewModel.updateValues(result)
+                }
+            }
             
             
         } //: ZSTQ
@@ -56,18 +63,17 @@ protocol ViewModelWithSubViews {
     func showSubView(forID: String)
 }
 
-class LightsViewModel: ViewModelWithSubViews, ObservableObject {
+class LightsViewModel: GCMSViewModel, ViewModelWithSubViews, ObservableObject {
     
     @Published var activeSeat: String = ""
-//    @Published var loading: Bool = true
     @Published var lightList: [LightModel]?
     @Published var showPanel: Bool = false
     
-    func updateValues(_ alive: Bool, data: [LightModel]) {
-//        self.loading = !alive
-//        if let data = data {
-            self.lightList = data 
-//        }
+    func updateValues(_ data: [Codable]) {
+        let typecast = data as? [LightModel]
+        if let typecast {
+            self.lightList = typecast
+        }
     }
     
     func showSubView(forID seat: String) {
@@ -85,7 +91,7 @@ class LightsViewModel: ViewModelWithSubViews, ObservableObject {
 
 struct Lights_Previews: PreviewProvider {
     static var previews: some View {
-        AppFactory.buildLightsMenu()
+        ViewFactory.buildLightsMenu()
     }
 }
 

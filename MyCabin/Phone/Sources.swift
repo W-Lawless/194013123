@@ -37,17 +37,14 @@ class SourcesViewModel: ObservableObject {
     @Published var loading: Bool = false
     @Published var sourceList: [SourceModel]?
     
-    func updateValues(_ alive: Bool, _ data: [SourceModel]?) {
-        self.loading = !alive
-        if let data = data {
-            self.sourceList = data
-        }
+    func updateValues(_ data: [SourceModel]) {
+        self.sourceList = data
     }
     
 }
 
 struct Sources_Previews: PreviewProvider {
     static var previews: some View {
-        AppFactory.buildSourcesView()
+        ViewFactory.buildSourcesView()
     }
 }

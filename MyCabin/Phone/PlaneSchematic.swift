@@ -308,7 +308,7 @@ extension View {
 
 struct PlaneSchematic_Previews: PreviewProvider {
     static var previews: some View {
-        AppFactory.buildPlaneSchematic(topLevelViewModel: SeatsViewModel(), options: PlaneSchematicDisplayMode.onlySeats)
+        PlaneFactory.buildPlaneSchematic(topLevelViewModel: SeatsViewModel(), options: PlaneSchematicDisplayMode.onlySeats)
     }
 }
 

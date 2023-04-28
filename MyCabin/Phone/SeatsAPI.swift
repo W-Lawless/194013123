@@ -33,7 +33,7 @@ class SeatsAPI {
                 }
             },
             receiveValue: { seats in
-                self.viewModel.updateValues(true, seats)
+                self.viewModel.updateValues(seats)
                 FileCacheUtil.cacheToFile(data: seats)
 
             }

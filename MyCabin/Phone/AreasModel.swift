@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AreaModel: Codable {
+struct AreaModel: Codable, ElementModel {
     var id: String
     var name: String
     var rect: RenderCoordinates

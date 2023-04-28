@@ -51,7 +51,7 @@ struct LightsBottomPanel: View {
     }
     
     private func getLightsForSeat() {
-        let target = AppFactory.planeElements?.allSeats.filter { seat in
+        let target = PlaneFactory.planeElements?.allSeats.filter { seat in
             return seat.id == currentSeat
         }
         

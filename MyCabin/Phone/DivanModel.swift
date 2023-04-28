@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DivanModel: Codable, Identifiable {
+struct DivanModel: Codable, Identifiable, ElementModel {
     var id: String
     var name: String
     var rect: RenderCoordinates

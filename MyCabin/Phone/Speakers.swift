@@ -37,11 +37,8 @@ class SpeakersViewModel: ObservableObject {
     @Published var loading: Bool = false
     @Published var speakerList: [SpeakerModel]?
     
-    func updateValues(_ alive: Bool, _ data: [SpeakerModel]?) {
-        self.loading = !alive
-        if let data = data {
-            self.speakerList = data
-        }
+    func updateValues(_ data: [SpeakerModel]) {
+        self.speakerList = data
     }
     
     func updateState(for speaker: SpeakerModel) {
@@ -56,6 +53,6 @@ class SpeakersViewModel: ObservableObject {
 
 struct Speakers_Previews: PreviewProvider {
     static var previews: some View {
-        AppFactory.buildSpeakersView()
+        ViewFactory.buildSpeakersView()
     }
 }

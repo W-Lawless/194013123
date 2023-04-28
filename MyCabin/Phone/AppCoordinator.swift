@@ -18,45 +18,36 @@ class AppCoordinator {
     
     func start() {
         
-        let cabin = AppFactory.cabinAPI
-        let tabs = AppFactory.buildRootTabNavigation()
+        let cabin = PlaneFactory.cabinAPI
+        let tabs = NavigationFactory.buildRootTabNavigation()
         
-        let loading = AppFactory.loadingView
+        let loading = ViewFactory.loadingView
         
         let rootNavView = UINavigationController()
         rootNavView.navigationBar.isHidden = true
         rootNavView.setViewControllers([tabs.navigationController,loading], animated: true)
         self.window.rootViewController = rootNavView
         
-        AppFactory.cabinConnectionPublisher
+        PlaneFactory.cabinConnectionPublisher
             .sink { pulse in
                 DispatchQueue.main.async {
                     let last = (rootNavView.viewControllers.count - 1)
                     if(pulse){
                         if(rootNavView.viewControllers[last] === loading) { ///Check view order
-                            AppFactory.fetchAll()
+                            PlaneFactory.connectToPlane()
                             cabin.monitor.stopMonitor()
                             rootNavView.popViewController(animated: true)
                         }
                     } else { //: Pulse false
                         Task {
-                            do {
-                                try await AppFactory.retrieveElementsFromCache()
-                                if(rootNavView.viewControllers[last] === loading) { ///Check view order
-//                                    AppFactory.fetchAll()
-                                    cabin.monitor.stopMonitor()
-                                    rootNavView.popViewController(animated: true)
-                                }
-                            } catch {
                                 if(rootNavView.viewControllers[last] !== loading) { /// Check already loading
                                     rootNavView.pushViewController(loading, animated: true)
                                 }
-                            }
                         }
                     }
                 }
             }
-            .store(in: &AppFactory.cabinConnectionSubscriptions)
+            .store(in: &PlaneFactory.cabinConnectionSubscriptions)
     }
 }
 
@@ -144,7 +135,7 @@ class HomeTabs: UITabBarController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        AppFactory.cabinAPI.monitor.startMonitor(interval: 30, callback: AppFactory.cabinAPI.monitorCallback)
+        PlaneFactory.cabinAPI.monitor.startMonitor(interval: 30, callback: PlaneFactory.cabinAPI.monitorCallback)
     }
     
 //    override func viewDidDisappear(_ animated: Bool) {

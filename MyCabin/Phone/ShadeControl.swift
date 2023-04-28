@@ -102,7 +102,7 @@ struct ShadeControl: View {
     
     
     private func getShadesForSeat() {
-        let target = AppFactory.planeElements?.allSeats.filter { seat in
+        let target = PlaneFactory.planeElements?.allSeats.filter { seat in
             return seat.id == currentSeat
         }
         
@@ -115,7 +115,7 @@ struct ShadeControl: View {
 struct ShadeControl_Previews: PreviewProvider {
     static var previews: some View {
         let shade = ShadeModel(id: "1", name: "window", side: "left", rect: RenderCoordinates(x: 0.0, y: 0.0, w: 0.0, h: 0.0, r: 0.0), sub: [], assoc: [])
-        ShadeControl(shade: shade, api: AppFactory.shadesAPI)
+        ShadeControl(shade: shade, api: StateFactory.shadesAPI)
             .previewLayout(.sizeThatFits)
     }
 }

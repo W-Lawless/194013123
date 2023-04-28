@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct SeatModel: Codable, Identifiable {
+struct SeatModel: Codable, Identifiable, ElementModel {
     var id: String
     var name: String
     var rect: RenderCoordinates

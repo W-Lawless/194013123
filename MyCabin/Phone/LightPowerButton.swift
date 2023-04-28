@@ -31,7 +31,7 @@ struct LightPowerButton: View {
         .frame(width: 64)
         .hapticFeedback(feedbackStyle: .rigid) {
             power.toggle()
-            AppFactory.lightsAPI.toggleLight(light, cmd: power ? .ON : .OFF)
+            StateFactory.lightsAPI.toggleLight(light, cmd: power ? .ON : .OFF)
         }
     }
 }

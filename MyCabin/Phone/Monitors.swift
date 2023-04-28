@@ -43,17 +43,14 @@ class MonitorsViewModel: ObservableObject {
     @Published var loading: Bool = false
     @Published var monitorsList: [MonitorModel]?
     
-    func updateValues(_ alive: Bool, _ data: [MonitorModel]?) {
-        self.loading = !alive
-        if let data = data {
-            self.monitorsList = data
-        }
+    func updateValues(_ data: [MonitorModel]) {
+        self.monitorsList = data
     }
 }
 
 
 struct Monitors_Previews: PreviewProvider {
     static var previews: some View {
-        AppFactory.buildMonitorsView()
+        ViewFactory.buildMonitorsView()
     }
 }

@@ -17,7 +17,7 @@ class AccessAPI {
     
     
     func fetch() {
-        let publisher = Session.shared.publisherForArrayResponse(for: endpoint, using: nil)
+        let publisher = Session.shared.publisherForArrayResponse(for: endpoint, using: Void())
         
         self.cancelToken = publisher.sink(
             receiveCompletion: { completion in

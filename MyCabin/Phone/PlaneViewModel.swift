@@ -43,10 +43,8 @@ struct PlaneMap: Codable {
 class PlaneViewModel: ObservableObject {
     @Published var plane: PlaneMap = PlaneMap()
     
-    @MainActor func updateValues(_ alive: Bool, _ data: PlaneMap?) {
-        if let data = data {
-            self.plane = data
-        }
+    @MainActor func updateValues(_ data: PlaneMap) {
+        self.plane = data
     }
 }
 

@@ -32,7 +32,7 @@ class SourcesAPI {
                 }
             },
             receiveValue: { sources in
-                self.viewModel.updateValues(true, sources)
+                self.viewModel.updateValues(sources)
                 FileCacheUtil.cacheToFile(data: sources)
             }
         )

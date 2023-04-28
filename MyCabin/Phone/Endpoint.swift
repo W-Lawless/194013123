@@ -17,7 +17,7 @@ protocol EndpointFormat {
     associatedtype RequestData
     
     static func prepare(_ request: inout URLRequest,
-                        with data: RequestData)
+                        with data: RequestData?)
 }
 
 enum EndpointFormats {
@@ -59,7 +59,21 @@ enum EndpointFormats {
 
 
 extension Endpoint {
-    func makeRequest(with data: Format.RequestData, host: URLHost = .default) -> URLRequest? {
+    func makeRequest(with data: Format.RequestData?) -> URLRequest? {
+
+        guard let url = validateUrl() else { return nil }
+
+        var request = URLRequest(url: url)
+        if let data {
+            Format.prepare(&request, with: data)
+        } else {
+            Format.prepare(&request, with: nil)
+        }
+
+        return request
+    }
+    
+    func validateUrl(host: URLHost = .default) -> URL? {
         var components = URLComponents()
         components.scheme = "http"
         components.host = host.rawValue
@@ -67,11 +81,7 @@ extension Endpoint {
         components.queryItems = queryItems.isEmpty ? nil : queryItems
 
         guard let url = components.url else { return nil }
-
-        var request = URLRequest(url: url)
-        Format.prepare(&request, with: data)
-
-        return request
+        return url
     }
 }
 

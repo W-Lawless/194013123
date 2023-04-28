@@ -19,12 +19,12 @@ struct Session {
     }
 
     private init() {
-//        let cache = URLCache(memoryCapacity: 8 * 1024 * 1024, diskCapacity: 16 * 1024 * 1024)
         let customNetworkReqConfig = URLSessionConfiguration.ephemeral
-//        customNetworkReqConfig.urlCache = cache
         customNetworkReqConfig.timeoutIntervalForRequest = 29
         customNetworkReqConfig.timeoutIntervalForResource = 29
+        customNetworkReqConfig.urlCache = nil
         self.session = URLSession(configuration: customNetworkReqConfig)
+        
     }
 
 }
@@ -32,14 +32,15 @@ struct Session {
 extension URLSession {
     func publisher<Format, ResponseModel>(
         for endpoint: Endpoint<Format, ResponseModel>,
-        using requestData: Format.RequestData,
-        decoder: JSONDecoder = .init()
+        using requestData: Format.RequestData?,
+        decoder: JSONDecoder = .init(),
+        array: Bool = false,
+        null: Bool = false
     ) -> AnyPublisher<[ResponseModel], Error> {
-        guard let request = endpoint.makeRequest(with: requestData) else {
-            return Fail(error: InvalidEndpoint())
-                .eraseToAnyPublisher()
-        }
-
+        
+        guard endpoint.validateUrl() != nil else { return Fail(error: InvalidEndpoint()).eraseToAnyPublisher() }
+        guard let request = endpoint.makeRequest(with: requestData ?? nil) else { return Fail(error: InvalidEndpoint()).eraseToAnyPublisher() }
+        
         return dataTaskPublisher(for: request)
             .map(\.data)
             .decode(type: NetworkResponse<ResponseModel>.self, decoder: decoder)

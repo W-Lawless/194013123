@@ -84,11 +84,11 @@ class Monitor_Tests: XCTestCase {
 class Endpoint_Tests: XCTestCase {
     
     typealias StubbedEndpoint = Endpoint<EndpointFormats.Stub, String>
-    let host = URLHost(rawValue: "test.url.com")
+    let host = URLHost(rawValue: "10.0.0.41")
     
     func testBasicRequestGeneration() throws {
         let endpoint = StubbedEndpoint(path: "/path/v1/resource")
-        let request = endpoint.makeRequest(with: nil, host: host)
+        let request = endpoint.makeRequest(with: nil)
         XCTAssertEqual(request?.url, try? host.expectedURL(withPath: "/path/v1/resource"))
     }
     
@@ -98,7 +98,7 @@ class Endpoint_Tests: XCTestCase {
                URLQueryItem(name: "b", value: "2")
            ])
 
-           let request = endpoint.makeRequest(with: nil, host: host)
+           let request = endpoint.makeRequest(with: nil)
 
            try XCTAssertEqual(
                request?.url,
@@ -108,13 +108,13 @@ class Endpoint_Tests: XCTestCase {
     
     func testFlightAPIEndpoint() throws {
         let endpoint = StubbedEndpoint(path: "/api/v1/flightInfo")
-        let request = endpoint.makeRequest(with: nil, host: host)
+        let request = endpoint.makeRequest(with: nil)
         XCTAssertEqual(request?.url, try? host.expectedURL(withPath: "/api/v1/flightInfo"))
     }
     
     func testSeatsAPIEndpoint() throws {
         let endpoint = StubbedEndpoint(path: "/api/v1/seats")
-        let request = endpoint.makeRequest(with: nil, host: host)
+        let request = endpoint.makeRequest(with: nil)
         XCTAssertEqual(request?.url, try? host.expectedURL(withPath: "/api/v1/seats"))
     }
     

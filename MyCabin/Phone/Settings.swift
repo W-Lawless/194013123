@@ -20,7 +20,7 @@ struct Settings: View {
             }
         }
         .onAppear {
-            AppFactory.fetchAll()
+
         }
     }
 }

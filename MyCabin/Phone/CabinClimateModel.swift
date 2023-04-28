@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ClimateControllerModel: Codable, Identifiable {
+struct ClimateControllerModel: Codable, Identifiable, ElementModel {
     var id: String
     var name: String
     struct rect: Codable {

@@ -12,17 +12,23 @@ struct ElementsAPI {
     let planeViewModel: PlaneViewModel
     private let endpoint = Endpoint<EndpointFormats.Get, AreaModel>(path: "/api/v1/elements").makeRequest(with: ())!
     
-    func fetch() async -> PlaneMap {
-        
-        var allLights = [LightModel]()
-        var allSeats = [SeatModel]()
-        var allMonitors = [MonitorModel]()
-        var allSpeakers = [SpeakerModel]()
-        var allSources = [SourceModel]()
-        var allShades = [ShadeModel]()
-        var allAreas = [AreaModel]()
-        var allTables = [TableModel]()
-        var allDivans = [DivanModel]()
+    private var elements: [String:[Codable]] = [
+         "allAreas": [AreaModel](),
+         "allLights": [LightModel](),
+         "allSeats": [SeatModel](),
+         "allMonitors": [MonitorModel](),
+         "allSpeakers": [SpeakerModel](),
+         "allSources": [SourceModel](),
+         "allShades": [ShadeModel](),
+         "allTables": [TableModel](),
+         "allDivans": [DivanModel]()
+    ]
+    
+    init(viewModel: PlaneViewModel) {
+        self.planeViewModel = viewModel
+    }
+    
+    mutating func fetch() async {
         
         do {
             let (planeData,_) = try await Session.shared.data(for: endpoint)
@@ -30,154 +36,207 @@ struct ElementsAPI {
             
             // INITIAL GROUPING OF ALL ELEMENTS
             
-            for element in result.results {
-                switch element {
-                case .light(let light):
-                    allLights.append(light)
-                case .seat(let seat):
-                    allSeats.append(seat)
-                case .speaker(let speaker):
-                    allSpeakers.append(speaker)
-                case .monitor(let monitor):
-                    allMonitors.append(monitor)
-                case .shade(let shade):
-                    allShades.append(shade)
-                case .source(let source):
-                    allSources.append(source)
-                case .area(let area):
-                    allAreas.append(area)
-                case .table(let table):
-                    allTables.append(table)
-                case .divan(let divan):
-                    allDivans.append(divan)
-                case .ignore:
-                    ()
-                }
-            } //: FOR LOOP
-            
-            let transformedSeats = allSeats.map { seat in
-                var lightsINeed = [LightModel]()
-                seat.assoc.forEach { item in
-                    guard let item = item else { return }
-
-                    if (item.decoratorType == "Light") {
+            mapResultsToClassDictionary(result: result)
                         
-                        let target = allLights.filter { light in
-                            return item.id == light.id
-                        }
-
-                        lightsINeed.append(target[0])
-
-                    }
-                }
-                
-                var copy = seat
-                copy.lights = lightsINeed
-                return copy
-            } //: FOR LOOP
+            mapLightsToSeat()
             
-            AppFactory.lightsViewModel.updateValues(true, data: allLights)
-            AppFactory.seatsViewModel.updateValues(true, transformedSeats)
-            AppFactory.monitorsViewModel.updateValues(true, allMonitors)
-            AppFactory.speakersViewModel.updateValues(true, allSpeakers)
-            AppFactory.sourcesViewModel.updateValues(true, allSources)
-            AppFactory.shadesViewModel.updateValues(true, data: allShades)
+            updateAndCacheValues()
             
-            var plane = PlaneMap(mapAreas: [PlaneArea](), apiAreas: allAreas, allLights: allLights, allSeats: transformedSeats, allMonitors: allMonitors, allSpeakers: allSpeakers, allSources: allSources, allShades: allShades, allTables: allTables, allDivans: allDivans)
+            var plane = PlaneMap(
+                mapAreas: [PlaneArea](),
+                apiAreas: elements["allAreas"] as! [AreaModel],
+                allLights: elements["allLights"] as! [LightModel],
+                allSeats: elements["allSeats"] as! [SeatModel],
+                allMonitors: elements["allMonitors"] as! [MonitorModel],
+                allSpeakers: elements["allSpeakers"] as! [SpeakerModel],
+                allSources: elements["allSources"] as! [SourceModel],
+                allShades: elements["allShades"] as! [ShadeModel],
+                allTables: elements["allTables"] as! [TableModel],
+                allDivans: elements["allDivans"] as! [DivanModel]
+            )
             
             // CATEGORIZE ELEMENTS BY AREA
             
-            allAreas.forEach { area in
-                
-                var areaLights = [LightModel]()
-                var areaSeats = [SeatModel]()
-                var areaMonitors = [MonitorModel]()
-                var areaSpeakers = [SpeakerModel]()
-                var areaSources = [SourceModel]()
-                var areaShades = [ShadeModel]()
-                var areaTables = [TableModel]()
-                var areaDivans = [DivanModel]()
-                
-                area.sub.forEach { subElement in
-                    switch(subElement.type) {
-                    case ElementTypes.LIGHT.rawValue:
-                        let matching = allLights.filter {
-                            return $0.id == subElement.id
-                        }
-                        if (!matching.isEmpty) {
-                            areaLights.append(matching[0])
-                        }
-                    case ElementTypes.SEAT.rawValue:
-                        let matching = allSeats.filter {
-                            return $0.id == subElement.id
-                        }
-                        if (!matching.isEmpty) {
-                            areaSeats.append(matching[0])
-                        }
-                    case ElementTypes.WINDOW.rawValue:
-                        let matching = allShades.filter{
-                            return $0.id == subElement.id
-                        }
-                        if (!matching.isEmpty) {
-                            areaShades.append(matching[0])
-                        }
-                    case ElementTypes.MONITOR.rawValue:
-                        let matching = allMonitors.filter{
-                            return $0.id == subElement.id
-                        }
-                        if (!matching.isEmpty) {
-                            areaMonitors.append(matching[0])
-                        }
-                    case ElementTypes.SPEAKER.rawValue:
-                        let matching = allSpeakers.filter{
-                            return $0.id == subElement.id
-                        }
-                        if (!matching.isEmpty) {
-                            areaSpeakers.append(matching[0])
-                        }
-                    case ElementTypes.SOURCE.rawValue:
-                        let matching = allSources.filter{
-                            return $0.id == subElement.id
-                        }
-                        if (!matching.isEmpty) {
-                            areaSources.append(matching[0])
-                        }
-                    case ElementTypes.TABLE.rawValue:
-                        let matching = allTables.filter{
-                            return $0.id == subElement.id
-                        }
-                        if (!matching.isEmpty) {
-                            areaTables.append(matching[0])
-                        }
-                    case ElementTypes.DIVAN.rawValue:
-                        let matching = allDivans.filter{
-                            return $0.id == subElement.id
-                        }
-                        if (!matching.isEmpty) {
-                            areaDivans.append(matching[0])
-                        }
-                    default:
-                        Void()
-                    }
-                } //: SUB ELEMENT LOOP
-                
-                
-                plane.mapAreas.append(PlaneArea(id: area.id, rect: area.rect, lights: areaLights, seats: areaSeats, shades: areaShades, monitors: areaMonitors, speakers: areaSpeakers, sources: areaSources, tables: areaTables, divans: areaDivans))
-                
-            } //: AREA LOOP
+            mapToPlaneAreas(allAreas: elements["allAreas"] as! [AreaModel], plane: &plane)
             
-            AppFactory.planeElements = plane
-
-            await planeViewModel.updateValues(true, plane)
+            PlaneFactory.planeElements = plane
+            
+            await planeViewModel.updateValues(plane)
             
             FileCacheUtil.cacheToFile(data: plane)
             
-            return plane
-            
         } catch {
             print(error)
-            await planeViewModel.updateValues(false, nil)
-            return PlaneMap()
+            await planeViewModel.updateValues(PlaneMap())
         }
     } //: FETCH
+    
+    private mutating func mapResultsToClassDictionary(result: ElementsRoot) {
+        for element in result.results {
+            switch element {
+            case .light(let light):
+                elements["allLights"]?.append(light)
+            case .seat(let seat):
+                elements["allSeats"]?.append(seat)
+            case .speaker(let speaker):
+                elements["allSpeakers"]?.append(speaker)
+            case .monitor(let monitor):
+                elements["allMonitors"]?.append(monitor)
+            case .shade(let shade):
+                elements["allShades"]?.append(shade)
+            case .source(let source):
+                elements["allSources"]?.append(source)
+            case .area(let area):
+                elements["allAreas"]?.append(area)
+            case .table(let table):
+                elements["allTables"]?.append(table)
+            case .divan(let divan):
+                elements["allDivans"]?.append(divan)
+            case .ignore:
+                ()
+            }
+        } //: FOR LOOP
+        
+    }
+    
+    private mutating func mapLightsToSeat() {
+        let seats = elements["allSeats"]! as! [SeatModel]
+        let lights = elements["allLights"]! as! [LightModel]
+        let transformedSeats = seats.map { seat in
+            var lightsINeed = [LightModel]()
+            seat.assoc.forEach { item in
+                guard let item = item else { return }
+                
+                if (item.decoratorType == "Light") {
+                    
+                    let target = lights.filter { light in
+                        return item.id == light.id
+                    }
+                    
+                    lightsINeed.append(target[0])
+                }
+            }
+            var copy = seat
+            copy.lights = lightsINeed
+            return copy
+        } //: FOR LOOP
+        elements["allSeats"] = transformedSeats
+    }
+    
+    private func updateAndCacheValues() {
+        
+        let allLights = elements["allLights"]! as! [LightModel]
+        let allSeats = elements["allSeats"]! as! [SeatModel]
+        let allMonitors = elements["allMonitors"] as! [MonitorModel]
+        let allSpeakers = elements["allSpeakers"] as! [SpeakerModel]
+        let allSources = elements["allSources"] as! [SourceModel]
+        let allShades = elements["allShades"] as! [ShadeModel]
+    
+        
+        StateFactory.lightsViewModel.updateValues(allLights)
+        FileCacheUtil.cacheToFile(data: allLights)
+        
+        StateFactory.seatsViewModel.updateValues(allSeats)
+        FileCacheUtil.cacheToFile(data: allSeats)
+
+        StateFactory.monitorsViewModel.updateValues(allMonitors)
+        FileCacheUtil.cacheToFile(data: allMonitors)
+
+        StateFactory.speakersViewModel.updateValues(allSpeakers)
+        FileCacheUtil.cacheToFile(data: allSpeakers)
+
+        StateFactory.sourcesViewModel.updateValues(allSources)
+        FileCacheUtil.cacheToFile(data: allSources)
+
+        StateFactory.shadesViewModel.updateValues(allShades)
+        FileCacheUtil.cacheToFile(data: allShades)
+    }
+    
+    private func mapToPlaneAreas(allAreas: [AreaModel], plane: inout PlaneMap) {
+        allAreas.forEach { area in
+            
+            let allLights =  elements["allLights"] as! [LightModel]
+            let allSeats =  elements["allSeats"] as! [SeatModel]
+            let allMonitors =  elements["allMonitors"] as! [MonitorModel]
+            let allSpeakers =  elements["allSpeakers"] as! [SpeakerModel]
+            let allSources =  elements["allSources"] as! [SourceModel]
+            let allShades =  elements["allShades"] as! [ShadeModel]
+            let allTables =  elements["allTables"] as! [TableModel]
+            let allDivans =  elements["allDivans"] as! [DivanModel]
+            
+            var areaLights = [LightModel]()
+            var areaSeats = [SeatModel]()
+            var areaMonitors = [MonitorModel]()
+            var areaSpeakers = [SpeakerModel]()
+            var areaSources = [SourceModel]()
+            var areaShades = [ShadeModel]()
+            var areaTables = [TableModel]()
+            var areaDivans = [DivanModel]()
+            
+            area.sub.forEach { subElement in
+                switch(subElement.type) {
+                case ElementTypes.LIGHT.rawValue:
+                    let matching = allLights.filter {
+                        return $0.id == subElement.id
+                    }
+                    if (!matching.isEmpty) {
+                        areaLights.append(matching[0])
+                    }
+                case ElementTypes.SEAT.rawValue:
+                    let matching = allSeats.filter {
+                        return $0.id == subElement.id
+                    }
+                    if (!matching.isEmpty) {
+                        areaSeats.append(matching[0])
+                    }
+                case ElementTypes.WINDOW.rawValue:
+                    let matching = allShades.filter{
+                        return $0.id == subElement.id
+                    }
+                    if (!matching.isEmpty) {
+                        areaShades.append(matching[0])
+                    }
+                case ElementTypes.MONITOR.rawValue:
+                    let matching = allMonitors.filter{
+                        return $0.id == subElement.id
+                    }
+                    if (!matching.isEmpty) {
+                        areaMonitors.append(matching[0])
+                    }
+                case ElementTypes.SPEAKER.rawValue:
+                    let matching = allSpeakers.filter{
+                        return $0.id == subElement.id
+                    }
+                    if (!matching.isEmpty) {
+                        areaSpeakers.append(matching[0])
+                    }
+                case ElementTypes.SOURCE.rawValue:
+                    let matching = allSources.filter{
+                        return $0.id == subElement.id
+                    }
+                    if (!matching.isEmpty) {
+                        areaSources.append(matching[0])
+                    }
+                case ElementTypes.TABLE.rawValue:
+                    let matching = allTables.filter{
+                        return $0.id == subElement.id
+                    }
+                    if (!matching.isEmpty) {
+                        areaTables.append(matching[0])
+                    }
+                case ElementTypes.DIVAN.rawValue:
+                    let matching = allDivans.filter{
+                        return $0.id == subElement.id
+                    }
+                    if (!matching.isEmpty) {
+                        areaDivans.append(matching[0])
+                    }
+                default:
+                    Void()
+                }
+            } //: SUB ELEMENT LOOP
+            
+            plane.mapAreas.append(PlaneArea(id: area.id, rect: area.rect, lights: areaLights, seats: areaSeats, shades: areaShades, monitors: areaMonitors, speakers: areaSpeakers, sources: areaSources, tables: areaTables, divans: areaDivans))
+        }
+    }
 }

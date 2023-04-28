@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TableModel: Codable, Identifiable {
+struct TableModel: Codable, Identifiable, ElementModel {
     var id: String
     var name: String
     var rect: RenderCoordinates

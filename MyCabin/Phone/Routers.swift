@@ -35,15 +35,15 @@ enum MenuRouter: NavigationRouter {
     func view() -> UIViewController {
         switch self {
         case .toplevel:
-            return UIHostingController(rootView: AppFactory.buildMenuOverview())
+            return UIHostingController(rootView: ViewFactory.buildMenuOverview())
         case .lights:
-           return UIHostingController(rootView: AppFactory.buildLightsMenu())
+           return UIHostingController(rootView: ViewFactory.buildLightsMenu())
         case .shades:
-            return UIHostingController(rootView: AppFactory.buildShadesView())
+            return UIHostingController(rootView: ViewFactory.buildShadesView())
         case .seats:
-            return UIHostingController(rootView: AppFactory.buildSeatSelection())
+            return UIHostingController(rootView: ViewFactory.buildSeatSelection())
         case .climate:
-            return UIHostingController(rootView: AppFactory.buildCabinClimateView())
+            return UIHostingController(rootView: ViewFactory.buildCabinClimateView())
         case .presets:
             return UIHostingController(rootView: Presets())
         case .settings:

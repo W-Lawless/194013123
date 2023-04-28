@@ -7,6 +7,8 @@
 
 import Foundation
 
+protocol ElementModel {}
+
 struct ElementsRoot: Decodable {
     var results: [ElementsEnum]
     var length: Int

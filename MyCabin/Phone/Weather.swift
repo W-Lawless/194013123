@@ -78,6 +78,6 @@ class WeatherViewModel: ObservableObject {
 
 struct Weather_Previews: PreviewProvider {
     static var previews: some View {
-        AppFactory.buildWeatherView()
+        ViewFactory.buildWeatherView()
     }
 }
