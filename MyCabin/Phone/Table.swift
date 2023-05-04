@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct MiniTable: View {
-    var table: TableModel
+    var tableType: String
     
     var body: some View {
-        if(table.type == "CREDENZA"){
+        if(tableType == "CREDENZA"){
             Image("credenza_unavailable")
                 .resizable()
                 .scaledToFit()
                 .frame(maxWidth: 96, maxHeight: 32)
-        } else if (table.type == "CONFERENCE") {
+        } else if (tableType == "CONFERENCE") {
             Image("table_medium_unavailable")
                 .resizable()
                 .scaledToFit()

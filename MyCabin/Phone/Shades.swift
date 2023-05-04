@@ -34,7 +34,7 @@ struct Shades: View {
     
 }
 
-class ShadesViewModel: GCMSViewModel, ViewModelWithSubViews, ObservableObject {
+class ShadesViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
 
     @Published var activeShadeID: String = ""
     @Published var showPanel: Bool = false

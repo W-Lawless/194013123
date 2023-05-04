@@ -29,7 +29,7 @@ struct CabinClimate: View {
     }
 }
 
-class CabinClimateViewModel: ObservableObject, GCMSViewModel, ViewModelWithSubViews {
+class CabinClimateViewModel: ObservableObject, GCMSViewModel, ParentViewModel {
     
     @Published var activeZone: PlaneArea = PlaneArea(id: "", rect: RenderCoordinates(x: 0, y: 0, w: 0, h: 0, r: 0))
     @Published var showPanel: Bool = false

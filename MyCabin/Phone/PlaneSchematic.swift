@@ -7,24 +7,22 @@
 
 import SwiftUI
 
-struct PlaneSchematic<AViewModel: ViewModelWithSubViews & ObservableObject>: View {
+struct PlaneSchematic<T: ParentViewModel>: View {
     
     @StateObject var coordinatesModel = PlaneViewCoordinates()
 
-    @ObservedObject var topLevelViewModel: AViewModel
-    @ObservedObject var viewModel: PlaneViewModel
-    var navigation: HomeMenuCoordinator
+    @StateObject var topLevelViewModel: T
+    @StateObject var viewModel: PlaneViewModel
+    let navigation: HomeMenuCoordinator
     let options: PlaneSchematicDisplayMode
     
-    @State var viewHeight: CGFloat = 0
-    @State var viewWidth: CGFloat = 0
-    @State var widthUnit: CGFloat = 0
-    @State var heightUnit: CGFloat = 0
     @State var selectedZone: PlaneArea? = nil
     
     var body: some View {
         GeometryReader { geometry in
+            
             VStack { // VSTQ
+                
                 HStack(alignment: .center) { // HSTQ
                     
                     Image("plane_left_side")
@@ -32,17 +30,21 @@ struct PlaneSchematic<AViewModel: ViewModelWithSubViews & ObservableObject>: Vie
                         .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
                     
                     VStack(alignment: .center, spacing: 0) { //VSTQ B
+                        
                         ForEach(viewModel.plane.mapAreas) { area in
-                            if(area.id != "AIRPLANE_AREA") { // Filter Areas
-                                AreaSubView(topLevelViewModel: topLevelViewModel, coordinatesModel: coordinatesModel, selectedZone: $selectedZone, area: area, options: options, navigation: navigation)
+                            
+                                AreaSubView<T>(selectedZone: $selectedZone, area: area, options: options, navigation: navigation)
                                     .if(options == .tempZones) {
                                         $0.modifier(TappableZone(area: area, selectedZone: $selectedZone))
                                     }
                                     .if(options == .lightZones) {
                                         $0.modifier(TappableZone(area: area, selectedZone: $selectedZone))
                                     }
-                            } //: CONDITIONAL
+                                    .environmentObject(topLevelViewModel)
+                                    .environmentObject(coordinatesModel)
+                            
                         } //: FOREACH
+                        
                     } //: VSTQ B
                     
                     Image("plane_right_side")
@@ -53,23 +55,20 @@ struct PlaneSchematic<AViewModel: ViewModelWithSubViews & ObservableObject>: Vie
                 .padding(.horizontal, 34)
                 .frame(height: geometry.size.height)
                 .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                
             } //: VSTQ
+            
         } //: GEO
         .passGeometry { geo in
-            self.viewHeight = geo.size.height
-            coordinatesModel.containerViewHeight = self.viewHeight
             
-            self.viewWidth = geo.size.width
-            coordinatesModel.containerViewWidth = self.viewWidth
+            coordinatesModel.containerViewHeight = geo.size.height
+            coordinatesModel.containerViewWidth = geo.size.width
             
-            viewModel.plane.mapAreas.forEach { area in
-                if(area.id == "AIRPLANE_AREA") {
-                    self.widthUnit = (geo.size.width * 0.39) / area.rect.w
-                    coordinatesModel.containerWidthUnit = self.widthUnit
-                    
-                    self.heightUnit = (geo.size.height) / area.rect.h
-                    coordinatesModel.containerHeightUnit = self.heightUnit
-                }
+            if let parentArea = viewModel.plane.parentArea {
+
+                coordinatesModel.containerWidthUnit = (geo.size.width * 0.39) / parentArea.rect.w //self.widthUnit
+                coordinatesModel.containerHeightUnit = (geo.size.height) / parentArea.rect.h //self.heightUnit
+
             }
         } //: PASS GEO UTIL
 
@@ -81,12 +80,14 @@ struct PlaneSchematic<AViewModel: ViewModelWithSubViews & ObservableObject>: Vie
 
 //MARK: - Area SubView
 
-struct AreaSubView<AViewModel: ViewModelWithSubViews & ObservableObject>: View {
+struct AreaSubView<T: ParentViewModel>: View {
     
-    @ObservedObject var topLevelViewModel: AViewModel
-    @ObservedObject var coordinatesModel: PlaneViewCoordinates
+    @EnvironmentObject var topLevelViewModel: T
+    @EnvironmentObject var coordinatesModel: PlaneViewCoordinates
     @Binding var selectedZone: PlaneArea?
+    
     let area: PlaneArea
+    
     let options: PlaneSchematicDisplayMode
     let navigation: HomeMenuCoordinator
 
@@ -101,28 +102,28 @@ struct AreaSubView<AViewModel: ViewModelWithSubViews & ObservableObject>: View {
             
             ForEach(area.seats ?? [SeatModel]()) { seat in
                 if(seat.id == selectedSeat) {
-                    SeatButton(topLevelViewModel: topLevelViewModel, seat: seat, navigation: navigation, options: options, selected: true)
-                        .modifier(PlaceIcon(element: seat, subviewWidthUnit: subviewWidthUnit, subviewHeightUnit: subviewHeightUnit))
+                    SeatButton(id: seat.id, options: options, selected: true)
+                        .modifier(PlaceIcon(rect: seat.rect, subviewWidthUnit: subviewWidthUnit, subviewHeightUnit: subviewHeightUnit))
                 } else {
-                    SeatButton(topLevelViewModel: topLevelViewModel, seat: seat, navigation: navigation, options: options, selected: false)
-                        .modifier(PlaceIcon(element: seat, subviewWidthUnit: subviewWidthUnit, subviewHeightUnit: subviewHeightUnit))
+                    SeatButton(id: seat.id, options: options, selected: false)
+                        .modifier(PlaceIcon(rect: seat.rect, subviewWidthUnit: subviewWidthUnit, subviewHeightUnit: subviewHeightUnit))
                 }
             } //: FOR EACH
             
             ForEach(area.tables ?? [TableModel]()) { table in
-                MiniTable(table: table)
-                    .modifier(PlaceIcon(element: table, subviewWidthUnit: subviewWidthUnit, subviewHeightUnit: subviewHeightUnit))
+                MiniTable(tableType: table.type)
+                    .modifier(PlaceIcon(rect: table.rect, subviewWidthUnit: subviewWidthUnit, subviewHeightUnit: subviewHeightUnit))
             } //: FOR EACH
             
             ForEach(area.divans ?? [DivanModel]()) { divan in
-                DivanSeat(divan: divan, navigation: navigation, options: options)
-                    .modifier(PlaceIcon(element: divan, subviewWidthUnit: subviewWidthUnit, subviewHeightUnit: subviewHeightUnit))
+                DivanSeat(options: options)
+                    .modifier(PlaceIcon(rect: divan.rect, subviewWidthUnit: subviewWidthUnit, subviewHeightUnit: subviewHeightUnit))
             } //: FOR EACH
             
             if(options == .showShades) {
                 ForEach(area.shades ?? [ShadeModel]()) { shade in
-                    ShadeButton(topLevelViewModel: topLevelViewModel as! ShadesViewModel, shade: shade, options: options)
-                        .modifier(PlaceIcon(element: shade, subviewWidthUnit: subviewWidthUnit, subviewHeightUnit: subviewHeightUnit))
+                    ShadeButton(shade: shade)
+                        .modifier(PlaceIcon(rect: shade.rect, subviewWidthUnit: subviewWidthUnit, subviewHeightUnit: subviewHeightUnit))
                 } //: FOR EACH
             }
 

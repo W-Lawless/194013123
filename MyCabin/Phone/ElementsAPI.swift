@@ -7,6 +7,8 @@
 
 import Foundation
 
+let PARENT_IDENTIFIER = "AIRPLANE_AREA"
+
 struct ElementsAPI {
     
     let planeViewModel: PlaneViewModel
@@ -237,8 +239,11 @@ struct ElementsAPI {
                     Void()
                 }
             } //: SUB ELEMENT LOOP
-            
-            plane.mapAreas.append(PlaneArea(id: area.id, rect: area.rect, lights: areaLights, seats: areaSeats, shades: areaShades, monitors: areaMonitors, speakers: areaSpeakers, sources: areaSources, tables: areaTables, divans: areaDivans))
+            if(area.id == PARENT_IDENTIFIER) {
+                plane.parentArea = PlaneArea(id: area.id, rect: area.rect, lights: areaLights, seats: areaSeats, shades: areaShades, monitors: areaMonitors, speakers: areaSpeakers, sources: areaSources, tables: areaTables, divans: areaDivans)
+            } else {
+                plane.mapAreas.append(PlaneArea(id: area.id, rect: area.rect, lights: areaLights, seats: areaSeats, shades: areaShades, monitors: areaMonitors, speakers: areaSpeakers, sources: areaSources, tables: areaTables, divans: areaDivans))
+            }
             
         }
     }

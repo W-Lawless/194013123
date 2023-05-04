@@ -11,8 +11,6 @@ struct DivanSeat: View {
     
     @State var selected: Bool = false
 
-    var divan: DivanModel
-    var navigation: HomeMenuCoordinator
     let options: PlaneSchematicDisplayMode
     
     var body: some View {

@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-struct PlaceIcon<T: ElementModel>: ViewModifier {
-    var element: T
+struct PlaceIcon: ViewModifier {
+    var rect: RenderCoordinates
     var subviewWidthUnit: CGFloat
     var subviewHeightUnit: CGFloat
     
     func body(content: Content) -> some View {
         content
-            .rotationEffect(Angle(degrees: element.rect.r))
-            .position(x: ((subviewWidthUnit * element.rect.x) + ((subviewWidthUnit * element.rect.w)/2)),
-                      y: ((subviewHeightUnit * element.rect.y) + ((subviewHeightUnit * element.rect.h)/2)) )
+            .rotationEffect(Angle(degrees: rect.r))
+            .position(x: ((subviewWidthUnit * rect.x) + ((subviewWidthUnit * rect.w)/2)),
+                      y: ((subviewHeightUnit * rect.y) + ((subviewHeightUnit * rect.h)/2)) )
         /// Position Center according to API coordinate data & add half the width/height to the coordinate to align image by top left corner
     }
 }

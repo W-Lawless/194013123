@@ -47,7 +47,7 @@ class AppCoordinator {
                     }
                 }
             }
-            .store(in: &PlaneFactory.cabinConnectionSubscriptions)
+            .store(in: &PlaneFactory.cancelTokens)
     }
 }
 

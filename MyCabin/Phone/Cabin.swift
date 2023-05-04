@@ -13,7 +13,7 @@ class CabinAPI<F: EndpointFormat, R: Codable>: GCMSClient, Realtime_API {
     var monitor = HeartBeatMonitor()
     
     var endpoint: Endpoint<F, R>
-    var callback: ([R]) -> Void
+    var callback: ([R]) -> Void 
     
     init(endpoint: Endpoint<F ,R>, callback: @escaping ([R]) -> Void) {
         self.endpoint = endpoint

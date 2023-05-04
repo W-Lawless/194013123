@@ -14,12 +14,9 @@ final class PlaneFactory {
     //: State Handling
     ///Cabin Connection
     static let cabinConnectionPublisher = CurrentValueSubject<Bool, Never>(false)
-    static var cabinConnectionSubscriptions = Set<AnyCancellable>()
-    static var apiSubscriptions = Set<AnyCancellable>()
     static var cancelTokens = Set<AnyCancellable>()
     
     static let cabinEndpoint = Endpoint<EndpointFormats.Head, EmptyResponse>(path: .ping)
-    
     static let cabinAPI = CabinAPI(endpoint: cabinEndpoint) { _ in }
     ///Access Levels
     static let accessAPI = AccessAPI()
@@ -33,8 +30,8 @@ final class PlaneFactory {
     
     //Menus
     
-    static func buildPlaneSchematic<AViewModel: ViewModelWithSubViews>(topLevelViewModel: AViewModel, options: PlaneSchematicDisplayMode) -> PlaneSchematic<AViewModel> {
-        let view = PlaneSchematic<AViewModel>(topLevelViewModel: topLevelViewModel, viewModel: planeViewModel, navigation: NavigationFactory.homeMenuCoordinator, options: options, selectedZone: nil)
+    static func buildPlaneSchematic<T: ParentViewModel>(topLevelViewModel: T, options: PlaneSchematicDisplayMode) -> PlaneSchematic<T> {
+        let view = PlaneSchematic<T>(topLevelViewModel: topLevelViewModel, viewModel: planeViewModel, navigation: NavigationFactory.homeMenuCoordinator, options: options, selectedZone: nil)
         return view
     }
     
@@ -54,6 +51,26 @@ final class PlaneFactory {
 //        ///Non Caching
 //        flightAPI.fetch()
 //        weatherAPI.fetch()
+    }
+    
+    static func seatIconCallback(displayOptions: PlaneSchematicDisplayMode, seatID: String) {
+        
+        switch displayOptions {
+        case .onlySeats:
+            UserDefaults.standard.set(seatID, forKey: "CurrentSeat")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                NavigationFactory.homeMenuCoordinator.dismiss()
+            }
+        case .showLights:
+            StateFactory.lightsViewModel.showSubView(forID: seatID)
+        default:
+            break
+        } //: SWITCH
+    }
+    
+    static func shadeIconCallback(shade: ShadeModel) {
+        StateFactory.shadesViewModel.showSubView(forID: shade.id)
+        StateFactory.shadesViewModel.activeShade = shade
     }
 }
 

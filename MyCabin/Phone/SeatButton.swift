@@ -7,11 +7,9 @@
 
 import SwiftUI
 
-struct SeatButton<AViewModel: ViewModelWithSubViews & ObservableObject>: View {
+struct SeatButton: View {
 
-    @ObservedObject var topLevelViewModel: AViewModel
-    var seat: SeatModel
-    var navigation: HomeMenuCoordinator
+    var id: String
     let options: PlaneSchematicDisplayMode
     
     @State var selected: Bool = false
@@ -23,7 +21,7 @@ struct SeatButton<AViewModel: ViewModelWithSubViews & ObservableObject>: View {
                 .scaledToFit()
                 .frame(width:30, height: 30)
                 .hapticFeedback(feedbackStyle: .light) {
-                    options.seatIconCallback(topLevelViewModel: topLevelViewModel, seatID: seat.id, nav: navigation)
+                    PlaneFactory.seatIconCallback(displayOptions: options, seatID: id)
                 }
         } else {
             Image("seat_unavailable")

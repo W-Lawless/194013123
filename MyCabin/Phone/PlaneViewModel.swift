@@ -28,6 +28,7 @@ struct PlaneArea: Identifiable, Codable {
 }
 
 struct PlaneMap: Codable {
+    var parentArea: PlaneArea? = nil
     var mapAreas: [PlaneArea] = [PlaneArea]()   /// Full-bodied area struct with populated fields for lights, seats, etc 
     var apiAreas: [AreaModel] = [AreaModel]()  /// Areas as described by API results
     var allLights: [LightModel] = [LightModel]()
@@ -66,24 +67,6 @@ enum PlaneSchematicDisplayMode: String {
     case tempZones
     case showMedia
 
-    func seatIconCallback<AViewModel: ViewModelWithSubViews>
-    (topLevelViewModel: AViewModel, seatID: String, nav: HomeMenuCoordinator) -> Void {
-        UserDefaults.standard.set(seatID, forKey: "CurrentSeat")
-        
-        switch self {
-        case .showLights:
-            topLevelViewModel.showSubView(forID: seatID)
-        default:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                nav.dismiss()
-            }
-        } //: SWITCH
-    }
-    
-    func shadeIconCallback(topLevelViewModel: ShadesViewModel, shade: ShadeModel) {
-        topLevelViewModel.showSubView(forID: shade.id)
-        topLevelViewModel.activeShade = shade
-    }
 }
     
 

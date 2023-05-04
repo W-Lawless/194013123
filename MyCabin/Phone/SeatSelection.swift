@@ -23,7 +23,7 @@ struct SeatSelection: View {
 
 //MARK: - View Model
 
-class SeatsViewModel: ViewModelWithSubViews, ObservableObject, GCMSViewModel {
+class SeatsViewModel: ParentViewModel, ObservableObject, GCMSViewModel {
     
     @Published var showPanel: Bool = false
     @Published var seatList: [SeatModel]?

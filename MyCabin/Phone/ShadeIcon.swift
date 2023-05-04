@@ -9,9 +9,7 @@ import SwiftUI
 
 struct ShadeButton: View {
     
-    @ObservedObject var topLevelViewModel: ShadesViewModel
     var shade: ShadeModel
-    let options: PlaneSchematicDisplayMode
     
     @State var selected: Bool = false
     
@@ -22,7 +20,7 @@ struct ShadeButton: View {
                 .frame(width:21, height: 44)
                 .hapticFeedback(feedbackStyle: .light) {
                     selected.toggle()
-                    options.shadeIconCallback(topLevelViewModel: topLevelViewModel, shade: shade)
+                    PlaneFactory.shadeIconCallback(shade: shade)
                 }
 
     }

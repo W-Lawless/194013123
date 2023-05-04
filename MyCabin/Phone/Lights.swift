@@ -55,15 +55,7 @@ struct Lights: View {
 }
 
 
-
-
-//MARK: - View Model
-
-protocol ViewModelWithSubViews {
-    func showSubView(forID: String)
-}
-
-class LightsViewModel: GCMSViewModel, ViewModelWithSubViews, ObservableObject {
+class LightsViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
     
     @Published var activeSeat: String = ""
     @Published var lightList: [LightModel]?

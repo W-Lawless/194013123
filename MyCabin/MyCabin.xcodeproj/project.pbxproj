@@ -43,15 +43,15 @@
 		2B183F542913F8C00087654E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B183F532913F8C00087654E /* Preview Assets.xcassets */; };
 		2B197EE62A02CAFA00DF406B /* RealtimeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197EE52A02CAFA00DF406B /* RealtimeAPI.swift */; };
 		2B197EEE2A02CFBA00DF406B /* ShadesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197EED2A02CFBA00DF406B /* ShadesModel.swift */; };
-		2B197EF72A02D0AD00DF406B /* GCMSViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197EF62A02D0AD00DF406B /* GCMSViewModel.swift */; };
 		2B197EFC2A02D86000DF406B /* PlaneSchematic+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197EFB2A02D86000DF406B /* PlaneSchematic+.swift */; };
 		2B197EFF2A02FD5F00DF406B /* ClimateAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197EFE2A02FD5F00DF406B /* ClimateAPI.swift */; };
-		2B197F022A031B4D00DF406B /* Seat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197F012A031B4D00DF406B /* Seat.swift */; };
+		2B197F022A031B4D00DF406B /* SeatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197F012A031B4D00DF406B /* SeatButton.swift */; };
 		2B197F042A031C2000DF406B /* Divan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197F032A031C2000DF406B /* Divan.swift */; };
 		2B197F062A031C3700DF406B /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197F052A031C3700DF406B /* Table.swift */; };
 		2B197F092A031C6C00DF406B /* PlaneSchematic+Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197F082A031C6C00DF406B /* PlaneSchematic+Modifiers.swift */; };
 		2B197F0B2A034CDA00DF406B /* ShadeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197F0A2A034CDA00DF406B /* ShadeIcon.swift */; };
 		2B41EF4A292C105E0062CA2B /* Cabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B41EF49292C105E0062CA2B /* Cabin.swift */; };
+		2B4A50162A03F71800DF47EF /* UI+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4A50152A03F71800DF47EF /* UI+.swift */; };
 		2B865803293900E600982BBB /* Routers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B865802293900E600982BBB /* Routers.swift */; };
 		2B86580629393AC200982BBB /* Devices.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B86580429393AC200982BBB /* Devices.json */; };
 		2B86580729393AC200982BBB /* AccessLevels.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B86580529393AC200982BBB /* AccessLevels.json */; };
@@ -183,15 +183,15 @@
 		2B183F532913F8C00087654E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2B197EE52A02CAFA00DF406B /* RealtimeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeAPI.swift; sourceTree = "<group>"; };
 		2B197EED2A02CFBA00DF406B /* ShadesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadesModel.swift; sourceTree = "<group>"; };
-		2B197EF62A02D0AD00DF406B /* GCMSViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCMSViewModel.swift; sourceTree = "<group>"; };
 		2B197EFB2A02D86000DF406B /* PlaneSchematic+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaneSchematic+.swift"; sourceTree = "<group>"; };
 		2B197EFE2A02FD5F00DF406B /* ClimateAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClimateAPI.swift; sourceTree = "<group>"; };
-		2B197F012A031B4D00DF406B /* Seat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seat.swift; sourceTree = "<group>"; };
+		2B197F012A031B4D00DF406B /* SeatButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatButton.swift; sourceTree = "<group>"; };
 		2B197F032A031C2000DF406B /* Divan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divan.swift; sourceTree = "<group>"; };
 		2B197F052A031C3700DF406B /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
 		2B197F082A031C6C00DF406B /* PlaneSchematic+Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaneSchematic+Modifiers.swift"; sourceTree = "<group>"; };
 		2B197F0A2A034CDA00DF406B /* ShadeIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadeIcon.swift; sourceTree = "<group>"; };
 		2B41EF49292C105E0062CA2B /* Cabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cabin.swift; sourceTree = "<group>"; };
+		2B4A50152A03F71800DF47EF /* UI+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+.swift"; sourceTree = "<group>"; };
 		2B7FE8102919C692002C64FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		2B865802293900E600982BBB /* Routers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routers.swift; sourceTree = "<group>"; };
 		2B86580429393AC200982BBB /* Devices.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Devices.json; sourceTree = "<group>"; };
@@ -588,7 +588,7 @@
 		2B197F002A031B3600DF406B /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				2B197F012A031B4D00DF406B /* Seat.swift */,
+				2B197F012A031B4D00DF406B /* SeatButton.swift */,
 				2B197F032A031C2000DF406B /* Divan.swift */,
 				2B197F052A031C3700DF406B /* Table.swift */,
 				2B197F0A2A034CDA00DF406B /* ShadeIcon.swift */,
@@ -784,7 +784,6 @@
 		2BBCCC632A004E2F00DC6FD4 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
-				2B197EF62A02D0AD00DF406B /* GCMSViewModel.swift */,
 				2B197EF32A02D01600DF406B /* Access */,
 				2B939C8B293E90F40014AD13 /* Areas */,
 				2B02B9CA2936B63900C6387A /* CabinClimate */,
@@ -844,6 +843,7 @@
 			children = (
 				2BE97D5D291C484900149BA4 /* MainViews */,
 				2BA8F6072925231E005621D3 /* Menus */,
+				2B4A50152A03F71800DF47EF /* UI+.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1057,12 +1057,13 @@
 				2B02B9C92936ABAB00C6387A /* GeneralAPI.swift in Sources */,
 				2BE97D3B291C137B00149BA4 /* HomeMenu.swift in Sources */,
 				2B197F092A031C6C00DF406B /* PlaneSchematic+Modifiers.swift in Sources */,
+				2B4A50162A03F71800DF47EF /* UI+.swift in Sources */,
 				2B197EFC2A02D86000DF406B /* PlaneSchematic+.swift in Sources */,
 				2BA8F60629252166005621D3 /* SeatModels.swift in Sources */,
 				2BA7D906293FC63F004E2DF6 /* PlaneViewModel.swift in Sources */,
 				2BE4D4F72941096F0026FC01 /* DivanModel.swift in Sources */,
 				2BE97D3D291C174000149BA4 /* FlightInfo.swift in Sources */,
-				2B197F022A031B4D00DF406B /* Seat.swift in Sources */,
+				2B197F022A031B4D00DF406B /* SeatButton.swift in Sources */,
 				2BB135FF292708750016444C /* ShadesAPI.swift in Sources */,
 				2BD75A1B292EB256004360A3 /* AppDelegate.swift in Sources */,
 				2BE4D4F22940FE3E0026FC01 /* ElementsEnumModel.swift in Sources */,
@@ -1070,7 +1071,6 @@
 				2BA8F61A29258F78005621D3 /* ElementsAPI.swift in Sources */,
 				2B1170462933E43800A1CB8F /* AppCoordinator.swift in Sources */,
 				2B197F062A031C3700DF406B /* Table.swift in Sources */,
-				2B197EF72A02D0AD00DF406B /* GCMSViewModel.swift in Sources */,
 				2BA8F60329251C0C005621D3 /* FlightModels.swift in Sources */,
 				2B865803293900E600982BBB /* Routers.swift in Sources */,
 				2BA7B4CD291D504900942CB5 /* URLSession+.swift in Sources */,
