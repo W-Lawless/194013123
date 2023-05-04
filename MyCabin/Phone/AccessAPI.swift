@@ -13,7 +13,7 @@ class AccessAPI {
     
     var cancelToken: Cancellable?
 
-    let endpoint = Endpoint<EndpointFormats.Get, AccessModel>(path: "/api/v1/security/access-levels")
+    let endpoint = Endpoint<EndpointFormats.Get, AccessModel>(path: .access)
     
     
     func fetch() {
@@ -83,7 +83,7 @@ class AccessAPI {
         
 //        print(newDevice)
         
-        let endpoint = Endpoint<EndpointFormats.Put<DeviceModel>, DeviceModel>(path: "/api/v1/security/clients")
+        let endpoint = Endpoint<EndpointFormats.Put<DeviceModel>, DeviceModel>(path: .registerDevice)
         let ipRequestHeader: [String:String] = ["gcms-ip-address": "4.2.6.7"]
         let publisher = Session.shared.publisher(for: endpoint, using: newDevice)
         

@@ -10,17 +10,14 @@ import Combine
 
 struct Home: View {
     
-//    var navCallback: (_ route: MenuRouter) -> () = { _ in }
-    let navigation: HomeMenuCoordinator
+    var navigateTo: (_ route: MenuRouter) -> () 
     @State var someSetting: String = (UserDefaults.standard.string(forKey: "someSetting") ?? "DefaultValue")
     
     var body: some View {
         
 //        RotatingWheel()
         
-        
         Group {
-
 
             HStack(alignment: .center, spacing: 72) {
 
@@ -32,7 +29,7 @@ struct Home: View {
                         Text("Lights")
                 } //: VSTQ
                 .hapticFeedback(feedbackStyle: .light) {
-                    navigation.goTo(.lights)
+                    navigateTo(.lights)
                 }
 
                 VStack(alignment: .center, spacing: 12) {
@@ -40,12 +37,12 @@ struct Home: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 56, height: 56)
-                    Button("Shades") {
-                        print("clicked")
-                        navigation.goTo(.shades)
-                    }
+                    Text("Shades")
                     .foregroundColor(.white)
                 } //: VSTQ
+                .hapticFeedback(feedbackStyle: .light) {
+                    navigateTo(.shades)
+                }
             } //:HSTQ
             .frame(height:120)
             .padding(.horizontal, 24)
@@ -59,11 +56,12 @@ struct Home: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 56, height: 56)
-                    Button("Temperature") {
-                        navigation.goTo(.climate)
-                    }
+                    Text("Temperature")
                     .foregroundColor(.white)
                 } //: VSTQ
+                .hapticFeedback(feedbackStyle: .light) {
+                    navigateTo(.climate)
+                }
                 .frame(width: 98)
                 .clipShape(RoundedRectangle(cornerRadius: 4))
 
@@ -72,12 +70,12 @@ struct Home: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 56, height: 56)
-                    Button("Seats") {
-                        print("clicked")
-                        navigation.goTo(.seats)
-                    }
+                    Text("Seats")
                     .foregroundColor(.white)
                 } //:VSTQ
+                .hapticFeedback(feedbackStyle: .light) {
+                    navigateTo(.seats)
+                }
                 .frame(width: 98)
             } //:HSTQ
             .frame(height:120)
@@ -92,22 +90,24 @@ struct Home: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 56, height: 56)
-                    Button("Presets") {
-                        navigation.goTo(.presets)
-                    }
+                    Text("Presets")
                     .foregroundColor(.white)
                 } //: VSTQ
+                .hapticFeedback(feedbackStyle: .light) {
+                    navigateTo(.presets)
+                }
 
                 VStack(alignment: .center, spacing: 12) {
                     Image(systemName: "gear")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 56, height: 56)
-                    Button("Settings") {
-                        navigation.goTo(.settings)
-                    }
+                    Text("Settings")
                     .foregroundColor(.white)
                 } //: VSTQ
+                .hapticFeedback(feedbackStyle: .light) {
+                    navigateTo(.settings)
+                }
             } //: HSTQ
             .frame(height:120)
             .padding(.horizontal, 24)

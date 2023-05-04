@@ -18,11 +18,11 @@ struct LightControl: View {
         VStack{
             
             Button("ON \(light.id)") {
-                StateFactory.lightsAPI.toggleLight(light, cmd: .ON)
+                StateFactory.apiClient.toggleLight(light, cmd: .ON)
             }
 
             Button("OFF \(light.id)") {
-                StateFactory.lightsAPI.toggleLight(light, cmd: .OFF)
+                StateFactory.apiClient.toggleLight(light, cmd: .OFF)
             }
 
             Stepper("Brightness", value: $luminosity)

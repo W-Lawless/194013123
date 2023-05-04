@@ -7,9 +7,42 @@
 
 import Foundation
 
+enum GCMSEndpoints: String {
+    
+    case ping = "/"
+    case elements = "/api/v1/elements"
+    case access = "/api/v1/security/access-levels"
+    case registerDevice = "/api/v1/security/clients"
+    case lights = "/api/v1/lights"
+    case shades = "/api/v1/windows"
+    case seats = "/api/v1/seats"
+    case climate = "/api/v1/tempcntrls"
+    case monitors = "/api/v1/monitors"
+    case speakers = "/api/v1/speakers"
+    case sources = "/api/v1/sources"
+    case flightInfo = "/api/v1/flightInfo"
+    case weather = "/api/v1/destination/weather"
+    
+    func stateChange(_ id: String) -> String {
+        switch self {
+        case .lights:
+            return "/api/v1/lights/\(id)/state"
+        case .monitors:
+            return "/api/v1/monitors/\(id)/state"
+        case .shades:
+            return "/api/v1/windows/\(id)/state"
+        default:
+            return  "ENDPOINT NOT STATEFUL"
+        }
+    }
+    
+}
+
+
 struct Endpoint<Format: EndpointFormat, ResponseModel: Codable> {
-    var path: String
+    var path: GCMSEndpoints
     var queryItems = [URLQueryItem]()
+    var stateUpdate = ""
 }
 
 
@@ -62,8 +95,8 @@ extension Endpoint {
     func makeRequest(with data: Format.RequestData?) -> URLRequest? {
 
         guard let url = validateUrl() else { return nil }
-
         var request = URLRequest(url: url)
+        
         if let data {
             Format.prepare(&request, with: data)
         } else {
@@ -77,7 +110,12 @@ extension Endpoint {
         var components = URLComponents()
         components.scheme = "http"
         components.host = host.rawValue
-        components.path = path
+        if(self.stateUpdate != "") {
+            components.path = self.path.stateChange(self.stateUpdate)
+        } else {
+            components.path = path.rawValue
+        }
+        
         components.queryItems = queryItems.isEmpty ? nil : queryItems
 
         guard let url = components.url else { return nil }

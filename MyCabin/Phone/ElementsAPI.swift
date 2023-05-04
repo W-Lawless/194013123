@@ -10,7 +10,7 @@ import Foundation
 struct ElementsAPI {
     
     let planeViewModel: PlaneViewModel
-    private let endpoint = Endpoint<EndpointFormats.Get, AreaModel>(path: "/api/v1/elements").makeRequest(with: ())!
+    private let endpoint = Endpoint<EndpointFormats.Get, AreaModel>(path: .elements).makeRequest(with: ())!
     
     private var elements: [String:[Codable]] = [
          "allAreas": [AreaModel](),
@@ -58,6 +58,8 @@ struct ElementsAPI {
             // CATEGORIZE ELEMENTS BY AREA
             
             mapToPlaneAreas(allAreas: elements["allAreas"] as! [AreaModel], plane: &plane)
+            
+            filterPlaneAreas(&plane)
             
             PlaneFactory.planeElements = plane
             
@@ -154,7 +156,7 @@ struct ElementsAPI {
     
     private func mapToPlaneAreas(allAreas: [AreaModel], plane: inout PlaneMap) {
         allAreas.forEach { area in
-            
+                        
             let allLights =  elements["allLights"] as! [LightModel]
             let allSeats =  elements["allSeats"] as! [SeatModel]
             let allMonitors =  elements["allMonitors"] as! [MonitorModel]
@@ -237,6 +239,50 @@ struct ElementsAPI {
             } //: SUB ELEMENT LOOP
             
             plane.mapAreas.append(PlaneArea(id: area.id, rect: area.rect, lights: areaLights, seats: areaSeats, shades: areaShades, monitors: areaMonitors, speakers: areaSpeakers, sources: areaSources, tables: areaTables, divans: areaDivans))
+            
         }
     }
+    
+    func filterPlaneAreas(_ plane: inout PlaneMap) {
+        
+        let parentID = try! NSRegularExpression(pattern: "AIRPLANE_AREA", options: .caseInsensitive)
+
+        plane.mapAreas = plane.mapAreas.filter { area in
+            
+            let range = NSRange(location: 0, length: area.id.utf16.count)
+            let checkParentArea = parentID.firstMatch(in: area.id, range: range)
+            
+            if(checkParentArea != nil) {
+                return true
+            } else {
+                let eval = regexFilter(area.id) && area.seats?.isEmpty != true
+                return eval
+            }
+        }
+
+    }
+    
+    func regexFilter(_ target: String) -> Bool {
+        
+        let range = NSRange(location: 0, length: target.utf16.count)
+        let lav = try! NSRegularExpression(pattern: "lav", options: .caseInsensitive)
+        let crew = try! NSRegularExpression(pattern: "crew", options: .caseInsensitive)
+        let galley = try! NSRegularExpression(pattern: "galley", options: .caseInsensitive)
+        let vestibule = try! NSRegularExpression(pattern: "vestibule", options: .caseInsensitive)
+        
+        
+        let lookUpOne = lav.firstMatch(in: target, range: range)
+        let lookUpTwo = crew.firstMatch(in: target, range: range)
+        let lookUpThree = galley.firstMatch(in: target, range: range)
+        let lookUpFour = vestibule.firstMatch(in: target, range: range)
+        
+        if(lookUpOne == nil && lookUpTwo == nil && lookUpThree == nil && lookUpFour == nil) {
+            //Target string passed all checks
+            return true
+        }
+        
+        //Target string failed
+        return false
+    }
+    
 }

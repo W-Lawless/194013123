@@ -10,7 +10,6 @@ import SwiftUI
 struct SeatSelection: View {
     
     @ObservedObject var viewModel: SeatsViewModel
-    var api: SeatsAPI
     
     var body: some View {
         PlaneFactory.buildPlaneSchematic(topLevelViewModel: viewModel, options: PlaneSchematicDisplayMode.onlySeats)
@@ -24,13 +23,13 @@ struct SeatSelection: View {
 
 //MARK: - View Model
 
-class SeatsViewModel: ViewModelWithSubViews, ObservableObject {
+class SeatsViewModel: ViewModelWithSubViews, ObservableObject, GCMSViewModel {
     
     @Published var showPanel: Bool = false
     @Published var seatList: [SeatModel]?
     
-    func updateValues(_ data: [SeatModel]) {
-        self.seatList = data
+    func updateValues(_ data: [Codable]) {
+        self.seatList = data as? [SeatModel]
     }
     
     func showSubView(forID: String) {

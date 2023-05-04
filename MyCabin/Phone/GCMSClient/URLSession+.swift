@@ -50,7 +50,7 @@ extension URLSession {
     }
     
     func publisherForNullResponse<Format, ResponseModel>( for endpoint: Endpoint<Format, ResponseModel>,
-        using requestData: Format.RequestData, decoder: JSONDecoder = .init() ) -> AnyPublisher<EmptyResponse, Error> {
+        using requestData: Format.RequestData? = nil, decoder: JSONDecoder = .init() ) -> AnyPublisher<EmptyResponse, Error> {
         
         guard let request = endpoint.makeRequest(with: requestData) else {
             return Fail(error: InvalidEndpoint())
@@ -78,4 +78,25 @@ extension URLSession {
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
+    
+    func publisherForPinging<Format, ResponseModel>( for endpoint: Endpoint<Format, ResponseModel>, decoder: JSONDecoder = .init() ) -> AnyPublisher<HTTPURLResponse, Error> {
+        
+        guard let request = endpoint.makeRequest(with: nil) else {
+            return Fail(error: URLError(_nsError: NSError(domain: "GCMS.server", code: -1)))
+                .eraseToAnyPublisher()
+        }
+
+        return dataTaskPublisher(for: request)
+            .tryMap { output in
+                guard let response = output.response as? HTTPURLResponse else {
+                    throw HTTPError.statusCode
+                }
+                return response
+            }
+            .eraseToAnyPublisher()
+    }
+}
+
+enum HTTPError: LocalizedError {
+    case statusCode
 }

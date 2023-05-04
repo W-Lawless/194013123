@@ -10,7 +10,9 @@ import Combine
 
 struct Loading: View {
     
-    var api: CabinAPI
+    var startMonitor: (Double, @escaping () async -> Void) -> Void
+    var monitorCallback: () async -> Void
+    var stopMonitor: () -> Void
     
     var body: some View {
         VStack {
@@ -33,8 +35,8 @@ struct Loading: View {
         .padding()
         .frame(height: 180)
         .onAppear {
-            api.monitor.stopMonitor()
-            api.monitor.startMonitor(interval: 3.0, callback: api.monitorCallback)
+            stopMonitor()
+            startMonitor(3.0, monitorCallback)
         }
         .onDisappear{
 //            print("view fading. . .")
@@ -46,6 +48,6 @@ struct Loading: View {
 struct Loading_Previews: PreviewProvider {
 
     static var previews: some View {
-        Loading(api: PlaneFactory.cabinAPI)
+        ViewFactory.buildLoadingScreen()
     }
 }

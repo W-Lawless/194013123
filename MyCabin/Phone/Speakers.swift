@@ -10,7 +10,6 @@ import SwiftUI
 struct Speakers: View {
     
     @StateObject var viewModel: SpeakersViewModel
-    var api: SpeakersAPI
     
     var body: some View {
         Group {
@@ -25,20 +24,18 @@ struct Speakers: View {
                 }
             }
         }
-//        .onAppear {
-//            api.fetch()
-//        }
+
     }
 }
 
 
-class SpeakersViewModel: ObservableObject {
+class SpeakersViewModel: ObservableObject, GCMSViewModel {
     
     @Published var loading: Bool = false
     @Published var speakerList: [SpeakerModel]?
     
-    func updateValues(_ data: [SpeakerModel]) {
-        self.speakerList = data
+    func updateValues(_ data: [Codable]) {
+        self.speakerList = data as? [SpeakerModel]
     }
     
     func updateState(for speaker: SpeakerModel) {

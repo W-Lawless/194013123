@@ -10,7 +10,6 @@ import SwiftUI
 struct Volume: View {
     
     @StateObject var viewModel: SpeakersViewModel
-    var api: SpeakersAPI
     @State var vol: Int = 0
     
     func callback(_ speaker: SpeakerModel) {

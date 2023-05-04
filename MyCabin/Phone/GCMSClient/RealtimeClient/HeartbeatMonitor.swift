@@ -27,8 +27,3 @@ class HeartBeatMonitor {
         timer.invalidate()
     }
 }
-
-protocol RealtimeAPI {
-    func fetch()
-    func monitorCallback()
-}

@@ -8,33 +8,27 @@
 import Foundation
 import Combine
 
-class CabinAPI: ObservableObject {
-
+class CabinAPI<F: EndpointFormat, R: Codable>: GCMSClient, Realtime_API {
+    
     var monitor = HeartBeatMonitor()
     
-    private let scheme = "http"
-    private let host = "10.0.0.41"
-    private let baseApi = "/"
-    private var endpoint: URL {
-        var URI = URLComponents()
-        URI.scheme = self.scheme
-        URI.host = self.host
-        URI.path = "\(self.baseApi)"
-        return URI.url!
+    var endpoint: Endpoint<F, R>
+    var callback: ([R]) -> Void
+    
+    init(endpoint: Endpoint<F ,R>, callback: @escaping ([R]) -> Void) {
+        self.endpoint = endpoint
+        self.callback = callback
     }
     
-    func monitorCallback() async {
-        do {
-            var request = URLRequest(url: self.endpoint, timeoutInterval: 5);
-            request.httpMethod = "HEAD"
-            let (_,response) = try await Session.shared.data(for: request)
-            if response is HTTPURLResponse { ///print(" ✅: Cabin Responsed with Status:\(res.statusCode)")
+    func listen() {
+        let pingCallback: (HTTPURLResponse) -> Void = { response in
+            if (response.statusCode == 200) {
                 PlaneFactory.cabinConnectionPublisher.send(true)
+            } else {
+                PlaneFactory.cabinConnectionPublisher.send(false)
             }
-        } catch {
-            /// let cast = error as NSError; print(" ❌: Cabin Connection Error \(cast.code)")
-            PlaneFactory.cabinConnectionPublisher.send(false)
         }
+        self.ping(for: endpoint, callback: pingCallback)
     }
     
 }

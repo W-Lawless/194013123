@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import Combine
 
 struct FlightInfo: View {
     
     @ObservedObject var viewModel: FlightViewModel
-    var api: FlightAPI
+
+    var startMonitor: (Double, @escaping () async -> Void) -> Void
+    var monitorCallback: () async -> Void
+    var stopMonitor: () -> Void
     
     var body: some View {
         List {
@@ -29,27 +33,28 @@ struct FlightInfo: View {
             }
         }
         .onAppear() {
-//            api.fetch()
-            api.monitor.startMonitor(interval: 3.0, callback: api.monitorCallback)
+            startMonitor(3.0, monitorCallback)
         }
         .onDisappear() {
-            api.monitor.stopMonitor()
+            stopMonitor()
         }
     }
 }
 
 //MARK: - View Model
 
-class FlightViewModel: ObservableObject {
+class FlightViewModel: ObservableObject, GCMSViewModel {
         
     @Published var loading: Bool = true
     @Published var groundSpeed: Int?
     @Published var airSpeed: Int?
     
-    func updateValues(_ alive: Bool, _ data: FlightModel?) {
+    func updateValues(_ data: [Codable]) {
         self.loading = false
-        self.groundSpeed = data?.ground_speed
-        self.airSpeed = data?.air_speed
+        if let data = data as? [FlightModel] {
+            self.groundSpeed = data[0].ground_speed
+            self.airSpeed = data[0].air_speed
+        }
     }
 
 }

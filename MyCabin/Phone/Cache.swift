@@ -39,6 +39,7 @@ struct FileCacheUtil {
         do {
             let cachedElements = try FileCacheUtil.retrieveCachedFile(dataModel: PlaneMap.self)
             let cachedLights = try FileCacheUtil.retrieveCachedFile(dataModel: [LightModel].self)
+            let cachedClimateControllers = try FileCacheUtil.retrieveCachedFile(dataModel: [ClimateControllerModel].self)
             let cachedSeats = try FileCacheUtil.retrieveCachedFile(dataModel: [SeatModel].self)
             let cachedMonitors = try FileCacheUtil.retrieveCachedFile(dataModel: [MonitorModel].self)
             let cachedSpeakers = try FileCacheUtil.retrieveCachedFile(dataModel: [SpeakerModel].self)
@@ -47,6 +48,7 @@ struct FileCacheUtil {
             
             PlaneFactory.planeViewModel.updateValues(cachedElements)
             StateFactory.lightsViewModel.updateValues(cachedLights)
+            StateFactory.climateViewModel.updateValues(cachedClimateControllers)
             StateFactory.seatsViewModel.updateValues(cachedSeats)
             StateFactory.monitorsViewModel.updateValues(cachedMonitors)
             StateFactory.speakersViewModel.updateValues(cachedSpeakers)

@@ -26,10 +26,10 @@ struct Lights: View {
             .background(Color.black)
             .frame(height:108, alignment: .top)
             .onAppear {
-                let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: "/api/v1/lights")
-                var sut = TestGeneral(endpoint: endpoint, viewModel: StateFactory.lightsViewModel)
-                sut.fetch(for: sut.endpoint, viewModel: sut.viewModel) { result in
-                    viewModel.updateValues(result)
+                let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: .lights)
+                let sut = StateFactory.apiClient
+                sut.fetch(for: endpoint) { result in
+                    StateFactory.lightsViewModel.updateValues(result)
                 }
             }
             

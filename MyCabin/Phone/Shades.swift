@@ -10,7 +10,6 @@ import SwiftUI
 struct Shades: View {
     
     @ObservedObject var viewModel: ShadesViewModel
-    var api: ShadesAPI
     
     var body: some View {
         
@@ -20,7 +19,7 @@ struct Shades: View {
             
             VStack(alignment: .center) {
                 if(viewModel.showPanel) {
-                    ShadeControl(api: api)
+                    ShadeControl()
                 }
             }
             .edgesIgnoringSafeArea(.bottom)

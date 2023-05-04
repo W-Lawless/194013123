@@ -13,14 +13,12 @@
 		2B02B9C52936AAA100C6387A /* CabinClimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9C42936AAA100C6387A /* CabinClimate.swift */; };
 		2B02B9C72936AB1900C6387A /* MapInPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9C62936AB1900C6387A /* MapInPlace.swift */; };
 		2B02B9C92936ABAB00C6387A /* GeneralAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9C82936ABAB00C6387A /* GeneralAPI.swift */; };
-		2B02B9CC2936B65200C6387A /* CabinClimateAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9CB2936B65200C6387A /* CabinClimateAPI.swift */; };
 		2B02B9CE2936B66500C6387A /* CabinClimateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9CD2936B66500C6387A /* CabinClimateModel.swift */; };
 		2B02B9D12936BBDD00C6387A /* Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9D02936BBDD00C6387A /* Presets.swift */; };
 		2B02B9D42936BBEA00C6387A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9D32936BBEA00C6387A /* Settings.swift */; };
 		2B02B9D92937C93300C6387A /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9D82937C93300C6387A /* Cache.swift */; };
 		2B02B9DB2937FD4500C6387A /* PlaneSchematic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B02B9DA2937FD4500C6387A /* PlaneSchematic.swift */; };
 		2B10DD24292D4C2400AB98F3 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD23292D4C2400AB98F3 /* Weather.swift */; };
-		2B10DD26292D572500AB98F3 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD25292D572500AB98F3 /* WeatherAPI.swift */; };
 		2B10DD28292D656B00AB98F3 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DD27292D656B00AB98F3 /* Endpoint.swift */; };
 		2B1170442933E3C100A1CB8F /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1170432933E3C100A1CB8F /* CoordinatorProtocol.swift */; };
 		2B1170462933E43800A1CB8F /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1170452933E43800A1CB8F /* AppCoordinator.swift */; };
@@ -43,8 +41,17 @@
 		2B183F4E2913F8BD0087654E /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B183F4D2913F8BD0087654E /* Loading.swift */; };
 		2B183F502913F8C00087654E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B183F4F2913F8C00087654E /* Assets.xcassets */; };
 		2B183F542913F8C00087654E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B183F532913F8C00087654E /* Preview Assets.xcassets */; };
+		2B197EE62A02CAFA00DF406B /* RealtimeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197EE52A02CAFA00DF406B /* RealtimeAPI.swift */; };
+		2B197EEE2A02CFBA00DF406B /* ShadesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197EED2A02CFBA00DF406B /* ShadesModel.swift */; };
+		2B197EF72A02D0AD00DF406B /* GCMSViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197EF62A02D0AD00DF406B /* GCMSViewModel.swift */; };
+		2B197EFC2A02D86000DF406B /* PlaneSchematic+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197EFB2A02D86000DF406B /* PlaneSchematic+.swift */; };
+		2B197EFF2A02FD5F00DF406B /* ClimateAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197EFE2A02FD5F00DF406B /* ClimateAPI.swift */; };
+		2B197F022A031B4D00DF406B /* Seat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197F012A031B4D00DF406B /* Seat.swift */; };
+		2B197F042A031C2000DF406B /* Divan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197F032A031C2000DF406B /* Divan.swift */; };
+		2B197F062A031C3700DF406B /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197F052A031C3700DF406B /* Table.swift */; };
+		2B197F092A031C6C00DF406B /* PlaneSchematic+Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197F082A031C6C00DF406B /* PlaneSchematic+Modifiers.swift */; };
+		2B197F0B2A034CDA00DF406B /* ShadeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197F0A2A034CDA00DF406B /* ShadeIcon.swift */; };
 		2B41EF4A292C105E0062CA2B /* Cabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B41EF49292C105E0062CA2B /* Cabin.swift */; };
-		2B41EF4C292C21E50062CA2B /* FlightAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B41EF4B292C21E50062CA2B /* FlightAPI.swift */; };
 		2B865803293900E600982BBB /* Routers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B865802293900E600982BBB /* Routers.swift */; };
 		2B86580629393AC200982BBB /* Devices.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B86580429393AC200982BBB /* Devices.json */; };
 		2B86580729393AC200982BBB /* AccessLevels.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B86580529393AC200982BBB /* AccessLevels.json */; };
@@ -91,7 +98,7 @@
 		2BE4D4F22940FE3E0026FC01 /* ElementsEnumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE4D4F12940FE3E0026FC01 /* ElementsEnumModel.swift */; };
 		2BE4D4F5294107680026FC01 /* TableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE4D4F4294107680026FC01 /* TableModel.swift */; };
 		2BE4D4F72941096F0026FC01 /* DivanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE4D4F62941096F0026FC01 /* DivanModel.swift */; };
-		2BE97D3B291C137B00149BA4 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D3A291C137B00149BA4 /* Home.swift */; };
+		2BE97D3B291C137B00149BA4 /* HomeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D3A291C137B00149BA4 /* HomeMenu.swift */; };
 		2BE97D3D291C174000149BA4 /* FlightInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D3C291C174000149BA4 /* FlightInfo.swift */; };
 		2BE97D3F291C175F00149BA4 /* MediaTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D3E291C175F00149BA4 /* MediaTab.swift */; };
 		2BE97D49291C348800149BA4 /* EntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE97D48291C348800149BA4 /* EntryPoint.swift */; };
@@ -144,14 +151,12 @@
 		2B02B9C42936AAA100C6387A /* CabinClimate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinClimate.swift; sourceTree = "<group>"; };
 		2B02B9C62936AB1900C6387A /* MapInPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInPlace.swift; sourceTree = "<group>"; };
 		2B02B9C82936ABAB00C6387A /* GeneralAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralAPI.swift; sourceTree = "<group>"; };
-		2B02B9CB2936B65200C6387A /* CabinClimateAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinClimateAPI.swift; sourceTree = "<group>"; };
 		2B02B9CD2936B66500C6387A /* CabinClimateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinClimateModel.swift; sourceTree = "<group>"; };
 		2B02B9D02936BBDD00C6387A /* Presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presets.swift; sourceTree = "<group>"; };
 		2B02B9D32936BBEA00C6387A /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		2B02B9D82937C93300C6387A /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		2B02B9DA2937FD4500C6387A /* PlaneSchematic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneSchematic.swift; sourceTree = "<group>"; };
 		2B10DD23292D4C2400AB98F3 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
-		2B10DD25292D572500AB98F3 /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		2B10DD27292D656B00AB98F3 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		2B1170432933E3C100A1CB8F /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		2B1170452933E43800A1CB8F /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -176,8 +181,17 @@
 		2B183F4F2913F8C00087654E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B183F512913F8C00087654E /* MyCabin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyCabin.entitlements; sourceTree = "<group>"; };
 		2B183F532913F8C00087654E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2B197EE52A02CAFA00DF406B /* RealtimeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeAPI.swift; sourceTree = "<group>"; };
+		2B197EED2A02CFBA00DF406B /* ShadesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadesModel.swift; sourceTree = "<group>"; };
+		2B197EF62A02D0AD00DF406B /* GCMSViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCMSViewModel.swift; sourceTree = "<group>"; };
+		2B197EFB2A02D86000DF406B /* PlaneSchematic+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaneSchematic+.swift"; sourceTree = "<group>"; };
+		2B197EFE2A02FD5F00DF406B /* ClimateAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClimateAPI.swift; sourceTree = "<group>"; };
+		2B197F012A031B4D00DF406B /* Seat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seat.swift; sourceTree = "<group>"; };
+		2B197F032A031C2000DF406B /* Divan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divan.swift; sourceTree = "<group>"; };
+		2B197F052A031C3700DF406B /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
+		2B197F082A031C6C00DF406B /* PlaneSchematic+Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaneSchematic+Modifiers.swift"; sourceTree = "<group>"; };
+		2B197F0A2A034CDA00DF406B /* ShadeIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadeIcon.swift; sourceTree = "<group>"; };
 		2B41EF49292C105E0062CA2B /* Cabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cabin.swift; sourceTree = "<group>"; };
-		2B41EF4B292C21E50062CA2B /* FlightAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightAPI.swift; sourceTree = "<group>"; };
 		2B7FE8102919C692002C64FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		2B865802293900E600982BBB /* Routers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routers.swift; sourceTree = "<group>"; };
 		2B86580429393AC200982BBB /* Devices.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Devices.json; sourceTree = "<group>"; };
@@ -227,7 +241,7 @@
 		2BE4D4F12940FE3E0026FC01 /* ElementsEnumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsEnumModel.swift; sourceTree = "<group>"; };
 		2BE4D4F4294107680026FC01 /* TableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableModel.swift; sourceTree = "<group>"; };
 		2BE4D4F62941096F0026FC01 /* DivanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivanModel.swift; sourceTree = "<group>"; };
-		2BE97D3A291C137B00149BA4 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		2BE97D3A291C137B00149BA4 /* HomeMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMenu.swift; sourceTree = "<group>"; };
 		2BE97D3C291C174000149BA4 /* FlightInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightInfo.swift; sourceTree = "<group>"; };
 		2BE97D3E291C175F00149BA4 /* MediaTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTab.swift; sourceTree = "<group>"; };
 		2BE97D46291C348800149BA4 /* My Cabin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My Cabin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,7 +292,6 @@
 		2B02B9CA2936B63900C6387A /* CabinClimate */ = {
 			isa = PBXGroup;
 			children = (
-				2B02B9CB2936B65200C6387A /* CabinClimateAPI.swift */,
 				2B02B9CD2936B66500C6387A /* CabinClimateModel.swift */,
 			);
 			name = CabinClimate;
@@ -332,7 +345,6 @@
 			isa = PBXGroup;
 			children = (
 				2B11704929352AF100A1CB8F /* MonitorsAPI.swift */,
-				2B11704D29352D0A00A1CB8F /* MonitorModel.swift */,
 			);
 			name = Monitors;
 			sourceTree = "<group>";
@@ -351,7 +363,6 @@
 		2B11705829353C0000A1CB8F /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2B11705929353C0E00A1CB8F /* SourceModel.swift */,
 				2B11705B29353DBF00A1CB8F /* SourcesAPI.swift */,
 			);
 			name = Sources;
@@ -361,7 +372,6 @@
 			isa = PBXGroup;
 			children = (
 				2B1170622935491000A1CB8F /* SpeakersAPI.swift */,
-				2B1170642935491D00A1CB8F /* SpeakerModel.swift */,
 			);
 			name = Speakers;
 			sourceTree = "<group>";
@@ -427,18 +437,176 @@
 			children = (
 				2BA7B4C9291D37A600942CB5 /* API */,
 				2BA7B4C8291D379200942CB5 /* HardwareDevices */,
-				2BA7B4CC291D504900942CB5 /* URLSession+.swift */,
-				2BB3A586292445C90094B787 /* HeartbeatMonitor.swift */,
-				2BB135FB292703970016444C /* CodableWrapper.swift */,
-				2B10DD27292D656B00AB98F3 /* Endpoint.swift */,
 			);
 			name = Networking;
+			sourceTree = "<group>";
+		};
+		2B197EE72A02CF4900DF406B /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				2B197EE82A02CF5500DF406B /* Speakers */,
+				2B197EE92A02CF5A00DF406B /* Sources */,
+				2B197EEA2A02CF6100DF406B /* Monitors */,
+			);
+			name = Media;
+			sourceTree = "<group>";
+		};
+		2B197EE82A02CF5500DF406B /* Speakers */ = {
+			isa = PBXGroup;
+			children = (
+				2B1170642935491D00A1CB8F /* SpeakerModel.swift */,
+			);
+			name = Speakers;
+			sourceTree = "<group>";
+		};
+		2B197EE92A02CF5A00DF406B /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				2B11705929353C0E00A1CB8F /* SourceModel.swift */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		2B197EEA2A02CF6100DF406B /* Monitors */ = {
+			isa = PBXGroup;
+			children = (
+				2B11704D29352D0A00A1CB8F /* MonitorModel.swift */,
+			);
+			name = Monitors;
+			sourceTree = "<group>";
+		};
+		2B197EEB2A02CF8900DF406B /* Lights */ = {
+			isa = PBXGroup;
+			children = (
+				2B11704B29352CDE00A1CB8F /* LightsModel.swift */,
+			);
+			name = Lights;
+			sourceTree = "<group>";
+		};
+		2B197EEC2A02CFA200DF406B /* Shades */ = {
+			isa = PBXGroup;
+			children = (
+				2B197EED2A02CFBA00DF406B /* ShadesModel.swift */,
+			);
+			name = Shades;
+			sourceTree = "<group>";
+		};
+		2B197EEF2A02CFCA00DF406B /* Seats */ = {
+			isa = PBXGroup;
+			children = (
+				2BA8F60529252166005621D3 /* SeatModels.swift */,
+			);
+			name = Seats;
+			sourceTree = "<group>";
+		};
+		2B197EF02A02CFE400DF406B /* FlightInfo */ = {
+			isa = PBXGroup;
+			children = (
+				2BA8F60229251C0C005621D3 /* FlightModels.swift */,
+			);
+			name = FlightInfo;
+			sourceTree = "<group>";
+		};
+		2B197EF12A02CFED00DF406B /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				2BB135EB2926D6AB0016444C /* WeatherModels.swift */,
+			);
+			name = Weather;
+			sourceTree = "<group>";
+		};
+		2B197EF22A02D00400DF406B /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				2BE4D4F12940FE3E0026FC01 /* ElementsEnumModel.swift */,
+				2BE4D4F62941096F0026FC01 /* DivanModel.swift */,
+				2BE4D4F4294107680026FC01 /* TableModel.swift */,
+				2B939C90293E9DC80014AD13 /* RenderCoordinates.swift */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
+		2B197EF32A02D01600DF406B /* Access */ = {
+			isa = PBXGroup;
+			children = (
+				2B86580929393E9500982BBB /* AccessModel.swift */,
+			);
+			name = Access;
+			sourceTree = "<group>";
+		};
+		2B197EF42A02D02E00DF406B /* GCMSClient+ */ = {
+			isa = PBXGroup;
+			children = (
+				2B86580829393E4400982BBB /* Access */,
+				2B197EFD2A02F66100DF406B /* Climate */,
+				2B11704729352ADE00A1CB8F /* Media */,
+				2B8F713A292E564400073637 /* Lights */,
+				2BB135FD292708650016444C /* Shades */,
+				2BA8F61829258F3E005621D3 /* Elements */,
+				2BA8F60429252150005621D3 /* Seats */,
+			);
+			name = "GCMSClient+";
+			sourceTree = "<group>";
+		};
+		2B197EF52A02D04800DF406B /* GCMSClient */ = {
+			isa = PBXGroup;
+			children = (
+				2B197EF82A02D0E700DF406B /* GeneralizedClient */,
+				2B197EF92A02D0FA00DF406B /* RealtimeClient */,
+			);
+			path = GCMSClient;
+			sourceTree = "<group>";
+		};
+		2B197EF82A02D0E700DF406B /* GeneralizedClient */ = {
+			isa = PBXGroup;
+			children = (
+				2B02B9C82936ABAB00C6387A /* GeneralAPI.swift */,
+				2BA7B4CC291D504900942CB5 /* URLSession+.swift */,
+				2B10DD27292D656B00AB98F3 /* Endpoint.swift */,
+				2BB135FB292703970016444C /* CodableWrapper.swift */,
+			);
+			name = GeneralizedClient;
+			sourceTree = "<group>";
+		};
+		2B197EF92A02D0FA00DF406B /* RealtimeClient */ = {
+			isa = PBXGroup;
+			children = (
+				2B197EE52A02CAFA00DF406B /* RealtimeAPI.swift */,
+				2BB3A586292445C90094B787 /* HeartbeatMonitor.swift */,
+			);
+			path = RealtimeClient;
+			sourceTree = "<group>";
+		};
+		2B197EFD2A02F66100DF406B /* Climate */ = {
+			isa = PBXGroup;
+			children = (
+				2B197EFE2A02FD5F00DF406B /* ClimateAPI.swift */,
+			);
+			name = Climate;
+			sourceTree = "<group>";
+		};
+		2B197F002A031B3600DF406B /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				2B197F012A031B4D00DF406B /* Seat.swift */,
+				2B197F032A031C2000DF406B /* Divan.swift */,
+				2B197F052A031C3700DF406B /* Table.swift */,
+				2B197F0A2A034CDA00DF406B /* ShadeIcon.swift */,
+			);
+			name = SubViews;
+			sourceTree = "<group>";
+		};
+		2B197F072A031C5400DF406B /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				2B197F082A031C6C00DF406B /* PlaneSchematic+Modifiers.swift */,
+			);
+			name = Modifiers;
 			sourceTree = "<group>";
 		};
 		2B86580829393E4400982BBB /* Access */ = {
 			isa = PBXGroup;
 			children = (
-				2B86580929393E9500982BBB /* AccessModel.swift */,
 				2B86580B2939414A00982BBB /* AccessAPI.swift */,
 			);
 			name = Access;
@@ -448,7 +616,6 @@
 			isa = PBXGroup;
 			children = (
 				2B8F713B292E566300073637 /* LightsAPI.swift */,
-				2B11704B29352CDE00A1CB8F /* LightsModel.swift */,
 			);
 			name = Lights;
 			sourceTree = "<group>";
@@ -464,7 +631,10 @@
 		2BA2F82229509FDD007C26E5 /* Plane */ = {
 			isa = PBXGroup;
 			children = (
+				2B197F072A031C5400DF406B /* Modifiers */,
+				2B197F002A031B3600DF406B /* SubViews */,
 				2B02B9DA2937FD4500C6387A /* PlaneSchematic.swift */,
+				2B197EFB2A02D86000DF406B /* PlaneSchematic+.swift */,
 				2BA7D905293FC63F004E2DF6 /* PlaneViewModel.swift */,
 			);
 			name = Plane;
@@ -482,35 +652,17 @@
 		2BA7B4C9291D37A600942CB5 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				2B939C8B293E90F40014AD13 /* Areas */,
-				2B86580829393E4400982BBB /* Access */,
-				2B02B9CA2936B63900C6387A /* CabinClimate */,
-				2B11704729352ADE00A1CB8F /* Media */,
-				2B8F713A292E564400073637 /* Lights */,
-				2BB135FD292708650016444C /* Shades */,
-				2BA8F61829258F3E005621D3 /* Elements */,
-				2BA8F60429252150005621D3 /* Seats */,
-				2BA8F60129251BFB005621D3 /* FlightInfo */,
-				2BB135E82926D67F0016444C /* Weather */,
-				2B02B9C82936ABAB00C6387A /* GeneralAPI.swift */,
+				2B197EF52A02D04800DF406B /* GCMSClient */,
+				2B197EF42A02D02E00DF406B /* GCMSClient+ */,
+				2BBCCC632A004E2F00DC6FD4 /* DataModels */,
 			);
 			name = API;
-			sourceTree = "<group>";
-		};
-		2BA8F60129251BFB005621D3 /* FlightInfo */ = {
-			isa = PBXGroup;
-			children = (
-				2B41EF4B292C21E50062CA2B /* FlightAPI.swift */,
-				2BA8F60229251C0C005621D3 /* FlightModels.swift */,
-			);
-			name = FlightInfo;
 			sourceTree = "<group>";
 		};
 		2BA8F60429252150005621D3 /* Seats */ = {
 			isa = PBXGroup;
 			children = (
 				2BA7B4CA291D4A3A00942CB5 /* SeatsAPI.swift */,
-				2BA8F60529252166005621D3 /* SeatModels.swift */,
 			);
 			name = Seats;
 			sourceTree = "<group>";
@@ -570,10 +722,6 @@
 			isa = PBXGroup;
 			children = (
 				2BA8F61929258F78005621D3 /* ElementsAPI.swift */,
-				2BE4D4F12940FE3E0026FC01 /* ElementsEnumModel.swift */,
-				2BE4D4F62941096F0026FC01 /* DivanModel.swift */,
-				2BE4D4F4294107680026FC01 /* TableModel.swift */,
-				2B939C90293E9DC80014AD13 /* RenderCoordinates.swift */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -610,15 +758,6 @@
 			path = MockData;
 			sourceTree = "<group>";
 		};
-		2BB135E82926D67F0016444C /* Weather */ = {
-			isa = PBXGroup;
-			children = (
-				2B10DD25292D572500AB98F3 /* WeatherAPI.swift */,
-				2BB135EB2926D6AB0016444C /* WeatherModels.swift */,
-			);
-			name = Weather;
-			sourceTree = "<group>";
-		};
 		2BB135F32926E1EB0016444C /* MockClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -640,6 +779,24 @@
 			children = (
 			);
 			path = "Cache Tests";
+			sourceTree = "<group>";
+		};
+		2BBCCC632A004E2F00DC6FD4 /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				2B197EF62A02D0AD00DF406B /* GCMSViewModel.swift */,
+				2B197EF32A02D01600DF406B /* Access */,
+				2B939C8B293E90F40014AD13 /* Areas */,
+				2B02B9CA2936B63900C6387A /* CabinClimate */,
+				2B197EF22A02D00400DF406B /* Elements */,
+				2B197EF02A02CFE400DF406B /* FlightInfo */,
+				2B197EEB2A02CF8900DF406B /* Lights */,
+				2B197EE72A02CF4900DF406B /* Media */,
+				2B197EEF2A02CFCA00DF406B /* Seats */,
+				2B197EEC2A02CFA200DF406B /* Shades */,
+				2B197EF12A02CFED00DF406B /* Weather */,
+			);
+			name = DataModels;
 			sourceTree = "<group>";
 		};
 		2BC49CD72923DD82007DA457 /* UI */ = {
@@ -695,7 +852,7 @@
 			isa = PBXGroup;
 			children = (
 				2B183F4D2913F8BD0087654E /* Loading.swift */,
-				2BE97D3A291C137B00149BA4 /* Home.swift */,
+				2BE97D3A291C137B00149BA4 /* HomeMenu.swift */,
 				2BA2F82229509FDD007C26E5 /* Plane */,
 				2B1170662935516B00A1CB8F /* Flight */,
 				2B11704F29352D6300A1CB8F /* Media */,
@@ -875,8 +1032,10 @@
 				2B11705C29353DBF00A1CB8F /* SourcesAPI.swift in Sources */,
 				2B939C91293E9DC80014AD13 /* RenderCoordinates.swift in Sources */,
 				2B8F7139292D763C00073637 /* Shades.swift in Sources */,
+				2B197F0B2A034CDA00DF406B /* ShadeIcon.swift in Sources */,
 				2B11705E29353DED00A1CB8F /* Sources.swift in Sources */,
 				2B8F713E292E5C5800073637 /* Lights.swift in Sources */,
+				2B197EEE2A02CFBA00DF406B /* ShadesModel.swift in Sources */,
 				2B939C8F293E910F0014AD13 /* AreasModel.swift in Sources */,
 				2B02B9D92937C93300C6387A /* Cache.swift in Sources */,
 				2BB135EC2926D6AB0016444C /* WeatherModels.swift in Sources */,
@@ -890,35 +1049,40 @@
 				2BD75A19292E7ACE004360A3 /* LightControl.swift in Sources */,
 				2B86580A29393E9500982BBB /* AccessModel.swift in Sources */,
 				2B1170632935491000A1CB8F /* SpeakersAPI.swift in Sources */,
-				2B10DD26292D572500AB98F3 /* WeatherAPI.swift in Sources */,
 				2B1170652935491D00A1CB8F /* SpeakerModel.swift in Sources */,
 				2B8F713C292E566300073637 /* LightsAPI.swift in Sources */,
 				2B02B9C72936AB1900C6387A /* MapInPlace.swift in Sources */,
 				2B02B9BF2936729100C6387A /* Volume.swift in Sources */,
+				2B197EFF2A02FD5F00DF406B /* ClimateAPI.swift in Sources */,
 				2B02B9C92936ABAB00C6387A /* GeneralAPI.swift in Sources */,
-				2BE97D3B291C137B00149BA4 /* Home.swift in Sources */,
-				2B02B9CC2936B65200C6387A /* CabinClimateAPI.swift in Sources */,
+				2BE97D3B291C137B00149BA4 /* HomeMenu.swift in Sources */,
+				2B197F092A031C6C00DF406B /* PlaneSchematic+Modifiers.swift in Sources */,
+				2B197EFC2A02D86000DF406B /* PlaneSchematic+.swift in Sources */,
 				2BA8F60629252166005621D3 /* SeatModels.swift in Sources */,
 				2BA7D906293FC63F004E2DF6 /* PlaneViewModel.swift in Sources */,
 				2BE4D4F72941096F0026FC01 /* DivanModel.swift in Sources */,
 				2BE97D3D291C174000149BA4 /* FlightInfo.swift in Sources */,
+				2B197F022A031B4D00DF406B /* Seat.swift in Sources */,
 				2BB135FF292708750016444C /* ShadesAPI.swift in Sources */,
 				2BD75A1B292EB256004360A3 /* AppDelegate.swift in Sources */,
 				2BE4D4F22940FE3E0026FC01 /* ElementsEnumModel.swift in Sources */,
 				2B11705129352D7A00A1CB8F /* Monitors.swift in Sources */,
 				2BA8F61A29258F78005621D3 /* ElementsAPI.swift in Sources */,
 				2B1170462933E43800A1CB8F /* AppCoordinator.swift in Sources */,
+				2B197F062A031C3700DF406B /* Table.swift in Sources */,
+				2B197EF72A02D0AD00DF406B /* GCMSViewModel.swift in Sources */,
 				2BA8F60329251C0C005621D3 /* FlightModels.swift in Sources */,
 				2B865803293900E600982BBB /* Routers.swift in Sources */,
 				2BA7B4CD291D504900942CB5 /* URLSession+.swift in Sources */,
 				2B10DD24292D4C2400AB98F3 /* Weather.swift in Sources */,
 				2B02B9D42936BBEA00C6387A /* Settings.swift in Sources */,
 				2B02B9C52936AAA100C6387A /* CabinClimate.swift in Sources */,
-				2B41EF4C292C21E50062CA2B /* FlightAPI.swift in Sources */,
 				2B1170442933E3C100A1CB8F /* CoordinatorProtocol.swift in Sources */,
 				2B41EF4A292C105E0062CA2B /* Cabin.swift in Sources */,
+				2B197F042A031C2000DF406B /* Divan.swift in Sources */,
 				2B02B9DB2937FD4500C6387A /* PlaneSchematic.swift in Sources */,
 				2B11704E29352D0A00A1CB8F /* MonitorModel.swift in Sources */,
+				2B197EE62A02CAFA00DF406B /* RealtimeAPI.swift in Sources */,
 				2B86580C2939414A00982BBB /* AccessAPI.swift in Sources */,
 				2B1479C429525BD000FA51C5 /* ShadeControl.swift in Sources */,
 				2B11705A29353C0E00A1CB8F /* SourceModel.swift in Sources */,

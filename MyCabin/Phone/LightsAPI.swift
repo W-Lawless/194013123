@@ -8,56 +8,19 @@
 import Foundation
 import Combine
 
-class LightsAPI {
-    
-    let viewModel: LightsViewModel
-    var cancelToken: Cancellable?
-
-    let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: "/api/v1/lights")
-    
-    init(viewModel: LightsViewModel) {
-        self.viewModel = viewModel
-    }
-    
-    func fetch() {
-        let publisher = Session.shared.publisher(for: endpoint, using: nil)
-        
-        self.cancelToken = publisher.sink(
-            receiveCompletion: { completion in
-                switch completion {
-                case .failure(let error):
-                    print(error)
-                case .finished:
-                    return
-                }
-            },
-            receiveValue: { lights in
-                self.viewModel.updateValues(lights)
-                FileCacheUtil.cacheToFile(data: lights)
-            }
-        )
-    }
+extension GCMSClient {
     
     func toggleLight(_ light: LightModel, cmd: LightState) {
         
-        let endpoint = Endpoint<EndpointFormats.Put<LightModel.state>, LightModel.state>(path: "/api/v1/lights/\(light.id)/state")
-        let encodeObj = LightModel.state(on: cmd.rawValue, brightness: cmd.rawValue == true ? 100 : 0)
-                
-        let publisher = Session.shared.publisher(for: endpoint, using: encodeObj)
+        let endpoint = Endpoint<EndpointFormats.Put<LightModel.state>, LightModel.state>(path: .lights, stateUpdate: light.id)
         
-        self.cancelToken = publisher.sink(
-            receiveCompletion: { completion in
-                switch completion {
-                case .failure(let error):
-                    print("there was an error", error)
-                case .finished:
-                    return
-                }
-            },
-            receiveValue: { lightStatus in
-                    print("put request data", lightStatus)
-            }
-        )
+        let encodeObj = LightModel.state(on: cmd.rawValue, brightness: cmd.rawValue == true ? 100 : 0)
+        
+        let callback = { lightStatus in
+            print("put request data", lightStatus)
+        }
+        
+        self.put(for: endpoint, putData: encodeObj, callback: callback)
     }
     
 }

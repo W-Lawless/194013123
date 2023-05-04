@@ -7,7 +7,9 @@
 
 import Foundation
 
-protocol ElementModel {}
+protocol ElementModel {
+    var rect: RenderCoordinates { get set }
+}
 
 struct ElementsRoot: Decodable {
     var results: [ElementsEnum]

@@ -68,7 +68,7 @@ final class NetworkingTests: XCTestCase {
         let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: "/api/v1/lights")
         let viewModel = LightsViewModel()
 
-        let sut = TestGeneral(endpoint: endpoint, viewModel: viewModel)
+        var sut = GCMSClient(endpoint: endpoint, viewModel: viewModel)
         sut.fetch(for: sut.endpoint, viewModel: viewModel) { result in
             viewModel.updateValues(result)
             exp.fulfill()

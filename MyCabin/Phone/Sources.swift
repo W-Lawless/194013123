@@ -10,35 +10,27 @@ import SwiftUI
 struct Sources: View {
     
     @StateObject var viewModel: SourcesViewModel
-    var api: SourcesAPI
     
     var body: some View {
         Group{
-            if (viewModel.loading) {
-                ProgressView()
-            } else {
-                List(viewModel.sourceList ?? [SourceModel]()) { source in
-                    Group {
-                        Text(source.id)
-                        Text(source.shortName)
-                    }
+            
+            List(viewModel.sourceList ?? [SourceModel]()) { source in
+                Group {
+                    Text(source.id)
+                    Text(source.shortName)
                 }
             }
         }
-//        .onAppear {
-//            api.fetch()
-//        }
     }
 }
 
 
-class SourcesViewModel: ObservableObject {
+class SourcesViewModel: ObservableObject, GCMSViewModel {
     
-    @Published var loading: Bool = false
     @Published var sourceList: [SourceModel]?
     
-    func updateValues(_ data: [SourceModel]) {
-        self.sourceList = data
+    func updateValues(_ data: [Codable]) {
+        self.sourceList = data as? [SourceModel]
     }
     
 }

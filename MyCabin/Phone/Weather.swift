@@ -10,7 +10,6 @@ import SwiftUI
 struct Weather: View {
     
     @StateObject var viewModel: WeatherViewModel
-    var api: WeatherAPI
     
     var body: some View {
         List{
@@ -51,7 +50,7 @@ struct Weather: View {
 
 //MARK: - View Model
 
-class WeatherViewModel: ObservableObject {
+class WeatherViewModel: ObservableObject, GCMSViewModel {
     
     @Published var condition: String = "Cloudy"
     @Published var currentTemp: Int = 0
@@ -61,15 +60,15 @@ class WeatherViewModel: ObservableObject {
     @Published var windSpeed: Int = 0
     @Published var sundown: String = ""
     
-    func updateValues(_ alive: Bool, _ data: WeatherModel?) {
-        if let data = data {
-            self.condition = data.current.condition
-            self.currentTemp = Int(data.current.temperatureF)
-            self.high =  data.current.high
-            self.low = data.current.low
-            self.humidity =  data.current.relativeHumidityPct
-            self.windSpeed = Int(data.current.windMph)
-            self.sundown =  data.astronomy.sunSet
+    func updateValues( _ data: [Codable]) {
+        if let data = data as? [WeatherModel] {
+            self.condition = data[0].current.condition
+            self.currentTemp = Int(data[0].current.temperatureF)
+            self.high =  data[0].current.high
+            self.low = data[0].current.low
+            self.humidity =  data[0].current.relativeHumidityPct
+            self.windSpeed = Int(data[0].current.windMph)
+            self.sundown =  data[0].astronomy.sunSet
         }
     }
 }

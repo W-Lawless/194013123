@@ -20,7 +20,7 @@ struct AdjustablePowerButton: View {
                     Text("Power")
                 }
                 .onChange(of: power) { newValue in
-                    StateFactory.lightsAPI.toggleLight(light, cmd: newValue ? .ON : .OFF)
+                    StateFactory.apiClient.toggleLight(light, cmd: newValue ? .ON : .OFF)
                 }
                 Stepper("Brightness", value: $luminosity)
             }

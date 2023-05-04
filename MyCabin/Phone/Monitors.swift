@@ -10,7 +10,6 @@ import SwiftUI
 struct Monitors: View {
     
     @StateObject var viewModel: MonitorsViewModel
-    var api: MonitorsAPI
     
     var body: some View {
         Group{
@@ -21,10 +20,10 @@ struct Monitors: View {
                     Group {
                         Text(monitor.id)
                         Button("Power On") {
-                            api.togglePower(monitor, cmd: true)
+                            StateFactory.apiClient.toggleMonitor(monitor, cmd: true)
                         }
                         Button("Power Off") {
-                            api.togglePower(monitor, cmd: false)
+                            StateFactory.apiClient.toggleMonitor(monitor, cmd: false)
                         }
                     }
                 }
@@ -38,13 +37,13 @@ struct Monitors: View {
 }
 
 
-class MonitorsViewModel: ObservableObject {
+class MonitorsViewModel: ObservableObject, GCMSViewModel {
     
     @Published var loading: Bool = false
     @Published var monitorsList: [MonitorModel]?
     
-    func updateValues(_ data: [MonitorModel]) {
-        self.monitorsList = data
+    func updateValues(_ data: [Codable]) {
+        self.monitorsList = data as? [MonitorModel]
     }
 }
 

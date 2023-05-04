@@ -18,11 +18,13 @@ final class PlaneFactory {
     static var apiSubscriptions = Set<AnyCancellable>()
     static var cancelTokens = Set<AnyCancellable>()
     
-    static let cabinAPI = CabinAPI()
+    static let cabinEndpoint = Endpoint<EndpointFormats.Head, EmptyResponse>(path: .ping)
+    
+    static let cabinAPI = CabinAPI(endpoint: cabinEndpoint) { _ in }
     ///Access Levels
     static let accessAPI = AccessAPI()
     ///Plane Map
-    static let planeViewModel = PlaneViewModel()
+    static var planeViewModel = PlaneViewModel()
     
     static var elementsAPI = ElementsAPI(viewModel: planeViewModel)
     
@@ -32,26 +34,24 @@ final class PlaneFactory {
     //Menus
     
     static func buildPlaneSchematic<AViewModel: ViewModelWithSubViews>(topLevelViewModel: AViewModel, options: PlaneSchematicDisplayMode) -> PlaneSchematic<AViewModel> {
-        let view = PlaneSchematic<AViewModel>(topLevelViewModel: topLevelViewModel, viewModel: planeViewModel, navigation: NavigationFactory.homeMenuCoordinator, options: options)
+        let view = PlaneSchematic<AViewModel>(topLevelViewModel: topLevelViewModel, viewModel: planeViewModel, navigation: NavigationFactory.homeMenuCoordinator, options: options, selectedZone: nil)
         return view
     }
     
     static func connectToPlane() {
 
-        Task{
+        Task(priority: .high) {
             do {
                 try await FileCacheUtil.loadAllCaches()
             } catch {
                 print("Cache failed to load")
                 await PlaneFactory.elementsAPI.fetch()
             }
-//            await areasAPI.mapPlane()
-//            accessAPI.registerDevice()
+            StateFactory.apiClient.fetchClimateControllers()
         }
-
         
+        //            accessAPI.registerDevice()
 //        ///Non Caching
-//        cabinClimateAPI.fetch()
 //        flightAPI.fetch()
 //        weatherAPI.fetch()
     }
@@ -60,10 +60,20 @@ final class PlaneFactory {
 final class ViewFactory {
     
     static let volumeMenu = UIHostingController(rootView: buildVolumeView())
-    static let loadingView = UIHostingController(rootView: Loading(api: PlaneFactory.cabinAPI))
+    static let loadingView = UIHostingController(rootView: buildLoadingScreen())
+    
+    static func buildLoadingScreen() -> Loading {
+        let startMonitor = PlaneFactory.cabinAPI.monitor.startMonitor
+        let monitorCallback = PlaneFactory.cabinAPI.monitorCallback
+        let stopMonitor = PlaneFactory.cabinAPI.monitor.stopMonitor
+        
+        let view = Loading(startMonitor: startMonitor, monitorCallback: monitorCallback, stopMonitor: stopMonitor)
+        
+        return view
+    }
     
     static func buildMenuOverview() -> Home {
-        let view = Home(navigation: NavigationFactory.homeMenuCoordinator)
+        let view = Home(navigateTo: NavigationFactory.homeMenuCoordinator.goTo)
         return view
     }
     
@@ -73,53 +83,66 @@ final class ViewFactory {
     }
             
     static func buildSeatSelection() -> SeatSelection {
-        let view = SeatSelection(viewModel: StateFactory.seatsViewModel, api: StateFactory.seatsAPI)
+        let view = SeatSelection(viewModel: StateFactory.seatsViewModel)
         return view
     }
     
     static func buildShadesView() -> Shades {
-        let view = Shades(viewModel: StateFactory.shadesViewModel, api: StateFactory.shadesAPI)
+        let view = Shades(viewModel: StateFactory.shadesViewModel)
         return view
     }
     
     
     static func buildCabinClimateView() -> CabinClimate {
-        let view = CabinClimate(viewModel: StateFactory.climateViewModel, api: StateFactory.cabinClimateAPI)
+        let view = CabinClimate(viewModel: StateFactory.climateViewModel)
         return view
     }
     
     // Media
     
     static func buildMonitorsView() -> Monitors {
-        let view = Monitors(viewModel: StateFactory.monitorsViewModel, api: StateFactory.monitorsAPI)
+        let view = Monitors(viewModel: StateFactory.monitorsViewModel)
         return view
     }
     
     static func buildSourcesView() -> Sources {
-        let view = Sources(viewModel: StateFactory.sourcesViewModel, api: StateFactory.sourcesAPI)
+        let view = Sources(viewModel: StateFactory.sourcesViewModel)
         return view
     }
     
     static func buildSpeakersView() -> Speakers {
-        let view = Speakers(viewModel: StateFactory.speakersViewModel, api: StateFactory.speakersAPI)
+        let view = Speakers(viewModel: StateFactory.speakersViewModel)
         return view
     }
     
     
     static func buildVolumeView() -> Volume {
-        let view = Volume(viewModel: StateFactory.speakersViewModel, api: StateFactory.speakersAPI)
+        let view = Volume(viewModel: StateFactory.speakersViewModel)
         return view
     }
     
     //Flight
     
     static func buildFlightInfo() -> FlightInfo {
-        let view = FlightInfo(viewModel: StateFactory.flightViewModel, api: StateFactory.flightAPI)
+        
+        let viewModel = StateFactory.flightViewModel
+        let startMonitor = StateFactory.flightAPI.monitor.startMonitor
+        let monitorCallback = StateFactory.flightAPI.monitorCallback
+        let stopMonitor = StateFactory.flightAPI.monitor.stopMonitor
+        
+        let view = FlightInfo(viewModel: viewModel , startMonitor: startMonitor, monitorCallback: monitorCallback, stopMonitor: stopMonitor)
+        
         return view
     }
     
     static func buildWeatherView() -> Weather {
-        let view = Weather(viewModel: StateFactory.weatherViewModel, api: StateFactory.weatherAPI)
+        
+//        let viewModel = StateFactory.weatherViewModel
+//        let startMonitor = StateFactory.weatherAPI.monitor.startMonitor
+//        let monitorCallback = StateFactory.weatherAPI.monitorCallback
+//        let stopMonitor = StateFactory.weatherAPI.monitor.stopMonitor
+        
+        let view = Weather(viewModel: StateFactory.weatherViewModel)
         return view
     }
     
@@ -187,40 +210,53 @@ final class NavigationFactory {
 //MARK: - ViewModels & API Adaptors
 
 final class StateFactory {
-
-    //Views
-        ///Lights
-    static let lightsViewModel = LightsViewModel()
-    static let lightsAPI = LightsAPI(viewModel: lightsViewModel)
-        ///Shades
-    static let shadesViewModel = ShadesViewModel()
-    static let shadesAPI = ShadesAPI(viewModel: shadesViewModel)
-        ///Seats
-    static let seatsViewModel = SeatsViewModel()
-    static let seatsAPI = SeatsAPI(viewModel: seatsViewModel)
-        ///Climate
-    static let climateViewModel = CabinClimateViewModel()
-    static let cabinClimateAPI = CabinClimateAPI(viewModel: climateViewModel)
-        
     
+    static var apiClient = GCMSClient()
+    
+    //Views
+    static let lightsViewModel = LightsViewModel()
+    ///Endpoint<EndpointFormats.Get, LightModel>(path: .lights)
+
+    ///Shades
+    static let shadesViewModel = ShadesViewModel()
+    ///Endpoint<EndpointFormats.Get, ShadeModel>(path: .shades)
+    
+    ///Seats
+    static let seatsViewModel = SeatsViewModel()
+    ///Endpoint<EndpointFormats.Get, SeatModel>(path: .seats)
+    
+    ///Climate
+    static let climateViewModel = CabinClimateViewModel()
+    ///Endpoint<EndpointFormats.Get, ClimateControllerModel>(path: .climate)
+        
     //Media
         ///Monitors
     static let monitorsViewModel = MonitorsViewModel()
-    static let monitorsAPI = MonitorsAPI(viewModel: monitorsViewModel)
+    ///Endpoint<EndpointFormats.Get, MonitorModel>(path: .monitors)
         ///Speakers
     static let speakersViewModel = SpeakersViewModel()
-    static let speakersAPI = SpeakersAPI(viewModel: speakersViewModel)
+    ///Endpoint<EndpointFormats.Get, SpeakerModel>(path: .speakers)
         ///Sources
     static let sourcesViewModel = SourcesViewModel()
-    static let sourcesAPI = SourcesAPI(viewModel: sourcesViewModel)
+    ///Endpoint<EndpointFormats.Get, SourceModel>(path: .sources)
     
     //Flight
-        ///Flight Info
     static let flightViewModel = FlightViewModel()
-    static let flightAPI = FlightAPI(viewModel: flightViewModel)
-        ///Weather
+    
+    static var flightEndpoint = Endpoint<EndpointFormats.Get, FlightModel>(path: .flightInfo)
+    
+    static let flightAPI = RealtimeAPI(endpoint: flightEndpoint) { shades in
+        StateFactory.flightViewModel.updateValues(shades)
+    }
+    
+    //Weather
     static let weatherViewModel = WeatherViewModel()
-    static let weatherAPI = WeatherAPI(viewModel: weatherViewModel)
+    
+    static var weatherEndpoint = Endpoint<EndpointFormats.Get, WeatherModel>(path: .weather)
+    
+    static let weatherAPI = RealtimeAPI(endpoint: weatherEndpoint) { weather in
+        StateFactory.weatherViewModel.updateValues(weather)
+    }
 
     
     

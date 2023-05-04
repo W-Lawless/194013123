@@ -7,11 +7,6 @@
 
 import Foundation
 
-//struct FlightModel: Codable {
-//    var results: [FlightDetails]
-//    var length: Int
-//}
-
 struct FlightModel: Codable, Equatable {
     var latitude: Double
     var longitude: Double

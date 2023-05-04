@@ -14,7 +14,6 @@ struct ShadeControl: View {
     @State var sheered: Bool = false
     @State var closed: Bool = false
     @State var shade: ShadeModel = ShadeModel(id: "1", name: "window", side: "left", rect: RenderCoordinates(x: 0.0, y: 0.0, w: 0.0, h: 0.0, r: 0.0), sub: [], assoc: [])
-    var api: ShadesAPI
     
     var body: some View {
         
@@ -42,7 +41,7 @@ struct ShadeControl: View {
                 sheered = false
                 closed = false
                 
-                api.commandShade(shade: shade, cmd: .OPEN)
+                StateFactory.apiClient.commandShade(shade: shade, cmd: .OPEN)
             } //: VSTQ
 
             //-
@@ -67,7 +66,7 @@ struct ShadeControl: View {
                 sheered = true
                 closed = false
                 
-                api.commandShade(shade: shade, cmd: .SHEER)
+                StateFactory.apiClient.commandShade(shade: shade, cmd: .SHEER)
             } //: VSTQ
 
             //-
@@ -92,7 +91,7 @@ struct ShadeControl: View {
                 opened = false
                 sheered = false
                 
-                api.commandShade(shade: shade, cmd: .CLOSE)
+                StateFactory.apiClient.commandShade(shade: shade, cmd: .CLOSE)
             } //: VSTQ
 
         } //: HSTQ
@@ -105,17 +104,13 @@ struct ShadeControl: View {
         let target = PlaneFactory.planeElements?.allSeats.filter { seat in
             return seat.id == currentSeat
         }
-        
-//        if let seatLights = target?.first?.lights {
-//            self.lights = seatLights
-//        }
     }
 }
 
 struct ShadeControl_Previews: PreviewProvider {
     static var previews: some View {
         let shade = ShadeModel(id: "1", name: "window", side: "left", rect: RenderCoordinates(x: 0.0, y: 0.0, w: 0.0, h: 0.0, r: 0.0), sub: [], assoc: [])
-        ShadeControl(shade: shade, api: StateFactory.shadesAPI)
+        ShadeControl(shade: shade)
             .previewLayout(.sizeThatFits)
     }
 }
