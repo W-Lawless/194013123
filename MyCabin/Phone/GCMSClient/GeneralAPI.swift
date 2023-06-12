@@ -31,7 +31,8 @@ extension GCMS_API {
             receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    print(error)
+                    print("API CONNECTION ERROR: \(error.localizedDescription)")
+                    callback([ResponseType]())
                 case .finished:
                     return
                 }
@@ -50,9 +51,10 @@ extension GCMS_API {
             receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    print("API ERROR:",error)
+                    print("API CONNECTION ERROR: \(error.localizedDescription)")
+                    callback([ResponseType]())
                 case .finished:
-                    print("API CLOSED")
+                    print("API SUBSCRIPTION CLOSED")
                     return
                 }
             },
@@ -70,9 +72,10 @@ extension GCMS_API {
             receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    print("API ERROR:",error)
+                    print("API CONNECTION ERROR: \(error.localizedDescription)")
+                    callback(HTTPURLResponse(url: URL(string: "gulf.aero.cabin")!, statusCode: 404, httpVersion: nil, headerFields: nil)!)
                 case .finished:
-                    print("API CLOSED")
+                    print("API SUBSCRIPTION CLOSED")
                     return
                 }
             },

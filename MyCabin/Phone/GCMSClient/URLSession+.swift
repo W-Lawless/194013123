@@ -24,8 +24,9 @@ struct Session {
         customNetworkReqConfig.timeoutIntervalForResource = 29
         customNetworkReqConfig.urlCache = nil
         self.session = URLSession(configuration: customNetworkReqConfig)
-        
     }
+    
+    //TODO: Long, Short session timeout instance
 
 }
 
@@ -82,7 +83,7 @@ extension URLSession {
     func publisherForPinging<Format, ResponseModel>( for endpoint: Endpoint<Format, ResponseModel>, decoder: JSONDecoder = .init() ) -> AnyPublisher<HTTPURLResponse, Error> {
         
         guard let request = endpoint.makeRequest(with: nil) else {
-            return Fail(error: URLError(_nsError: NSError(domain: "GCMS.server", code: -1)))
+            return Fail(error: InvalidEndpoint())
                 .eraseToAnyPublisher()
         }
 

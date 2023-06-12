@@ -7,7 +7,16 @@
 
 import Foundation
 
-struct MonitorModel: Codable, Identifiable, ElementModel {
+struct MonitorModel: Codable, Identifiable, Hashable, ElementModel, MediaModel {
+    
+    static func == (lhs: MonitorModel, rhs: MonitorModel) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
+    }
+    
     var id: String
     var name: String
     var rect: RenderCoordinates
@@ -26,8 +35,13 @@ struct MonitorModel: Codable, Identifiable, ElementModel {
         var source: String
         var sourceShortName: String
     }
+
 }
 
 struct MonitorPowerState: Codable {
     var on: Bool
+}
+
+struct MonitorSourceAssignment: Codable {
+    var source: String
 }

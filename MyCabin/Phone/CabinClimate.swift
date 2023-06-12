@@ -16,16 +16,7 @@ struct CabinClimate: View {
     }
     
     var body: some View {
-        PlaneFactory.buildPlaneSchematic(topLevelViewModel: viewModel, options: PlaneSchematicDisplayMode.tempZones)
-
-//        List(viewModel.climateControllers ?? [ClimateControllerModel]()) { controller in
-//            Group {
-//                HStack {
-//                    Text(controller.name)
-//                    Text(currentTemp(for: controller))
-//                }
-//            }
-//        } //: LIST
+        PlaneFactory.buildPlaneSchematic(options: .tempZones)
     }
 }
 
@@ -33,12 +24,11 @@ class CabinClimateViewModel: ObservableObject, GCMSViewModel, ParentViewModel {
     
     @Published var activeZone: PlaneArea = PlaneArea(id: "", rect: RenderCoordinates(x: 0, y: 0, w: 0, h: 0, r: 0))
     @Published var showPanel: Bool = false
+    @Published var climateControllers: [ClimateControllerModel]?
     
     func showSubView(forID: String) {
         
     }
-    
-    @Published var climateControllers: [ClimateControllerModel]?
     
     func updateValues(_ data: [Codable]) {
         self.climateControllers = data as? [ClimateControllerModel]

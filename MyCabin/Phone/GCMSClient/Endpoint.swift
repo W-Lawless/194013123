@@ -31,6 +31,8 @@ enum GCMSEndpoints: String {
             return "/api/v1/monitors/\(id)/state"
         case .shades:
             return "/api/v1/windows/\(id)/state"
+        case .speakers:
+            return "/api/v1/speakers/\(id)/state"
         default:
             return  "ENDPOINT NOT STATEFUL"
         }
@@ -110,6 +112,7 @@ extension Endpoint {
         var components = URLComponents()
         components.scheme = "http"
         components.host = host.rawValue
+        
         if(self.stateUpdate != "") {
             components.path = self.path.stateChange(self.stateUpdate)
         } else {

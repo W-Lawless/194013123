@@ -23,7 +23,8 @@ struct ElementsAPI {
          "allSources": [SourceModel](),
          "allShades": [ShadeModel](),
          "allTables": [TableModel](),
-         "allDivans": [DivanModel]()
+         "allDivans": [DivanModel](),
+         "allTempCtrlrs": [ClimateControllerModel]()
     ]
     
     init(viewModel: PlaneViewModel) {
@@ -33,14 +34,17 @@ struct ElementsAPI {
     mutating func fetch() async {
         
         do {
+            
             let (planeData,_) = try await Session.shared.data(for: endpoint)
             let result = try JSONDecoder().decode(ElementsRoot.self, from: planeData)
             
             // INITIAL GROUPING OF ALL ELEMENTS
             
-            mapResultsToClassDictionary(result: result)
+            mapResultsToInstanceDictionary(result: result)
                         
             mapLightsToSeat()
+            
+            let sourceTypes = findUniqueSourceTypes()
             
             updateAndCacheValues()
             
@@ -52,18 +56,20 @@ struct ElementsAPI {
                 allMonitors: elements["allMonitors"] as! [MonitorModel],
                 allSpeakers: elements["allSpeakers"] as! [SpeakerModel],
                 allSources: elements["allSources"] as! [SourceModel],
+                sourceTypes: sourceTypes,
                 allShades: elements["allShades"] as! [ShadeModel],
                 allTables: elements["allTables"] as! [TableModel],
-                allDivans: elements["allDivans"] as! [DivanModel]
+                allDivans: elements["allDivans"] as! [DivanModel],
+                allTempCtrlrs: elements["allTempCtrlrs"] as! [ClimateControllerModel]
             )
-            
+                        
             // CATEGORIZE ELEMENTS BY AREA
             
-            mapToPlaneAreas(allAreas: elements["allAreas"] as! [AreaModel], plane: &plane)
+            mapElementsToPlaneAreas(allAreas: elements["allAreas"] as! [AreaModel], plane: &plane)
             
             filterPlaneAreas(&plane)
             
-            PlaneFactory.planeElements = plane
+//            PlaneFactory.planeElements = plane
             
             await planeViewModel.updateValues(plane)
             
@@ -75,7 +81,7 @@ struct ElementsAPI {
         }
     } //: FETCH
     
-    private mutating func mapResultsToClassDictionary(result: ElementsRoot) {
+    private mutating func mapResultsToInstanceDictionary(result: ElementsRoot) {
         for element in result.results {
             switch element {
             case .light(let light):
@@ -96,6 +102,8 @@ struct ElementsAPI {
                 elements["allTables"]?.append(table)
             case .divan(let divan):
                 elements["allDivans"]?.append(divan)
+            case .tempctrlr(let tempctrlr):
+                elements["allTempCtrlrs"]?.append(tempctrlr)
             case .ignore:
                 ()
             }
@@ -106,7 +114,9 @@ struct ElementsAPI {
     private mutating func mapLightsToSeat() {
         let seats = elements["allSeats"]! as! [SeatModel]
         let lights = elements["allLights"]! as! [LightModel]
+        let tables = elements["allTables"]! as! [TableModel]
         let transformedSeats = seats.map { seat in
+            print("transforming...",seat)
             var lightsINeed = [LightModel]()
             seat.assoc.forEach { item in
                 guard let item = item else { return }
@@ -119,12 +129,82 @@ struct ElementsAPI {
                     
                     lightsINeed.append(target[0])
                 }
+                
+                if(item.decoratorType == "Table") {
+                    let target = tables.filter { table in
+                        return item.id == table.id
+                    }
+                    let tableLights = target[0].assoc
+                    print("table lights:", tableLights)
+                    tableLights.forEach { tableLight in
+                        let l = lights.filter { light in
+                            return tableLight.id == light.id
+                        }
+                        lightsINeed.append(l[0])
+                    }
+                }
             }
             var copy = seat
             copy.lights = lightsINeed
             return copy
         } //: FOR LOOP
+        print(">>: ",transformedSeats)
         elements["allSeats"] = transformedSeats
+    }
+    
+    private func findUniqueSourceTypes()  -> Set<SourceType> {
+        var sourceTypes = Set<SourceType>()
+        
+        let allSources = elements["allSources"] as! [SourceModel]
+        
+        allSources.forEach { source in
+            let type = source.type
+            switch(type) {
+            case SourceTypes.aux.rawValue:
+                let sourceType = SourceType(id: .aux, name: "Aux", icon: .aux)
+                sourceTypes.insert(sourceType)
+            case SourceTypes.appleTV.rawValue:
+                let sourceType = SourceType(id: .appleTV, name: "Apple TV", icon: .appleTV)
+                sourceTypes.insert(sourceType)
+            case SourceTypes.bluray.rawValue:
+                let sourceType = SourceType(id: .bluray, name: "Blu-Ray", icon: .bluray)
+                sourceTypes.insert(sourceType)
+            case SourceTypes.cabinView.rawValue:
+                let sourceType = SourceType(id: .cabinView, name: "Cabin View", icon: .cabinView)
+                sourceTypes.insert(sourceType)
+            case SourceTypes.camera.rawValue:
+                let sourceType = SourceType(id: .camera, name: "Cameras", icon: .camera)
+                sourceTypes.insert(sourceType)
+            case SourceTypes.hdmi.rawValue:
+                let sourceType = SourceType(id: .hdmi, name: "HDMI", icon: .hdmi)
+                sourceTypes.insert(sourceType)
+            case SourceTypes.kaleid.rawValue:
+                let sourceType = SourceType(id: .kaleid, name: "Kaleidescape", icon: .kaleid)
+                sourceTypes.insert(sourceType)
+            case SourceTypes.onDemand.rawValue:
+                let sourceType = SourceType(id: .onDemand, name: "On Demand", icon: .onDemand)
+                sourceTypes.insert(sourceType)
+            case SourceTypes.roku.rawValue:
+                let sourceType = SourceType(id: .roku, name: "ROKU", icon: .roku)
+                sourceTypes.insert(sourceType)
+            case SourceTypes.satTV.rawValue:
+                let sourceType = SourceType(id: .satTV, name: "Sat TV", icon: .satTV)
+                sourceTypes.insert(sourceType)
+            case SourceTypes.usbC.rawValue:
+                let sourceType = SourceType(id: .usbC, name: "USB-C", icon: .usbC)
+                sourceTypes.insert(sourceType)
+            case SourceTypes.xm.rawValue:
+                let sourceType = SourceType(id: .xm, name: "XM", icon: .xm)
+                sourceTypes.insert(sourceType)
+            default:
+                break
+            }
+        }
+        
+        StateFactory.sourcesViewModel.updateSourceTypes(sourceTypes)
+        FileCacheUtil.cacheToFile(data: sourceTypes)
+        
+        return sourceTypes
     }
     
     private func updateAndCacheValues() {
@@ -135,7 +215,7 @@ struct ElementsAPI {
         let allSpeakers = elements["allSpeakers"] as! [SpeakerModel]
         let allSources = elements["allSources"] as! [SourceModel]
         let allShades = elements["allShades"] as! [ShadeModel]
-    
+        let tempCtrlrs = elements["allTempCtrlrs"] as! [ClimateControllerModel]
         
         StateFactory.lightsViewModel.updateValues(allLights)
         FileCacheUtil.cacheToFile(data: allLights)
@@ -154,9 +234,12 @@ struct ElementsAPI {
 
         StateFactory.shadesViewModel.updateValues(allShades)
         FileCacheUtil.cacheToFile(data: allShades)
+        
+        StateFactory.climateViewModel.updateValues(tempCtrlrs)
+        FileCacheUtil.cacheToFile(data: tempCtrlrs)
     }
     
-    private func mapToPlaneAreas(allAreas: [AreaModel], plane: inout PlaneMap) {
+    private func mapElementsToPlaneAreas(allAreas: [AreaModel], plane: inout PlaneMap) {
         allAreas.forEach { area in
                         
             let allLights =  elements["allLights"] as! [LightModel]
@@ -167,6 +250,7 @@ struct ElementsAPI {
             let allShades =  elements["allShades"] as! [ShadeModel]
             let allTables =  elements["allTables"] as! [TableModel]
             let allDivans =  elements["allDivans"] as! [DivanModel]
+            let allTempCtrlrs = elements["allTempCtrlrs"] as! [ClimateControllerModel]
             
             var areaLights = [LightModel]()
             var areaSeats = [SeatModel]()
@@ -176,6 +260,7 @@ struct ElementsAPI {
             var areaShades = [ShadeModel]()
             var areaTables = [TableModel]()
             var areaDivans = [DivanModel]()
+            var areaTempCtrlrs = [ClimateControllerModel]()
             
             area.sub.forEach { subElement in
                 switch(subElement.type) {
@@ -235,20 +320,27 @@ struct ElementsAPI {
                     if (!matching.isEmpty) {
                         areaDivans.append(matching[0])
                     }
+                case ElementTypes.TEMPCTRL.rawValue:
+                    let matching = allTempCtrlrs.filter {
+                        return $0.id == subElement.id
+                    }
+                    if(!matching.isEmpty) {
+                        areaTempCtrlrs.append(matching[0])
+                    }
                 default:
                     Void()
                 }
             } //: SUB ELEMENT LOOP
             if(area.id == PARENT_IDENTIFIER) {
-                plane.parentArea = PlaneArea(id: area.id, rect: area.rect, lights: areaLights, seats: areaSeats, shades: areaShades, monitors: areaMonitors, speakers: areaSpeakers, sources: areaSources, tables: areaTables, divans: areaDivans)
+                plane.parentArea = PlaneArea(id: area.id, rect: area.rect, lights: areaLights, seats: areaSeats, shades: areaShades, monitors: areaMonitors, speakers: areaSpeakers, sources: areaSources, tables: areaTables, divans: areaDivans, zoneTemp: areaTempCtrlrs)
             } else {
-                plane.mapAreas.append(PlaneArea(id: area.id, rect: area.rect, lights: areaLights, seats: areaSeats, shades: areaShades, monitors: areaMonitors, speakers: areaSpeakers, sources: areaSources, tables: areaTables, divans: areaDivans))
+                plane.mapAreas.append(PlaneArea(id: area.id, rect: area.rect, lights: areaLights, seats: areaSeats, shades: areaShades, monitors: areaMonitors, speakers: areaSpeakers, sources: areaSources, tables: areaTables, divans: areaDivans, zoneTemp: areaTempCtrlrs))
             }
             
         }
     }
     
-    func filterPlaneAreas(_ plane: inout PlaneMap) {
+    private func filterPlaneAreas(_ plane: inout PlaneMap) {
         
         let parentID = try! NSRegularExpression(pattern: "AIRPLANE_AREA", options: .caseInsensitive)
 
@@ -267,7 +359,7 @@ struct ElementsAPI {
 
     }
     
-    func regexFilter(_ target: String) -> Bool {
+    private func regexFilter(_ target: String) -> Bool {
         
         let range = NSRange(location: 0, length: target.utf16.count)
         let lav = try! NSRegularExpression(pattern: "lav", options: .caseInsensitive)

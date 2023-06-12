@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SourceModel: Codable, Identifiable, ElementModel {
+struct SourceModel: Codable, Identifiable, ElementModel, MediaModel {
     var id: String
     var name: String
     var allowRename: Bool

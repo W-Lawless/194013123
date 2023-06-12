@@ -20,7 +20,7 @@ struct SeatButton: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width:30, height: 30)
-                .hapticFeedback(feedbackStyle: .light) {
+                .hapticFeedback(feedbackStyle: .light) { _ in
                     PlaneFactory.seatIconCallback(displayOptions: options, seatID: id)
                 }
         } else {

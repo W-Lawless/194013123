@@ -111,6 +111,30 @@ struct CircularSliderView: View {
                                     changeAngle(location: value.location)
                                 }
                         )
+                    Circle()
+                        .fill(Color.white)
+                        .shadow(radius: (sliderWidth * 0.3))
+                        .frame(width: sliderWidth, height: sliderWidth)
+                        .offset(x: 20, y: -radius + 2)
+                        .rotationEffect(rotationAngle)
+                        .gesture(
+                            DragGesture(minimumDistance: 0.0)
+                                .onChanged() { value in
+                                    changeAngle(location: value.location)
+                                }
+                        )
+                    Circle()
+                        .fill(Color.white)
+                        .shadow(radius: (sliderWidth * 0.3))
+                        .frame(width: sliderWidth, height: sliderWidth)
+                        .offset(x: -20, y: -radius + 2)
+                        .rotationEffect(rotationAngle)
+                        .gesture(
+                            DragGesture(minimumDistance: 0.0)
+                                .onChanged() { value in
+                                    changeAngle(location: value.location)
+                                }
+                        )
                 }
                 .frame(width: radius * 2.0, height: radius * 2.0, alignment: .center)
                 .padding(radius * 0.1)

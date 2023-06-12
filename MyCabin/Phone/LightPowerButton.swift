@@ -29,7 +29,7 @@ struct LightPowerButton: View {
                 .font(.caption2)
         }
         .frame(width: 64)
-        .hapticFeedback(feedbackStyle: .rigid) {
+        .hapticFeedback(feedbackStyle: .rigid) { _ in
             power.toggle()
             StateFactory.apiClient.toggleLight(light, cmd: power ? .ON : .OFF)
         }

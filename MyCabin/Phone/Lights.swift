@@ -9,12 +9,12 @@ import SwiftUI
 
 struct Lights: View {
     
-    @StateObject var viewModel = LightsViewModel()
+    @ObservedObject var viewModel = StateFactory.lightsViewModel
     
     var body: some View {
         ZStack(alignment: .bottom) {
             
-            PlaneFactory.buildPlaneSchematic(topLevelViewModel: viewModel, options: PlaneSchematicDisplayMode.showLights)
+            PlaneFactory.buildPlaneSchematic(options: .showLights)
             
             VStack(alignment: .center) {
                 if(viewModel.showPanel) {
@@ -26,11 +26,11 @@ struct Lights: View {
             .background(Color.black)
             .frame(height:108, alignment: .top)
             .onAppear {
-                let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: .lights)
-                let sut = StateFactory.apiClient
-                sut.fetch(for: endpoint) { result in
-                    StateFactory.lightsViewModel.updateValues(result)
-                }
+//                let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: .lights)
+//                let sut = StateFactory.apiClient
+//                sut.fetch(for: endpoint) { result in
+//                    StateFactory.lightsViewModel.updateValues(result)
+//                }
             }
             
             

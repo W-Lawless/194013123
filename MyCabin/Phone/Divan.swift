@@ -51,7 +51,7 @@ struct DivanIcon: View  {
             .resizable()
             .scaledToFit()
             .frame(width: width)
-            .hapticFeedback(feedbackStyle: .light) {
+            .hapticFeedback(feedbackStyle: .light) { _ in
                 selected.toggle()
             }
     }

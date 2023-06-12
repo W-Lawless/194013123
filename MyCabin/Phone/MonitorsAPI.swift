@@ -21,5 +21,17 @@ extension GCMSClient {
         self.put(for: endpoint, putData: encodeObj, callback: callback)
     }
     
+    
+    func assignSourceToMonitor(_ monitor: MonitorModel, source: SourceModel) {
+        
+        let endpoint = Endpoint<EndpointFormats.Put<MonitorSourceAssignment>, MonitorModel.state>(path: .monitors, stateUpdate: monitor.id)
+        let encodeObj = MonitorSourceAssignment(source: source.id)
+            
+        let callback = { monitorStatus in
+            print("put request data", monitorStatus)
+        }
+        
+        self.put(for: endpoint, putData: encodeObj, callback: callback)
+    }
 }
 

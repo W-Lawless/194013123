@@ -44,6 +44,7 @@ struct FileCacheUtil {
             let cachedMonitors = try FileCacheUtil.retrieveCachedFile(dataModel: [MonitorModel].self)
             let cachedSpeakers = try FileCacheUtil.retrieveCachedFile(dataModel: [SpeakerModel].self)
             let cachedSources = try FileCacheUtil.retrieveCachedFile(dataModel: [SourceModel].self)
+            let cachedSourceTypes = try FileCacheUtil.retrieveCachedFile(dataModel: Set<SourceType>.self)
             let cachedShades = try FileCacheUtil.retrieveCachedFile(dataModel: [ShadeModel].self)
             
             PlaneFactory.planeViewModel.updateValues(cachedElements)
@@ -53,6 +54,7 @@ struct FileCacheUtil {
             StateFactory.monitorsViewModel.updateValues(cachedMonitors)
             StateFactory.speakersViewModel.updateValues(cachedSpeakers)
             StateFactory.sourcesViewModel.updateValues(cachedSources)
+            StateFactory.sourcesViewModel.updateSourceTypes(cachedSourceTypes)
             StateFactory.shadesViewModel.updateValues(cachedShades)
         } catch {
             throw error

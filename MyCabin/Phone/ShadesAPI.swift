@@ -12,6 +12,8 @@ extension GCMSClient {
     
     func commandShade(shade: ShadeModel, cmd: ShadeStates) {
         
+        print(shade.id)
+        
         let endpoint = Endpoint<EndpointFormats.Put<ShadeCommand>, EmptyResponse>(path: .shades, stateUpdate: shade.id)
         let encodeObj = ShadeCommand(cmd: cmd.rawValue)
         

@@ -17,7 +17,11 @@ enum ShadeStates: String {
     case SHEER
 }
 
-struct ShadeModel: Codable, Identifiable, ElementModel {
+struct ShadeModel: Codable, Identifiable, ElementModel, Equatable {
+    static func == (lhs: ShadeModel, rhs: ShadeModel) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     var id: String
     var name: String
     var side: String

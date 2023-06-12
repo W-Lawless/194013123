@@ -9,15 +9,15 @@ import SwiftUI
 
 struct ShadeControl: View {
     
-    @AppStorage("CurrentSeat") var currentSeat: String = ""
+    @ObservedObject var viewModel: ShadesViewModel = StateFactory.shadesViewModel
     @State var opened: Bool = false
     @State var sheered: Bool = false
     @State var closed: Bool = false
-    @State var shade: ShadeModel = ShadeModel(id: "1", name: "window", side: "left", rect: RenderCoordinates(x: 0.0, y: 0.0, w: 0.0, h: 0.0, r: 0.0), sub: [], assoc: [])
     
     var body: some View {
         
         HStack {
+            Text(viewModel.activeShade?.id ?? "none")
             
             //-
             VStack {
@@ -36,12 +36,13 @@ struct ShadeControl: View {
                     .font(.caption2)
             }
             .frame(width: 64)
-            .hapticFeedback(feedbackStyle: .rigid) {
+            .hapticFeedback(feedbackStyle: .rigid) { _ in
                 opened = true
                 sheered = false
                 closed = false
-                
-                StateFactory.apiClient.commandShade(shade: shade, cmd: .OPEN)
+                if let shade = viewModel.activeShade {
+                    StateFactory.apiClient.commandShade(shade: shade, cmd: .OPEN)
+                }
             } //: VSTQ
 
             //-
@@ -61,13 +62,16 @@ struct ShadeControl: View {
                     .font(.caption2)
             }
             .frame(width: 64)
-            .hapticFeedback(feedbackStyle: .rigid) {
+            .hapticFeedback(feedbackStyle: .rigid) { _ in
                 opened = false
                 sheered = true
                 closed = false
                 
-                StateFactory.apiClient.commandShade(shade: shade, cmd: .SHEER)
+                if let shade = viewModel.activeShade {
+                    StateFactory.apiClient.commandShade(shade: shade, cmd: .OPEN)
+                }
             } //: VSTQ
+            
 
             //-
             VStack {
@@ -86,12 +90,14 @@ struct ShadeControl: View {
                     .font(.caption2)
             }
             .frame(width: 64)
-            .hapticFeedback(feedbackStyle: .rigid) {
+            .hapticFeedback(feedbackStyle: .rigid) { _ in
                 closed = true
                 opened = false
                 sheered = false
                 
-                StateFactory.apiClient.commandShade(shade: shade, cmd: .CLOSE)
+                if let shade = viewModel.activeShade {
+                    StateFactory.apiClient.commandShade(shade: shade, cmd: .OPEN)
+                }
             } //: VSTQ
 
         } //: HSTQ
@@ -99,18 +105,11 @@ struct ShadeControl: View {
         
     } //: BODY
     
-    
-    private func getShadesForSeat() {
-        let target = PlaneFactory.planeElements?.allSeats.filter { seat in
-            return seat.id == currentSeat
-        }
-    }
 }
 
 struct ShadeControl_Previews: PreviewProvider {
     static var previews: some View {
-        let shade = ShadeModel(id: "1", name: "window", side: "left", rect: RenderCoordinates(x: 0.0, y: 0.0, w: 0.0, h: 0.0, r: 0.0), sub: [], assoc: [])
-        ShadeControl(shade: shade)
+        ShadeControl()
             .previewLayout(.sizeThatFits)
     }
 }

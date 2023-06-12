@@ -15,7 +15,7 @@ struct Shades: View {
         
         ZStack(alignment: .bottom) {
             
-            PlaneFactory.buildPlaneSchematic(topLevelViewModel: viewModel, options: PlaneSchematicDisplayMode.showShades)
+            PlaneFactory.buildPlaneSchematic(options: .showShades)
             
             VStack(alignment: .center) {
                 if(viewModel.showPanel) {
@@ -36,22 +36,21 @@ struct Shades: View {
 
 class ShadesViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
 
-    @Published var activeShadeID: String = ""
     @Published var showPanel: Bool = false
     @Published var shadeList: [ShadeModel]?
     @Published var activeShade: ShadeModel?
+    @Published var selectedShade: String = ""
     
     func updateValues(_ data: [Codable]) {
         self.shadeList = (data as! [ShadeModel])
     }
     
-    func showSubView(forID shade: String) {
-        if(activeShadeID != shade){
-            showPanel = true
-            activeShadeID = shade
-        } else {
-            showPanel.toggle()
-        }
+    func showSubView(forID shadeID: String) {
+        //
+    }
+    
+    func selectShade(is shadeID: String) {
+        selectedShade = shadeID
     }
     
 }

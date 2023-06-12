@@ -7,7 +7,15 @@
 
 import Foundation
 
-struct ClimateControllerModel: Codable, Identifiable, ElementModel {
+struct ClimateControllerModel: Codable, Identifiable, Hashable, ElementModel {
+    static func == (lhs: ClimateControllerModel, rhs: ClimateControllerModel) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
+    }
+    
     var id: String
     var name: String
     var rect:RenderCoordinates

@@ -28,6 +28,7 @@ enum ElementsEnum: Decodable {
     case area(AreaModel)
     case table(TableModel)
     case divan(DivanModel)
+    case tempctrlr(ClimateControllerModel)
     case ignore(Void)
     
     init(from decoder: Decoder) throws {
@@ -53,7 +54,8 @@ enum ElementsEnum: Decodable {
             self = .table(try typeContainer.decode(TableModel.self))
         case .DIVAN:
             self = .divan(try typeContainer.decode(DivanModel.self))
-            
+        case .TEMPCTRL:
+            self = .tempctrlr(try typeContainer.decode(ClimateControllerModel.self))
         case .WATERH:
             self = .ignore(())
         case .WATERT:
@@ -61,8 +63,6 @@ enum ElementsEnum: Decodable {
         case .WATERS:
             self = .ignore(())
         case .WATERZ:
-            self = .ignore(())
-        case .TEMPCTRL:
             self = .ignore(())
         case .BREAKER:
             self = .ignore(())
@@ -98,5 +98,41 @@ enum ElementTypes: String, Decodable {
     case TABLE = "Table"
     case DIVAN = "Divan"
     case MONITORLIFT = "MonitorLift"
+}
+
+struct SourceType: Codable, Hashable {
+    var id: SourceTypes
+    var name: String
+    var icon: SourceIcons
+}
+
+enum SourceTypes: String, Codable {
+    case appleTV = "APPLE_TV"
+    case aux = "AUX"
+    case bluray = "BLURAY"
+    case cabinView = "CABIN_VIEW"
+    case camera = "CAMERA"
+    case hdmi = "HDMI"
+    case kaleid = "KALEIDESCAPE"
+    case onDemand = "ON_DEMAND"
+    case roku = "ROKU"
+    case satTV = "SAT"
+    case usbC = "USB_C"
+    case xm = "XM"
+}
+
+enum SourceIcons: String, Codable {
+    case appleTV = "ic_apple_tv"
+    case aux = "ic_change_seat"
+    case bluray = "ic_bluray"
+    case cabinView = "ic_cabinview"
+    case camera = "ic_cameras"
+    case hdmi = "ic_change_devices"
+    case kaleid = "ic_kaleidescape"
+    case onDemand = "ic_ondemand"
+    case roku = "ic_back_media"
+    case satTV = "ic_livetv"
+    case usbC = "ic_internal_connection"
+    case xm = "ic_radio"
 }
 

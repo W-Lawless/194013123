@@ -28,7 +28,7 @@ struct Home: View {
                             .frame(width: 56, height: 56)
                         Text("Lights")
                 } //: VSTQ
-                .hapticFeedback(feedbackStyle: .light) {
+                .hapticFeedback(feedbackStyle: .light) { _ in
                     navigateTo(.lights)
                 }
 
@@ -40,11 +40,11 @@ struct Home: View {
                     Text("Shades")
                     .foregroundColor(.white)
                 } //: VSTQ
-                .hapticFeedback(feedbackStyle: .light) {
+                .hapticFeedback(feedbackStyle: .light) { _ in
                     navigateTo(.shades)
                 }
             } //:HSTQ
-            .frame(height:120)
+            .frame(height:160)
             .padding(.horizontal, 24)
             .padding(.vertical, 12)
 
@@ -59,7 +59,7 @@ struct Home: View {
                     Text("Temperature")
                     .foregroundColor(.white)
                 } //: VSTQ
-                .hapticFeedback(feedbackStyle: .light) {
+                .hapticFeedback(feedbackStyle: .light) { _ in
                     navigateTo(.climate)
                 }
                 .frame(width: 98)
@@ -73,12 +73,12 @@ struct Home: View {
                     Text("Seats")
                     .foregroundColor(.white)
                 } //:VSTQ
-                .hapticFeedback(feedbackStyle: .light) {
+                .hapticFeedback(feedbackStyle: .light) { _ in
                     navigateTo(.seats)
                 }
                 .frame(width: 98)
             } //:HSTQ
-            .frame(height:120)
+            .frame(height:160)
             .padding(.horizontal, 24)
             .padding(.vertical, 12)
 
@@ -93,7 +93,7 @@ struct Home: View {
                     Text("Presets")
                     .foregroundColor(.white)
                 } //: VSTQ
-                .hapticFeedback(feedbackStyle: .light) {
+                .hapticFeedback(feedbackStyle: .light) { _ in
                     navigateTo(.presets)
                 }
 
@@ -105,13 +105,21 @@ struct Home: View {
                     Text("Settings")
                     .foregroundColor(.white)
                 } //: VSTQ
-                .hapticFeedback(feedbackStyle: .light) {
+                .hapticFeedback(feedbackStyle: .light) { _ in
                     navigateTo(.settings)
                 }
             } //: HSTQ
-            .frame(height:120)
+            .frame(height:160)
             .padding(.horizontal, 24)
             .padding(.vertical, 12)
+
+            Button {
+                Task {
+                    await PlaneFactory.elementsAPI.fetch()
+                }
+            } label: {
+                Text("Hot Reload")
+            }
 
         }
         .overlay(

@@ -12,7 +12,7 @@ struct SeatSelection: View {
     @ObservedObject var viewModel: SeatsViewModel
     
     var body: some View {
-        PlaneFactory.buildPlaneSchematic(topLevelViewModel: viewModel, options: PlaneSchematicDisplayMode.onlySeats)
+        PlaneFactory.buildPlaneSchematic(options: .onlySeats)
 //        List(viewModel.seatList ?? [SeatModel]()) { seat in
 //            Button(seat.id) {
 //                api.call(seat: seat)

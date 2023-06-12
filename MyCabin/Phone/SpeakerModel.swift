@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SpeakerModel: Codable, Identifiable, ElementModel {
+struct SpeakerModel: Codable, Identifiable, ElementModel, MediaModel {
     var id: String
     var name: String
     var rect: RenderCoordinates
@@ -25,4 +25,17 @@ struct SpeakerState: Codable {
     var trebleLevel: Int
     var bassLevel: Int
     var shortSourceName: String?
+}
+
+
+struct MuteCommand: Codable {
+    var mute: Bool
+}
+
+struct VolumeCommand: Codable {
+    var volume: Int
+}
+
+struct SpeakerSourceAssignment: Codable {
+    var source: String
 }

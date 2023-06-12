@@ -7,6 +7,34 @@
 
 import Foundation
 
+class PlaneViewModel: ObservableObject {
+    @Published var plane: PlaneMap = PlaneMap()
+    
+    @MainActor func updateValues(_ data: PlaneMap) {
+        self.plane = data
+    }
+}
+
+class PlaneViewCoordinates: ObservableObject {
+    @Published var containerViewHeight: CGFloat = 0
+    @Published var containerViewWidth: CGFloat = 0
+    @Published var containerWidthUnit: CGFloat = 0
+    @Published var containerHeightUnit: CGFloat = 0
+}
+
+enum PlaneSchematicDisplayMode: String {
+    case onlySeats
+    case showLights
+    case showShades
+    case lightZones
+    case tempZones
+    case showMonitors
+    case showNowPlaying
+    case showSpeakers
+    case showBluetooth
+    case showRemote
+}
+
 struct Plane: Identifiable {
     var areas: [PlaneArea]
     var id: String
@@ -36,38 +64,14 @@ struct PlaneMap: Codable {
     var allMonitors: [MonitorModel] = [MonitorModel]()
     var allSpeakers: [SpeakerModel] = [SpeakerModel]()
     var allSources: [SourceModel] = [SourceModel]()
+    var sourceTypes: Set<SourceType> = Set<SourceType>()
     var allShades: [ShadeModel] = [ShadeModel]()
     var allTables: [TableModel] = [TableModel]()
     var allDivans: [DivanModel] = [DivanModel]()
+    var allTempCtrlrs: [ClimateControllerModel] = [ClimateControllerModel]()
 }
+      
 
-class PlaneViewModel: ObservableObject {
-    @Published var plane: PlaneMap = PlaneMap()
-    
-    @MainActor func updateValues(_ data: PlaneMap) {
-        self.plane = data
-    }
-}
-
-
-class PlaneViewCoordinates: ObservableObject {
-    @Published var containerViewHeight: CGFloat = 0
-    @Published var containerViewWidth: CGFloat = 0
-    @Published var containerWidthUnit: CGFloat = 0
-    @Published var containerHeightUnit: CGFloat = 0
-}
-
-        
-enum PlaneSchematicDisplayMode: String {
-
-    case onlySeats  
-    case showLights
-    case showShades
-    case lightZones
-    case tempZones
-    case showMedia
-
-}
     
 
 

@@ -33,9 +33,9 @@ struct TappableZone: ViewModifier {
                     .stroke(.white, lineWidth: 1)
             )
             .padding(6)
-            .hapticFeedback(feedbackStyle: .rigid) {
+            .hapticFeedback(feedbackStyle: .rigid) { _ in
+                print("tapped")
                 selectedZone = area
-                
             }
     }
 }

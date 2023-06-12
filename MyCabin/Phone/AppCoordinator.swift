@@ -29,7 +29,14 @@ class AppCoordinator {
         self.window.rootViewController = rootNavView
         
         PlaneFactory.cabinConnectionPublisher
-            .sink { pulse in
+            .sink(receiveCompletion: { completion in
+                switch (completion) {
+                case .finished:
+                    print("cabin api ping closed")
+                case .failure:
+                    print("error pinging cabin")
+                }
+            }, receiveValue: { pulse in
                 DispatchQueue.main.async {
                     let last = (rootNavView.viewControllers.count - 1)
                     if(pulse){
@@ -39,26 +46,53 @@ class AppCoordinator {
                             rootNavView.popViewController(animated: true)
                         }
                     } else { //: Pulse false
-                        Task {
-                                if(rootNavView.viewControllers[last] !== loading) { /// Check already loading
-                                    rootNavView.pushViewController(loading, animated: true)
-                                }
+                        if(rootNavView.viewControllers[last] !== loading) { /// Check already loading
+                            rootNavView.pushViewController(loading, animated: true)
                         }
                     }
                 }
-            }
+            })
             .store(in: &PlaneFactory.cancelTokens)
     }
 }
 
 //MARK: - TabView
 
-class RootTabCoordinator {
-
+class RootTabCoordinator: NSObject  {
+    
     var navigationController = HomeTabs()
+    var subviews: [UIViewController]!
+    
+    func goTo(_ route: MenuRouter) {
+        let destination = route.view()
+        destination.modalTransitionStyle = .coverVertical
+        navigationController.present(destination, animated: true)
+    }
+    
+    func goToWithParams(_ view: some View) {
+        let destination = UIHostingController(rootView: view)
+        destination.modalTransitionStyle = .coverVertical
+        navigationController.present(destination, animated: true)
+    }
     
     func start(subviews: [UIViewController]) {
+        self.subviews = subviews
+        navigationController.delegate = self
         navigationController.setViewControllers(subviews, animated: true)
+    }
+    
+    func goToTab(_ index: Int) {
+        let views = navigationController.viewControllers
+        let view = views?[index]
+        guard view != nil else { return }
+        navigationController.show(view!, sender: self)
+    }
+    
+    open func dismiss() {
+        navigationController.dismiss(animated: true) { [weak self] in
+            /// because there is a leak in UIHostingControllers that prevents from deallocation
+            self?.navigationController.viewControllers = self?.subviews ?? [UIViewController()]
+        }
     }
     
 }
@@ -89,6 +123,12 @@ class HomeMenuCoordinator: NSObject, Coordinator {
         navigationController.present(destination, animated: true)
     }
     
+    func pushView(_ route: MenuRouter) {
+        let destination = route.view()
+        destination.modalPresentationStyle = .popover
+        navigationController.pushViewController(destination, animated: true)
+    }
+    
     func popView() {
         navigationController.popViewController(animated: true)
     }
@@ -104,6 +144,9 @@ class HomeMenuCoordinator: NSObject, Coordinator {
         }
     }
 }
+
+//MARK: - Media
+
 
 //        switch(route.transition){
 //        case .presentFullscreen(let presentation):
@@ -123,6 +166,23 @@ extension HomeMenuCoordinator: UINavigationControllerDelegate {
         }
     }
 }
+
+extension RootTabCoordinator: UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if viewController as? UIHostingController<MediaTab> != nil {
+            print("media tab")
+//            dump(StateFactory.mediaViewModel)
+        }
+    }
+
+    
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+    }
+}
+
+
 
 class HomeTabs: UITabBarController {
     

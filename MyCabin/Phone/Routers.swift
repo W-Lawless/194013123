@@ -17,6 +17,7 @@ enum MenuRouter: NavigationRouter {
     case climate
     case presets
     case settings
+    case sourceList
 //    case plane
     
     var transition: NavigationTranisitionStyle {
@@ -48,6 +49,8 @@ enum MenuRouter: NavigationRouter {
             return UIHostingController(rootView: Presets())
         case .settings:
             return UIHostingController(rootView: Settings())
+        case .sourceList:
+            return UIHostingController(rootView: ViewFactory.buildSourceListView())
 //        case .plane:
 //            return UIHostingController(rootView: AppFactory.buildPlaneSchematic())
         }
@@ -64,3 +67,36 @@ enum NavigationTranisitionStyle {
     case presentModally(presentation: UIModalPresentationStyle)
     case presentFullscreen(presentation: UIModalPresentationStyle)
 }
+
+
+
+
+//
+//enum MediaRouter: NavigationRouter {
+//
+//    case monitors
+//    case nowPlaying
+//    case speakers
+////    case plane
+//
+//    var transition: NavigationTranisitionStyle {
+//        switch self {
+//        default:
+//            return .push(presentation: UIModalPresentationStyle.fullScreen)
+//        }
+//    }
+//
+//    func view() -> UIViewController {
+//        switch self {
+//        case .monitors:
+//            return UIHostingController(rootView: MediaTab(mediaViewModel: StateFactory.mediaViewModel))//, planeDisplayOptions: .showMonitors))
+//        case .nowPlaying:
+//            return UIHostingController(rootView: MediaTab(mediaViewModel: StateFactory.mediaViewModel))//planeDisplayOptions: .showNowPlaying))
+//        case .speakers:
+//            let view = UIHostingController(rootView: MediaTab(mediaViewModel: StateFactory.mediaViewModel))//planeDisplayOptions: .showSpeakers, mediaDisplayOptions: .sound))
+//            return view
+////        case .plane:
+////            return UIHostingController(rootView: AppFactory.buildPlaneSchematic())
+//        }
+//    }
+//}

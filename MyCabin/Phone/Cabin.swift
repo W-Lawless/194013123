@@ -24,8 +24,10 @@ class CabinAPI<F: EndpointFormat, R: Codable>: GCMSClient, Realtime_API {
         let pingCallback: (HTTPURLResponse) -> Void = { response in
             if (response.statusCode == 200) {
                 PlaneFactory.cabinConnectionPublisher.send(true)
+                PlaneFactory.cabinConnectionPublisher.send(completion: .finished)
             } else {
                 PlaneFactory.cabinConnectionPublisher.send(false)
+                PlaneFactory.cabinConnectionPublisher.send(completion: .finished)
             }
         }
         self.ping(for: endpoint, callback: pingCallback)

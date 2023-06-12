@@ -24,7 +24,6 @@ struct Speakers: View {
                 }
             }
         }
-
     }
 }
 
@@ -33,6 +32,7 @@ class SpeakersViewModel: ObservableObject, GCMSViewModel {
     
     @Published var loading: Bool = false
     @Published var speakerList: [SpeakerModel]?
+    @Published var playingSpeakers: [String:String] = ["-":"-"]
     
     func updateValues(_ data: [Codable]) {
         self.speakerList = data as? [SpeakerModel]
