@@ -16,6 +16,8 @@ struct Home: View {
     var body: some View {
         
 //        RotatingWheel()
+//        Pulse()
+
         
         Group {
 
@@ -126,10 +128,6 @@ struct Home: View {
             RoundedRectangle(cornerRadius: 24)
                 .stroke(Color.white, lineWidth: 2)
         )
-        
-//        Curves()
-//        Pulse()
-        
 
     }
 }
@@ -139,32 +137,6 @@ struct Home: View {
 //        Home()
 //    }
 //}
-
-
-//MARK: - Custom Curves
-
-struct Curves: View {
-    
-    var body: some View {
-        
-        VStack {
-            
-            ZStack {
-                
-                Image(systemName: "house.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 108)
-                
-            } //: ZSTQ
-            .background(Color.secondary)
-            
-        } //: VSTQ
-        
-    }
-    
-}
-
 
 //MARK: - Animated Pulse
 

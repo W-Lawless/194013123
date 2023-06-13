@@ -62,17 +62,24 @@ struct LightControl: View {
 //            }
             
         }
+        .onAppear {
+            let ep = Endpoint<EndpointFormats.Get, LightModel.state>(path: .lights, stateUpdate: light.id)
+            let rtApi = RealtimeAPI(endpoint: ep, callback: { returnValue in
+                print(returnValue)
+            })
+            rtApi.monitor.startMonitor(interval: 1.0, callback: rtApi.monitorCallback)
+        }
         
     } //: BODY
     
-    func dragCircle(value: DragGesture.Value) {
-        let vector = CGVector(dx: value.location.x, dy: value.location.y)
-        let xOffset = vector.dx
-        
-        if (xOffset < ((300/2) + 3.5) && xOffset > ((-300/2) - 7)) {
-            withAnimation(Animation.linear(duration: 0.1)) { self.circleOffset = xOffset }
-        }
-    }
+//    func dragCircle(value: DragGesture.Value) {
+//        let vector = CGVector(dx: value.location.x, dy: value.location.y)
+//        let xOffset = vector.dx
+//
+//        if (xOffset < ((300/2) + 3.5) && xOffset > ((-300/2) - 7)) {
+//            withAnimation(Animation.linear(duration: 0.1)) { self.circleOffset = xOffset }
+//        }
+//    }
 }
 
 //struct LightControl_Previews: PreviewProvider {

@@ -10,20 +10,19 @@ import SwiftUI
 struct ShadeControl: View {
     
     @ObservedObject var viewModel: ShadesViewModel = StateFactory.shadesViewModel
-    @State var opened: Bool = false
-    @State var sheered: Bool = false
-    @State var closed: Bool = false
+    @State private var iconState: OSC = .none
     
     var body: some View {
         
         HStack {
             Text(viewModel.activeShade?.id ?? "none")
+                .font(.caption)
             
             //-
             VStack {
                 ZStack {
                     Circle()
-                        .fill(opened ? Color.green : Color.black)
+                        .fill(iconState == .opened ? Color.green : Color.black)
                         .frame(width:48, height: 50)
                         .overlay (
                             Circle()
@@ -37,9 +36,8 @@ struct ShadeControl: View {
             }
             .frame(width: 64)
             .hapticFeedback(feedbackStyle: .rigid) { _ in
-                opened = true
-                sheered = false
-                closed = false
+                iconState = .opened
+                
                 if let shade = viewModel.activeShade {
                     StateFactory.apiClient.commandShade(shade: shade, cmd: .OPEN)
                 }
@@ -49,7 +47,7 @@ struct ShadeControl: View {
             VStack {
                 ZStack {
                     Circle()
-                        .fill(sheered ? Color.green : Color.black)
+                        .fill(iconState == .sheer ? Color.green : Color.black)
                         .frame(width:48, height: 50)
                         .overlay (
                             Circle()
@@ -63,9 +61,7 @@ struct ShadeControl: View {
             }
             .frame(width: 64)
             .hapticFeedback(feedbackStyle: .rigid) { _ in
-                opened = false
-                sheered = true
-                closed = false
+                iconState = .sheer
                 
                 if let shade = viewModel.activeShade {
                     StateFactory.apiClient.commandShade(shade: shade, cmd: .OPEN)
@@ -77,7 +73,7 @@ struct ShadeControl: View {
             VStack {
                 ZStack {
                     Circle()
-                        .fill(closed ? Color.green : Color.black)
+                        .fill(iconState == .closed ? Color.green : Color.black)
                         .frame(width:48, height: 50)
                         .overlay (
                             Circle()
@@ -91,9 +87,7 @@ struct ShadeControl: View {
             }
             .frame(width: 64)
             .hapticFeedback(feedbackStyle: .rigid) { _ in
-                closed = true
-                opened = false
-                sheered = false
+                iconState = .closed
                 
                 if let shade = viewModel.activeShade {
                     StateFactory.apiClient.commandShade(shade: shade, cmd: .OPEN)
@@ -104,6 +98,13 @@ struct ShadeControl: View {
         .padding(18)
         
     } //: BODY
+    
+    private enum OSC {
+        case opened
+        case sheer
+        case closed
+        case none
+    }
     
 }
 

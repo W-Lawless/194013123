@@ -35,7 +35,7 @@ extension GCMSClient {
         
         let endpoint = Endpoint<EndpointFormats.Put<LightModel.state>, LightModel.state>(path: .lights, stateUpdate: light.id)
         
-        var encodeObj = LightModel.state(on: true, brightness: brightness)
+        let encodeObj = LightModel.state(on: true, brightness: brightness)
         
         let callback = { lightStatus in
             print("put request data", lightStatus)

@@ -27,10 +27,16 @@ struct PlaneSchematic: View {
                         ZoneButton(displayOptions: $options, targetOption: .showLights, imageName: "lightbulb.fill")
                         
                     }
-//                    .frame(width: 32)
                     .padding(.horizontal, 18)
-//                    .border(.red, width: 1)
-                    
+                }
+                
+                if(options == .showShades) {
+                    VStack(spacing: 32) {
+                        ShadeGroupButton(group: .all, text: "All")
+                        ShadeGroupButton(group: .left, text: "Left")
+                        ShadeGroupButton(group: .right, text: "Right")
+                    }
+                    .padding(.horizontal, 18)
                 }
                 
                 HStack(alignment: .center) { // HSTQ
@@ -112,6 +118,36 @@ struct ZoneButton: View {
                 .overlay (
                     RoundedRectangle(cornerRadius: 6).stroke(.blue, lineWidth: 1).frame(width: 48, height: 48)
                 )
+        }
+    }
+}
+
+
+struct ShadeGroupButton: View {
+  
+    @ObservedObject var viewModel = StateFactory.shadesViewModel
+    let group: ShadeGroup
+    let text: String
+    
+    var body: some View {
+        Button {
+            if(!viewModel.showPanel) {
+                viewModel.showPanel = true
+            }
+//            viewModel.groupSelection = group
+            viewModel.selectAll(in: group)
+        } label: {
+            VStack {
+                Image("ico_advanced_off")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundColor(.white)
+                    .frame(width: 24, height: 24)
+                    .overlay (
+                        RoundedRectangle(cornerRadius: 6).stroke(.blue, lineWidth: 1).frame(width: 48, height: 48)
+                    )
+                Text(text)
+            }
         }
     }
 }

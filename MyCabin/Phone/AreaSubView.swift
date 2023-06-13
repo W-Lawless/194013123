@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct AreaSubView: View {
     
     @EnvironmentObject var coordinatesModel: PlaneViewCoordinates

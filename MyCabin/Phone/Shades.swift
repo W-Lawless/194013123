@@ -39,7 +39,9 @@ class ShadesViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
     @Published var showPanel: Bool = false
     @Published var shadeList: [ShadeModel]?
     @Published var activeShade: ShadeModel?
+    @Published var activeShades = [ShadeModel]()
     @Published var selectedShade: String = ""
+    @Published var groupSelection: ShadeGroup = .none
     
     func updateValues(_ data: [Codable]) {
         self.shadeList = (data as! [ShadeModel])
@@ -53,10 +55,75 @@ class ShadesViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
         selectedShade = shadeID
     }
     
+    func appendShade(_ shade: ShadeModel) {
+        let match = self.activeShades.first { selected in
+            return selected.id == shade.id
+        }
+        
+        if(match != nil) {
+            self.activeShades.removeAll { selected in
+                return selected.id == shade.id
+            }
+            print("removed shade from list")
+        } else {
+            self.activeShades.append(shade)
+            print("added shade to list")
+        }
+    }
+    
+    func selectAll(in group: ShadeGroup) {
+        
+        switch(group) {
+        case .all:
+            if let shadeList {
+                if(activeShades.count != shadeList.count) {
+                    activeShades = shadeList
+                } else {
+                    activeShades = [ShadeModel]()
+                }
+            }
+        default:
+            if let shadeList {
+                if(activeShades.count != shadeList.count / 2) {
+
+                    let shades = shadeList.filter({ element in
+                        return element.side == group.rawValue
+                    })
+                    
+                    self.activeShades = shades
+                    
+                } else {
+                    print("active shade == shadelist /2 ")
+                    if (activeShades[0].side == group.rawValue) {
+                        print("first shade equal to", group.rawValue)
+                        activeShades = [ShadeModel]()
+                    } else {
+                        let shades = shadeList.filter({ element in
+                            return element.side == group.rawValue
+                        })
+                        
+                        self.activeShades = shades
+                    }
+                }
+            }
+        }
+        
+        
+        
+        
+    }
+    
 }
 
 struct Shades_Previews: PreviewProvider {
     static var previews: some View {
         ViewFactory.buildShadesView()
     }
+}
+
+enum ShadeGroup: String {
+    case left = "LEFT"
+    case right = "RIGHT"
+    case none = "NONE"
+    case all = "ALL"
 }
