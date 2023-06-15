@@ -20,13 +20,13 @@ struct ShadeButton: View {
                 .scaledToFit()
                 .frame(width:21, height: 44)
                 .hapticFeedback(feedbackStyle: .light) { _ in
-                    viewModel.appendShade(shade)
-//                    viewModel.selectShade(is: shade.id)
-//                    if(viewModel.selectedShade != viewModel.activeShade?.id) {
-//                        viewModel.activeShade = shade
-//                    } else {
-//                        viewModel.showPanel.toggle()
-//                    }
+//                    viewModel.appendShade(shade)
+                    viewModel.selectShade(is: shade.id)
+                    if(viewModel.selectedShade != viewModel.activeShade?.id) {
+                        viewModel.activeShade = shade
+                    } else {
+                        viewModel.showPanel.toggle()
+                    }
                 } //: HAPTIC
 
     }

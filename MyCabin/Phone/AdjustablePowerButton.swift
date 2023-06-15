@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AdjustablePowerButton: View {
+    
+    @ObservedObject var viewModel = StateFactory.lightsViewModel
     @State var light: LightModel
     @State var power:Bool = false
     @State var luminosity:Int = 50
@@ -16,13 +18,13 @@ struct AdjustablePowerButton: View {
 //        if(display) {
             VStack{
                 Toggle(isOn: $power) {
-                    Text("Power")
+                    Text("Power \(luminosity)")
                 }
                 .onChange(of: power) { newValue in
                     print("power::",power)
                     StateFactory.apiClient.toggleLight(light, cmd: newValue ? .ON : .OFF)
                 }
-                Stepper("Brightness", value: $luminosity, in: 0...100, step: 25).onChange(of: luminosity) { newValue in
+                Stepper("Brightness", value: $luminosity, in: 25...100, step: 25).onChange(of: luminosity) { newValue in
                     print("lumisotry is", newValue)
                     StateFactory.apiClient.adjustBrightness(light, brightness: luminosity)
                 }
@@ -43,6 +45,18 @@ struct AdjustablePowerButton: View {
 //                }
 
             }
+            .onAppear{
+                print("CURRENT STATE ON PLANE:",viewModel.rtResponses[light.id] ?? "none")
+                if let lightState = viewModel.rtResponses[light.id] {
+                    print("IT IS:",lightState.on)
+                    power = lightState.on
+                }
+            }
+            .onChange(of: viewModel.rtResponses[light.id], perform: { newValue in
+                print("VALUE CHANGED ON PLANE:", newValue ?? "optionalwrapped")
+                power = newValue?.on ?? false
+                luminosity = newValue?.brightness ?? 0
+            })
 //        } else {
         
 //            VStack {

@@ -11,6 +11,7 @@ struct LightsBottomPanel: View {
     
     @ObservedObject var viewModel: LightsViewModel = StateFactory.lightsViewModel
     @State var lights = [LightModel]()
+    var rtApi: RealtimeAPI<EndpointFormats.Get, LightModel.state>? = nil
     
     var body: some View {
         
@@ -39,10 +40,22 @@ struct LightsBottomPanel: View {
         }  //: GEO
         .onAppear {
             getLightsForSeat()
+                
+            print("APPEAR!")
+//            print(lights)
+            viewModel.pollLightsForState(lights: lights)
+            
  //            print(lights)
         }
         .onChange(of: viewModel.activeSeat) { newValue in
+            viewModel.killMonitor()
             getLightsForSeat()
+            viewModel.pollLightsForState(lights: lights)
+        }
+        .onDisappear {
+            print("GOODBYE")
+            viewModel.killMonitor()
+            print(viewModel.rtResponses)
         }
     }
     
@@ -57,9 +70,9 @@ struct LightsBottomPanel: View {
     }
 }
 
-struct LightsBottomPanel_Previews: PreviewProvider {
-    static var previews: some View {
-        LightsBottomPanel()
-    }
-}
+//struct LightsBottomPanel_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LightsBottomPanel()
+//    }
+//}
 

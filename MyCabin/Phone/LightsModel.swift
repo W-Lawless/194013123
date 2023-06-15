@@ -43,9 +43,13 @@ struct LightModel: Codable, Identifiable, Hashable {
         var on: String
         var off: String
     }
-    struct state: Codable {
+    struct state: Codable, Equatable {
         var on: Bool
         var brightness: Int
+        
+        static func == (lhs: LightModel.state, rhs: LightModel.state) -> Bool {
+            return lhs.on == rhs.on && lhs.brightness == rhs.brightness
+        }
     }
 }
 

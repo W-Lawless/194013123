@@ -62,13 +62,6 @@ struct LightControl: View {
 //            }
             
         }
-        .onAppear {
-            let ep = Endpoint<EndpointFormats.Get, LightModel.state>(path: .lights, stateUpdate: light.id)
-            let rtApi = RealtimeAPI(endpoint: ep, callback: { returnValue in
-                print(returnValue)
-            })
-            rtApi.monitor.startMonitor(interval: 1.0, callback: rtApi.monitorCallback)
-        }
         
     } //: BODY
     

@@ -41,6 +41,7 @@ extension URLSession {
         
         guard endpoint.validateUrl() != nil else { return Fail(error: InvalidEndpoint()).eraseToAnyPublisher() }
         guard let request = endpoint.makeRequest(with: requestData ?? nil) else { return Fail(error: InvalidEndpoint()).eraseToAnyPublisher() }
+        print("Fething @", request.url)
         
         return dataTaskPublisher(for: request)
             .map(\.data)

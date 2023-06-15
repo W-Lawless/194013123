@@ -57,9 +57,14 @@ struct Lights: View {
 
 class LightsViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
     
+    typealias F = EndpointFormats.Get
+    typealias R = LightModel.state
+    
     @Published var activeSeat: String = ""
     @Published var lightList: [LightModel]?
     @Published var showPanel: Bool = false
+    var rtAPI = [RealtimeAPI<F ,R>]()
+    @Published var rtResponses = [String:R]()
     
     func updateValues(_ data: [Codable]) {
         let typecast = data as? [LightModel]
@@ -75,6 +80,27 @@ class LightsViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
         } else {
             showPanel.toggle()
         }
+    }
+    
+    func pollLightsForState(lights: [LightModel]) {
+
+        lights.forEach { light in
+            let ep = Endpoint<F, R>(path: .lights, stateUpdate: light.id)
+            let pointer =  RealtimeAPI(endpoint: ep, callback: { [weak self] returnValue in
+                print("Polling light:",returnValue)
+                self?.rtResponses[light.id] = returnValue[0]
+            })
+            rtAPI.append(pointer)
+            pointer.monitor.startMonitor(interval: 1.0, callback: pointer.monitorCallback)
+        }
+        
+    }
+    
+    func killMonitor() {
+        print("KILL MONITOR!")
+        self.rtAPI.forEach({ api in
+            api.monitor.stopMonitor()
+        })
     }
     
 }
