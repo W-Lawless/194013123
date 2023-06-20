@@ -14,7 +14,6 @@ final class NavigationFactory {
     //Navigation
     static let rootTabCoordinator = RootTabCoordinator()
     static let homeMenuCoordinator = HomeMenuCoordinator()
-//    static let mediaCoordinator = MediaCoordinator()
     
     static func buildRootTabNavigation() -> RootTabCoordinator {
         let coordinator = rootTabCoordinator
@@ -60,34 +59,6 @@ final class NavigationFactory {
         
         return homeMenuCoordinator
     }
-    
-//    static func buildMediaTab()  {
-//
-//        let rootMenuView = ViewFactory.buildMediaTab()
-//        rootMenuView.title = "Media"
-//
-//        let navigationBarAppearance = UINavigationBarAppearance()
-//        navigationBarAppearance.configureWithOpaqueBackground()
-//        //        navigationBarAppearance.backgroundColor = .systemIndigo
-//
-//        rootMenuView.navigationItem.standardAppearance = navigationBarAppearance
-//        rootMenuView.navigationItem.compactAppearance = navigationBarAppearance
-//        rootMenuView.navigationItem.scrollEdgeAppearance = navigationBarAppearance
-//
-////        let planeMenu = UIHostingController(rootView: AppFactory.buildPlaneSchematic())
-////        planeMenu.title = "Select your seat"
-//
-//        let volumeMenu = UIHostingController(rootView: ViewFactory.buildVolumeView())
-//        volumeMenu.title = "Volume"
-//
-//        let volume = UIBarButtonItem(image: UIImage(systemName: "speaker"), style: .plain, target: self, action: #selector(volumeClick))
-//        let icon = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(attendantClick))
-//        rootMenuView.navigationItem.rightBarButtonItems = [volume, icon]
-//
-//        mediaCoordinator.start(subviews: [rootMenuView])
-//
-//        return mediaCoordinator
-//    }
     
     @objc static func volumeClick() {
         homeMenuCoordinator.navigationController.present(ViewFactory.volumeMenu, animated: true)

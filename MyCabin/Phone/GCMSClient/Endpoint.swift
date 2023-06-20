@@ -22,6 +22,7 @@ enum GCMSEndpoints: String {
     case sources = "/api/v1/sources"
     case flightInfo = "/api/v1/flightInfo"
     case weather = "/api/v1/destination/weather"
+    case test = "api/v1/test"
     
     func stateChange(_ id: String) -> String {
         switch self {

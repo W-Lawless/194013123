@@ -72,10 +72,9 @@ extension GCMS_API {
             receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    print("API CONNECTION ERROR: \(error.localizedDescription)")
+                    print("ERROR PINGING CABIN: \(error.localizedDescription)")
                     callback(HTTPURLResponse(url: URL(string: "gulf.aero.cabin")!, statusCode: 404, httpVersion: nil, headerFields: nil)!)
                 case .finished:
-                    print("API SUBSCRIPTION CLOSED")
                     return
                 }
             },

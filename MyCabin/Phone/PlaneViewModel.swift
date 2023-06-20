@@ -11,7 +11,9 @@ class PlaneViewModel: ObservableObject {
     @Published var plane: PlaneMap = PlaneMap()
     
     @MainActor func updateValues(_ data: PlaneMap) {
+        print("Updating plane data")
         self.plane = data
+//        print(data.mapAreas[0].lights)
     }
 }
 

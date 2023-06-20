@@ -117,6 +117,7 @@ struct Home: View {
 
             Button {
                 Task {
+                    PlaneFactory.planeViewModel = PlaneViewModel()
                     await PlaneFactory.elementsAPI.fetch()
                 }
             } label: {

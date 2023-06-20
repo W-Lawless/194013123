@@ -7,13 +7,12 @@
 
 //import Foundation
 import UIKit
+import Combine
 //import SwiftUI
 
-@main
 final class AppDelegate: NSObject, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        
 //        if let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.path {
 //            print("Documents Directory: \(documentsPath)")
 //        }
@@ -36,17 +35,34 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 final class SceneDelegate: NSObject, UIWindowSceneDelegate {
         
     var appCoordinator: AppCoordinator?
+    var hasAlreadyConnectedToCabin: Bool = false
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
         let window = UIWindow(windowScene: windowScene)
-        
+
         let appCoordinator = AppCoordinator(window: window)
-        appCoordinator.start()
-        self.appCoordinator = appCoordinator
+        ViewFactory.AppCoordinator = appCoordinator
+        
+        appCoordinator.start { _ in } sinkValue: { pulse in
+            DispatchQueue.main.async { [weak self] in
+                if(pulse){
+                    self?.loadAllCabinElementsOnFirstConnection(pulse)
+                    appCoordinator.goTo(.cabinFound)
+                } else {
+                    appCoordinator.goTo(.loadCabin)
+                }
+            }
+        }
         
         window.makeKeyAndVisible()
+    }
+    
+    func loadAllCabinElementsOnFirstConnection(_ pulse: Bool) {
+        if pulse != hasAlreadyConnectedToCabin {
+            hasAlreadyConnectedToCabin = true
+            PlaneFactory.connectToPlane()
+        }
     }
 }
 

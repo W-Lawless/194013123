@@ -48,7 +48,7 @@ struct PlaneSchematic: View {
                     VStack(alignment: .center, spacing: 0) { //VSTQ B
                         
                         if(options == .tempZones) {
-                            
+                            //TODO: - Force unwrap fix
                             AreaSubView(selectedZone: $selectedZone, area: viewModel.plane.parentArea!, options: options)
                                 .environmentObject(coordinatesModel)
 

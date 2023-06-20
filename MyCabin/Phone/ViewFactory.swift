@@ -10,17 +10,14 @@ import SwiftUI
 
 final class ViewFactory {
     
+    // Coordinators
+    static var AppCoordinator: AppCoordinator? = nil
+    
     static let volumeMenu = UIHostingController(rootView: buildVolumeView())
     static let loadingView = UIHostingController(rootView: buildLoadingScreen())
-
     
     static func buildLoadingScreen() -> Loading {
-        let startMonitor = PlaneFactory.cabinAPI.monitor.startMonitor
-        let monitorCallback = PlaneFactory.cabinAPI.monitorCallback
-        let stopMonitor = PlaneFactory.cabinAPI.monitor.stopMonitor
-        
-        let view = Loading(startMonitor: startMonitor, monitorCallback: monitorCallback, stopMonitor: stopMonitor)
-        
+        let view = Loading()
         return view
     }
     
@@ -51,9 +48,8 @@ final class ViewFactory {
     }
     
     // Media
-    
+    //TODO: - Normalize
     static func buildMediaTab() -> UIHostingController<MediaTab> {
-        print("building media tab. . .")
         let view = MediaTab(mediaViewModel: StateFactory.mediaViewModel)
         let hostedView = UIHostingController(rootView: view)
         return hostedView

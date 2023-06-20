@@ -10,10 +10,6 @@ import Combine
 
 struct Loading: View {
     
-    var startMonitor: (Double, @escaping () async -> Void) -> Void
-    var monitorCallback: () async -> Void
-    var stopMonitor: () -> Void
-    
     var body: some View {
         VStack {
             
@@ -34,19 +30,11 @@ struct Loading: View {
         } //: VSTQ
         .padding()
         .frame(height: 180)
-        .onAppear {
-            stopMonitor()
-            startMonitor(3.0, monitorCallback)
-        }
-        .onDisappear{
-//            print("view fading. . .")
-        }
     }
 }
 
 
 struct Loading_Previews: PreviewProvider {
-
     static var previews: some View {
         ViewFactory.buildLoadingScreen()
     }

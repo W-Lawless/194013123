@@ -7,60 +7,76 @@
 
 import UIKit
 import SwiftUI
+import Combine
 
 class AppCoordinator {
     
+    typealias CabinAPIAdaptor = CabinAPI<EndpointFormats.Head, EmptyResponse>
+    typealias CabinLoadingView = UIHostingController<Loading>
+    typealias CabinPublisher = CurrentValueSubject<Bool, Never>
+    typealias SinkCompletion = (Subscribers.Completion<Never>) -> Void
+    typealias SinkValue =  (Bool) -> Void
+    
     let window: UIWindow
-
-    init(window: UIWindow) {
+    let cabin: CabinAPIAdaptor
+    var loadingView: CabinLoadingView
+    var tabs: RootTabCoordinator
+    let rootNavView = UINavigationController()
+    
+    init(window: UIWindow,
+         cabin: CabinAPIAdaptor = PlaneFactory.cabinAPI,
+         loadingView: CabinLoadingView = ViewFactory.loadingView,
+         tabs: RootTabCoordinator = NavigationFactory.buildRootTabNavigation()) {
         self.window = window
+        self.cabin = cabin
+        self.loadingView = loadingView
+        self.tabs = tabs
     }
     
-    func start() {
+    func start(
+        publisher: CabinPublisher = PlaneFactory.cabinConnectionPublisher,
+        sinkCompletion endSink: @escaping SinkCompletion,
+        sinkValue onSink: @escaping SinkValue) {
         
-        let cabin = PlaneFactory.cabinAPI
-        let tabs = NavigationFactory.buildRootTabNavigation()
-        
-        let loading = ViewFactory.loadingView
-        
-        let rootNavView = UINavigationController()
         rootNavView.navigationBar.isHidden = true
-        rootNavView.setViewControllers([tabs.navigationController,loading], animated: true)
+        rootNavView.setViewControllers([tabs.navigationController,loadingView], animated: true)
         self.window.rootViewController = rootNavView
         
-        PlaneFactory.cabinConnectionPublisher
-            .sink(receiveCompletion: { completion in
-                switch (completion) {
-                case .finished:
-                    print("cabin api ping closed")
-                case .failure:
-                    print("error pinging cabin")
-                }
-            }, receiveValue: { pulse in
-                DispatchQueue.main.async {
-                    let last = (rootNavView.viewControllers.count - 1)
-                    if(pulse){
-                        if(rootNavView.viewControllers[last] === loading) { ///Check view order
-                            PlaneFactory.connectToPlane()
-                            cabin.monitor.stopMonitor()
-                            rootNavView.popViewController(animated: true)
-                        }
-                    } else { //: Pulse false
-                        if(rootNavView.viewControllers[last] !== loading) { /// Check already loading
-                            rootNavView.pushViewController(loading, animated: true)
-                        }
-                    }
-                }
-            })
-            .store(in: &PlaneFactory.cancelTokens)
+        publisher.sink(receiveCompletion: endSink, receiveValue: onSink).store(in: &PlaneFactory.cancelTokens)
+    }
+    
+    func goTo(_ route: AppRouter) {
+        switch route {
+        case .cabinFound:
+            startMonitor(atInterval: 30.0)
+            if(rootNavView.visibleViewController === loadingView) { ///Check view order
+                rootNavView.popViewController(animated: true)
+            }
+        case .loadCabin:
+            startMonitor(atInterval: 3.0)
+            if(rootNavView.visibleViewController !== loadingView) { /// Check already loading
+                rootNavView.pushViewController(loadingView, animated: true)
+            }
+        }
+    }
+    
+    func startMonitor(atInterval interval: Double){
+        PlaneFactory.cabinAPI.monitor.stopMonitor()
+        PlaneFactory.cabinAPI.monitor.startMonitor(interval: interval, callback: PlaneFactory.cabinAPI.monitorCallback)
+    }
+ 
+    enum AppRouter {
+        case cabinFound
+        case loadCabin
     }
 }
+
 
 //MARK: - TabView
 
 class RootTabCoordinator: NSObject  {
     
-    var navigationController = HomeTabs()
+    var navigationController = UITabBarController()
     var subviews: [UIViewController]!
     
     func goTo(_ route: MenuRouter) {
@@ -145,17 +161,7 @@ class HomeMenuCoordinator: NSObject, Coordinator {
     }
 }
 
-//MARK: - Media
-
-
-//        switch(route.transition){
-//        case .presentFullscreen(let presentation):
-//            ()
-//        case .presentModally(let presentation):
-//            destination.modalPresentationStyle = presentation
-//        case .push(let presentation):
-//            destination.modalPresentationStyle = presentation
-//        }
+//MARK: - UIVC Type Casting / OnLoad
 
 extension HomeMenuCoordinator: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
@@ -170,12 +176,13 @@ extension HomeMenuCoordinator: UINavigationControllerDelegate {
 extension RootTabCoordinator: UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if viewController as? UINavigationController != nil {
+            print("Home Tab")
+        }
         if viewController as? UIHostingController<MediaTab> != nil {
             print("media tab")
-//            dump(StateFactory.mediaViewModel)
         }
     }
-
     
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
@@ -184,21 +191,4 @@ extension RootTabCoordinator: UITabBarControllerDelegate {
 
 
 
-class HomeTabs: UITabBarController {
-    
-    init() {
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        PlaneFactory.cabinAPI.monitor.startMonitor(interval: 30, callback: PlaneFactory.cabinAPI.monitorCallback)
-    }
-    
-//    override func viewDidDisappear(_ animated: Bool) {
-//        api.monitor.stopMonitor()
-//    }
-}
+

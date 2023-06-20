@@ -11,12 +11,23 @@ protocol ElementModel {
     var rect: RenderCoordinates { get set }
 }
 
-struct ElementsRoot: Decodable {
+struct ElementsRoot: Codable {
     var results: [ElementsEnum]
     var length: Int
+    
+    init() {
+        self.results = [ElementsEnum]()
+        self.length = 0
+    }
+    
+    init(results: [ElementsEnum], length: Int){
+        self.results = results
+        self.length = length
+    }
+    
 }
 
-enum ElementsEnum: Decodable {
+enum ElementsEnum: Codable {
     private enum CodingKeys: String, CodingKey { case elementType = "@type" }
     
     case light(LightModel)
@@ -76,9 +87,11 @@ enum ElementsEnum: Decodable {
             self = .ignore(())
         }
     }
+    
+    func encode(to encoder: Encoder) throws {}
 }
 
-enum ElementTypes: String, Decodable {
+enum ElementTypes: String, Codable {
     case LIGHT = "Light"
     case SEAT = "Seat"
     case SPEAKER = "Speaker"

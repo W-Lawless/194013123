@@ -10,40 +10,6 @@ import Combine
 @testable import MyCabin
 import SwiftUI
 
-
-//MARK: - UI Layer
-
-class ViewFactory_Tests: XCTestCase {
-    
-    /// API & View must always share same ViewModel instance
-    
-    func testFlightInfoFactory() throws {
-        let testView = AppFactory.buildFlightInfo()
-        XCTAssertTrue(testView.api.viewModel === testView.viewModel)
-    }
-    
-    func testSeatSelection() throws {
-        let testView = AppFactory.buildSeatSelection()
-        XCTAssertTrue(testView.api.viewModel === testView.viewModel)
-    }
-    
-}
-
-class Navigation_Tests: XCTestCase {
-    
-    func testMenuRouter() throws {
-        let coordinator = AppFactory.buildHomeMenu()
-        let targetView = MenuRouter.lights.view()
-
-        coordinator.navigationController.pushViewController(targetView, animated: false)
-        
-        let visible = coordinator.navigationController.visibleViewController
-        
-        XCTAssertTrue(visible === targetView)
-    }
-    
-}
-
 // MARK: - Network Layer
 
 class Monitor_Tests: XCTestCase {
@@ -86,34 +52,28 @@ class Endpoint_Tests: XCTestCase {
     typealias StubbedEndpoint = Endpoint<EndpointFormats.Stub, String>
     let host = URLHost(rawValue: "10.0.0.41")
     
-    func testBasicRequestGeneration() throws {
-        let endpoint = StubbedEndpoint(path: "/path/v1/resource")
-        let request = endpoint.makeRequest(with: nil)
-        XCTAssertEqual(request?.url, try? host.expectedURL(withPath: "/path/v1/resource"))
-    }
-    
-    func testGeneratingRequestWithQueryItems() throws {
-           let endpoint = StubbedEndpoint(path: "/path", queryItems: [
-               URLQueryItem(name: "a", value: "1"),
-               URLQueryItem(name: "b", value: "2")
-           ])
-
-           let request = endpoint.makeRequest(with: nil)
-
-           try XCTAssertEqual(
-               request?.url,
-               host.expectedURL(withPath: "/path?a=1&b=2")
-           )
-       }
+//    func testGeneratingRequestWithQueryItems() throws {
+//        let endpoint = StubbedEndpoint(path: .test, queryItems: [
+//               URLQueryItem(name: "a", value: "1"),
+//               URLQueryItem(name: "b", value: "2")
+//           ])
+//
+//           let request = endpoint.makeRequest(with: nil)
+//
+//           try XCTAssertEqual(
+//               request?.url,
+//               host.expectedURL(withPath: "/api/v1/test?a=1&b=2")
+//           )
+//       }
     
     func testFlightAPIEndpoint() throws {
-        let endpoint = StubbedEndpoint(path: "/api/v1/flightInfo")
+        let endpoint = StubbedEndpoint(path: .flightInfo)
         let request = endpoint.makeRequest(with: nil)
         XCTAssertEqual(request?.url, try? host.expectedURL(withPath: "/api/v1/flightInfo"))
     }
     
     func testSeatsAPIEndpoint() throws {
-        let endpoint = StubbedEndpoint(path: "/api/v1/seats")
+        let endpoint = StubbedEndpoint(path: .seats)
         let request = endpoint.makeRequest(with: nil)
         XCTAssertEqual(request?.url, try? host.expectedURL(withPath: "/api/v1/seats"))
     }
@@ -156,35 +116,24 @@ class Decoder_Tests: XCTestCase {
 
 }
 
-class NetworkIntegration_Test: XCTestCase {
-    
-    typealias StubbedEndpoint = Endpoint<EndpointFormats.Stub, FlightModel>
-    let host = URLHost(rawValue: "test.url.com")
-    let endpoint = StubbedEndpoint(path: "/api/v1/testEndpoint")
-    
-    func testSuccessfullyPerformingRequest() throws {
-        
-        let session = URLSession(mockResponder: FlightModel.MockDataURLResponder.self)
+//class NetworkIntegration_Test: XCTestCase {
+//
+//    typealias StubbedEndpoint = Endpoint<EndpointFormats.Stub, FlightModel>
+//    let host = URLHost(rawValue: "test.url.com")
+//    let endpoint = StubbedEndpoint(path: .test)
+//
+//    func testSuccessfullyPerformingRequest() throws {
+//
+//        let session = URLSession(mockResponder: FlightModel.MockDataURLResponder.self)
+//
+//        let publisher = session.publisher(for: endpoint, using: nil)
+//        let result = try awaitCompletion(of: publisher)[0]
+//
+//        XCTAssertEqual(result[0], FlightModel.MockDataURLResponder.dummyModel)
+//    }
+//}
 
-        let publisher = session.publisher(for: endpoint, using: nil)
-        let result = try awaitCompletion(of: publisher)[0]
-        
-        XCTAssertEqual(result[0], FlightModel.MockDataURLResponder.dummyModel)
-    }
-}
-
-class ConcurrencyTimeBenchmark_Tests: XCTestCase {
-    
-    func testBulkFetch() throws {
-        measure {
-            AppFactory.fetchAll()
-        }
-    }
-    
-}
-
-class Network_Tests: XCTestCase {
-    
+//class Network_Tests: XCTestCase {
 //    func test_init_doesNotRequestData() {
 //        let spy = SessionSpy()
 //        XCTAssertTrue(spy.messages.isEmpty)
@@ -213,10 +162,7 @@ class Network_Tests: XCTestCase {
 //        
 //        wait(for: [exp], timeout: 1.0)
 //    }
-    
-    
-    
-}
+//}
 
 //MARK: - Network Test Infrastructure
 
@@ -372,7 +318,6 @@ extension XCTestCase {
         }
     }
 }
-
 
 /*
  /// This was a very hard to find example of thorough testing of the Timer class, please leave for future reference

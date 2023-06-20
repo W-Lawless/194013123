@@ -9,7 +9,7 @@ import XCTest
 import Combine
 @testable import MyCabin
 
-final class NetworkingTests: XCTestCase {
+final class Networking_Tests: XCTestCase {
 
     var cancelTokens = Set<AnyCancellable>()
     var session: URLSession?
@@ -65,11 +65,11 @@ final class NetworkingTests: XCTestCase {
     func test_GeneralAPI_FetchesAndUpdatesViewModel() {
         let exp = expectation(description: "Wait for completion")
         
-        let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: "/api/v1/lights")
+        let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: .lights)
         let viewModel = LightsViewModel()
 
-        var sut = GCMSClient(endpoint: endpoint, viewModel: viewModel)
-        sut.fetch(for: sut.endpoint, viewModel: viewModel) { result in
+        let sut = GCMSClient()
+        sut.fetch(for: endpoint) { result in
             viewModel.updateValues(result)
             exp.fulfill()
         }
@@ -79,7 +79,48 @@ final class NetworkingTests: XCTestCase {
         XCTAssertTrue(type(of: viewModel.lightList?.first?.brightness) == LightBrightness?.self, "Did not find \(String(describing: viewModel.lightList?.first?.brightness))")
 
     }
+    
+    //MARK: - Realtime API Abstraction
+    
+    func test_RealtimeAPI_RepeatedlyFetchesAndUpdatesViewModel() {
+        let exp = expectation(description: "Wait for completion")
+        
+        let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: .lights)
+        let viewModel = LightsViewModel()
+        var count = 0
+        
+        let sut = RealtimeAPI(endpoint: endpoint) { result in
+            viewModel.updateValues(result)
+            count += 1
+            if(count == 3){
+                exp.fulfill()
+            }
+        }
+        sut.monitor.startMonitor(interval: 0.1, callback: sut.monitorCallback)
+        
+        wait(for: [exp], timeout: 1.0)
 
+        XCTAssertTrue(type(of: viewModel.lightList?.first?.brightness) == LightBrightness?.self, "Did not find \(String(describing: viewModel.lightList?.first?.brightness))")
+        XCTAssert(count == 3)
+    }
+
+    
+    func test_RealtimeAPI_KillsInternalTimerOnStopCmd() {
+        
+        let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: .lights)
+        var count = 0
+        
+        let sut = RealtimeAPI(endpoint: endpoint) { _ in
+            count += 1
+        }
+        sut.monitor.startMonitor(interval: 0.1, callback: sut.monitorCallback)
+        sut.monitor.stopMonitor()
+
+        XCTAssert(count == 0)
+        XCTAssertFalse(sut.monitor.isTimerValid)
+    }
+    
+    
     //MARK: - Utils
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> URLSession {
@@ -108,7 +149,6 @@ final class NetworkingTests: XCTestCase {
         return URL(string: "http://any-url.com")!
     }
     
-    
     private func resultErrorFor(data: Data?, response: URLResponse?, error: Error?, file: StaticString = #file, line: UInt = #line) -> Error? {
         URLProtocolStub.stub(data: data, response: response, error: error)
 
@@ -116,7 +156,7 @@ final class NetworkingTests: XCTestCase {
         let exp = expectation(description: "Wait for completion")
 
         var receivedError: Error?
-        let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: "/api/v1/lights")
+        let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: .lights)
 
         let publisher = sut.publisher(for: endpoint, using: nil)
         
@@ -151,7 +191,7 @@ final class NetworkingTests: XCTestCase {
 
         var receivedValues: [LightModel]?
         
-        let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: "/api/v1/lights")
+        let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: .lights)
 
         let publisher = sut.publisher(for: endpoint, using: nil)
         
