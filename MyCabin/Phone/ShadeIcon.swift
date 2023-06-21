@@ -19,7 +19,9 @@ struct ShadeButton: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width:21, height: 44)
+                .accessibilityIdentifier(shade.id)
                 .hapticFeedback(feedbackStyle: .light) { _ in
+                    print(shade.id)
 //                    viewModel.appendShade(shade)
                     viewModel.selectShade(is: shade.id)
                     if(viewModel.selectedShade != viewModel.activeShade?.id) {

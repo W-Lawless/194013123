@@ -19,7 +19,6 @@ struct LightsBottomPanel: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
             
-          
                 HStack(alignment: .center, spacing: 12) {
                     ForEach(Array(lights.enumerated()), id: \.element) { index, element in
                         if(lights[index].brightness.dimmable){
@@ -30,22 +29,17 @@ struct LightsBottomPanel: View {
                     }
                     .padding(.horizontal, 24)
                     .padding(.vertical, 16)
-                }
-                .border(.red, width: 2)
-                
+                }                
                 
             } //: SCROLL
+            .accessibilityIdentifier("lightControlPanel")
             .frame(width: geo.size.width, height: geo.size.height, alignment: .top)
             
         }  //: GEO
         .onAppear {
             getLightsForSeat()
-                
             print("APPEAR!")
-//            print(lights)
             viewModel.pollLightsForState(lights: lights)
-            
- //            print(lights)
         }
         .onChange(of: viewModel.activeSeat) { newValue in
             viewModel.killMonitor()

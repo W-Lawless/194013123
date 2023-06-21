@@ -12,15 +12,12 @@ struct AreaSubView: View {
     @EnvironmentObject var coordinatesModel: PlaneViewCoordinates
     @Binding var selectedZone: PlaneArea?
     
-    let area: PlaneArea
-    
+    let area: PlaneArea    
     let options: PlaneSchematicDisplayMode
 
     @State var subviewHeightUnit: CGFloat = 0
     @State var subviewWidthUnit: CGFloat = 0
 
-//    @AppStorage("CurrentSeat") var selectedSeat: String = ""
-//    let selectedSeat: String = UserDefaults.standard.string(forKey: "CurrentSeat") ?? ""
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -93,12 +90,12 @@ struct AreaBlueprint: View {
         } //: FOR EACH
         
         ForEach(area.tables ?? [TableModel]()) { table in
-            MiniTable(tableType: table.type)
+            MiniTable(tableType: table.type, id: table.id)
                 .modifier(PlaceIcon(rect: table.rect, subviewWidthUnit: subviewWidthUnit, subviewHeightUnit: subviewHeightUnit))
         } //: FOR EACH
         
         ForEach(area.divans ?? [DivanModel]()) { divan in
-            DivanSeat(options: options)
+            DivanSeat(options: options, id: divan.id)
                 .modifier(PlaceIcon(rect: divan.rect, subviewWidthUnit: subviewWidthUnit, subviewHeightUnit: subviewHeightUnit))
         } //: FOR EACH
         

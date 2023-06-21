@@ -27,6 +27,10 @@ final class NavigationFactory {
         tabTwo.tabBarItem = UITabBarItem(title: "Media", image: UIImage(systemName: "play"), selectedImage: UIImage(systemName: "play.fill"))
         tabThree.tabBarItem = UITabBarItem(title: "Flight", image: UIImage(systemName: "airplane"), selectedImage: UIImage(systemName: "airplane.circle"))
         
+        tabOne.accessibilityLabel = "HomeTab"
+        tabTwo.accessibilityLabel = "MediaTab"
+        tabThree.accessibilityLabel = "FlightTab"
+        
         let subviews = [tabOne.navigationController, tabTwo, tabThree]
 //        coordinator.subviews = subviews
         

@@ -22,7 +22,7 @@ enum GCMSEndpoints: String {
     case sources = "/api/v1/sources"
     case flightInfo = "/api/v1/flightInfo"
     case weather = "/api/v1/destination/weather"
-    case test = "api/v1/test"
+    case test = "/api/v1/test"
     
     func stateChange(_ id: String) -> String {
         switch self {
@@ -96,7 +96,6 @@ enum EndpointFormats {
 
 extension Endpoint {
     func makeRequest(with data: Format.RequestData?) -> URLRequest? {
-
         guard let url = validateUrl() else { return nil }
         var request = URLRequest(url: url)
         
@@ -121,7 +120,7 @@ extension Endpoint {
         }
         
         components.queryItems = queryItems.isEmpty ? nil : queryItems
-
+        
         guard let url = components.url else { return nil }
         return url
     }
@@ -139,7 +138,7 @@ extension URLHost {
     }
 
     static var production: Self {
-        URLHost(rawValue: "ProductionServerString")
+        URLHost(rawValue: "10.0.0.41")
     }
 
     static var `default`: Self {

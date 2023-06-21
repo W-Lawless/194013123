@@ -31,10 +31,11 @@ struct TappableZone: ViewModifier {
             .overlay (
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(.white, lineWidth: 1)
+                    .accessibilityIdentifier("tappable_\(area.id)")
             )
             .padding(6)
             .hapticFeedback(feedbackStyle: .rigid) { _ in
-                print("tapped")
+                print("tapped", area.id)
                 selectedZone = area
             }
     }

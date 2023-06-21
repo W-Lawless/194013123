@@ -40,6 +40,7 @@ struct Sources: View {
                     }
                     
                 } //: BTN
+                .accessibilityIdentifier(sourceType.id.rawValue)
                 
             } //: FOREACH
             
@@ -73,6 +74,7 @@ struct SourceList: View {
                     } label: {
                         Text(source.name)
                     } //: BTN
+                    .accessibilityIdentifier(source.id)
                     
                 } //: CONDITIONAL
                 

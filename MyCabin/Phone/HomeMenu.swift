@@ -15,10 +15,6 @@ struct Home: View {
     
     var body: some View {
         
-//        RotatingWheel()
-//        Pulse()
-
-        
         Group {
 
             HStack(alignment: .center, spacing: 72) {
@@ -30,6 +26,7 @@ struct Home: View {
                             .frame(width: 56, height: 56)
                         Text("Lights")
                 } //: VSTQ
+                .accessibilityIdentifier("LightsMenu")
                 .hapticFeedback(feedbackStyle: .light) { _ in
                     navigateTo(.lights)
                 }
@@ -42,6 +39,7 @@ struct Home: View {
                     Text("Shades")
                     .foregroundColor(.white)
                 } //: VSTQ
+                .accessibilityIdentifier("ShadesMenu")
                 .hapticFeedback(feedbackStyle: .light) { _ in
                     navigateTo(.shades)
                 }
@@ -61,6 +59,7 @@ struct Home: View {
                     Text("Temperature")
                     .foregroundColor(.white)
                 } //: VSTQ
+                .accessibilityIdentifier("ClimateMenu")
                 .hapticFeedback(feedbackStyle: .light) { _ in
                     navigateTo(.climate)
                 }
@@ -75,6 +74,7 @@ struct Home: View {
                     Text("Seats")
                     .foregroundColor(.white)
                 } //:VSTQ
+                .accessibilityIdentifier("SeatsMenu")
                 .hapticFeedback(feedbackStyle: .light) { _ in
                     navigateTo(.seats)
                 }
@@ -95,6 +95,7 @@ struct Home: View {
                     Text("Presets")
                     .foregroundColor(.white)
                 } //: VSTQ
+                .accessibilityIdentifier("Presets")
                 .hapticFeedback(feedbackStyle: .light) { _ in
                     navigateTo(.presets)
                 }
@@ -107,6 +108,7 @@ struct Home: View {
                     Text("Settings")
                     .foregroundColor(.white)
                 } //: VSTQ
+                .accessibilityIdentifier("SettingsMenu")
                 .hapticFeedback(feedbackStyle: .light) { _ in
                     navigateTo(.settings)
                 }
@@ -114,16 +116,6 @@ struct Home: View {
             .frame(height:160)
             .padding(.horizontal, 24)
             .padding(.vertical, 12)
-
-            Button {
-                Task {
-                    PlaneFactory.planeViewModel = PlaneViewModel()
-                    await PlaneFactory.elementsAPI.fetch()
-                }
-            } label: {
-                Text("Hot Reload")
-            }
-
         }
         .overlay(
             RoundedRectangle(cornerRadius: 24)

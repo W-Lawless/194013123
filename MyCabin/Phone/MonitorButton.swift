@@ -23,6 +23,7 @@ struct MonitorButton: View {
             .frame(maxWidth: 48, maxHeight: 48)
             .scaleEffect(selected ? 1.4 : 1)
             .hapticFeedback(feedbackStyle: .light, cb: mediaViewModel.monitorIconCallback, data: monitor)
+            .accessibilityIdentifier("\(monitor.id)")
 //            .longPressHaptic {
 //                print("ay")
 //                pressed.toggle()

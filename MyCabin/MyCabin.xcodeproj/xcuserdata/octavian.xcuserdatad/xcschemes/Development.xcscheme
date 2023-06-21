@@ -38,6 +38,17 @@
                ReferencedContainer = "container:MyCabin.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2BBBB10B2A4369B20045DF40"
+               BuildableName = "MyCabinUITests.xctest"
+               BlueprintName = "MyCabinUITests"
+               ReferencedContainer = "container:MyCabin.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

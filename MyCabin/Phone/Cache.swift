@@ -9,30 +9,78 @@ import Foundation
 
 struct FileCacheUtil {
     
+    typealias ElementsDictionary = [String:[Codable]]
     private static let encoder = JSONEncoder()
     private static let decoder = JSONDecoder()
     
-    static func cacheToFile<T: Codable>(data: T) {
+    static func cacheToFile<T: Codable>(data: T, mockPath: String? = nil) {
         do {
-            let cacheDirectory = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("\(T.self).store")
-            let dataEncoded = try encoder.encode(data)
-            try dataEncoded.write(to: cacheDirectory)
+            if let mockPath {
+                let dataEncoded = try encoder.encode(data)
+                let mockFilePath = "\(mockPath)/\(T.self).store"
+                try FileManager.default.createDirectory(atPath: mockPath, withIntermediateDirectories: false)
+                FileManager.default.createFile(atPath: mockFilePath, contents: dataEncoded)
+            } else {
+                let cacheDirectory = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("\(T.self).store")
+                let dataEncoded = try encoder.encode(data)
+                try dataEncoded.write(to: cacheDirectory)
+            }
             print("Data cached successfully")
         } catch {
             print(error)
         }
     }
     
-    static func retrieveCachedFile<T: Codable>(dataModel: T.Type) throws -> T {
+    static func retrieveCachedFile<T: Codable>(dataModel: T.Type, mockPath: String? = nil) throws -> T {
         print("retrieving cache", T.self)
         do {
-            let cacheDirectory = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("\(T.self).store")
-            let fileData = try Data(contentsOf: cacheDirectory)
-            let out = try decoder.decode(T.self, from: fileData)
-            return out
+            if let mockPath {
+                let mockFilePath = URL(fileURLWithPath: "\(mockPath)/\(T.self).store")
+                let fileData = try Data(contentsOf: mockFilePath)
+                let out = try decoder.decode(T.self, from: fileData)
+                return out
+            } else {
+                let cacheDirectory = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("\(T.self).store")
+                let fileData = try Data(contentsOf: cacheDirectory)
+                let out = try decoder.decode(T.self, from: fileData)
+                return out
+            }
         } catch {
+            print(error)
             throw error
         }
+    }
+    
+    static func updateAndCachePlaneElements(elements: ElementsDictionary, mockPath: String? = nil) {
+        
+        let allLights = elements["allLights"]! as! [LightModel]
+        let allSeats = elements["allSeats"]! as! [SeatModel]
+        let allMonitors = elements["allMonitors"] as! [MonitorModel]
+        let allSpeakers = elements["allSpeakers"] as! [SpeakerModel]
+        let allSources = elements["allSources"] as! [SourceModel]
+        let allShades = elements["allShades"] as! [ShadeModel]
+        let tempCtrlrs = elements["allTempCtrlrs"] as! [ClimateControllerModel]
+        
+        StateFactory.lightsViewModel.updateValues(allLights)
+        cacheToFile(data: allLights, mockPath: mockPath)
+        
+        StateFactory.seatsViewModel.updateValues(allSeats)
+        cacheToFile(data: allSeats, mockPath: mockPath)
+
+        StateFactory.monitorsViewModel.updateValues(allMonitors)
+        cacheToFile(data: allMonitors, mockPath: mockPath)
+
+        StateFactory.speakersViewModel.updateValues(allSpeakers)
+        cacheToFile(data: allSpeakers, mockPath: mockPath)
+
+        StateFactory.sourcesViewModel.updateValues(allSources)
+        cacheToFile(data: allSources, mockPath: mockPath)
+
+        StateFactory.shadesViewModel.updateValues(allShades)
+        cacheToFile(data: allShades, mockPath: mockPath)
+        
+        StateFactory.climateViewModel.updateValues(tempCtrlrs)
+        cacheToFile(data: tempCtrlrs, mockPath: mockPath)
     }
     
     @MainActor static func loadAllCaches() throws {

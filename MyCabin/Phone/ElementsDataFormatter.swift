@@ -9,112 +9,42 @@ import Foundation
 
 let PARENT_IDENTIFIER = "AIRPLANE_AREA"
 
-class ElementsAPI {
+class ElementDataFormatter {
     
-    let planeViewModel: PlaneViewModel
-    private let endpoint = Endpoint<EndpointFormats.Get, AreaModel>(path: .elements).makeRequest(with: nil)!
-    private let ep = Endpoint<EndpointFormats.Get, ElementsEnum>(path: .elements)
+    typealias ElementsDictionary = [String:[Codable]]
     
-    private var elements: [String:[Codable]] = [
-         "allAreas": [AreaModel](),
-         "allLights": [LightModel](),
-         "allSeats": [SeatModel](),
-         "allMonitors": [MonitorModel](),
-         "allSpeakers": [SpeakerModel](),
-         "allSources": [SourceModel](),
-         "allShades": [ShadeModel](),
-         "allTables": [TableModel](),
-         "allDivans": [DivanModel](),
-         "allTempCtrlrs": [ClimateControllerModel]()
-    ]
-    
-    init(viewModel: PlaneViewModel) {
-        self.planeViewModel = viewModel
-    }
-    
-    func fetch() async {
-        
-            
-            StateFactory.apiClient.fetch(for: ep) { [weak self] res in
-                let result = ElementsRoot(results: res, length: res.count)
-                
-//                let (planeData,_) = try await Session.shared.data(for: endpoint)
-//                let result = try JSONDecoder().decode(ElementsRoot.self, from: planeData)
-                // INITIAL GROUPING OF ALL ELEMENTS
-                //
-                self?.mapResultsToInstanceDictionary(result: result)
-
-                self?.mapLightsToSeat()
-
-                let sourceTypes = self?.findUniqueSourceTypes()
-
-                self?.updateAndCacheValues()
-
-                PlaneFactory.planeMap = PlaneMap(
-                    mapAreas: [PlaneArea](),
-                    apiAreas: self?.elements["allAreas"] as! [AreaModel],
-                    allLights: self?.elements["allLights"] as! [LightModel],
-                    allSeats: self?.elements["allSeats"] as! [SeatModel],
-                    allMonitors: self?.elements["allMonitors"] as! [MonitorModel],
-                    allSpeakers: self?.elements["allSpeakers"] as! [SpeakerModel],
-                    allSources: self?.elements["allSources"] as! [SourceModel],
-                    sourceTypes: sourceTypes ?? Set<SourceType>(),
-                    allShades: self?.elements["allShades"] as! [ShadeModel],
-                    allTables: self?.elements["allTables"] as! [TableModel],
-                    allDivans: self?.elements["allDivans"] as! [DivanModel],
-                    allTempCtrlrs: self?.elements["allTempCtrlrs"] as! [ClimateControllerModel]
-                )
-                
-
-                // CATEGORIZE ELEMENTS BY AREA
-
-                self?.mapElementsToPlaneAreas(allAreas: self?.elements["allAreas"] as! [AreaModel], plane: &PlaneFactory.planeMap)
-
-                self?.filterPlaneAreas(&PlaneFactory.planeMap)
-
-                Task {
-                    await PlaneFactory.planeViewModel.updateValues(PlaneFactory.planeMap)
-                }
-
-                FileCacheUtil.cacheToFile(data: PlaneFactory.planeMap)
-                
-            }
-            
-            
-     
-    } //: FETCH
-
-    private func mapResultsToInstanceDictionary(result: ElementsRoot) {
+    func mapResultsToDictionary(result: ElementsRoot) -> ElementsDictionary {
+        var dictionary = buildEmptyDictionary()
         for element in result.results {
             switch element {
             case .light(let light):
-                elements["allLights"]?.append(light)
+                dictionary["allLights"]?.append(light)
             case .seat(let seat):
-                elements["allSeats"]?.append(seat)
+                dictionary["allSeats"]?.append(seat)
             case .speaker(let speaker):
-                elements["allSpeakers"]?.append(speaker)
+                dictionary["allSpeakers"]?.append(speaker)
             case .monitor(let monitor):
-                elements["allMonitors"]?.append(monitor)
+                dictionary["allMonitors"]?.append(monitor)
             case .shade(let shade):
-                elements["allShades"]?.append(shade)
+                dictionary["allShades"]?.append(shade)
             case .source(let source):
-                elements["allSources"]?.append(source)
+                dictionary["allSources"]?.append(source)
             case .area(let area):
-                elements["allAreas"]?.append(area)
+                dictionary["allAreas"]?.append(area)
             case .table(let table):
-                elements["allTables"]?.append(table)
+                dictionary["allTables"]?.append(table)
             case .divan(let divan):
-                elements["allDivans"]?.append(divan)
+                dictionary["allDivans"]?.append(divan)
             case .tempctrlr(let tempctrlr):
-                elements["allTempCtrlrs"]?.append(tempctrlr)
+                dictionary["allTempCtrlrs"]?.append(tempctrlr)
             case .ignore:
                 ()
             }
         } //: FOR LOOP
-        
+        return dictionary
     }
     
-    private func mapLightsToSeat() {
+    func mapLightsToSeat(elements: inout ElementsDictionary) {
         let seats = elements["allSeats"]! as! [SeatModel]
         let lights = elements["allLights"]! as! [LightModel]
         let tables = elements["allTables"]! as! [TableModel]
@@ -154,7 +84,7 @@ class ElementsAPI {
         elements["allSeats"] = transformedSeats
     }
     
-    private func findUniqueSourceTypes()  -> Set<SourceType> {
+    func findUniqueSourceTypes(elements: inout ElementsDictionary)  -> Set<SourceType> {
         var sourceTypes = Set<SourceType>()
         
         let allSources = elements["allSources"] as! [SourceModel]
@@ -209,39 +139,9 @@ class ElementsAPI {
         return sourceTypes
     }
     
-    private func updateAndCacheValues() {
-        
-        let allLights = elements["allLights"]! as! [LightModel]
-        let allSeats = elements["allSeats"]! as! [SeatModel]
-        let allMonitors = elements["allMonitors"] as! [MonitorModel]
-        let allSpeakers = elements["allSpeakers"] as! [SpeakerModel]
-        let allSources = elements["allSources"] as! [SourceModel]
-        let allShades = elements["allShades"] as! [ShadeModel]
-        let tempCtrlrs = elements["allTempCtrlrs"] as! [ClimateControllerModel]
-        
-        StateFactory.lightsViewModel.updateValues(allLights)
-        FileCacheUtil.cacheToFile(data: allLights)
-        
-        StateFactory.seatsViewModel.updateValues(allSeats)
-        FileCacheUtil.cacheToFile(data: allSeats)
 
-        StateFactory.monitorsViewModel.updateValues(allMonitors)
-        FileCacheUtil.cacheToFile(data: allMonitors)
-
-        StateFactory.speakersViewModel.updateValues(allSpeakers)
-        FileCacheUtil.cacheToFile(data: allSpeakers)
-
-        StateFactory.sourcesViewModel.updateValues(allSources)
-        FileCacheUtil.cacheToFile(data: allSources)
-
-        StateFactory.shadesViewModel.updateValues(allShades)
-        FileCacheUtil.cacheToFile(data: allShades)
-        
-        StateFactory.climateViewModel.updateValues(tempCtrlrs)
-        FileCacheUtil.cacheToFile(data: tempCtrlrs)
-    }
     
-    private func mapElementsToPlaneAreas(allAreas: [AreaModel], plane: inout PlaneMap) {
+    func mapElementsToPlaneAreas(allAreas: [AreaModel], plane: inout PlaneMap, elements: inout ElementsDictionary) {
         allAreas.forEach { area in
                         
             let allLights =  elements["allLights"] as! [LightModel]
@@ -342,26 +242,17 @@ class ElementsAPI {
         }
     }
     
-    private func filterPlaneAreas(_ plane: inout PlaneMap) {
-        
-        let parentID = try! NSRegularExpression(pattern: "AIRPLANE_AREA", options: .caseInsensitive)
+    func filterPlaneAreas(_ plane: inout PlaneMap) {
 
         plane.mapAreas = plane.mapAreas.filter { area in
-            
-            let range = NSRange(location: 0, length: area.id.utf16.count)
-            let checkParentArea = parentID.firstMatch(in: area.id, range: range)
-            
-            if(checkParentArea != nil) {
-                return true
-            } else {
                 let eval = regexFilter(area.id) && area.seats?.isEmpty != true
                 return eval
-            }
+                // TRUE = INCLUDE
         }
 
     }
     
-    private func regexFilter(_ target: String) -> Bool {
+    func regexFilter(_ target: String) -> Bool {
         
         let range = NSRange(location: 0, length: target.utf16.count)
         let lav = try! NSRegularExpression(pattern: "lav", options: .caseInsensitive)
@@ -376,12 +267,44 @@ class ElementsAPI {
         let lookUpFour = vestibule.firstMatch(in: target, range: range)
         
         if(lookUpOne == nil && lookUpTwo == nil && lookUpThree == nil && lookUpFour == nil) {
-            //Target string passed all checks
+            //Target string passed all checks, include it in filter results
             return true
         }
         
-        //Target string failed
+        //Target string failed a regex, exclude it from filter results
         return false
     }
     
+    
+    func buildEmptyDictionary() -> ElementsDictionary {
+        return [
+            "allAreas": [AreaModel](),
+            "allLights": [LightModel](),
+            "allSeats": [SeatModel](),
+            "allMonitors": [MonitorModel](),
+            "allSpeakers": [SpeakerModel](),
+            "allSources": [SourceModel](),
+            "allShades": [ShadeModel](),
+            "allTables": [TableModel](),
+            "allDivans": [DivanModel](),
+            "allTempCtrlrs": [ClimateControllerModel]()
+       ]
+    }
+    
+    func buildPlaneMap(dictionary: ElementsDictionary, sourceSet: Set<SourceType>) -> PlaneMap {
+        return PlaneMap (
+            mapAreas: [PlaneArea](),
+            apiAreas: dictionary["allAreas"] as! [AreaModel],
+            allLights: dictionary["allLights"] as! [LightModel],
+            allSeats: dictionary["allSeats"] as! [SeatModel],
+            allMonitors: dictionary["allMonitors"] as! [MonitorModel],
+            allSpeakers: dictionary["allSpeakers"] as! [SpeakerModel],
+            allSources: dictionary["allSources"] as! [SourceModel],
+            sourceTypes: sourceSet,
+            allShades: dictionary["allShades"] as! [ShadeModel],
+            allTables: dictionary["allTables"] as! [TableModel],
+            allDivans: dictionary["allDivans"] as! [DivanModel],
+            allTempCtrlrs: dictionary["allTempCtrlrs"] as! [ClimateControllerModel]
+        )
+    }
 }

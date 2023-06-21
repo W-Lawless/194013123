@@ -33,15 +33,16 @@ class AppCoordinator {
         self.tabs = tabs
     }
     
+    func configureViews() {
+        rootNavView.navigationBar.isHidden = true
+        rootNavView.setViewControllers([tabs.navigationController,loadingView], animated: true)
+        self.window.rootViewController = rootNavView
+    }
+    
     func start(
         publisher: CabinPublisher = PlaneFactory.cabinConnectionPublisher,
         sinkCompletion endSink: @escaping SinkCompletion,
         sinkValue onSink: @escaping SinkValue) {
-        
-        rootNavView.navigationBar.isHidden = true
-        rootNavView.setViewControllers([tabs.navigationController,loadingView], animated: true)
-        self.window.rootViewController = rootNavView
-        
         publisher.sink(receiveCompletion: endSink, receiveValue: onSink).store(in: &PlaneFactory.cancelTokens)
     }
     

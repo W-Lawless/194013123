@@ -14,12 +14,16 @@ struct PlaneSchematic: View {
     @State var options: PlaneSchematicDisplayMode
     @State var selectedZone: PlaneArea? = nil
     
+    let emptyArea = PlaneArea(id: "", rect: RenderCoordinates(x: 0, y: 0, w: 0, h: 0, r: 0))
+    
     var body: some View {
         
         GeometryReader { geometry in
             
             ZStack(alignment: .custom) { // ZSTQ
-                    
+                   
+                //MARK: - Option Panel Overlays
+                
                 if (options == .showLights || options == .lightZones) {
                     VStack(spacing: 32) {
                         
@@ -48,12 +52,10 @@ struct PlaneSchematic: View {
                     VStack(alignment: .center, spacing: 0) { //VSTQ B
                         
                         if(options == .tempZones) {
-                            //TODO: - Force unwrap fix
-                            AreaSubView(selectedZone: $selectedZone, area: viewModel.plane.parentArea!, options: options)
+                            AreaSubView(selectedZone: $selectedZone, area: viewModel.plane.parentArea ?? emptyArea, options: options)
                                 .environmentObject(coordinatesModel)
 
                         } else {
-                            
                             
                             ForEach(viewModel.plane.mapAreas) { area in
                                 
@@ -83,6 +85,9 @@ struct PlaneSchematic: View {
             .padding(.horizontal, 12)
             
         } //: GEO
+        .onChange(of: options, perform: { newValue in
+            print(">>>",newValue)
+        })
         .passGeometry { geo in
             
             coordinatesModel.containerViewHeight = geo.size.height
@@ -119,6 +124,7 @@ struct ZoneButton: View {
                     RoundedRectangle(cornerRadius: 6).stroke(.blue, lineWidth: 1).frame(width: 48, height: 48)
                 )
         }
+        .accessibilityIdentifier("\(targetOption)")
     }
 }
 

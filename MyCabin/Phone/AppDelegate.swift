@@ -5,10 +5,7 @@
 //  Created by Lawless on 11/23/22.
 //
 
-//import Foundation
 import UIKit
-import Combine
-//import SwiftUI
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
     
@@ -16,7 +13,9 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 //        if let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.path {
 //            print("Documents Directory: \(documentsPath)")
 //        }
-        
+        if CommandLine.arguments.contains("--uitesting") {
+              
+          }
         return true
     }
     
@@ -44,13 +43,20 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
         let appCoordinator = AppCoordinator(window: window)
         ViewFactory.AppCoordinator = appCoordinator
         
-        appCoordinator.start { _ in } sinkValue: { pulse in
-            DispatchQueue.main.async { [weak self] in
-                if(pulse){
-                    self?.loadAllCabinElementsOnFirstConnection(pulse)
-                    appCoordinator.goTo(.cabinFound)
-                } else {
-                    appCoordinator.goTo(.loadCabin)
+        if CommandLine.arguments.contains("--uitesting") {
+            appCoordinator.configureViews()
+            try? FileCacheUtil.loadAllCaches()
+            appCoordinator.goTo(.cabinFound)
+        } else {
+            appCoordinator.configureViews()
+            appCoordinator.start { _ in } sinkValue: { cabinHeartBeat in
+                DispatchQueue.main.async { [weak self] in
+                    if(cabinHeartBeat){
+                        self?.loadAllCabinElementsOnFirstConnection(cabinHeartBeat)
+                        appCoordinator.goTo(.cabinFound)
+                    } else {
+                        appCoordinator.goTo(.loadCabin)
+                    }
                 }
             }
         }

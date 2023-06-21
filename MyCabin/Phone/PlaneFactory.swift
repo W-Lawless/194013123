@@ -10,6 +10,8 @@ import Combine
 
 
 final class PlaneFactory {
+    
+    typealias ElementsDictionary = [String:[Codable]]
     //: State Handling
     ///Cabin Connection
     static let cabinConnectionPublisher = CurrentValueSubject<Bool, Never>(false)
@@ -24,8 +26,8 @@ final class PlaneFactory {
     ///Plane Map
     static var planeViewModel = PlaneViewModel()
     
-    static var elementsAPI = ElementsAPI(viewModel: planeViewModel)
-    
+    static let elementsEndpoint = Endpoint<EndpointFormats.Get, ElementsEnum>(path: .elements)
+    static var elementFormatter = ElementDataFormatter()
     static var planeMap  = PlaneMap()
     
     //Menus
@@ -36,14 +38,38 @@ final class PlaneFactory {
     }
     
     static func connectToPlane() {
+        
         Task(priority: .high) {
-//            do {
-//                try await FileCacheUtil.loadAllCaches()
-//            } catch {
-//                print("Cache failed to load")
-                await PlaneFactory.elementsAPI.fetch()
-//            }
-//            StateFactory.apiClient.fetchClimateControllers()
+            do {
+                try await FileCacheUtil.loadAllCaches()
+            } catch {
+                
+                StateFactory.apiClient.fetch(for: elementsEndpoint) { res in
+                    
+                    let result = ElementsRoot(results: res, length: res.count)
+                    
+                    var dictionary = elementFormatter.mapResultsToDictionary(result: result)
+
+                    elementFormatter.mapLightsToSeat(elements: &dictionary)
+
+                    let sourceTypes = elementFormatter.findUniqueSourceTypes(elements: &dictionary)
+
+                    planeMap = elementFormatter.buildPlaneMap(dictionary: dictionary, sourceSet: sourceTypes)
+
+                    elementFormatter.mapElementsToPlaneAreas(allAreas: dictionary["allAreas"] as! [AreaModel], plane: &planeMap, elements: &dictionary)
+
+                    elementFormatter.filterPlaneAreas(&planeMap)
+
+                    Task {
+                        await planeViewModel.updateValues(planeMap)
+                    }
+
+                    FileCacheUtil.updateAndCachePlaneElements(elements: dictionary)
+                    FileCacheUtil.cacheToFile(data: planeMap)
+                }
+                //TODO: - Climate View troubleshoot
+                StateFactory.apiClient.fetchClimateControllers()
+            }
         }
     }
     
@@ -60,16 +86,6 @@ final class PlaneFactory {
         default:
             break
         } //: SWITCH
-    }
-    
-    static func buildPlaneSchematicPreview(options: PlaneSchematicDisplayMode) -> PlaneSchematic {
-        let file = Bundle.main.url(forResource: "planeMap", withExtension: "json")
-        let jsonData = try? Data(contentsOf: file!)
-        let planeMap = try? JSONDecoder().decode(PlaneMap.self, from: jsonData!)
-        let vm = PlaneViewModel()
-        vm.plane = planeMap!
-        let view = PlaneSchematic(viewModel: vm, options: options)
-        return view
     }
     
 }

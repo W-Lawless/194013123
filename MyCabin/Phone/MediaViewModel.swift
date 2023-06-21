@@ -47,6 +47,7 @@ class MediaViewModel: ObservableObject {
             speakerIconCallback = { _ in }
             
         case .selectSpeakerOutput:
+            print("selectin speaker")
             planeDisplayOptions = .showSpeakers
             mediaDisplayOptions = .sound
             
