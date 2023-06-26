@@ -58,11 +58,3 @@ class FlightViewModel: ObservableObject, GCMSViewModel {
     }
 
 }
-
-//MARK: - Preview
-
-struct FlightInfo_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewFactory.buildFlightInfo()
-    }
-}

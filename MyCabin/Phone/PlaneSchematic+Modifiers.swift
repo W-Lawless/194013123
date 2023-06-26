@@ -8,23 +8,22 @@
 import SwiftUI
 
 struct PlaceIcon: ViewModifier {
+    @EnvironmentObject var planeViewModel: PlaneViewModel
     var rect: RenderCoordinates
-    var subviewWidthUnit: CGFloat
-    var subviewHeightUnit: CGFloat
     
     func body(content: Content) -> some View {
         content
             .rotationEffect(Angle(degrees: rect.r))
-            .position(x: ((subviewWidthUnit * rect.x) + ((subviewWidthUnit * rect.w)/2)),
-                      y: ((subviewHeightUnit * rect.y) + ((subviewHeightUnit * rect.h)/2)) )
+            .position(x: ((planeViewModel.subviewWidthUnit * rect.x) + ((planeViewModel.subviewWidthUnit * rect.w)/2)),
+                      y: ((planeViewModel.subviewHeightUnit * rect.y) + ((planeViewModel.subviewHeightUnit * rect.h)/2)) )
         /// Position Center according to API coordinate data & add half the width/height to the coordinate to align image by top left corner
     }
 }
 
 struct TappableZone: ViewModifier {
     
+    @EnvironmentObject var planeViewModel: PlaneViewModel
     var area: PlaneArea
-    @Binding var selectedZone: PlaneArea?
     
     func body(content: Content) -> some View {
         content
@@ -36,7 +35,7 @@ struct TappableZone: ViewModifier {
             .padding(6)
             .hapticFeedback(feedbackStyle: .rigid) { _ in
                 print("tapped", area.id)
-                selectedZone = area
+                planeViewModel.selectedZone = area
             }
     }
 }

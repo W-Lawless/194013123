@@ -72,11 +72,3 @@ class WeatherViewModel: ObservableObject, GCMSViewModel {
         }
     }
 }
-
-//MARK: - Preview
-
-struct Weather_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewFactory.buildWeatherView()
-    }
-}

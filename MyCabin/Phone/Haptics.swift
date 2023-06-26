@@ -10,19 +10,19 @@ import SwiftUI
 struct HapticFeedback: ViewModifier {
     private let generator: UIImpactFeedbackGenerator
     private let cb: (_: Codable?) -> ()
-    private let data: Codable?
+    private let args: Codable?
     
-    init(feedbackStyle: UIImpactFeedbackGenerator.FeedbackStyle, cb: @escaping (_: Codable?) -> (), data: Codable?) {
+    init(feedbackStyle: UIImpactFeedbackGenerator.FeedbackStyle, cb: @escaping (_: Codable?) -> (), args: Codable?) {
         generator = UIImpactFeedbackGenerator(style: feedbackStyle)
         self.cb = cb
-        self.data = data
+        self.args = args
     }
     
     func body(content: Content) -> some View {
         content
             .onTapGesture {
                 generator.impactOccurred()
-                self.cb(self.data)
+                self.cb(self.args)
             }
 
     }
@@ -47,8 +47,8 @@ struct LongPressHaptic: ViewModifier {
 }
 
 extension View {
-    func hapticFeedback(feedbackStyle: UIImpactFeedbackGenerator.FeedbackStyle = .heavy, cb: @escaping (_:  Codable?) -> (), data: Codable? = nil) -> some View {
-        self.modifier(HapticFeedback(feedbackStyle: feedbackStyle, cb: cb, data: data))
+    func hapticFeedback(feedbackStyle: UIImpactFeedbackGenerator.FeedbackStyle = .heavy, cb: @escaping (_:  Codable?) -> (), cbArgs: Codable? = nil) -> some View {
+        self.modifier(HapticFeedback(feedbackStyle: feedbackStyle, cb: cb, args: cbArgs))
     }
 }
 

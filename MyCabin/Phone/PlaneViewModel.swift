@@ -8,20 +8,42 @@
 import Foundation
 
 class PlaneViewModel: ObservableObject {
-    @Published var plane: PlaneMap = PlaneMap()
     
-    @MainActor func updateValues(_ data: PlaneMap) {
-        print("Updating plane data")
-        self.plane = data
-//        print(data.mapAreas[0].lights)
-    }
-}
-
-class PlaneViewCoordinates: ObservableObject {
+    @Published var plane: PlaneMap = PlaneMap()
+    @Published var planeDisplayOptions: PlaneSchematicDisplayMode = .onlySeats
+    @Published var selectedZone: PlaneArea? = nil
+    
     @Published var containerViewHeight: CGFloat = 0
     @Published var containerViewWidth: CGFloat = 0
     @Published var containerWidthUnit: CGFloat = 0
     @Published var containerHeightUnit: CGFloat = 0
+    
+    @Published var subviewHeightUnit: CGFloat = 0
+    @Published var subviewWidthUnit: CGFloat = 0
+    
+    @MainActor func updateValues(_ data: PlaneMap) {
+        self.plane = data
+    }
+    
+    @MainActor func updateDisplayMode(_ mode: PlaneSchematicDisplayMode) {
+        self.planeDisplayOptions = mode
+    }
+    
+    func seatIconCallback(displayOptions: PlaneSchematicDisplayMode, seatID: String) {
+        switch displayOptions {
+        case .onlySeats:
+            UserDefaults.standard.set(seatID, forKey: "CurrentSeat")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                NavigationFactory.homeMenuCoordinator.dismiss()
+            }
+        case .showLights:
+            UserDefaults.standard.set(seatID, forKey: "CurrentSeat")
+            StateFactory.lightsViewModel.showSubView(forID: seatID)
+        default:
+            break
+        }
+    }
+    
 }
 
 enum PlaneSchematicDisplayMode: String {
@@ -43,8 +65,8 @@ struct Plane: Identifiable {
 }
 
 struct PlaneArea: Identifiable, Codable {
-    var id: String
-    var rect: RenderCoordinates
+    var id: String = ""
+    var rect: RenderCoordinates = RenderCoordinates()
     var lights: [LightModel]? = nil
     var seats: [SeatModel]? = nil
     var shades: [ShadeModel]? = nil
@@ -58,7 +80,7 @@ struct PlaneArea: Identifiable, Codable {
 }
 
 struct PlaneMap: Codable {
-    var parentArea: PlaneArea? = nil
+    var parentArea: PlaneArea = PlaneArea()
     var mapAreas: [PlaneArea] = [PlaneArea]()   /// Full-bodied area struct with populated fields for lights, seats, etc 
     var apiAreas: [AreaModel] = [AreaModel]()  /// Areas as described by API results
     var allLights: [LightModel] = [LightModel]()

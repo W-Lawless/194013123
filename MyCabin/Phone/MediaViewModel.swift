@@ -34,6 +34,9 @@ class MediaViewModel: ObservableObject {
     @Published var contextualSubView: AnyView = AnyView(Text(""))
     @Published var contextualToolTip: String = ""
     
+    
+    //TODO: - Refactor this nightmare
+    //  IF ACTIVEMEDIA.COUNT > 0 , SET STATE
     func changeViewIntent (_ intent: MediaViewIntent) {
         switch (intent) {
         case .selectMonitorOutput:
@@ -45,9 +48,9 @@ class MediaViewModel: ObservableObject {
             
             monitorIconCallback = selectMonitor
             speakerIconCallback = { _ in }
-            
+                        
         case .selectSpeakerOutput:
-            print("selectin speaker")
+            
             planeDisplayOptions = .showSpeakers
             mediaDisplayOptions = .sound
             
@@ -55,6 +58,7 @@ class MediaViewModel: ObservableObject {
             
             speakerIconCallback = assignSourceToSpeaker
             monitorIconCallback = { _ in }
+            
             
         case .viewNowPlaying:
             planeDisplayOptions = .showNowPlaying
@@ -72,40 +76,39 @@ class MediaViewModel: ObservableObject {
             activeMonitorIconCallback = { [weak self] data in
                 self?.loadActiveMediaControls(data: data, device: .monitor)
             }
+            
         }
         
     }
 
     func selectMonitor(_ monitor: Codable?) {
-        if let typecast = monitor as? MonitorModel {
-            let selected = StateFactory.mediaViewModel.selectedMonitor
-            if (selected == typecast.id) {
-                //Clear
-                updateSelectedMonitor(id: "")
-                displaySubView = false
-                displayToolTip = true
-            } else {
-                updateSelectedMonitor(id: typecast.id)
-                displaySubView = true
-                displayToolTip = false
-            }
+        let monitor = monitor as! MonitorModel
+        let selected = StateFactory.mediaViewModel.selectedMonitor
+        if (selected == monitor.id) {
+            updateSelectedMonitor(id: "")
+            displaySubView = false
+            displayToolTip = true
+        } else {
+            updateSelectedMonitor(id: monitor.id)
+            displaySubView = true
+            displayToolTip = false
         }
     }
     
     func selectSpeaker(_ speaker: Codable?) {
-        if let typecast = speaker as? SpeakerModel {
-            let selected = StateFactory.mediaViewModel.selectedSpeaker
-            if (selected == typecast.id) {
-                //Clear
-                updateSelectedSpeaker(id: "")
-                displaySubView = false
-                displayToolTip = true
-            } else {
-                updateSelectedSpeaker(id: typecast.id)
-                displaySubView = true
-                displayToolTip = false
-            }
+        let speaker = speaker as! SpeakerModel
+        let selected = StateFactory.mediaViewModel.selectedSpeaker
+        if (selected == speaker.id) {
+            //Clear
+            updateSelectedSpeaker(id: "")
+            displaySubView = false
+            displayToolTip = true
+        } else {
+            updateSelectedSpeaker(id: speaker.id)
+            displaySubView = true
+            displayToolTip = false
         }
+        
     }
     
     func assignSourceToMonitor(source: SourceModel) {
@@ -123,32 +126,30 @@ class MediaViewModel: ObservableObject {
     
     
     func assignSourceToSpeaker(_ speaker: Codable?) {
-        let typecast = speaker as? SpeakerModel
-        if let typecast {
+        let speaker = speaker as! SpeakerModel
+        updateSelectedSpeaker(id: speaker.id)
+        
+        print("activeMedia", activeMediaID!)
+        if let activeMediaID {
+            var mediaGroup = activeMedia[activeMediaID]
+            mediaGroup?.speaker = speaker
+            activeMedia[activeMediaID] = mediaGroup
+            let monitor = activeMedia[activeMediaID]?.monitor
+            let source = activeMedia[activeMediaID]?.source
             
-            updateSelectedSpeaker(id: typecast.id)
+            StateFactory.apiClient.toggleMonitor(monitor!, cmd: true)
+            StateFactory.apiClient.assignSourceToMonitor(monitor!, source: source!)
             
-            print("activeMedia", activeMediaID!)
-            if let activeMediaID {
-                var mediaGroup = activeMedia[activeMediaID]
-                mediaGroup?.speaker = typecast
-                activeMedia[activeMediaID] = mediaGroup
-                let monitor = activeMedia[activeMediaID]?.monitor
-                let source = activeMedia[activeMediaID]?.source
-                
-                StateFactory.apiClient.toggleMonitor(monitor!, cmd: true)
-                StateFactory.apiClient.assignSourceToMonitor(monitor!, source: source!)
-                
-                
-                StateFactory.apiClient.assignSourceToSpeaker(typecast, source: source!)
-                StateFactory.apiClient.setVolume(typecast, volume: 50)
-            }
             
-            print("hmm")
-            clearSelection()
-            changeViewIntent(.viewNowPlaying)
-
+            StateFactory.apiClient.assignSourceToSpeaker(speaker, source: source!)
+            StateFactory.apiClient.setVolume(speaker, volume: 50)
         }
+        
+        print("hmm")
+        clearSelection()
+        changeViewIntent(.viewNowPlaying)
+
+        
     }
     
     func loadActiveMediaControls(data: Codable?, device: MediaDevice){
@@ -205,6 +206,15 @@ class MediaViewModel: ObservableObject {
     }
     
     
+}
+
+
+//TODO: +
+
+enum MediaDisplayOptions {
+    case all
+    case outputs
+    case sound
 }
 
 enum MediaDevice: String {

@@ -35,15 +35,18 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
         
     var appCoordinator: AppCoordinator?
     var hasAlreadyConnectedToCabin: Bool = false
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
+        
+        //MARK: -
 
         let appCoordinator = AppCoordinator(window: window)
         ViewFactory.AppCoordinator = appCoordinator
         
         if CommandLine.arguments.contains("--uitesting") {
+            print("UI TESTS LAUNCHED")
             appCoordinator.configureViews()
             try? FileCacheUtil.loadAllCaches()
             appCoordinator.goTo(.cabinFound)

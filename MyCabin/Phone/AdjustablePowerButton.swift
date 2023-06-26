@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//TODO: - Remove Static References
 struct AdjustablePowerButton: View {
     
     @ObservedObject var viewModel = StateFactory.lightsViewModel

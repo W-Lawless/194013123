@@ -10,12 +10,14 @@ import SwiftUI
 struct Shades: View {
     
     @ObservedObject var viewModel: ShadesViewModel
+    let planeViewBuilder: (PlaneSchematicDisplayMode) -> PlaneSchematic
+
     
     var body: some View {
         
         ZStack(alignment: .bottom) {
             
-            PlaneFactory.buildPlaneSchematic(options: .showShades)
+            planeViewBuilder(.showShades)
             
             VStack(alignment: .center) {
                 if(viewModel.showPanel) {
@@ -101,11 +103,6 @@ class ShadesViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
     
 }
 
-struct Shades_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewFactory.buildShadesView()
-    }
-}
 
 enum ShadeGroup: String {
     case left = "LEFT"

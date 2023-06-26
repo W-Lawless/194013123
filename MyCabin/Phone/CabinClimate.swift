@@ -10,13 +10,15 @@ import SwiftUI
 struct CabinClimate: View {
     
     @ObservedObject var viewModel: CabinClimateViewModel
+    let planeViewBuilder: (PlaneSchematicDisplayMode) -> PlaneSchematic
+    
+    
+    var body: some View {
+        planeViewBuilder(.tempZones)
+    }
     
     func currentTemp(for c: ClimateControllerModel) -> String {
         return "\(c.state.setPoint + c.state.temp)"
-    }
-    
-    var body: some View {
-        PlaneFactory.buildPlaneSchematic(options: .tempZones)
     }
 }
 
@@ -35,9 +37,3 @@ class CabinClimateViewModel: ObservableObject, GCMSViewModel, ParentViewModel {
     }
 
 }
-
-//struct CabinClimate_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CabinClimate()
-//    }
-//}

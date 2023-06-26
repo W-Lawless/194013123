@@ -8,13 +8,17 @@
 import Foundation
 import SwiftUI
 
+
 final class ViewFactory {
     
     // Coordinators
     static var AppCoordinator: AppCoordinator? = nil
     
+    static let homeMenu = UIHostingController(rootView: buildMenuOverview())
     static let volumeMenu = UIHostingController(rootView: buildVolumeView())
     static let loadingView = UIHostingController(rootView: buildLoadingScreen())
+    static let mediaTab = UIHostingController(rootView: buildMediaTab())
+    static let flightTab = UIHostingController(rootView: buildFlightInfo())
     
     static func buildLoadingScreen() -> Loading {
         let view = Loading()
@@ -27,32 +31,35 @@ final class ViewFactory {
     }
     
     static func buildLightsMenu() -> Lights {
-        let view = Lights()
+        let view = Lights(planeViewBuilder: PlaneFactory.buildPlaneSchematic, bottomPanelBuilder: buildLightsBottomPanel)
+        return view
+    }
+    
+    static func buildLightsBottomPanel() -> LightsBottomPanel {
+        let view = LightsBottomPanel(viewModel: StateFactory.lightsViewModel)
         return view
     }
             
     static func buildSeatSelection() -> SeatSelection {
-        let view = SeatSelection(viewModel: StateFactory.seatsViewModel)
+        let view = SeatSelection(viewModel: StateFactory.seatsViewModel, planeViewBuilder: PlaneFactory.buildPlaneSchematic)
         return view
     }
     
     static func buildShadesView() -> Shades {
-        let view = Shades(viewModel: StateFactory.shadesViewModel)
+        let view = Shades(viewModel: StateFactory.shadesViewModel, planeViewBuilder: PlaneFactory.buildPlaneSchematic)
         return view
     }
     
     
     static func buildCabinClimateView() -> CabinClimate {
-        let view = CabinClimate(viewModel: StateFactory.climateViewModel)
+        let view = CabinClimate(viewModel: StateFactory.climateViewModel, planeViewBuilder: PlaneFactory.buildPlaneSchematic)
         return view
     }
     
-    // Media
-    //TODO: - Normalize
-    static func buildMediaTab() -> UIHostingController<MediaTab> {
-        let view = MediaTab(mediaViewModel: StateFactory.mediaViewModel)
-        let hostedView = UIHostingController(rootView: view)
-        return hostedView
+
+    static func buildMediaTab() -> MediaTab {
+        let view = MediaTab(mediaViewModel: StateFactory.mediaViewModel, planeViewBuilder: PlaneFactory.buildPlaneSchematic)
+        return view
     }
     
     static func buildActiveMediaControlPanel(for item: ActiveMedia, on device: MediaDevice) -> ActiveMediaControlPanel {

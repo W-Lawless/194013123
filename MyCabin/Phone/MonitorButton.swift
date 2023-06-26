@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+//TODO: Remove static references
+
 struct MonitorButton: View {
     
     @ObservedObject var mediaViewModel = StateFactory.mediaViewModel
@@ -22,7 +24,7 @@ struct MonitorButton: View {
             .scaledToFit()
             .frame(maxWidth: 48, maxHeight: 48)
             .scaleEffect(selected ? 1.4 : 1)
-            .hapticFeedback(feedbackStyle: .light, cb: mediaViewModel.monitorIconCallback, data: monitor)
+            .hapticFeedback(feedbackStyle: .light, cb: mediaViewModel.monitorIconCallback, cbArgs: monitor)
             .accessibilityIdentifier("\(monitor.id)")
 //            .longPressHaptic {
 //                print("ay")

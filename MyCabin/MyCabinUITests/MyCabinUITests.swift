@@ -18,7 +18,7 @@ final class MyCabinUITests: XCTestCase {
         app.launchArguments.append("--uitesting")
     }
 
-    func test_OpenSeatsMenu() {
+    func test_SeatsMenu_Opens() {
         app.launch()
         app.images["LightsMenu"].tap()
         
@@ -61,7 +61,7 @@ final class MyCabinUITests: XCTestCase {
         XCTAssertTrue(divanIcon)
     }
     
-    func test_OpenShadesMenu() {
+    func test_ShadesMenu_Opens() {
         app.launch()
         app.images["ShadesMenu"].tap()
         
@@ -100,7 +100,7 @@ final class MyCabinUITests: XCTestCase {
         XCTAssertTrue(shadeIcon12)
     }
     
-    func test_OpenLightsMenu() {
+    func test_LightsMenu_Opens() {
         app.launch()
         app.images["LightsMenu"].tap()
         
@@ -111,7 +111,7 @@ final class MyCabinUITests: XCTestCase {
         XCTAssertTrue(lightOptionBtn2)
     }
     
-    func test_OpenLightZonesMenu() {
+    func test_LightsMenu_ShowsZones() {
         app.launch()
         app.images["LightsMenu"].tap()
         
@@ -126,7 +126,20 @@ final class MyCabinUITests: XCTestCase {
         XCTAssertTrue(zone3)
     }
     
-    func test_LightsMenuOpensBottomPanel() {
+    func test_LightsMenu_ZoneTappableArea() {
+//        app.launch()
+//        app.images["LightsMenu"].tap()
+//        app.buttons["lightZones"].tap()
+//        let zone1 = app.otherElements["tappable_FWD-GRP"]
+//        zone1.tap()
+//        let active_zone1 = app.otherElements["tapped_FWD-GRP"]
+        
+        //TODO: - Placeholder 
+        //XCTAssertTrue(active_zone1.exists)
+        
+    }
+    
+    func test_LightsMenu_OpensBottomPanel() {
         app.launch()
         app.images["LightsMenu"].tap()
         app.images["L-SEAT-1-1"].tap()
@@ -136,7 +149,7 @@ final class MyCabinUITests: XCTestCase {
         XCTAssertTrue(lightCtrlPanel)
     }
     
-    func test_OpenMediaTab()  {
+    func test_Media_OpenTab()  {
         app.launch()
         app.tabBars.buttons["MediaTab"].tap()
         
@@ -147,6 +160,10 @@ final class MyCabinUITests: XCTestCase {
         let monitorBtn5 = app.images["AFT-BLKHD-MON"].exists
         let monitorBtn6 = app.images["CREDENZA-MON"].exists
         
+        XCTAssertTrue(app.buttons["display"].exists)
+        XCTAssertTrue(app.buttons["speaker.wave.3"].exists)
+        XCTAssertTrue(app.buttons["headphones"].exists)
+        
         XCTAssertTrue(monitorBtn1)
         XCTAssertTrue(monitorBtn2)
         XCTAssertTrue(monitorBtn3)
@@ -155,7 +172,7 @@ final class MyCabinUITests: XCTestCase {
         XCTAssertTrue(monitorBtn6)
     }
     
-    func test_MediaTabMonitorButtonOpensSourcePanel() {
+    func test_Media_AssignSource_MonitorButtonDisplaysSourcePanel() {
         app.launch()
         app.tabBars.buttons["MediaTab"].tap()
         app.images["AFT-BLKHD-4K-MON"].tap()
@@ -163,7 +180,27 @@ final class MyCabinUITests: XCTestCase {
         XCTAssertTrue(sourceSelectionPanel)
     }
     
-    func test_MediaSourceButtonPresentsSourceListView() {
+    func test_Media_AssignSource_MonitorButtonHidesSourcePanel() {
+        app.launch()
+        app.tabBars.buttons["MediaTab"].tap()
+        app.images["AFT-BLKHD-4K-MON"].tap()
+        app.images["AFT-BLKHD-4K-MON"].tap()
+        let sourceSelectionPanel = app.buttons["CAMERA"].exists
+        XCTAssertFalse(sourceSelectionPanel)
+    }
+    
+    func test_Media_AssignSource_MonitorButtonSwapsPanelContext() {
+        app.launch()
+        app.tabBars.buttons["MediaTab"].tap()
+        let mon1 = app.images["AFT-BLKHD-4K-MON"]
+        mon1.tap()
+        
+        app.images["R-SEAT-2-MON-1"].tap()
+        let sourceSelectionPanel = app.buttons["CAMERA"].exists
+        XCTAssertTrue(sourceSelectionPanel)
+    }
+    
+    func test_Media_AssignSource_PanelButtonDisplaysListView() {
         app.launch()
         app.tabBars.buttons["MediaTab"].tap()
         app.images["AFT-BLKHD-4K-MON"].tap()
@@ -173,14 +210,139 @@ final class MyCabinUITests: XCTestCase {
         XCTAssertTrue(sourceListView)
     }
     
-    func test_SourceListButtonPushesSpeakerView() {
+    func test_Media_AssignSource_ListButtonDisplaysSpeakerView() {
         app.launch()
         app.tabBars.buttons["MediaTab"].tap()
         app.images["AFT-BLKHD-4K-MON"].tap()
         app.buttons["CAMERA"].tap()
-        let sourceListView = app.buttons["CAMERA_FWD"].exists
+        app.buttons["CAMERA_FWD"].tap()
         
-        XCTAssertTrue(sourceListView)
+        let speakerIcon1 = app.images["L-SEAT-1-SPK-1"].exists
+        let speakerIcon2 = app.images["R-SEAT-1-SPK-1"].exists
+        let speakerIcon3 = app.images["R-SEAT-2-SPK-1"].exists
+        let speakerIcon4 = app.images["R-SEAT-2-SPK-1"].exists
+        let speakerIcon5 = app.images["L-SEAT-2-SPK-1"].exists
+        let speakerIcon6 = app.images["MID-SPK"].exists
+        let speakerIcon7 = app.images["SEAT-1-SPK-3"].exists
+        let speakerIcon8 = app.images["DIVAN-FWD-SPK-3"].exists
+        let speakerIcon9 = app.images["DIVAN-AFT-SPK-3"].exists
+        let speakerIcon10 = app.images["AFT-SPK"].exists
+        let speakerIcon11 = app.images["SEAT-2-SPK-3"].exists
+        
+        XCTAssertTrue(speakerIcon1)
+        XCTAssertTrue(speakerIcon2)
+        XCTAssertTrue(speakerIcon3)
+        XCTAssertTrue(speakerIcon4)
+        XCTAssertTrue(speakerIcon5)
+        XCTAssertTrue(speakerIcon6)
+        XCTAssertTrue(speakerIcon7)
+        XCTAssertTrue(speakerIcon8)
+        XCTAssertTrue(speakerIcon9)
+        XCTAssertTrue(speakerIcon10)
+        XCTAssertTrue(speakerIcon11)
     }
+    
+    func test_Media_AssignSource_SpeakerIconForwardsToNowPlaying() {
+        app.launch()
+        app.tabBars.buttons["MediaTab"].tap()
+        app.images["AFT-BLKHD-4K-MON"].tap()
+        app.buttons["CAMERA"].tap()
+        app.buttons["CAMERA_FWD"].tap()
+        app.images["L-SEAT-1-SPK-1"].tap()
+        
+        let activeMediaIcon1 = app.images["active_AFT-BLKHD-4K-MON"].exists
+        let activeMediaIcon2 = app.images["active_L-SEAT-1-SPK-1"].exists
+        
+        XCTAssertTrue(activeMediaIcon1)
+        XCTAssertTrue(activeMediaIcon2)
+        
+        XCTAssertTrue(app.buttons["display"].exists)
+        XCTAssertTrue(app.buttons["play.display"].exists)
+        XCTAssertTrue(app.buttons["speaker.wave.3"].exists)
+        XCTAssertTrue(app.buttons["headphones"].exists)
+        XCTAssertTrue(app.buttons["appletvremote.gen2"].exists)
+    }
+    
+    func test_Media_TabRetainsStateAcrossContexts() {
+        
+        app.launch()
+        app.tabBars.buttons["MediaTab"].tap()
+        app.images["AFT-BLKHD-4K-MON"].tap()
+        app.buttons["CAMERA"].tap()
+        app.buttons["CAMERA_FWD"].tap()
+        app.images["L-SEAT-1-SPK-1"].tap()
+        app.tabBars.buttons["HomeTab"].tap()
+        app.tabBars.buttons["MediaTab"].tap()
+        
+        let activeMediaIcon1 = app.images["active_AFT-BLKHD-4K-MON"].exists
+        let activeMediaIcon2 = app.images["active_L-SEAT-1-SPK-1"].exists
+        
+        XCTAssertTrue(activeMediaIcon1)
+        XCTAssertTrue(activeMediaIcon2)
+        
+        XCTAssertTrue(app.buttons["display"].exists)
+        XCTAssertTrue(app.buttons["play.display"].exists)
+        XCTAssertTrue(app.buttons["speaker.wave.3"].exists)
+        XCTAssertTrue(app.buttons["headphones"].exists)
+        XCTAssertTrue(app.buttons["appletvremote.gen2"].exists)
+    }
+    
+    func test_ActiveMedia_MonitorIconDisplaysMonitorControlPanel() {
+        app.launch()
+        app.tabBars.buttons["MediaTab"].tap()
+        app.images["AFT-BLKHD-4K-MON"].tap()
+        app.buttons["CAMERA"].tap()
+        app.buttons["CAMERA_FWD"].tap()
+        app.images["L-SEAT-1-SPK-1"].tap()
+        app.images["active_AFT-BLKHD-4K-MON"].tap()
+        
+        let activeMediaDeviceIcon = app.images["active_device_monitor"].exists
+        let activeMediaSourceIcon = app.images["source_icon_CAMERA_FWD"].exists
+        
+        XCTAssertTrue(activeMediaDeviceIcon)
+        XCTAssertTrue(activeMediaSourceIcon)
+    }
+    
+    func test_ActiveMedia_SpeakerIconDisplaysSpeakerControlPanel() {
+        app.launch()
+        app.tabBars.buttons["MediaTab"].tap()
+        app.images["AFT-BLKHD-4K-MON"].tap()
+        app.buttons["CAMERA"].tap()
+        app.buttons["CAMERA_FWD"].tap()
+        app.images["L-SEAT-1-SPK-1"].tap()
+        app.images["active_L-SEAT-1-SPK-1"].tap()
+        
+        let activeMediaDeviceIcon = app.images["active_device_speaker"].exists
+        let activeMediaSourceIcon = app.images["source_icon_CAMERA_FWD"].exists
+        
+        XCTAssertTrue(activeMediaDeviceIcon)
+        XCTAssertTrue(activeMediaSourceIcon)
+    }
+    
+    func test_ActiveMedia_ShowMonitorsOptionDisplaysMonitors() {
+        app.launch()
+        app.tabBars.buttons["MediaTab"].tap()
+        app.images["AFT-BLKHD-4K-MON"].tap()
+        app.buttons["CAMERA"].tap()
+        app.buttons["CAMERA_FWD"].tap()
+        app.images["L-SEAT-1-SPK-1"].tap()
+        app.buttons["display"].tap()
+        
+        XCTAssertTrue(app.images["AFT-BLKHD-4K-MON"].exists)
+    }
+    
+    func test_ActiveMedia_ShowNowPlayingOptionDisplaysNowPlaying() {
+        app.launch()
+        app.tabBars.buttons["MediaTab"].tap()
+        app.images["AFT-BLKHD-4K-MON"].tap()
+        app.buttons["CAMERA"].tap()
+        app.buttons["CAMERA_FWD"].tap()
+        app.images["L-SEAT-1-SPK-1"].tap()
+        app.buttons["display"].tap()
+        app.buttons["play.display"].tap()
+        
+        XCTAssertTrue(app.images["active_AFT-BLKHD-4K-MON"].exists)
+    }
+    
     
 }

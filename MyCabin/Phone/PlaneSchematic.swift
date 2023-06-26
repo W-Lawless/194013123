@@ -9,68 +9,24 @@ import SwiftUI
 
 struct PlaneSchematic: View {
     
-    @StateObject var coordinatesModel = PlaneViewCoordinates()
-    @StateObject var viewModel: PlaneViewModel
-    @State var options: PlaneSchematicDisplayMode
-    @State var selectedZone: PlaneArea? = nil
-    
-    let emptyArea = PlaneArea(id: "", rect: RenderCoordinates(x: 0, y: 0, w: 0, h: 0, r: 0))
-    
+    @ObservedObject var planeViewModel: PlaneViewModel
+        
     var body: some View {
         
         GeometryReader { geometry in
             
             ZStack(alignment: .custom) { // ZSTQ
-                   
-                //MARK: - Option Panel Overlays
                 
-                if (options == .showLights || options == .lightZones) {
-                    VStack(spacing: 32) {
-                        
-                        ZoneButton(displayOptions: $options, targetOption: .lightZones, imageName: "square.on.square")
-                        ZoneButton(displayOptions: $options, targetOption: .showLights, imageName: "lightbulb.fill")
-                        
-                    }
-                    .padding(.horizontal, 18)
-                }
-                
-                if(options == .showShades) {
-                    VStack(spacing: 32) {
-                        ShadeGroupButton(group: .all, text: "All")
-                        ShadeGroupButton(group: .left, text: "Left")
-                        ShadeGroupButton(group: .right, text: "Right")
-                    }
-                    .padding(.horizontal, 18)
-                }
+                PlaneDisplayOptionBar()
+                    .environmentObject(planeViewModel)
                 
                 HStack(alignment: .center) { // HSTQ
-                    
+
                     Image("plane_left_side")
                         .resizable()
                         .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
-                    
-                    VStack(alignment: .center, spacing: 0) { //VSTQ B
-                        
-                        if(options == .tempZones) {
-                            AreaSubView(selectedZone: $selectedZone, area: viewModel.plane.parentArea ?? emptyArea, options: options)
-                                .environmentObject(coordinatesModel)
-
-                        } else {
-                            
-                            ForEach(viewModel.plane.mapAreas) { area in
-                                
-                                AreaSubView(selectedZone: $selectedZone, area: area, options: options)
-                                    .if(options == .lightZones) {
-                                        $0.modifier(TappableZone(area: area, selectedZone: $selectedZone))
-                                    }
-                                    .environmentObject(coordinatesModel)
-                                
-                            } //: FOREACH
-                            
-                        } //: CONDITIONAL
-                        
-                    } //: VSTQ B
-                    
+                    PlaneFuselage()
+                        .environmentObject(planeViewModel)
                     Image("plane_right_side")
                         .resizable()
                         .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
@@ -81,88 +37,14 @@ struct PlaneSchematic: View {
                 .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                 
             } //: ZSTQ
-//            .border(.red, width: 1)
             .padding(.horizontal, 12)
             
         } //: GEO
-        .onChange(of: options, perform: { newValue in
-            print(">>>",newValue)
-        })
         .passGeometry { geo in
-            
-            coordinatesModel.containerViewHeight = geo.size.height
-            coordinatesModel.containerViewWidth = geo.size.width
-            
-            if let parentArea = viewModel.plane.parentArea {
-
-                coordinatesModel.containerWidthUnit = (geo.size.width * 0.39) / parentArea.rect.w //self.widthUnit
-                coordinatesModel.containerHeightUnit = (geo.size.height) / parentArea.rect.h //self.heightUnit
-
-            }
+            planeViewModel.containerWidthUnit = (geo.size.width * 0.39) / planeViewModel.plane.parentArea.rect.w
+            planeViewModel.containerHeightUnit = (geo.size.height) / planeViewModel.plane.parentArea.rect.h
         } //: PASS GEO UTIL
-
+        
     } //: BODY
     
 }
-
-struct ZoneButton: View {
-  
-    @Binding var displayOptions: PlaneSchematicDisplayMode
-    let targetOption: PlaneSchematicDisplayMode
-    let imageName: String
-    
-    var body: some View {
-        Button {
-            displayOptions = targetOption
-        } label: {
-            Image(systemName: imageName)
-                .resizable()
-                .scaledToFit()
-                .foregroundColor(.white)
-                .frame(width: 24, height: 24)
-                .overlay (
-                    RoundedRectangle(cornerRadius: 6).stroke(.blue, lineWidth: 1).frame(width: 48, height: 48)
-                )
-        }
-        .accessibilityIdentifier("\(targetOption)")
-    }
-}
-
-
-struct ShadeGroupButton: View {
-  
-    @ObservedObject var viewModel = StateFactory.shadesViewModel
-    let group: ShadeGroup
-    let text: String
-    
-    var body: some View {
-        Button {
-            if(!viewModel.showPanel) {
-                viewModel.showPanel = true
-            }
-//            viewModel.groupSelection = group
-            viewModel.selectAll(in: group)
-        } label: {
-            VStack {
-                Image("ico_advanced_off")
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor(.white)
-                    .frame(width: 24, height: 24)
-                    .overlay (
-                        RoundedRectangle(cornerRadius: 6).stroke(.blue, lineWidth: 1).frame(width: 48, height: 48)
-                    )
-                Text(text)
-            }
-        }
-    }
-}
-
-//MARK: - Preview
-
-struct PlaneSchematic_Previews: PreviewProvider {
-    static var previews: some View {
-        PlaneFactory.buildPlaneSchematicPreview(options: .onlySeats)
-    }
-}
-

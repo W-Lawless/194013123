@@ -35,8 +35,7 @@ final class Navigation_Tests: XCTestCase {
         let loadingView = sut.loadingView
         
         sut.start(publisher: mockPublisher) { _ in } sinkValue: { _ in }
-        
-        XCTAssertTrue(rootNavView.visibleViewController === loadingView)
+        XCTAssertEqual(rootNavView.visibleViewController,loadingView)
     }
     
     func test_AppCoordinator_DisplaysHomeMenuOnCabinConnection() {
@@ -115,6 +114,7 @@ final class Navigation_Tests: XCTestCase {
     
     private func makeSUT() -> AppCoordinator {
         let sut = ViewFactory.AppCoordinator
+        sut?.configureViews()
         return sut!
     }
 

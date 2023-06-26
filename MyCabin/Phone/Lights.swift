@@ -10,36 +10,30 @@ import SwiftUI
 struct Lights: View {
     
     @ObservedObject var viewModel = StateFactory.lightsViewModel
+    let planeViewBuilder: (PlaneSchematicDisplayMode) -> PlaneSchematic
+    let bottomPanelBuilder: () -> LightsBottomPanel
     
     var body: some View {
         ZStack(alignment: .bottom) {
             
-            PlaneFactory.buildPlaneSchematic(options: .showLights)
+            planeViewBuilder(.showLights)
             
             VStack(alignment: .center) {
                 if(viewModel.showPanel) {
-                    LightsBottomPanel()
+                    bottomPanelBuilder()
                 }
             }
             .edgesIgnoringSafeArea(.bottom)
             .padding(.bottom, 18)
             .background(Color.black)
             .frame(height:108, alignment: .top)
-            .onAppear {
-//                let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: .lights)
-//                let sut = StateFactory.apiClient
-//                sut.fetch(for: endpoint) { result in
-//                    StateFactory.lightsViewModel.updateValues(result)
-//                }
-            }
-            
+
             
         } //: ZSTQ
         .edgesIgnoringSafeArea(.bottom)
     }
-    
+        
     //MARK: - Gestures
-    
 //    var dragGesture: some Gesture {
 //        DragGesture()
 //            .onEnded { value in
@@ -63,13 +57,25 @@ class LightsViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
     @Published var activeSeat: String = ""
     @Published var lightList: [LightModel]?
     @Published var showPanel: Bool = false
-    var rtAPI = [RealtimeAPI<F ,R>]()
     @Published var rtResponses = [String:R]()
+    @Published var lightsForSeat = [LightModel]()
+    
+    var rtAPI = [RealtimeAPI<F ,R>]()
     
     func updateValues(_ data: [Codable]) {
         let typecast = data as? [LightModel]
         if let typecast {
             self.lightList = typecast
+        }
+    }
+    
+    func getLightsForSeat() {
+        let target = PlaneFactory.planeViewModel.plane.allSeats.filter { seat in
+            return seat.id == activeSeat
+        }
+
+        if let seatLights = target.first?.lights {
+            lightsForSeat = seatLights
         }
     }
     
@@ -82,18 +88,18 @@ class LightsViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
         }
     }
     
+    
     func pollLightsForState(lights: [LightModel]) {
-
         lights.forEach { light in
             let ep = Endpoint<F, R>(path: .lights, stateUpdate: light.id)
-            let pointer =  RealtimeAPI(endpoint: ep, callback: { [weak self] returnValue in
-                print("Polling light:",returnValue)
-                self?.rtResponses[light.id] = returnValue[0]
+            let pointer =  RealtimeAPI(endpoint: ep, callback: { [weak self] apiResult in
+                if let state = apiResult.first {
+                    self?.rtResponses[light.id] = state
+                }
             })
             rtAPI.append(pointer)
             pointer.monitor.startMonitor(interval: 1.0, callback: pointer.monitorCallback)
         }
-        
     }
     
     func killMonitor() {
@@ -103,14 +109,6 @@ class LightsViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
         })
     }
     
+    
+    
 }
-
-//MARK: - Preview
-
-struct Lights_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewFactory.buildLightsMenu()
-    }
-}
-
-

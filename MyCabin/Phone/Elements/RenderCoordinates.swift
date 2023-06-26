@@ -8,9 +8,9 @@
 import Foundation
 
 struct RenderCoordinates: Codable {
-    var x: CGFloat
-    var y: CGFloat
-    var w: CGFloat
-    var h: CGFloat
-    var r: Double
+    var x: CGFloat = 0.0
+    var y: CGFloat = 0.0
+    var w: CGFloat = 0.0
+    var h: CGFloat = 0.0
+    var r: Double = 0.0
 }

@@ -7,14 +7,13 @@
 
 import SwiftUI
 
+//TODO: Remove static references
+
 struct ActiveMediaButton: View {
     
     let area: PlaneArea
     @ObservedObject var mediaViewModel = StateFactory.mediaViewModel
     let activeMedia: ActiveMedia
-
-    @Binding var subviewHeightUnit: CGFloat
-    @Binding var subviewWidthUnit: CGFloat
     
     var body: some View {
         if let speaker = activeMedia.speaker {
@@ -23,8 +22,9 @@ struct ActiveMediaButton: View {
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: 48, maxHeight: 48)
-                    .hapticFeedback(feedbackStyle: .light, cb: mediaViewModel.activeSpeakerIconCallback, data: activeMedia)
-                    .modifier(PlaceIcon(rect: speaker.rect, subviewWidthUnit: subviewWidthUnit, subviewHeightUnit: subviewHeightUnit))
+                    .accessibilityIdentifier("active_\(speaker.id)")
+                    .hapticFeedback(feedbackStyle: .light, cb: mediaViewModel.activeSpeakerIconCallback, cbArgs: activeMedia)
+                    .modifier(PlaceIcon(rect: speaker.rect))
             }
         }
 
@@ -34,8 +34,9 @@ struct ActiveMediaButton: View {
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: 48, maxHeight: 48)
-                    .hapticFeedback(feedbackStyle: .light, cb: mediaViewModel.activeMonitorIconCallback, data: activeMedia)
-                    .modifier(PlaceIcon(rect: monitor.rect, subviewWidthUnit: subviewWidthUnit, subviewHeightUnit: subviewHeightUnit))
+                    .accessibilityIdentifier("active_\(monitor.id)")
+                    .hapticFeedback(feedbackStyle: .light, cb: mediaViewModel.activeMonitorIconCallback, cbArgs: activeMedia)
+                    .modifier(PlaceIcon(rect: monitor.rect))
             }
         }
     }

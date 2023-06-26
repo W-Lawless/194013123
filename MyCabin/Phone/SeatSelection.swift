@@ -10,14 +10,11 @@ import SwiftUI
 struct SeatSelection: View {
     
     @ObservedObject var viewModel: SeatsViewModel
+    let planeViewBuilder: (PlaneSchematicDisplayMode) -> PlaneSchematic
+
     
     var body: some View {
-        PlaneFactory.buildPlaneSchematic(options: .onlySeats)
-//        List(viewModel.seatList ?? [SeatModel]()) { seat in
-//            Button(seat.id) {
-//                api.call(seat: seat)
-//            }
-//        } //: LIST
+        planeViewBuilder(.onlySeats)
     }
 }
 
@@ -36,12 +33,4 @@ class SeatsViewModel: ParentViewModel, ObservableObject, GCMSViewModel {
         
     }
     
-}
-
-//MARK: - Preview
-
-struct Seats_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewFactory.buildSeatSelection()
-    }
 }

@@ -21,9 +21,9 @@ final class HeartbeatMonitor_Tests: XCTestCase {
             monitor.stopMonitor()
         }
 
-        monitor.startMonitor(interval: 1, callback: testTimer)
+        monitor.startMonitor(interval: 0.1, callback: testTimer)
 
-        waitForExpectations(timeout: 1.1, handler: nil)
+        waitForExpectations(timeout: 1, handler: nil)
     }
     
     func test_MonitorStops() throws {
@@ -36,9 +36,9 @@ final class HeartbeatMonitor_Tests: XCTestCase {
             XCTAssertFalse(monitor.isTimerValid)
         }
 
-        monitor.startMonitor(interval: 1, callback: testTimer)
+        monitor.startMonitor(interval: 0.1, callback: testTimer)
 
-        waitForExpectations(timeout: 1.1, handler: nil)
+        waitForExpectations(timeout: 1, handler: nil)
     }
 
 }

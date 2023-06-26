@@ -9,9 +9,7 @@ import SwiftUI
 
 struct LightsBottomPanel: View {
     
-    @ObservedObject var viewModel: LightsViewModel = StateFactory.lightsViewModel
-    @State var lights = [LightModel]()
-    var rtApi: RealtimeAPI<EndpointFormats.Get, LightModel.state>? = nil
+    @ObservedObject var viewModel: LightsViewModel
     
     var body: some View {
         
@@ -20,11 +18,11 @@ struct LightsBottomPanel: View {
             ScrollView(.horizontal, showsIndicators: false) {
             
                 HStack(alignment: .center, spacing: 12) {
-                    ForEach(Array(lights.enumerated()), id: \.element) { index, element in
-                        if(lights[index].brightness.dimmable){
-                            AdjustablePowerButton(light: lights[index])
+                    ForEach(Array(viewModel.lightsForSeat.enumerated()), id: \.element) { index, element in
+                        if(viewModel.lightsForSeat[index].brightness.dimmable){
+                            AdjustablePowerButton(light: viewModel.lightsForSeat[index])
                         } else {
-                            LightPowerButton(light: lights[index])
+                            LightPowerButton(light: viewModel.lightsForSeat[index])
                         }
                     }
                     .padding(.horizontal, 24)
@@ -37,36 +35,20 @@ struct LightsBottomPanel: View {
             
         }  //: GEO
         .onAppear {
-            getLightsForSeat()
-            print("APPEAR!")
-            viewModel.pollLightsForState(lights: lights)
+//            print("APPEAR!")
+            viewModel.getLightsForSeat()
+            viewModel.pollLightsForState(lights: viewModel.lightsForSeat)
         }
         .onChange(of: viewModel.activeSeat) { newValue in
             viewModel.killMonitor()
-            getLightsForSeat()
-            viewModel.pollLightsForState(lights: lights)
+            viewModel.getLightsForSeat()
+            viewModel.pollLightsForState(lights: viewModel.lightsForSeat)
         }
         .onDisappear {
-            print("GOODBYE")
+//            print("GOODBYE")
             viewModel.killMonitor()
-            print(viewModel.rtResponses)
+//            print(viewModel.rtResponses)
         }
     }
-    
-    private func getLightsForSeat() {
-        let target = PlaneFactory.planeViewModel.plane.allSeats.filter { seat in
-            return seat.id == viewModel.activeSeat
-        }
 
-        if let seatLights = target.first?.lights {
-            self.lights = seatLights
-        }
-    }
 }
-
-//struct LightsBottomPanel_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LightsBottomPanel()
-//    }
-//}
-

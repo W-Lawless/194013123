@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//TODO: - remove static reference
 struct MediaSourceSelection: View {
     
     var body: some View {

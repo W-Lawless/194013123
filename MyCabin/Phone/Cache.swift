@@ -51,6 +51,7 @@ struct FileCacheUtil {
         }
     }
     
+    //TODO: Consider removing entirely
     static func updateAndCachePlaneElements(elements: ElementsDictionary, mockPath: String? = nil) {
         
         let allLights = elements["allLights"]! as! [LightModel]

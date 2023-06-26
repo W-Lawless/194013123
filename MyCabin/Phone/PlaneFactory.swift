@@ -8,7 +8,6 @@
 import UIKit
 import Combine
 
-
 final class PlaneFactory {
     
     typealias ElementsDictionary = [String:[Codable]]
@@ -24,16 +23,17 @@ final class PlaneFactory {
     ///Access Levels
     static let accessAPI = AccessAPI()
     ///Plane Map
-    static var planeViewModel = PlaneViewModel()
     
     static let elementsEndpoint = Endpoint<EndpointFormats.Get, ElementsEnum>(path: .elements)
     static var elementFormatter = ElementDataFormatter()
     static var planeMap  = PlaneMap()
     
-    //Menus
+    //Plane Schematic View
+    static var planeViewModel = PlaneViewModel()
     
     static func buildPlaneSchematic(options: PlaneSchematicDisplayMode) -> PlaneSchematic {
-        let view = PlaneSchematic(viewModel: planeViewModel, options: options)
+        let view = PlaneSchematic(planeViewModel: planeViewModel)
+        Task { await planeViewModel.updateDisplayMode(options) }
         return view
     }
     
@@ -71,21 +71,6 @@ final class PlaneFactory {
                 StateFactory.apiClient.fetchClimateControllers()
             }
         }
-    }
-    
-    static func seatIconCallback(displayOptions: PlaneSchematicDisplayMode, seatID: String) {
-        switch displayOptions {
-        case .onlySeats:
-            UserDefaults.standard.set(seatID, forKey: "CurrentSeat")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                NavigationFactory.homeMenuCoordinator.dismiss()
-            }
-        case .showLights:
-            UserDefaults.standard.set(seatID, forKey: "CurrentSeat")
-            StateFactory.lightsViewModel.showSubView(forID: seatID)
-        default:
-            break
-        } //: SWITCH
     }
     
 }

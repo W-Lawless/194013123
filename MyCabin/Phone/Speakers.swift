@@ -48,8 +48,3 @@ class SpeakersViewModel: ObservableObject, GCMSViewModel {
     
 }
 
-struct Speakers_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewFactory.buildSpeakersView()
-    }
-}

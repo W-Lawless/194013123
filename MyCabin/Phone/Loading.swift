@@ -32,10 +32,3 @@ struct Loading: View {
         .frame(height: 180)
     }
 }
-
-
-struct Loading_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewFactory.buildLoadingScreen()
-    }
-}

@@ -9,14 +9,15 @@ import SwiftUI
 
 struct DivanSeat: View {
     
+    @EnvironmentObject var planeViewModel: PlaneViewModel
+
+    let id: String
     @State var selected: Bool = false
 
-    let options: PlaneSchematicDisplayMode
-    let id: String
     
     var body: some View {
         Group {
-            if(options == .onlySeats || options == .showLights) {
+            if(planeViewModel.planeDisplayOptions == .onlySeats || planeViewModel.planeDisplayOptions == .showLights) {
                 HStack(alignment: .bottom, spacing: 0) {
                     
                     DivanIcon(selected: $selected, id: id, assetName: selected ? "divan_selected_left" : "divan_selectable_left", width: 41)

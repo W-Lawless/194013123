@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//TODO: - Remove Entire view ? 
 struct Monitors: View {
     
     @StateObject var viewModel: MonitorsViewModel
@@ -52,11 +53,4 @@ class MonitorsViewModel: ObservableObject, GCMSViewModel {
         playingMonitors[monitor.id] = source.id
     }
     
-}
-
-
-struct Monitors_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewFactory.buildMonitorsView()
-    }
 }

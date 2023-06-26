@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//TODO: - Remove Static References
 struct Sources: View {
     
     @ObservedObject var viewModel: SourcesViewModel
@@ -104,10 +105,4 @@ class SourcesViewModel: ObservableObject, GCMSViewModel {
         self.sourceTypes.sort { $0.name < $1.name }
     }
     
-}
-
-struct Sources_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewFactory.buildSourcesView()
-    }
 }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//TODO: Remove static references
 struct ShadeControl: View {
     
     @ObservedObject var viewModel: ShadesViewModel = StateFactory.shadesViewModel

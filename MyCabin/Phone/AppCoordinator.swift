@@ -26,11 +26,12 @@ class AppCoordinator {
     init(window: UIWindow,
          cabin: CabinAPIAdaptor = PlaneFactory.cabinAPI,
          loadingView: CabinLoadingView = ViewFactory.loadingView,
-         tabs: RootTabCoordinator = NavigationFactory.buildRootTabNavigation()) {
+         tabCoordinator: RootTabCoordinator = NavigationFactory.buildRootTabNavigation()
+    ) {
         self.window = window
         self.cabin = cabin
         self.loadingView = loadingView
-        self.tabs = tabs
+        self.tabs = tabCoordinator
     }
     
     func configureViews() {
@@ -43,7 +44,7 @@ class AppCoordinator {
         publisher: CabinPublisher = PlaneFactory.cabinConnectionPublisher,
         sinkCompletion endSink: @escaping SinkCompletion,
         sinkValue onSink: @escaping SinkValue) {
-        publisher.sink(receiveCompletion: endSink, receiveValue: onSink).store(in: &PlaneFactory.cancelTokens)
+            publisher.sink(receiveCompletion: endSink, receiveValue: onSink).store(in: &PlaneFactory.cancelTokens)
     }
     
     func goTo(_ route: AppRouter) {
@@ -62,8 +63,8 @@ class AppCoordinator {
     }
     
     func startMonitor(atInterval interval: Double){
-        PlaneFactory.cabinAPI.monitor.stopMonitor()
-        PlaneFactory.cabinAPI.monitor.startMonitor(interval: interval, callback: PlaneFactory.cabinAPI.monitorCallback)
+        cabin.monitor.stopMonitor()
+        cabin.monitor.startMonitor(interval: interval, callback: cabin.monitorCallback)
     }
  
     enum AppRouter {
@@ -71,125 +72,3 @@ class AppCoordinator {
         case loadCabin
     }
 }
-
-
-//MARK: - TabView
-
-class RootTabCoordinator: NSObject  {
-    
-    var navigationController = UITabBarController()
-    var subviews: [UIViewController]!
-    
-    func goTo(_ route: MenuRouter) {
-        let destination = route.view()
-        destination.modalTransitionStyle = .coverVertical
-        navigationController.present(destination, animated: true)
-    }
-    
-    func goToWithParams(_ view: some View) {
-        let destination = UIHostingController(rootView: view)
-        destination.modalTransitionStyle = .coverVertical
-        navigationController.present(destination, animated: true)
-    }
-    
-    func start(subviews: [UIViewController]) {
-        self.subviews = subviews
-        navigationController.delegate = self
-        navigationController.setViewControllers(subviews, animated: true)
-    }
-    
-    func goToTab(_ index: Int) {
-        let views = navigationController.viewControllers
-        let view = views?[index]
-        guard view != nil else { return }
-        navigationController.show(view!, sender: self)
-    }
-    
-    open func dismiss() {
-        navigationController.dismiss(animated: true) { [weak self] in
-            /// because there is a leak in UIHostingControllers that prevents from deallocation
-            self?.navigationController.viewControllers = self?.subviews ?? [UIViewController()]
-        }
-    }
-    
-}
-
-//MARK: - Home Tab
-
-class HomeMenuCoordinator: NSObject, Coordinator {
-    
-    var navigationController: UINavigationController
-    var subviews: [UIViewController]!
-    
-    override init() {
-        self.navigationController = UINavigationController()
-        navigationController.navigationBar.tintColor = .white
-        super.init()
-        
-        navigationController.delegate = self
-    }
-
-    func start(subviews: [UIViewController]) {
-        self.subviews = subviews
-        navigationController.setViewControllers(subviews, animated: false)
-    }
-    
-    func goTo(_ route: MenuRouter) {
-        let destination = route.view()
-        destination.modalTransitionStyle = .crossDissolve
-        navigationController.present(destination, animated: true)
-    }
-    
-    func pushView(_ route: MenuRouter) {
-        let destination = route.view()
-        destination.modalPresentationStyle = .popover
-        navigationController.pushViewController(destination, animated: true)
-    }
-    
-    func popView() {
-        navigationController.popViewController(animated: true)
-    }
-    
-    func popToRoot() {
-        navigationController.popToRootViewController(animated: true)
-    }
-    
-    open func dismiss() {
-        navigationController.dismiss(animated: true) { [weak self] in
-            /// because there is a leak in UIHostingControllers that prevents from deallocation
-            self?.navigationController.viewControllers = self?.subviews ?? [UIViewController()]
-        }
-    }
-}
-
-//MARK: - UIVC Type Casting / OnLoad
-
-extension HomeMenuCoordinator: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        if viewController as? UIHostingController<Home> != nil {
-            print("Home Menu")
-        } else if viewController as? UIHostingController<Lights> != nil {
-            print("Lights Opened")
-        }
-    }
-}
-
-extension RootTabCoordinator: UITabBarControllerDelegate {
-    
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if viewController as? UINavigationController != nil {
-            print("Home Tab")
-        }
-        if viewController as? UIHostingController<MediaTab> != nil {
-            print("media tab")
-        }
-    }
-    
-    
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-    }
-}
-
-
-
-

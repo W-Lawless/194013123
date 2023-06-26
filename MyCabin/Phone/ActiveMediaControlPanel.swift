@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//TODO: - remove static reference
 struct ActiveMediaControlPanel: View {
     
     @ObservedObject var mediaViewModel: MediaViewModel
@@ -31,6 +32,7 @@ struct ActiveMediaControlPanel: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 64, height: 64)
+                            .accessibilityIdentifier("active_device_\(device.rawValue)")
                         
                         Button {} label: {
                             VStack(spacing: 4) {
@@ -38,6 +40,7 @@ struct ActiveMediaControlPanel: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 48, height: 48)
+                                    .accessibilityIdentifier("source_icon_\(activeMedia.source.id)")
                                 Text(activeMedia.source.name)
                                     .foregroundColor(.white)
                                     .font(.system(size: 11))
@@ -173,8 +176,3 @@ struct ActiveMediaControlPanel: View {
     }
 }
 
-//struct ActiveMediaControlPanel_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ViewFactory.buildActiveMediaControlPanel()
-//    }
-//}

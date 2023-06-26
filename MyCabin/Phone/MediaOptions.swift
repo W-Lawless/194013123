@@ -78,17 +78,6 @@ struct OptionsButton: View {
                     RoundedRectangle(cornerRadius: 6).stroke(.blue, lineWidth: 1).frame(width: 48, height: 48)
                 )
         }
+        .accessibilityIdentifier(imageName)
     }
 }
-
-enum MediaDisplayOptions {
-    case all
-    case outputs
-    case sound
-}
-
-//struct MediaOptions_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MediaOptions()
-//    }
-//}

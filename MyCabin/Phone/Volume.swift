@@ -81,9 +81,3 @@ class VolumeViewModel: SpeakersViewModel {
 
 
 
-
-struct Volume_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewFactory.buildVolumeView()
-    }
-}
