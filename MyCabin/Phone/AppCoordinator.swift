@@ -18,20 +18,20 @@ class AppCoordinator {
     typealias SinkValue =  (Bool) -> Void
     
     let window: UIWindow
-    let cabin: CabinAPIAdaptor
+    let cabinAPI: CabinAPIAdaptor
     var loadingView: CabinLoadingView
     var tabs: RootTabCoordinator
     let rootNavView = UINavigationController()
     
-    init(window: UIWindow,
-         cabin: CabinAPIAdaptor = PlaneFactory.cabinAPI,
-         loadingView: CabinLoadingView = ViewFactory.loadingView,
-         tabCoordinator: RootTabCoordinator = NavigationFactory.buildRootTabNavigation()
+    init(cabinAPI: CabinAPIAdaptor,
+         loadingView: CabinLoadingView,
+         rootTabCoordinator: RootTabCoordinator,
+         window: UIWindow
     ) {
-        self.window = window
-        self.cabin = cabin
+        self.cabinAPI = cabinAPI
         self.loadingView = loadingView
-        self.tabs = tabCoordinator
+        self.tabs = rootTabCoordinator
+        self.window = window
     }
     
     func configureViews() {
@@ -41,10 +41,11 @@ class AppCoordinator {
     }
     
     func start(
-        publisher: CabinPublisher = PlaneFactory.cabinConnectionPublisher,
+        publisher: CabinPublisher,
+        tokenStore: inout Set<AnyCancellable>,
         sinkCompletion endSink: @escaping SinkCompletion,
         sinkValue onSink: @escaping SinkValue) {
-            publisher.sink(receiveCompletion: endSink, receiveValue: onSink).store(in: &PlaneFactory.cancelTokens)
+            publisher.sink(receiveCompletion: endSink, receiveValue: onSink).store(in: &tokenStore)
     }
     
     func goTo(_ route: AppRouter) {
@@ -63,8 +64,8 @@ class AppCoordinator {
     }
     
     func startMonitor(atInterval interval: Double){
-        cabin.monitor.stopMonitor()
-        cabin.monitor.startMonitor(interval: interval, callback: cabin.monitorCallback)
+        cabinAPI.monitor.stopMonitor()
+        cabinAPI.monitor.startMonitor(interval: interval, callback: cabinAPI.monitorCallback)
     }
  
     enum AppRouter {

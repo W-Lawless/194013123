@@ -44,6 +44,10 @@ class PlaneViewModel: ObservableObject {
         }
     }
     
+    func getLightsForSeat(id: String) -> [LightModel] {
+        
+    }
+    
 }
 
 enum PlaneSchematicDisplayMode: String {

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Lights: View {
     
-    @ObservedObject var viewModel = StateFactory.lightsViewModel
+    @ObservedObject var viewModel: LightsViewModel
     let planeViewBuilder: (PlaneSchematicDisplayMode) -> PlaneSchematic
     let bottomPanelBuilder: () -> LightsBottomPanel
     
@@ -59,8 +59,13 @@ class LightsViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
     @Published var showPanel: Bool = false
     @Published var rtResponses = [String:R]()
     @Published var lightsForSeat = [LightModel]()
+    let getLights: (String) -> [LightModel]
     
     var rtAPI = [RealtimeAPI<F ,R>]()
+    
+    init(getLights: @escaping (String) -> [LightModel]) {
+        self.getLights = getLights
+    }
     
     func updateValues(_ data: [Codable]) {
         let typecast = data as? [LightModel]
@@ -70,13 +75,14 @@ class LightsViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
     }
     
     func getLightsForSeat() {
-        let target = PlaneFactory.planeViewModel.plane.allSeats.filter { seat in
-            return seat.id == activeSeat
-        }
-
-        if let seatLights = target.first?.lights {
-            lightsForSeat = seatLights
-        }
+        self.lightsForSeat = getLights(activeSeat)
+//        let target = PlaneFactory.planeViewModel.plane.allSeats.filter { seat in
+//            return seat.id == activeSeat
+//        }
+//
+//        if let seatLights = target.first?.lights {
+//            lightsForSeat = seatLights
+//        }
     }
     
     func showSubView(forID seat: String) {
