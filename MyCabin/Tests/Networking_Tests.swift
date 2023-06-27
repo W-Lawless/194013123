@@ -66,7 +66,7 @@ final class Networking_Tests: XCTestCase {
         let exp = expectation(description: "Wait for completion")
         
         let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: .lights)
-        let viewModel = LightsViewModel()
+        let viewModel = getMockLightViewModel()
 
         let sut = GCMSClient()
         sut.fetch(for: endpoint) { result in
@@ -86,7 +86,7 @@ final class Networking_Tests: XCTestCase {
         let exp = expectation(description: "Wait for completion")
         
         let endpoint = Endpoint<EndpointFormats.Get, LightModel>(path: .lights)
-        let viewModel = LightsViewModel()
+        let viewModel = getMockLightViewModel()
         var count = 0
         
         let sut = RealtimeAPI(endpoint: endpoint) { result in
@@ -218,6 +218,12 @@ final class Networking_Tests: XCTestCase {
     }
     
     //MARK: - Test Stubs
+    
+    func getMockLightViewModel() -> LightsViewModel {
+        let planeViewModel = PlaneViewModel()
+        let lightViewModel = LightsViewModel(plane: planeViewModel)
+        return lightViewModel
+    }
     
     private class URLProtocolStub: URLProtocol {
         

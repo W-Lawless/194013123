@@ -23,7 +23,7 @@ struct ShadeMenuPlaneDisplayOptions: View {
 
 struct ShadeGroupButton: View {
   
-    @ObservedObject var viewModel = StateFactory.shadesViewModel
+    @EnvironmentObject var viewModel: ShadesViewModel
     let group: ShadeGroup
     let text: String
     

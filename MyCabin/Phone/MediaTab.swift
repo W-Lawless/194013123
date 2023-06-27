@@ -14,6 +14,8 @@ struct MediaTab: View {
     let planeViewBuilder: (PlaneSchematicDisplayMode) -> PlaneSchematic
     @State private var hasAppeared = false
     
+    let mediaSubViewBuilder: (MediaViewIntent) -> AnyView
+    
 
     var body: some View {
         ZStack(alignment: .bottom) { // ZSTQ A
@@ -40,11 +42,13 @@ struct MediaTab: View {
             }
          
             if(mediaViewModel.displaySubView) {
-                mediaViewModel.contextualSubView
+                mediaSubViewBuilder(mediaViewModel.mediaViewIntent)
+//                mediaViewModel.contextualSubView
             }
 
         } //: ZSTQ A
-
+        .environmentObject(mediaViewModel)
+        
     } //: BODY
 
 }

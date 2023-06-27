@@ -21,7 +21,7 @@ final class Data_Formatting_Tests: XCTestCase {
     }
     
     func test_emptyDictionaryHasProperKeys() {
-        let sut = ElementDataFormatter()
+        let sut = getMockDataFormatter()
         let emptyDictionary = sut.buildEmptyDictionary()
         
         XCTAssertTrue(emptyDictionary["allAreas"] as? [AreaModel] != nil)
@@ -40,7 +40,7 @@ final class Data_Formatting_Tests: XCTestCase {
     func test_MapResultsToDictionary() {
         if let mockData {
             
-            let sut = ElementDataFormatter()
+            let sut = getMockDataFormatter()
             let dictionary = sut.mapResultsToDictionary(result: mockData)
             
             let allAreasResultCount = dictionary["allAreas"]?.count ?? 0
@@ -70,7 +70,7 @@ final class Data_Formatting_Tests: XCTestCase {
     
     func test_MapLightsToSeat() {
         if let mockData {
-            let sut = ElementDataFormatter()
+            let sut = getMockDataFormatter()
             var dictionary = sut.mapResultsToDictionary(result: mockData)
             
             let seats = dictionary["allSeats"] as! [SeatModel]
@@ -88,7 +88,7 @@ final class Data_Formatting_Tests: XCTestCase {
     
     func test_FindUniqueSourceTypes() {
         if let mockData {
-            let sut = ElementDataFormatter()
+            let sut = getMockDataFormatter()
             var dictionary = sut.mapResultsToDictionary(result: mockData)
             let sourceTypes = sut.findUniqueSourceTypes(elements: &dictionary)
             XCTAssertTrue(sourceTypes.count == 10)
@@ -97,7 +97,7 @@ final class Data_Formatting_Tests: XCTestCase {
     
     func test_BuildPlaneMap() {
         if let mockData {
-            let sut = ElementDataFormatter()
+            let sut = getMockDataFormatter()
             var dictionary = sut.mapResultsToDictionary(result: mockData)
             let sourceTypes = sut.findUniqueSourceTypes(elements: &dictionary)
             
@@ -118,7 +118,7 @@ final class Data_Formatting_Tests: XCTestCase {
     
     func test_MapElementsToPlaneAreas() {
         if let mockData {
-            let sut = ElementDataFormatter()
+            let sut = getMockDataFormatter()
             var dictionary = sut.mapResultsToDictionary(result: mockData)
             let sourceTypes = sut.findUniqueSourceTypes(elements: &dictionary)
             var planeMap = sut.buildPlaneMap(dictionary: dictionary, sourceSet: sourceTypes)
@@ -137,7 +137,7 @@ final class Data_Formatting_Tests: XCTestCase {
     
     func test_FilterPlaneAreas() {
         if let mockData {
-            let sut = ElementDataFormatter()
+            let sut = getMockDataFormatter()
             var dictionary = sut.mapResultsToDictionary(result: mockData)
             let sourceTypes = sut.findUniqueSourceTypes(elements: &dictionary)
             var planeMap = sut.buildPlaneMap(dictionary: dictionary, sourceSet: sourceTypes)
@@ -154,6 +154,13 @@ final class Data_Formatting_Tests: XCTestCase {
             XCTAssertFalse(containsJunkAreas)
             XCTAssertTrue(planeMap.mapAreas.count == 3)
         }
+    }
+    
+    func getMockDataFormatter() -> ElementDataFormatter {
+        let mockState = StateFactory()
+        let mockCacheUtil = FileCacheUtil(state: mockState)
+        let sut = ElementDataFormatter(state: mockState, cacheUtil: mockCacheUtil)
+        return sut
     }
     
 }

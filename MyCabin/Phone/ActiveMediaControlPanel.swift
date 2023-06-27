@@ -10,14 +10,16 @@ import SwiftUI
 //TODO: - remove static reference
 struct ActiveMediaControlPanel: View {
     
-    @ObservedObject var mediaViewModel: MediaViewModel
-    let activeMedia: ActiveMedia
-    let device: MediaDevice
+    @EnvironmentObject var mediaViewModel: MediaViewModel
     @State var mute: Bool = false
     @State var volume: Int = 25
-    
     @State var monitorPower: Bool = true
 
+    let apiClient: GCMSClient
+    let activeMedia: ActiveMedia
+    let device: MediaDevice
+    let navHandler: () -> ()
+    
     
     var body: some View {
         
@@ -50,9 +52,10 @@ struct ActiveMediaControlPanel: View {
                             RoundedRectangle(cornerRadius: 8).stroke(.blue, lineWidth: 1).frame(width: 86, height: 86)
                         )
                         .hapticFeedback(feedbackStyle: .medium) { _ in
-                            mediaViewModel.displaySubView.toggle()
-                            mediaViewModel.contextualSubView = AnyView(ViewFactory.buildSourcesView())
-                            mediaViewModel.displaySubView.toggle()
+                            //TODO: - Refactor subview generation
+//                            mediaViewModel.displaySubView.toggle()
+//                            mediaViewModel.contextualSubView = AnyView(ViewFactory.buildSourcesView())
+//                            mediaViewModel.displaySubView.toggle()
                         }
                         
                     } //: BTN
@@ -73,7 +76,7 @@ struct ActiveMediaControlPanel: View {
                                 RoundedRectangle(cornerRadius: 8).stroke(.blue, lineWidth: 1).frame(width: 86, height: 86)
                             )
                             .hapticFeedback(feedbackStyle: .medium) { _ in
-                                NavigationFactory.rootTabCoordinator.goTo(.sourceList)
+                                navHandler()
                             }
                             
                         } //: BTN
@@ -89,7 +92,7 @@ struct ActiveMediaControlPanel: View {
                                 if (volume < 100) {
                                     volume = volume + 5
                                     print(volume)
-                                    StateFactory.apiClient.setVolume(activeMedia.speaker!, volume: volume)
+                                    apiClient.setVolume(activeMedia.speaker!, volume: volume)
                                 }
                             }
                         
@@ -101,7 +104,7 @@ struct ActiveMediaControlPanel: View {
                                 if(volume > 0) {
                                     volume = volume - 5
                                     print(volume)
-                                    StateFactory.apiClient.setVolume(activeMedia.speaker!, volume: volume)
+                                    apiClient.setVolume(activeMedia.speaker!, volume: volume)
                                 }
                             }
                                                 
@@ -111,7 +114,7 @@ struct ActiveMediaControlPanel: View {
                             .frame(maxWidth: 48, maxHeight: 48)
                             .hapticFeedback(feedbackStyle: .light) { _ in
                                 mute.toggle()
-                                StateFactory.apiClient.toggleMute(activeMedia.speaker!, cmd: mute)
+                                apiClient.toggleMute(activeMedia.speaker!, cmd: mute)
                             }
                         
                     case .monitor:
@@ -134,7 +137,7 @@ struct ActiveMediaControlPanel: View {
                                 
                                 guard let monitor = activeMedia.monitor else { return }
                                 monitorPower.toggle()
-                                StateFactory.apiClient.toggleMonitor(monitor, cmd: monitorPower)
+                                apiClient.toggleMonitor(monitor, cmd: monitorPower)
                                 
                             }
                             

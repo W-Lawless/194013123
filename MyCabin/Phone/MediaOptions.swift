@@ -58,7 +58,7 @@ struct OptionsButton: View {
             case .showMonitors:
                 mediaViewModel.configForSelectMonitor()
             case .showSpeakers:
-                mediaViewModel.speakerIconCallback = mediaViewModel.selectSpeaker
+//                mediaViewModel.speakerIconCallback = mediaViewModel.selectSpeaker
                 mediaViewModel.updateContextualToolTip(MediaToolTips.speakers.rawValue)
             case .showBluetooth:
                 mediaViewModel.updateContextualToolTip(MediaToolTips.bluetooth.rawValue)

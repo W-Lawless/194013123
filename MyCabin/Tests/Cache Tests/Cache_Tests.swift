@@ -10,11 +10,12 @@ import XCTest
 
 final class Cache_Tests: XCTestCase {
 
-    let mockData = MockData(name: "Test", id: .init())
-
+    private let mockData = MockData(name: "Test", id: .init())
+    
     func test_CacheToFile() {
         let mockPath = makeTemporaryFilePathForTest()
-        FileCacheUtil.cacheToFile(data: mockData, mockPath: mockPath)
+        let mockCacheUtil = getMockCacheUtil()
+        mockCacheUtil.cacheToFile(data: mockData, mockPath: mockPath)
         
         let data = FileManager.default.contents(atPath: "\(mockPath)/MockData.store")
 
@@ -23,17 +24,24 @@ final class Cache_Tests: XCTestCase {
     
     func test_RetrieveFromCache() {
         let mockPath = makeTemporaryFilePathForTest()
-        FileCacheUtil.cacheToFile(data: mockData, mockPath: mockPath)
-        let data = try? FileCacheUtil.retrieveCachedFile(dataModel: MockData.self, mockPath: mockPath)
+        let mockCacheUtil = getMockCacheUtil()
+        mockCacheUtil.cacheToFile(data: mockData, mockPath: mockPath)
+        let data = try? mockCacheUtil.retrieveCachedFile(dataModel: MockData.self, mockPath: mockPath)
         XCTAssertNotNil(data)
     }
     
-    struct MockData: Codable {
+    private struct MockData: Codable {
         var name: String
         var id: UUID
     }
     
-    func makeTemporaryFilePathForTest() -> String {
+    private func getMockCacheUtil() -> FileCacheUtil {
+        let mockStateObjects = StateFactory()
+        let mockCacheUtil = FileCacheUtil(state: mockStateObjects)
+        return mockCacheUtil
+    }
+    
+    private func makeTemporaryFilePathForTest() -> String {
         let path = NSTemporaryDirectory() + "cache_tests"
         try? FileManager.default.removeItem(atPath: path)
         return path

@@ -9,7 +9,10 @@ import SwiftUI
 
 struct LightsBottomPanel: View {
     
-    @ObservedObject var viewModel: LightsViewModel
+    @EnvironmentObject var viewModel: LightsViewModel
+    
+    let adjustablePowerButtonBuilder: (LightModel) -> AdjustablePowerButton
+    let lightPowerButtonBuilder: (LightModel) -> LightPowerButton
     
     var body: some View {
         
@@ -20,9 +23,9 @@ struct LightsBottomPanel: View {
                 HStack(alignment: .center, spacing: 12) {
                     ForEach(Array(viewModel.lightsForSeat.enumerated()), id: \.element) { index, element in
                         if(viewModel.lightsForSeat[index].brightness.dimmable){
-                            AdjustablePowerButton(light: viewModel.lightsForSeat[index])
+                            adjustablePowerButtonBuilder(viewModel.lightsForSeat[index])
                         } else {
-                            LightPowerButton(light: viewModel.lightsForSeat[index])
+                            lightPowerButtonBuilder(viewModel.lightsForSeat[index])
                         }
                     }
                     .padding(.horizontal, 24)

@@ -15,6 +15,7 @@ final class PlaneFactory {
     ///Cabin Connection
     let cabinConnectionPublisher = CurrentValueSubject<Bool, Never>(false)
     
+    let state: StateFactory
     
     //Used by loading view
     let cabinAPI: CabinAPI<EndpointFormats.Head, EmptyResponse>
@@ -24,26 +25,27 @@ final class PlaneFactory {
     ///Plane Map
     
     let elementsEndpoint = Endpoint<EndpointFormats.Get, ElementsEnum>(path: .elements)
-    var elementFormatter = ElementDataFormatter()
+    var elementFormatter: ElementDataFormatter
     
-    let state: StateFactory
+    let cacheUtil: FileCacheUtil
     
-    init(state: StateFactory) {
+    init(state: StateFactory, cacheUtil: FileCacheUtil) {
         self.state = state
+        
         let cabinEndpoint = Endpoint<EndpointFormats.Head, EmptyResponse>(path: .ping)
-        self.cabinAPI = CabinAPI(endpoint: cabinEndpoint) { _ in }
+        self.cabinAPI = CabinAPI(endpoint: cabinEndpoint, publisher: cabinConnectionPublisher) { _ in }
+        
+        self.elementFormatter = ElementDataFormatter(state: state, cacheUtil: cacheUtil)
+        
+        self.cacheUtil = cacheUtil
     }
     
-    //Plane Schematic View
-    
-    //TODO: move to view fac
-
-    
+    //TODO: - does this need to be in here ?
     func connectToPlane() {
         
         Task(priority: .high) {
             do {
-                try await FileCacheUtil.loadAllCaches()
+                try await self.cacheUtil.loadAllCaches()
             } catch {
                 
                 state.apiClient.fetch(for: elementsEndpoint) { res in
@@ -66,11 +68,11 @@ final class PlaneFactory {
                         await self.state.planeViewModel.updateValues(self.state.planeMap)
                     }
 
-                    FileCacheUtil.updateAndCachePlaneElements(elements: dictionary)
-                    FileCacheUtil.cacheToFile(data: self.state.planeMap)
+                    self.cacheUtil.updateAndCachePlaneElements(elements: dictionary)
+                    self.cacheUtil.cacheToFile(data: self.state.planeMap)
                 }
                 //TODO: - Climate View troubleshoot
-                state.apiClient.fetchClimateControllers()
+                state.apiClient.fetchClimateControllers(climateViewModel: state.climateViewModel, cacheUtil: cacheUtil)
             }
         }
     }

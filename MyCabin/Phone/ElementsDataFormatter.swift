@@ -13,6 +13,14 @@ class ElementDataFormatter {
     
     typealias ElementsDictionary = [String:[Codable]]
     
+    let state: StateFactory
+    let cacheUtil: FileCacheUtil
+    
+    init(state: StateFactory, cacheUtil: FileCacheUtil) {
+        self.state = state
+        self.cacheUtil = cacheUtil
+    }
+    
     func mapResultsToDictionary(result: ElementsRoot) -> ElementsDictionary {
         var dictionary = buildEmptyDictionary()
         for element in result.results {
@@ -133,8 +141,8 @@ class ElementDataFormatter {
             }
         }
         
-        StateFactory.sourcesViewModel.updateSourceTypes(sourceTypes)
-        FileCacheUtil.cacheToFile(data: sourceTypes)
+        self.state.sourcesViewModel.updateSourceTypes(sourceTypes)
+        self.cacheUtil.cacheToFile(data: sourceTypes)
         
         return sourceTypes
     }

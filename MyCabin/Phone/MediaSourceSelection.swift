@@ -10,6 +10,8 @@ import SwiftUI
 //TODO: - remove static reference
 struct MediaSourceSelection: View {
     
+    let sourcesHScrollBuilder: () -> SourcesHorizontalScroll
+    
     var body: some View {
         VStack(alignment: .leading) {
             
@@ -20,7 +22,7 @@ struct MediaSourceSelection: View {
             ScrollViewReader { value in
                 
                 ScrollView(.horizontal) {
-                    ViewFactory.buildSourcesView()
+                    sourcesHScrollBuilder()
                 } //:SCRLL
                 .frame(height: 96)
                 .padding(.bottom, 14)

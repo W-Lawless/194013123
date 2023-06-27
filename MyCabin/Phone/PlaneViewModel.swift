@@ -30,22 +30,19 @@ class PlaneViewModel: ObservableObject {
     }
     
     func seatIconCallback(displayOptions: PlaneSchematicDisplayMode, seatID: String) {
-        switch displayOptions {
-        case .onlySeats:
-            UserDefaults.standard.set(seatID, forKey: "CurrentSeat")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                NavigationFactory.homeMenuCoordinator.dismiss()
-            }
-        case .showLights:
-            UserDefaults.standard.set(seatID, forKey: "CurrentSeat")
-            StateFactory.lightsViewModel.showSubView(forID: seatID)
-        default:
-            break
-        }
-    }
-    
-    func getLightsForSeat(id: String) -> [LightModel] {
-        
+        //TODO: - Refactor into view fac
+//        switch displayOptions {
+//        case .onlySeats:
+//            UserDefaults.standard.set(seatID, forKey: "CurrentSeat")
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+//                NavigationFactory.homeMenuCoordinator.dismiss()
+//            }
+//        case .showLights:
+//            UserDefaults.standard.set(seatID, forKey: "CurrentSeat")
+//            StateFactory.lightsViewModel.showSubView(forID: seatID)
+//        default:
+//            break
+//        }
     }
     
 }

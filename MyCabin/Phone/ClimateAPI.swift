@@ -9,17 +9,16 @@ import Foundation
 
 extension GCMSClient {
     
-    func fetchClimateControllers() {
+    func fetchClimateControllers(climateViewModel: CabinClimateViewModel, cacheUtil: FileCacheUtil) {
         let endpoint = Endpoint<EndpointFormats.Get, ClimateControllerModel>(path: .climate)
         let callback: ([ClimateControllerModel]) -> Void = { controllers in
-            print("LOOKUP CLIMATE CONTROLLERS")
-            StateFactory.climateViewModel.updateValues(controllers)
-            FileCacheUtil.cacheToFile(data: controllers)
+            climateViewModel.updateValues(controllers)
+            cacheUtil.cacheToFile(data: controllers)
         }
         
         do {
-            let cachedData = try FileCacheUtil.retrieveCachedFile(dataModel: [ClimateControllerModel].self)
-            StateFactory.climateViewModel.updateValues(cachedData)
+            let cachedData = try cacheUtil.retrieveCachedFile(dataModel: [ClimateControllerModel].self)
+            climateViewModel.updateValues(cachedData)
         } catch {
             self.fetch(for: endpoint, callback: callback)
         }

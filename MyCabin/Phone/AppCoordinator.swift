@@ -45,6 +45,7 @@ class AppCoordinator {
         tokenStore: inout Set<AnyCancellable>,
         sinkCompletion endSink: @escaping SinkCompletion,
         sinkValue onSink: @escaping SinkValue) {
+            
             publisher.sink(receiveCompletion: endSink, receiveValue: onSink).store(in: &tokenStore)
     }
     

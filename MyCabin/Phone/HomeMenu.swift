@@ -10,7 +10,7 @@ import Combine
 
 struct Home: View {
     
-    var navigateTo: (_ route: MenuRouter) -> ()
+    let homeMenuButtonBuilder: (String, String, String, MenuRouter) -> HomeMenuButton
     
     var body: some View {
         
@@ -18,10 +18,10 @@ struct Home: View {
             
             HStack(alignment: .center, spacing: 32) {
                 
-                HomeMenuButton(image: "ic_lights", label: "Lights", navHandler: navigateTo, destination: .lights, uilabel: "LightsMenu")
+                homeMenuButtonBuilder("ic_lights", "Lights", "LightsMenu", .lights)
                 Divider()
                     .background(Color.white)
-                HomeMenuButton(image: "ic_windows", label: "Shades", navHandler: navigateTo, destination: .shades, uilabel: "ShadesMenu")
+                homeMenuButtonBuilder("ic_windows", "Shades", "ShadesMenu", .shades)
 
             } //:HSTQ
             .padding(.top, 24)
@@ -29,24 +29,25 @@ struct Home: View {
             
             HStack(alignment: .center, spacing: 32) {
                 
-                HomeMenuButton(image: "ic_temperature", label: "Temperature", navHandler: navigateTo, destination: .climate, uilabel: "ClimateMenu")
+                homeMenuButtonBuilder("ic_temperature", "Temperature", "ClimateMenu", .climate)
                 Divider()
                     .background(Color.white)
-                HomeMenuButton(image: "ic_change_seat", label: "Seats", navHandler: navigateTo, destination: .seats, uilabel: "SeatsMenu")
+                homeMenuButtonBuilder("ic_change_seat", "Seats", "SeatsMenu", .seats)
                 
             } //:HSTQ
 
             
             
             HStack(alignment: .center, spacing: 32) {
-                HomeMenuButton(image: "ic_presets", label: "Presets", navHandler: navigateTo, destination: .presets, uilabel: "Presets")
+                homeMenuButtonBuilder("ic_presets", "Presets", "Presets", .presets)
                 Divider()
                     .background(Color.white)
-                HomeMenuButton(image: "ic_settings", label: "Settings", navHandler: navigateTo, destination: .settings, uilabel: "SettingsMenu")
+                homeMenuButtonBuilder("ic_settings", "Settings", "SettingsMenu", .settings)
                 
             } //: HSTQ
             .padding(.bottom, 24)
         }
+        
         
     }
 }
@@ -55,9 +56,8 @@ struct HomeMenuButton: View {
     
     let image: String
     let label: String
-    let navHandler: (_ route: MenuRouter) -> ()
-    let destination: MenuRouter
     let uilabel: String
+    let navHandler: () -> ()
     
     var body: some View {
         VStack(alignment: .center, spacing: 12) {
@@ -71,7 +71,7 @@ struct HomeMenuButton: View {
         } //:VSTQ
         .accessibilityIdentifier(uilabel)
         .hapticFeedback(feedbackStyle: .light) { _ in
-            navHandler(destination)
+            navHandler()
         }
         .frame(width: 98)
     }

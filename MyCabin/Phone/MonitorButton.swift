@@ -15,6 +15,7 @@ struct MonitorButton: View {
     
     let monitor: MonitorModel
     @State var selected: Bool
+    let iconCallback: (MonitorModel) -> Void
     
     var body: some View {
         
@@ -23,7 +24,9 @@ struct MonitorButton: View {
             .scaledToFit()
             .frame(maxWidth: 48, maxHeight: 48)
             .scaleEffect(selected ? 1.4 : 1)
-            .hapticFeedback(feedbackStyle: .light, cb: mediaViewModel.monitorIconCallback, cbArgs: monitor)
+            .hapticFeedback(feedbackStyle: .light) { _ in
+                iconCallback(monitor)
+            }
             .accessibilityIdentifier("\(monitor.id)")
 //            .longPressHaptic {
 //                print("ay")

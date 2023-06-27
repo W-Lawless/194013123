@@ -31,7 +31,7 @@ extension GCMSClient {
                     print("put request data", seats)
             }
         )
-        .store(in: &StateFactory.apiClient.cancelTokens)
+        .store(in: &self.cancelTokens)
     }
     
 }

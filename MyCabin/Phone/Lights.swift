@@ -30,6 +30,7 @@ struct Lights: View {
 
             
         } //: ZSTQ
+        .environmentObject(viewModel)
         .edgesIgnoringSafeArea(.bottom)
     }
         
@@ -53,18 +54,19 @@ class LightsViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
     
     typealias F = EndpointFormats.Get
     typealias R = LightModel.state
+
+    let planeViewModel: PlaneViewModel
     
     @Published var activeSeat: String = ""
     @Published var lightList: [LightModel]?
     @Published var showPanel: Bool = false
     @Published var rtResponses = [String:R]()
     @Published var lightsForSeat = [LightModel]()
-    let getLights: (String) -> [LightModel]
     
     var rtAPI = [RealtimeAPI<F ,R>]()
     
-    init(getLights: @escaping (String) -> [LightModel]) {
-        self.getLights = getLights
+    init(plane: PlaneViewModel) {
+        self.planeViewModel = plane
     }
     
     func updateValues(_ data: [Codable]) {
@@ -75,14 +77,13 @@ class LightsViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
     }
     
     func getLightsForSeat() {
-        self.lightsForSeat = getLights(activeSeat)
-//        let target = PlaneFactory.planeViewModel.plane.allSeats.filter { seat in
-//            return seat.id == activeSeat
-//        }
-//
-//        if let seatLights = target.first?.lights {
-//            lightsForSeat = seatLights
-//        }
+        let target = planeViewModel.plane.allSeats.filter { seat in
+            return seat.id == activeSeat
+        }
+
+        if let seatLights = target.first?.lights {
+            lightsForSeat = seatLights
+        }
     }
     
     func showSubView(forID seat: String) {

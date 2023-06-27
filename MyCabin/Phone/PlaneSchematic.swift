@@ -43,7 +43,7 @@ struct PlaneSchematic: View {
             } //: ZSTQ
             .padding(.horizontal, 12)
             .environmentObject(planeViewModel)
-            .environmentObject(mediaViewModel)
+            .environmentObject(mediaViewModel) // Since the plane schematic is shared between screens that both do/don't use a media reference, always needed in env to avoid crash
             
         } //: GEO
         .passGeometry { geo in

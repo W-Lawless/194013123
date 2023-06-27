@@ -10,7 +10,10 @@ import SwiftUI
 //TODO: - Remove Static References
 struct AdjustablePowerButton: View {
     
-    @ObservedObject var viewModel = StateFactory.lightsViewModel
+    @EnvironmentObject var viewModel: LightsViewModel
+    
+    let apiClient: GCMSClient
+    
     @State var light: LightModel
     @State var power:Bool = false
     @State var luminosity:Int = 50
@@ -23,11 +26,11 @@ struct AdjustablePowerButton: View {
                 }
                 .onChange(of: power) { newValue in
                     print("power::",power)
-                    StateFactory.apiClient.toggleLight(light, cmd: newValue ? .ON : .OFF)
+                    apiClient.toggleLight(light, cmd: newValue ? .ON : .OFF)
                 }
                 Stepper("Brightness", value: $luminosity, in: 25...100, step: 25).onChange(of: luminosity) { newValue in
                     print("lumisotry is", newValue)
-                    StateFactory.apiClient.adjustBrightness(light, brightness: luminosity)
+                    apiClient.adjustBrightness(light, brightness: luminosity)
                 }
 //                Stepper("Brightness") {
 //                    print(luminosity)

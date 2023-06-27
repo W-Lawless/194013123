@@ -13,19 +13,23 @@ class CabinAPI<F: EndpointFormat, R: Codable>: GCMSClient, Realtime_API {
     var monitor = HeartBeatMonitor()
     
     var endpoint: Endpoint<F, R>
-    var callback: ([R]) -> Void 
+    var callback: ([R]) -> Void
+    var valuePublisher: CurrentValueSubject<Bool, Never>?
     
-    init(endpoint: Endpoint<F ,R>, callback: @escaping ([R]) -> Void) {
+    init(endpoint: Endpoint<F ,R>, publisher: CurrentValueSubject<Bool, Never>? = nil, callback: @escaping ([R]) -> Void) {
         self.endpoint = endpoint
         self.callback = callback
+        self.valuePublisher = publisher
     }
     
     func listen() {
-        self.ping(for: endpoint) { response in
-            if (response.statusCode == 200) {
-                PlaneFactory.cabinConnectionPublisher.send(true)
-            } else {
-                PlaneFactory.cabinConnectionPublisher.send(false)
+        if let valuePublisher = self.valuePublisher {
+            self.ping(for: endpoint) { response in
+                if (response.statusCode == 200) {
+                    valuePublisher.send(true)
+                } else {
+                    valuePublisher.send(false)
+                }
             }
         }
     }

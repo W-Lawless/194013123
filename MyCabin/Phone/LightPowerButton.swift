@@ -9,7 +9,10 @@ import SwiftUI
 
 struct LightPowerButton: View {
     
-    @ObservedObject var viewModel = StateFactory.lightsViewModel
+    @EnvironmentObject var viewModel: LightsViewModel
+    
+    let apiClient: GCMSClient
+    
     @State var light: LightModel
     @State var power: Bool = false
     
@@ -43,15 +46,7 @@ struct LightPowerButton: View {
         .frame(width: 64)
         .hapticFeedback(feedbackStyle: .rigid) { _ in
             power.toggle()
-            StateFactory.apiClient.toggleLight(light, cmd: power ? .ON : .OFF)
+            apiClient.toggleLight(light, cmd: power ? .ON : .OFF)
         }
-    }
-}
-
-struct LightPowerButton_Previews: PreviewProvider {
-    static var previews: some View {
-        let light = LightModel(id: "", name: "lightTest", rect: RenderCoordinates(x: 0.0, y: 0.0, w: 0.0, h: 0.0, r: 0.0), side: "", sub: [], type: "light", brightness: LightBrightness(dimmable: true, range: [0,1]))
-        LightPowerButton(light: light)
-            .fixedSize()
     }
 }

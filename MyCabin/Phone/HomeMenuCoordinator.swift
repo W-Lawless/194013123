@@ -26,17 +26,16 @@ class HomeMenuCoordinator: NSObject {
         navigationController.setViewControllers(subviews, animated: false)
     }
     
-    func goTo(_ route: MenuRouter) {
-        let destination = route.view()
+    func goTo<V>(destination: UIHostingController<V>) {
         destination.modalTransitionStyle = .crossDissolve
         navigationController.present(destination, animated: true)
     }
     
-    func pushView(_ route: MenuRouter) {
-        let destination = route.view()
-        destination.modalPresentationStyle = .popover
-        navigationController.pushViewController(destination, animated: true)
-    }
+//    func pushView(_ route: MenuRouter, views: ViewFactory) {
+//        let destination = route.view(views: views)
+//        destination.modalPresentationStyle = .popover
+//        navigationController.pushViewController(destination, animated: true)
+//    }
     
     func popView() {
         navigationController.popViewController(animated: true)

@@ -8,9 +8,8 @@
 import SwiftUI
 import UIKit
 
-enum MenuRouter: NavigationRouter {
+enum MenuRouter {
     
-    case toplevel
     case lights
     case shades
     case seats
@@ -32,29 +31,7 @@ enum MenuRouter: NavigationRouter {
             return .push(presentation: UIModalPresentationStyle.automatic)
         }
     }
-    
-    func view() -> UIViewController {
-        switch self {
-        case .toplevel:
-            return UIHostingController(rootView: ViewFactory.buildMenuOverview())
-        case .lights:
-           return UIHostingController(rootView: ViewFactory.buildLightsMenu())
-        case .shades:
-            return UIHostingController(rootView: ViewFactory.buildShadesView())
-        case .seats:
-            return UIHostingController(rootView: ViewFactory.buildSeatSelection())
-        case .climate:
-            return UIHostingController(rootView: ViewFactory.buildCabinClimateView())
-        case .presets:
-            return UIHostingController(rootView: Presets())
-        case .settings:
-            return UIHostingController(rootView: Settings())
-        case .sourceList:
-            return UIHostingController(rootView: ViewFactory.buildSourceListView())
-//        case .plane:
-//            return UIHostingController(rootView: AppFactory.buildPlaneSchematic())
-        }
-    }
+
 }
 
 protocol NavigationRouter {

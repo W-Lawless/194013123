@@ -13,28 +13,22 @@ final class StateFactory {
     var cancelTokens = Set<AnyCancellable>()
     
     //Navigation
-    var AppCoordinator: AppCoordinator? = nil
     let rootTabCoordinator = RootTabCoordinator()
     let homeMenuCoordinator = HomeMenuCoordinator()
 
     let planeViewModel = PlaneViewModel()
     var planeMap  = PlaneMap()
     
-    //Views
-    let lightsViewModel = LightsViewModel(getLights: getLightsForSeat)
+    let mediaViewModel: MediaViewModel
+    let lightsViewModel: LightsViewModel
     
-    func getLightsForSeat(activeSeat: String) -> [LightModel] {
-        let target = self.planeViewModel.plane.allSeats.filter { seat in
-            return seat.id == activeSeat
-        }
-
-        
-        if let seatLights = target.first?.lights {
-            return seatLights
-        }
-        
-        return [LightModel]()
+    init() {
+        self.lightsViewModel = LightsViewModel(plane: planeViewModel)
+        self.mediaViewModel = MediaViewModel(apiClient: apiClient)
     }
+    
+    //Views
+    
     ///Endpoint<EndpointFormats.Get, LightModel>(path: .lights)
 
     ///Shades
@@ -50,7 +44,7 @@ final class StateFactory {
     ///Endpoint<EndpointFormats.Get, ClimateControllerModel>(path: .climate)
         
     //Media
-    let mediaViewModel = MediaViewModel()
+    
         ///Monitors
     let monitorsViewModel = MonitorsViewModel()
     ///Endpoint<EndpointFormats.Get, MonitorModel>(path: .monitors)
@@ -65,18 +59,44 @@ final class StateFactory {
     let flightViewModel = FlightViewModel()
     
     
-    
+    //TODO: - API Factory
     let flightAPI = RealtimeAPI(endpoint: Endpoint<EndpointFormats.Get, FlightModel>(path: .flightInfo)) { shades in
 //        StateFactory.flightViewModel.updateValues(shades)
+    }
+    let weatherAPI = RealtimeAPI(endpoint: Endpoint<EndpointFormats.Get, WeatherModel>(path: .weather)) { weather in
+        //        StateFactory.weatherViewModel.updateValues(weather)
     }
     
     //Weather
     let weatherViewModel = WeatherViewModel()
     
     
+    //MARK: - Media State Update Methods
     
-    let weatherAPI = RealtimeAPI(endpoint: Endpoint<EndpointFormats.Get, WeatherModel>(path: .weather)) { weather in
-//        StateFactory.weatherViewModel.updateValues(weather)
+    func selectMonitor(monitor: MonitorModel) {
+        let selected = mediaViewModel.selectedMonitor
+        if (selected == monitor.id) {
+            mediaViewModel.updateSelectedMonitor(id: "")
+            mediaViewModel.displaySubView = false
+            mediaViewModel.displayToolTip = true
+        } else {
+            mediaViewModel.updateSelectedMonitor(id: monitor.id)
+            mediaViewModel.displaySubView = true
+            mediaViewModel.displayToolTip = false
+        }
+    }
+    
+    func selectSpeaker(speaker: SpeakerModel) {
+        let selected = mediaViewModel.selectedSpeaker
+        if (selected == speaker.id) {
+            mediaViewModel.updateSelectedSpeaker(id: "")
+            mediaViewModel.displaySubView = false
+            mediaViewModel.displayToolTip = true
+        } else {
+            mediaViewModel.updateSelectedSpeaker(id: speaker.id)
+            mediaViewModel.displaySubView = true
+            mediaViewModel.displayToolTip = false
+        }
     }
     
 }

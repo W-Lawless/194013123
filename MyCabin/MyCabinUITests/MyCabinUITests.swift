@@ -142,7 +142,7 @@ final class MyCabinUITests: XCTestCase {
     func test_LightsMenu_OpensBottomPanel() {
         app.launch()
         app.images["LightsMenu"].tap()
-        app.images["L-SEAT-1-1"].tap()
+        app.images["L-SEAT-1-1"].tap() //Invesitgate why multiple?
         
         let lightCtrlPanel = app.scrollViews["lightControlPanel"].exists
         

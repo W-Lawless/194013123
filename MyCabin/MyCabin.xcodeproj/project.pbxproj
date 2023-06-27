@@ -30,7 +30,7 @@
 		2B1170572935338D00A1CB8F /* Sources.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B1170542935338D00A1CB8F /* Sources.json */; };
 		2B11705A29353C0E00A1CB8F /* SourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11705929353C0E00A1CB8F /* SourceModel.swift */; };
 		2B11705C29353DBF00A1CB8F /* SourcesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11705B29353DBF00A1CB8F /* SourcesAPI.swift */; };
-		2B11705E29353DED00A1CB8F /* Sources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11705D29353DED00A1CB8F /* Sources.swift */; };
+		2B11705E29353DED00A1CB8F /* SourcesHorizontalScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11705D29353DED00A1CB8F /* SourcesHorizontalScroll.swift */; };
 		2B117060293548A100A1CB8F /* Speakers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11705F293548A100A1CB8F /* Speakers.swift */; };
 		2B1170632935491000A1CB8F /* SpeakersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1170622935491000A1CB8F /* SpeakersAPI.swift */; };
 		2B1170652935491D00A1CB8F /* SpeakerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1170642935491D00A1CB8F /* SpeakerModel.swift */; };
@@ -53,10 +53,9 @@
 		2B20BF512A05A1390096568D /* MediaFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20BF502A05A1390096568D /* MediaFactory.swift */; };
 		2B20BF532A05AE500096568D /* StateFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20BF522A05AE500096568D /* StateFactory.swift */; };
 		2B20BF552A05AE740096568D /* NavigationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20BF542A05AE740096568D /* NavigationFactory.swift */; };
-		2B20BF572A05AE8C0096568D /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20BF562A05AE8C0096568D /* ViewFactory.swift */; };
 		2B27F7372A40A75600868884 /* Navigation_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B27F7362A40A75600868884 /* Navigation_Tests.swift */; };
 		2B27F7392A40D19500868884 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B27F7382A40D19500868884 /* TestAppDelegate.swift */; };
-		2B27F73B2A40D20E00868884 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B27F73A2A40D20E00868884 /* main.swift */; };
+		2B27F73B2A40D20E00868884 /* _pri_main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B27F73A2A40D20E00868884 /* _pri_main.swift */; };
 		2B40FE782A41FE5E007E0D96 /* Data_Formatting_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B40FE772A41FE5E007E0D96 /* Data_Formatting_Tests.swift */; };
 		2B41EF4A292C105E0062CA2B /* Cabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B41EF49292C105E0062CA2B /* Cabin.swift */; };
 		2B4A50162A03F71800DF47EF /* UI+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4A50152A03F71800DF47EF /* UI+.swift */; };
@@ -130,10 +129,19 @@
 		2BC49CDF2923FC06007DA457 /* +Cabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC49CDE2923FC06007DA457 /* +Cabin.swift */; };
 		2BCF9E6929F4686E007C7CA5 /* Networking_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF9E6829F4686E007C7CA5 /* Networking_Tests.swift */; };
 		2BCF9E6D29F49CE1007C7CA5 /* Wheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF9E6C29F49CE1007C7CA5 /* Wheel.swift */; };
+		2BD08B8D2A4B96E400623211 /* ApiFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08B8C2A4B96E400623211 /* ApiFactory.swift */; };
+		2BD08B902A4B9FF900623211 /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08B8F2A4B9FF900623211 /* ViewFactory.swift */; };
+		2BD08B922A4BA01E00623211 /* ViewFactory+HostedViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08B912A4BA01E00623211 /* ViewFactory+HostedViews.swift */; };
+		2BD08B942A4BA05100623211 /* ViewFactory+PrimaryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08B932A4BA05100623211 /* ViewFactory+PrimaryViews.swift */; };
+		2BD08B962A4BA07000623211 /* ViewFactory+LightsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08B952A4BA07000623211 /* ViewFactory+LightsMenu.swift */; };
+		2BD08B982A4BA08D00623211 /* ViewFactory+SeatsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08B972A4BA08D00623211 /* ViewFactory+SeatsMenu.swift */; };
+		2BD08B9A2A4BA0BE00623211 /* ViewFactory+ShadesMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08B992A4BA0BE00623211 /* ViewFactory+ShadesMenu.swift */; };
+		2BD08B9C2A4BA0E500623211 /* ViewFactory+ClimateMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08B9B2A4BA0E500623211 /* ViewFactory+ClimateMenu.swift */; };
+		2BD08B9E2A4BA10800623211 /* ViewFactory+PlaneSchematic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08B9D2A4BA10800623211 /* ViewFactory+PlaneSchematic.swift */; };
+		2BD08BA02A4BA1B600623211 /* ViewFactory+Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08B9F2A4BA1B600623211 /* ViewFactory+Media.swift */; };
 		2BD5E7FF2A12B9140042DF92 /* elements.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BD5E7FE2A12B9140042DF92 /* elements.json */; };
 		2BD5E8012A12C0C40042DF92 /* planeMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BD5E8002A12C0C30042DF92 /* planeMap.json */; };
 		2BD75A17292E7503004360A3 /* LightsData.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BD75A16292E7503004360A3 /* LightsData.json */; };
-		2BD75A19292E7ACE004360A3 /* LightControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD75A18292E7ACE004360A3 /* LightControl.swift */; };
 		2BD75A1B292EB256004360A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD75A1A292EB256004360A3 /* AppDelegate.swift */; };
 		2BE4D4F22940FE3E0026FC01 /* ElementsEnumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE4D4F12940FE3E0026FC01 /* ElementsEnumModel.swift */; };
 		2BE4D4F5294107680026FC01 /* TableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE4D4F4294107680026FC01 /* TableModel.swift */; };
@@ -215,7 +223,7 @@
 		2B1170542935338D00A1CB8F /* Sources.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Sources.json; sourceTree = "<group>"; };
 		2B11705929353C0E00A1CB8F /* SourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceModel.swift; sourceTree = "<group>"; };
 		2B11705B29353DBF00A1CB8F /* SourcesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesAPI.swift; sourceTree = "<group>"; };
-		2B11705D29353DED00A1CB8F /* Sources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources.swift; sourceTree = "<group>"; };
+		2B11705D29353DED00A1CB8F /* SourcesHorizontalScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesHorizontalScroll.swift; sourceTree = "<group>"; };
 		2B11705F293548A100A1CB8F /* Speakers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speakers.swift; sourceTree = "<group>"; };
 		2B1170622935491000A1CB8F /* SpeakersAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakersAPI.swift; sourceTree = "<group>"; };
 		2B1170642935491D00A1CB8F /* SpeakerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerModel.swift; sourceTree = "<group>"; };
@@ -240,10 +248,9 @@
 		2B20BF502A05A1390096568D /* MediaFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaFactory.swift; sourceTree = "<group>"; };
 		2B20BF522A05AE500096568D /* StateFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateFactory.swift; sourceTree = "<group>"; };
 		2B20BF542A05AE740096568D /* NavigationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFactory.swift; sourceTree = "<group>"; };
-		2B20BF562A05AE8C0096568D /* ViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactory.swift; sourceTree = "<group>"; };
 		2B27F7362A40A75600868884 /* Navigation_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation_Tests.swift; sourceTree = "<group>"; };
 		2B27F7382A40D19500868884 /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
-		2B27F73A2A40D20E00868884 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		2B27F73A2A40D20E00868884 /* _pri_main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _pri_main.swift; sourceTree = "<group>"; };
 		2B40FE772A41FE5E007E0D96 /* Data_Formatting_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data_Formatting_Tests.swift; sourceTree = "<group>"; };
 		2B41EF49292C105E0062CA2B /* Cabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cabin.swift; sourceTree = "<group>"; };
 		2B4A50152A03F71800DF47EF /* UI+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+.swift"; sourceTree = "<group>"; };
@@ -321,10 +328,19 @@
 		2BC49CDE2923FC06007DA457 /* +Cabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Cabin.swift"; sourceTree = "<group>"; };
 		2BCF9E6829F4686E007C7CA5 /* Networking_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking_Tests.swift; sourceTree = "<group>"; };
 		2BCF9E6C29F49CE1007C7CA5 /* Wheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wheel.swift; sourceTree = "<group>"; };
+		2BD08B8C2A4B96E400623211 /* ApiFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiFactory.swift; sourceTree = "<group>"; };
+		2BD08B8F2A4B9FF900623211 /* ViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactory.swift; sourceTree = "<group>"; };
+		2BD08B912A4BA01E00623211 /* ViewFactory+HostedViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewFactory+HostedViews.swift"; sourceTree = "<group>"; };
+		2BD08B932A4BA05100623211 /* ViewFactory+PrimaryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewFactory+PrimaryViews.swift"; sourceTree = "<group>"; };
+		2BD08B952A4BA07000623211 /* ViewFactory+LightsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewFactory+LightsMenu.swift"; sourceTree = "<group>"; };
+		2BD08B972A4BA08D00623211 /* ViewFactory+SeatsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewFactory+SeatsMenu.swift"; sourceTree = "<group>"; };
+		2BD08B992A4BA0BE00623211 /* ViewFactory+ShadesMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewFactory+ShadesMenu.swift"; sourceTree = "<group>"; };
+		2BD08B9B2A4BA0E500623211 /* ViewFactory+ClimateMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewFactory+ClimateMenu.swift"; sourceTree = "<group>"; };
+		2BD08B9D2A4BA10800623211 /* ViewFactory+PlaneSchematic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewFactory+PlaneSchematic.swift"; sourceTree = "<group>"; };
+		2BD08B9F2A4BA1B600623211 /* ViewFactory+Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewFactory+Media.swift"; sourceTree = "<group>"; };
 		2BD5E7FE2A12B9140042DF92 /* elements.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = elements.json; sourceTree = "<group>"; };
 		2BD5E8002A12C0C30042DF92 /* planeMap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = planeMap.json; sourceTree = "<group>"; };
 		2BD75A16292E7503004360A3 /* LightsData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LightsData.json; sourceTree = "<group>"; };
-		2BD75A18292E7ACE004360A3 /* LightControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightControl.swift; sourceTree = "<group>"; };
 		2BD75A1A292EB256004360A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BE4D4F12940FE3E0026FC01 /* ElementsEnumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsEnumModel.swift; sourceTree = "<group>"; };
 		2BE4D4F4294107680026FC01 /* TableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableModel.swift; sourceTree = "<group>"; };
@@ -451,7 +467,6 @@
 				2B793F8D2A0AB1D8005AB60C /* Subviews */,
 				2BE97D3E291C175F00149BA4 /* MediaTab.swift */,
 				2B11705029352D7A00A1CB8F /* Monitors.swift */,
-				2B11705D29353DED00A1CB8F /* Sources.swift */,
 				2B11705F293548A100A1CB8F /* Speakers.swift */,
 				2B793F8B2A06D9AA005AB60C /* MediaViewModel.swift */,
 			);
@@ -513,9 +528,9 @@
 				2B02B9D52937A53000C6387A /* Persistence */,
 				2B1170422933E3B400A1CB8F /* Navigation */,
 				2BE97D5C291C47EB00149BA4 /* UI */,
-				2B20BF4F2A05A09B0096568D /* CompositionRoot */,
+				2B20BF4F2A05A09B0096568D /* Root */,
 				2BD75A1A292EB256004360A3 /* AppDelegate.swift */,
-				2B27F73A2A40D20E00868884 /* main.swift */,
+				2B27F73A2A40D20E00868884 /* _pri_main.swift */,
 				2B183F512913F8C00087654E /* MyCabin.entitlements */,
 				2B183F4F2913F8C00087654E /* Assets.xcassets */,
 				2B7FE8102919C692002C64FF /* Info.plist */,
@@ -713,16 +728,17 @@
 			name = Modifiers;
 			sourceTree = "<group>";
 		};
-		2B20BF4F2A05A09B0096568D /* CompositionRoot */ = {
+		2B20BF4F2A05A09B0096568D /* Root */ = {
 			isa = PBXGroup;
 			children = (
+				2BD08B8E2A4B9FE200623211 /* ViewFactory */,
+				2BD08B8C2A4B96E400623211 /* ApiFactory.swift */,
 				2B02B9C02936968600C6387A /* PlaneFactory.swift */,
 				2B20BF502A05A1390096568D /* MediaFactory.swift */,
 				2B20BF522A05AE500096568D /* StateFactory.swift */,
 				2B20BF542A05AE740096568D /* NavigationFactory.swift */,
-				2B20BF562A05AE8C0096568D /* ViewFactory.swift */,
 			);
-			name = CompositionRoot;
+			name = Root;
 			sourceTree = "<group>";
 		};
 		2B27F7352A40A73A00868884 /* View Tests */ = {
@@ -764,6 +780,7 @@
 			isa = PBXGroup;
 			children = (
 				2B793F872A06B663005AB60C /* MediaOptions.swift */,
+				2B11705D29353DED00A1CB8F /* SourcesHorizontalScroll.swift */,
 				2B793F8E2A0AB1E7005AB60C /* MediaSourceSelection.swift */,
 				2B793F912A0AB27B005AB60C /* ActiveMediaControlPanel.swift */,
 			);
@@ -871,7 +888,6 @@
 			isa = PBXGroup;
 			children = (
 				2B8F713D292E5C5800073637 /* Lights.swift */,
-				2BD75A18292E7ACE004360A3 /* LightControl.swift */,
 				2B9ABC6C294A1CB600670EE0 /* LightsBottomPanel.swift */,
 				2B1479C129520BB900FA51C5 /* LightPowerButton.swift */,
 				2BA9DBE82963166300DF3EEC /* AdjustablePowerButton.swift */,
@@ -1000,6 +1016,22 @@
 				2BA7B5D62A4250F500A02965 /* Endpoint_Tests.swift */,
 			);
 			name = "Networking Tests";
+			sourceTree = "<group>";
+		};
+		2BD08B8E2A4B9FE200623211 /* ViewFactory */ = {
+			isa = PBXGroup;
+			children = (
+				2BD08B8F2A4B9FF900623211 /* ViewFactory.swift */,
+				2BD08B912A4BA01E00623211 /* ViewFactory+HostedViews.swift */,
+				2BD08B932A4BA05100623211 /* ViewFactory+PrimaryViews.swift */,
+				2BD08B952A4BA07000623211 /* ViewFactory+LightsMenu.swift */,
+				2BD08B972A4BA08D00623211 /* ViewFactory+SeatsMenu.swift */,
+				2BD08B992A4BA0BE00623211 /* ViewFactory+ShadesMenu.swift */,
+				2BD08B9B2A4BA0E500623211 /* ViewFactory+ClimateMenu.swift */,
+				2BD08B9D2A4BA10800623211 /* ViewFactory+PlaneSchematic.swift */,
+				2BD08B9F2A4BA1B600623211 /* ViewFactory+Media.swift */,
+			);
+			path = ViewFactory;
 			sourceTree = "<group>";
 		};
 		2BE97D47291C348800149BA4 /* Watch */ = {
@@ -1252,8 +1284,9 @@
 				2B8F7139292D763C00073637 /* Shades.swift in Sources */,
 				2B5A28DF2A44EAEB009A8DC0 /* NowPlayingBlueprint.swift in Sources */,
 				2B197F0B2A034CDA00DF406B /* ShadeButton.swift in Sources */,
-				2B11705E29353DED00A1CB8F /* Sources.swift in Sources */,
+				2B11705E29353DED00A1CB8F /* SourcesHorizontalScroll.swift in Sources */,
 				2B5A28D72A44EA0C009A8DC0 /* ShadeBlueprint.swift in Sources */,
+				2BD08B8D2A4B96E400623211 /* ApiFactory.swift in Sources */,
 				2B8F713E292E5C5800073637 /* Lights.swift in Sources */,
 				2B20BF4E2A059AED0096568D /* SpeakerButton.swift in Sources */,
 				2B197EEE2A02CFBA00DF406B /* ShadesModel.swift in Sources */,
@@ -1261,6 +1294,7 @@
 				2B02B9D92937C93300C6387A /* Cache.swift in Sources */,
 				2BB135EC2926D6AB0016444C /* WeatherModels.swift in Sources */,
 				2BE97D67291C69F700149BA4 /* Haptics.swift in Sources */,
+				2BD08B982A4BA08D00623211 /* ViewFactory+SeatsMenu.swift in Sources */,
 				2B20BF512A05A1390096568D /* MediaFactory.swift in Sources */,
 				2BBBB11C2A439D870045DF40 /* HomeMenuCoordinator.swift in Sources */,
 				2BB3A587292445C90094B787 /* HeartbeatMonitor.swift in Sources */,
@@ -1272,24 +1306,24 @@
 				2B5A28CE2A44E3F4009A8DC0 /* PlaneFuselage.swift in Sources */,
 				2B5A28D42A44E460009A8DC0 /* ShadeMenuPlaneDisplayOptions.swift in Sources */,
 				2BE97D5A291C46ED00149BA4 /* Watch.swift in Sources */,
-				2BD75A19292E7ACE004360A3 /* LightControl.swift in Sources */,
 				2B86580A29393E9500982BBB /* AccessModel.swift in Sources */,
 				2B793F922A0AB27B005AB60C /* ActiveMediaControlPanel.swift in Sources */,
 				2B20BF532A05AE500096568D /* StateFactory.swift in Sources */,
+				2BD08B902A4B9FF900623211 /* ViewFactory.swift in Sources */,
 				2B5A28E12A44EB08009A8DC0 /* ClimateBlueprint.swift in Sources */,
 				2B1170632935491000A1CB8F /* SpeakersAPI.swift in Sources */,
 				2B1170652935491D00A1CB8F /* SpeakerModel.swift in Sources */,
-				2B20BF572A05AE8C0096568D /* ViewFactory.swift in Sources */,
 				2B8F713C292E566300073637 /* LightsAPI.swift in Sources */,
 				2B02B9C72936AB1900C6387A /* MapInPlace.swift in Sources */,
 				2B02B9BF2936729100C6387A /* Volume.swift in Sources */,
 				2B197EFF2A02FD5F00DF406B /* ClimateAPI.swift in Sources */,
 				2B02B9C92936ABAB00C6387A /* GeneralAPI.swift in Sources */,
+				2BD08B942A4BA05100623211 /* ViewFactory+PrimaryViews.swift in Sources */,
 				2BE97D3B291C137B00149BA4 /* HomeMenu.swift in Sources */,
 				2B197F092A031C6C00DF406B /* PlaneSchematic+Modifiers.swift in Sources */,
 				2B4A50162A03F71800DF47EF /* UI+.swift in Sources */,
 				2B197EFC2A02D86000DF406B /* PlaneSchematic+.swift in Sources */,
-				2B27F73B2A40D20E00868884 /* main.swift in Sources */,
+				2B27F73B2A40D20E00868884 /* _pri_main.swift in Sources */,
 				2BA8F60629252166005621D3 /* SeatModels.swift in Sources */,
 				2BA7D906293FC63F004E2DF6 /* PlaneViewModel.swift in Sources */,
 				2B4A501A2A0433D700DF47EF /* MonitorButton.swift in Sources */,
@@ -1298,6 +1332,7 @@
 				2BE97D3D291C174000149BA4 /* FlightInfo.swift in Sources */,
 				2BBBB11A2A439D4F0045DF40 /* RootTabCoordinator.swift in Sources */,
 				2B197F022A031B4D00DF406B /* SeatButton.swift in Sources */,
+				2BD08B9C2A4BA0E500623211 /* ViewFactory+ClimateMenu.swift in Sources */,
 				2BB135FF292708750016444C /* ShadesAPI.swift in Sources */,
 				2BD75A1B292EB256004360A3 /* AppDelegate.swift in Sources */,
 				2BE4D4F22940FE3E0026FC01 /* ElementsEnumModel.swift in Sources */,
@@ -1312,9 +1347,11 @@
 				2B10DD24292D4C2400AB98F3 /* Weather.swift in Sources */,
 				2B02B9D42936BBEA00C6387A /* Settings.swift in Sources */,
 				2B02B9C52936AAA100C6387A /* CabinClimate.swift in Sources */,
+				2BD08B9A2A4BA0BE00623211 /* ViewFactory+ShadesMenu.swift in Sources */,
 				2B41EF4A292C105E0062CA2B /* Cabin.swift in Sources */,
 				2B5A28DD2A44EAD5009A8DC0 /* SpeakersBlueprint.swift in Sources */,
 				2B197F042A031C2000DF406B /* Divan.swift in Sources */,
+				2BD08B922A4BA01E00623211 /* ViewFactory+HostedViews.swift in Sources */,
 				2B02B9DB2937FD4500C6387A /* PlaneSchematic.swift in Sources */,
 				2B11704E29352D0A00A1CB8F /* MonitorModel.swift in Sources */,
 				2B197EE62A02CAFA00DF406B /* RealtimeAPI.swift in Sources */,
@@ -1326,6 +1363,7 @@
 				2B02B9C12936968600C6387A /* PlaneFactory.swift in Sources */,
 				2BA7B4CB291D4A3A00942CB5 /* SeatsAPI.swift in Sources */,
 				2B11704A29352AF100A1CB8F /* MonitorsAPI.swift in Sources */,
+				2BD08B9E2A4BA10800623211 /* ViewFactory+PlaneSchematic.swift in Sources */,
 				2B117068293551AD00A1CB8F /* FlightTab.swift in Sources */,
 				2B02B9D12936BBDD00C6387A /* Presets.swift in Sources */,
 				2B02B9CE2936B66500C6387A /* CabinClimateModel.swift in Sources */,
@@ -1334,12 +1372,14 @@
 				2B10DD28292D656B00AB98F3 /* Endpoint.swift in Sources */,
 				2BE4D4F5294107680026FC01 /* TableModel.swift in Sources */,
 				2B793F942A0B0192005AB60C /* ActiveMediaButton.swift in Sources */,
+				2BD08BA02A4BA1B600623211 /* ViewFactory+Media.swift in Sources */,
 				2B117060293548A100A1CB8F /* Speakers.swift in Sources */,
 				2B9ABC6D294A1CB600670EE0 /* LightsBottomPanel.swift in Sources */,
 				2B5A28D22A44E435009A8DC0 /* LightMenuPlaneDisplayOptions.swift in Sources */,
 				2B793F882A06B663005AB60C /* MediaOptions.swift in Sources */,
 				2BA9DBE92963166300DF3EEC /* AdjustablePowerButton.swift in Sources */,
 				2B1479C229520BB900FA51C5 /* LightPowerButton.swift in Sources */,
+				2BD08B962A4BA07000623211 /* ViewFactory+LightsMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,9 +8,11 @@
 import SwiftUI
 
 //TODO: - Remove Static References
-struct Sources: View {
+struct SourcesHorizontalScroll: View {
     
     @ObservedObject var viewModel: SourcesViewModel
+    
+    let sourceIconCallback: (SourceType) -> ()
     
     var body: some View {
         HStack(spacing:10) {
@@ -18,7 +20,7 @@ struct Sources: View {
             ForEach(viewModel.sourceTypes, id: \.id) { sourceType in
                 
                 Button {
-                    print("clicked!")
+                    //
                 } label: {
                     
                     VStack(spacing: 4) {
@@ -35,9 +37,7 @@ struct Sources: View {
                         RoundedRectangle(cornerRadius: 8).stroke(.blue, lineWidth: 1).frame(width: 86, height: 86)
                     )
                     .hapticFeedback(feedbackStyle: .medium) { _ in
-                        NavigationFactory.rootTabCoordinator.goToWithParams(
-                            ViewFactory.buildSourceListView(sourceType.id)
-                        )
+                        sourceIconCallback(sourceType)
                     }
                     
                 } //: BTN
@@ -67,11 +67,12 @@ struct SourceList: View {
                 if(source.type == filter.rawValue) {
 
                     Button {
-                        StateFactory.mediaViewModel.updateSelectedSource(source: source)
-                        StateFactory.mediaViewModel.assignSourceToMonitor(source: source)
-                        StateFactory.mediaViewModel.changeViewIntent(.selectSpeakerOutput)
-                        StateFactory.mediaViewModel.clearSelection()
-                        NavigationFactory.rootTabCoordinator.dismiss()
+                        //TODO: - 
+//                        StateFactory.mediaViewModel.updateSelectedSource(source: source)
+//                        StateFactory.mediaViewModel.assignSourceToMonitor(source: source)
+//                        StateFactory.mediaViewModel.changeViewIntent(.selectSpeakerOutput)
+//                        StateFactory.mediaViewModel.clearSelection()
+//                        NavigationFactory.rootTabCoordinator.dismiss()
                     } label: {
                         Text(source.name)
                     } //: BTN

@@ -13,8 +13,7 @@ class RootTabCoordinator: NSObject  {
     var navigationController = UITabBarController()
     var subviews: [UIViewController]!
     
-    func goTo(_ route: MenuRouter) {
-        let destination = route.view()
+    func goTo<V>(destination: UIHostingController<V>) {
         destination.modalTransitionStyle = .coverVertical
         navigationController.present(destination, animated: true)
     }

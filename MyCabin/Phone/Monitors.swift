@@ -7,37 +7,9 @@
 
 import SwiftUI
 
-//TODO: - Remove Entire view ? 
-struct Monitors: View {
-    
-    @StateObject var viewModel: MonitorsViewModel
-    
-    var body: some View {
-        Group{
-            if (viewModel.loading) {
-                ProgressView()
-            } else {                
-                List(viewModel.monitorsList ?? [MonitorModel]()) { monitor in
-                    Group {
-                        Text(monitor.id)
-                        Button("Power On") {
-                            StateFactory.apiClient.toggleMonitor(monitor, cmd: true)
-                        }
-                        Button("Power Off") {
-                            StateFactory.apiClient.toggleMonitor(monitor, cmd: false)
-                        }
-                    }
-                }
-            }
-        }
-//        .onAppear {
-//            api.fetch()
-//        }
-    }
-    
-}
 
 
+//TODO: - Fix View Model somewhere
 class MonitorsViewModel: ObservableObject, GCMSViewModel {
     
     @Published var loading: Bool = false

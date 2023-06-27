@@ -32,7 +32,7 @@ extension GCMSClient {
                     print("put request data", shade)
             }
         )
-        .store(in: &StateFactory.apiClient.cancelTokens)
+        .store(in: &self.cancelTokens)
     }
     
 }

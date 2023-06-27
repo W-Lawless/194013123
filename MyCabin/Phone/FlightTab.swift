@@ -11,8 +11,9 @@ import SwiftUI
 struct FlightTab: View {
     var body: some View {
         TabView {
-            ViewFactory.buildFlightInfo()
-            ViewFactory.buildWeatherView()
+            //TODO: - Flight Tab
+//            ViewFactory.buildFlightInfo()
+//            ViewFactory.buildWeatherView()
         }
         .tabViewStyle(.page)
     }

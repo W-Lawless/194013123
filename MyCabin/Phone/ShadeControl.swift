@@ -10,8 +10,10 @@ import SwiftUI
 //TODO: Remove static references
 struct ShadeControl: View {
     
-    @ObservedObject var viewModel: ShadesViewModel = StateFactory.shadesViewModel
+    @EnvironmentObject var viewModel: ShadesViewModel
     @State private var iconState: OSC = .none
+    
+    let apiClient: GCMSClient
     
     var body: some View {
         
@@ -40,7 +42,7 @@ struct ShadeControl: View {
                 iconState = .opened
                 
                 if let shade = viewModel.activeShade {
-                    StateFactory.apiClient.commandShade(shade: shade, cmd: .OPEN)
+                    apiClient.commandShade(shade: shade, cmd: .OPEN)
                 }
             } //: VSTQ
 
@@ -65,7 +67,7 @@ struct ShadeControl: View {
                 iconState = .sheer
                 
                 if let shade = viewModel.activeShade {
-                    StateFactory.apiClient.commandShade(shade: shade, cmd: .OPEN)
+                    apiClient.commandShade(shade: shade, cmd: .OPEN)
                 }
             } //: VSTQ
             
@@ -91,7 +93,7 @@ struct ShadeControl: View {
                 iconState = .closed
                 
                 if let shade = viewModel.activeShade {
-                    StateFactory.apiClient.commandShade(shade: shade, cmd: .OPEN)
+                    apiClient.commandShade(shade: shade, cmd: .OPEN)
                 }
             } //: VSTQ
 
@@ -107,11 +109,4 @@ struct ShadeControl: View {
         case none
     }
     
-}
-
-struct ShadeControl_Previews: PreviewProvider {
-    static var previews: some View {
-        ShadeControl()
-            .previewLayout(.sizeThatFits)
-    }
 }

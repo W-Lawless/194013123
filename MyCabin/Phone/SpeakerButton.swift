@@ -15,6 +15,8 @@ struct SpeakerButton: View {
     let speaker: SpeakerModel
     @State var selected: Bool
     
+    let iconCallback: (SpeakerModel) -> Void
+    
     var body: some View {
         Image(selected ? "ic_speaker_on" : "ic_speaker_off")
             .resizable()
@@ -22,6 +24,8 @@ struct SpeakerButton: View {
             .frame(maxWidth: 48, maxHeight: 48)
             .scaleEffect(selected ? 1.4 : 1)
             .accessibilityIdentifier(speaker.id)
-            .hapticFeedback(feedbackStyle: .light, cb: mediaViewModel.speakerIconCallback, cbArgs: speaker)
+            .hapticFeedback(feedbackStyle: .light) { _ in
+                iconCallback(speaker)
+            }
     }
 }

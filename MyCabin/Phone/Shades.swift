@@ -11,7 +11,7 @@ struct Shades: View {
     
     @ObservedObject var viewModel: ShadesViewModel
     let planeViewBuilder: (PlaneSchematicDisplayMode) -> PlaneSchematic
-
+    let shadeControlBuilder: () -> ShadeControl
     
     var body: some View {
         
@@ -21,7 +21,7 @@ struct Shades: View {
             
             VStack(alignment: .center) {
                 if(viewModel.showPanel) {
-                    ShadeControl()
+                    shadeControlBuilder()
                 }
             }
             .edgesIgnoringSafeArea(.bottom)
@@ -30,6 +30,7 @@ struct Shades: View {
             .frame(height:108, alignment: .top)
             
         }
+        .environmentObject(viewModel)
         .edgesIgnoringSafeArea(.bottom)
         
     }
