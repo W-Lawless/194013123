@@ -14,8 +14,8 @@ struct LightMenuPlaneDisplayOptions: View {
     var body: some View {
         VStack(spacing: 32) {
             
-            LightMenuOptionButton(viewModel: planeViewModel, targetOption: .lightZones, imageName: "square.on.square")
-            LightMenuOptionButton(viewModel: planeViewModel, targetOption: .showLights, imageName: "lightbulb.fill")
+            LightMenuOptionButton(targetOption: .lightZones, imageName: "square.on.square")
+            LightMenuOptionButton(targetOption: .showLights, imageName: "lightbulb.fill")
             
         }
         .padding(.horizontal, 18)
@@ -25,13 +25,13 @@ struct LightMenuPlaneDisplayOptions: View {
 
 struct LightMenuOptionButton: View {
   
-    let viewModel: PlaneViewModel
+    @EnvironmentObject var planeViewModel: PlaneViewModel
     let targetOption: PlaneSchematicDisplayMode
     let imageName: String
     
     var body: some View {
         Button {
-            viewModel.updateDisplayMode(targetOption)
+            planeViewModel.updateDisplayMode(targetOption)
         } label: {
             Image(systemName: imageName)
                 .resizable()

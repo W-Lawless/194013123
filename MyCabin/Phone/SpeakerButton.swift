@@ -11,9 +11,9 @@ import SwiftUI
 
 struct SpeakerButton: View {
     
+    @EnvironmentObject var mediaViewModel: MediaViewModel
     let speaker: SpeakerModel
     @State var selected: Bool
-    @ObservedObject var mediaViewModel = StateFactory.mediaViewModel
     
     var body: some View {
         Image(selected ? "ic_speaker_on" : "ic_speaker_off")

@@ -11,11 +11,10 @@ import SwiftUI
 
 struct MonitorButton: View {
     
-    @ObservedObject var mediaViewModel = StateFactory.mediaViewModel
+    @EnvironmentObject var mediaViewModel: MediaViewModel
     
     let monitor: MonitorModel
     @State var selected: Bool
-//    @State var longPress: Bool = false
     
     var body: some View {
         

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AreaBaseBlueprint: View {
+struct AreaBaseBlueprint: View, AreaBlueprint {
     
     @EnvironmentObject var planeViewModel: PlaneViewModel
     

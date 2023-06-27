@@ -9,15 +9,14 @@ import SwiftUI
 
 struct PlaneDisplayOptionBar: View {
     
-    @EnvironmentObject var planeViewModel: PlaneViewModel
+    let planeDisplayOptions: PlaneSchematicDisplayMode
     
     var body: some View {
-        if (planeViewModel.planeDisplayOptions == .showLights || planeViewModel.planeDisplayOptions == .lightZones) {
+        if (planeDisplayOptions == .showLights || planeDisplayOptions == .lightZones) {
             LightMenuPlaneDisplayOptions()
-                .environmentObject(planeViewModel)
         }
         
-        if(planeViewModel.planeDisplayOptions == .showShades) {
+        if(planeDisplayOptions == .showShades) {
             ShadeMenuPlaneDisplayOptions()
         }
     }

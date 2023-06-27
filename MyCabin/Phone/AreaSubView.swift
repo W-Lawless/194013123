@@ -7,36 +7,22 @@
 
 import SwiftUI
 
+
+
 struct AreaSubView: View {
     
     @EnvironmentObject var planeViewModel: PlaneViewModel
-    
+
     let area: PlaneArea
+    let baseBlueprintBuilder: (PlaneArea) -> AreaBaseBlueprint
+    let featureBlueprintBuilder: (PlaneArea, PlaneSchematicDisplayMode) -> AnyView
     
     var body: some View {
         ZStack(alignment: .topLeading) {
             
-            AreaBaseBlueprint(area: area)
-            
-            if(planeViewModel.planeDisplayOptions == .showShades) {
-                ShadeBlueprint(area: area)
-            }
-            
-            if(planeViewModel.planeDisplayOptions == .showMonitors) {
-                MonitorsBlueprint(area: area)
-            }
-            
-            if(planeViewModel.planeDisplayOptions == .showSpeakers) {
-                SpeakersBlueprint(area: area)
-            }
-            
-            if(planeViewModel.planeDisplayOptions == .showNowPlaying) {
-                NowPlayingBlueprint(area: area)
-            }
-            
-            if(planeViewModel.planeDisplayOptions == .tempZones) {
-                ClimateBlueprint(area: area)
-            }
+            baseBlueprintBuilder(area)
+            featureBlueprintBuilder(area, planeViewModel.planeDisplayOptions)
+
 
         }
         .frame(width: (planeViewModel.subviewWidthUnit * area.rect.w), height: (planeViewModel.subviewHeightUnit * area.rect.h))

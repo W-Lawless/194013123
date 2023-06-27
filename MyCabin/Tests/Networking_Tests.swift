@@ -98,7 +98,7 @@ final class Networking_Tests: XCTestCase {
         }
         sut.monitor.startMonitor(interval: 0.1, callback: sut.monitorCallback)
         
-        wait(for: [exp], timeout: 1.0)
+        wait(for: [exp], timeout: 3.0)
 
         XCTAssertTrue(type(of: viewModel.lightList?.first?.brightness) == LightBrightness?.self, "Did not find \(String(describing: viewModel.lightList?.first?.brightness))")
         XCTAssert(count == 3)

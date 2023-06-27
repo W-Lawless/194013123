@@ -8,19 +8,20 @@
 import SwiftUI
 
 //TODO: Remove static references
-struct MonitorsBlueprint: View {
+struct MonitorsBlueprint: View, AreaBlueprint {
     
-    let area: PlaneArea
-    
-    @ObservedObject var mediaViewModel = StateFactory.mediaViewModel
+    @EnvironmentObject var mediaViewModel: MediaViewModel
+
+    let areaMonitors: [MonitorModel]
+    let monitorButtonBuilder: (MonitorModel, Bool) -> MonitorButton
     
     var body: some View {
-        ForEach(area.monitors ?? [MonitorModel]()) { monitor in
+        ForEach(areaMonitors) { monitor in
             if(monitor.id == mediaViewModel.selectedMonitor) {
-                MonitorButton(monitor: monitor, selected: true)
+                monitorButtonBuilder(monitor, true)
                     .modifier(PlaceIcon(rect: monitor.rect))
             } else {
-                MonitorButton(monitor: monitor, selected: false)
+                monitorButtonBuilder(monitor, false)
                     .modifier(PlaceIcon(rect: monitor.rect))
             }
         }

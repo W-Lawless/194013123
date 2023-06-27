@@ -9,19 +9,20 @@ import SwiftUI
 
 //TODO: Remove static references
 
-struct SpeakersBlueprint: View {
+struct SpeakersBlueprint: View, AreaBlueprint {
     
-    let area: PlaneArea
+    @EnvironmentObject var mediaViewModel: MediaViewModel
     
-    @ObservedObject var mediaViewModel = StateFactory.mediaViewModel
+    let areaSpeakers: [SpeakerModel]
+    let speakerButtonBuilder: (SpeakerModel, Bool) -> SpeakerButton
     
     var body: some View {
-        ForEach(area.speakers ?? [SpeakerModel]()) { speaker in
+        ForEach(areaSpeakers) { speaker in
             if(speaker.id == mediaViewModel.selectedSpeaker) {
-                SpeakerButton(speaker: speaker, selected: true)
+                speakerButtonBuilder(speaker, true)
                     .modifier(PlaceIcon(rect: speaker.rect))
             } else {
-                SpeakerButton(speaker: speaker, selected: false)
+                speakerButtonBuilder(speaker, false)
                     .modifier(PlaceIcon(rect: speaker.rect))
             }
         }

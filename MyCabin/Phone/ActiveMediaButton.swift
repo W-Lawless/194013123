@@ -11,8 +11,9 @@ import SwiftUI
 
 struct ActiveMediaButton: View {
     
+    @EnvironmentObject var mediaViewModel: MediaViewModel
+
     let area: PlaneArea
-    @ObservedObject var mediaViewModel = StateFactory.mediaViewModel
     let activeMedia: ActiveMedia
     
     var body: some View {

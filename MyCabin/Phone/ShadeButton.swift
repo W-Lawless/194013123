@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ShadeButton: View {
     
-    @ObservedObject var viewModel: ShadesViewModel = StateFactory.shadesViewModel
+    @ObservedObject var viewModel: ShadesViewModel
     var shade: ShadeModel
     
     var body: some View {

@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct ClimateBlueprint: View {
+struct ClimateBlueprint: View, AreaBlueprint {
 
     @EnvironmentObject var planeViewModel: PlaneViewModel
-    let area: PlaneArea
+    let areaClimateZones: [ClimateControllerModel]
 
     var body: some View {
         ZStack {
-            ForEach(Array(area.zoneTemp ?? [ClimateControllerModel]()), id: \.self) { tempZone in
+            ForEach(areaClimateZones, id: \.self) { tempZone in
                 
                 RoundedRectangle(cornerRadius: 4)
                     .stroke(.red, lineWidth: 1)

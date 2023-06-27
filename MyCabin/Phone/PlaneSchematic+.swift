@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+protocol AreaBlueprint {}
+
 extension PlaneSchematic {
     func filterPlaneAreas(_ planeModel: PlaneViewModel) {
         planeModel.plane.mapAreas = planeModel.plane.mapAreas.filter { area in

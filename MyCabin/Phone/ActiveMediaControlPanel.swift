@@ -33,7 +33,30 @@ struct ActiveMediaControlPanel: View {
                             .scaledToFit()
                             .frame(width: 64, height: 64)
                             .accessibilityIdentifier("active_device_\(device.rawValue)")
+
+                    Button {} label: {
+                        VStack(spacing: 4) {
+                            Image(systemName: "power.off")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 48, height: 48)
+                                .accessibilityIdentifier("source_icon_\(activeMedia.source.id)")
+                            Text("delete_it")
+                                .foregroundColor(.white)
+                                .font(.system(size: 11))
+                        } //: VSTQ
+                        .frame(width: 88, height: 88)
+                        .overlay (
+                            RoundedRectangle(cornerRadius: 8).stroke(.blue, lineWidth: 1).frame(width: 86, height: 86)
+                        )
+                        .hapticFeedback(feedbackStyle: .medium) { _ in
+                            mediaViewModel.displaySubView.toggle()
+                            mediaViewModel.contextualSubView = AnyView(ViewFactory.buildSourcesView())
+                            mediaViewModel.displaySubView.toggle()
+                        }
                         
+                    } //: BTN
+                    
                         Button {} label: {
                             VStack(spacing: 4) {
                                 Image(getSourceIcon())
@@ -50,9 +73,7 @@ struct ActiveMediaControlPanel: View {
                                 RoundedRectangle(cornerRadius: 8).stroke(.blue, lineWidth: 1).frame(width: 86, height: 86)
                             )
                             .hapticFeedback(feedbackStyle: .medium) { _ in
-                                mediaViewModel.displaySubView.toggle()
-                                mediaViewModel.contextualSubView = AnyView(ViewFactory.buildSourcesView())
-                                mediaViewModel.displaySubView.toggle()
+                                NavigationFactory.rootTabCoordinator.goTo(.sourceList)
                             }
                             
                         } //: BTN

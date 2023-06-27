@@ -7,13 +7,14 @@
 
 import SwiftUI
 
-struct ShadeBlueprint: View {
+struct ShadeBlueprint: View, AreaBlueprint {
     
     let area: PlaneArea
+    let shadeButtonBuilder: (ShadeModel) -> ShadeButton
     
     var body: some View {
         ForEach(area.shades ?? [ShadeModel]()) { shade in
-            ShadeButton(shade: shade)
+            shadeButtonBuilder(shade)
                 .modifier(PlaceIcon(rect: shade.rect))
         } //: FOR EACH
     }

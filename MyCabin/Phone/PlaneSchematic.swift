@@ -10,6 +10,10 @@ import SwiftUI
 struct PlaneSchematic: View {
     
     @ObservedObject var planeViewModel: PlaneViewModel
+    @ObservedObject var mediaViewModel: MediaViewModel
+    
+    let planeDisplayOptionsBarBuilder: (PlaneSchematicDisplayMode) -> AnyView
+    let planeFuselageBuilder: () -> PlaneFuselage
         
     var body: some View {
         
@@ -17,20 +21,20 @@ struct PlaneSchematic: View {
             
             ZStack(alignment: .custom) { // ZSTQ
                 
-                PlaneDisplayOptionBar()
-                    .environmentObject(planeViewModel)
+                planeDisplayOptionsBarBuilder(planeViewModel.planeDisplayOptions)
                 
                 HStack(alignment: .center) { // HSTQ
 
                     Image("plane_left_side")
                         .resizable()
                         .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
-                    PlaneFuselage()
-                        .environmentObject(planeViewModel)
+                    
+                    planeFuselageBuilder()
+                    
                     Image("plane_right_side")
                         .resizable()
                         .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
-                    
+
                 } //: HSTQ
                 .padding(.horizontal, 34)
                 .frame(height: geometry.size.height)
@@ -38,6 +42,8 @@ struct PlaneSchematic: View {
                 
             } //: ZSTQ
             .padding(.horizontal, 12)
+            .environmentObject(planeViewModel)
+            .environmentObject(mediaViewModel)
             
         } //: GEO
         .passGeometry { geo in

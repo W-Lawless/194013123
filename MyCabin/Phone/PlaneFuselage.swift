@@ -11,23 +11,24 @@ struct PlaneFuselage: View {
     
     @EnvironmentObject var planeViewModel: PlaneViewModel
     
+    let areaSubViewBuilder: (PlaneArea) -> AreaSubView
+    
     var body: some View {
         
         VStack(alignment: .center, spacing: 0) { //VSTQ B
             
             if(planeViewModel.planeDisplayOptions == .tempZones) {
-                AreaSubView(area: planeViewModel.plane.parentArea ?? PlaneArea())
-                    .environmentObject(planeViewModel)
+                
+                areaSubViewBuilder(planeViewModel.plane.parentArea)
 
             } else {
                 
                 ForEach(planeViewModel.plane.mapAreas) { area in
                     
-                    AreaSubView(area: area)
+                    areaSubViewBuilder(area)
                         .if(planeViewModel.planeDisplayOptions == .lightZones) {
                             $0.modifier(TappableZone(area: area))
                         }
-                        .environmentObject(planeViewModel)
                     
                 } //: FOREACH
                 

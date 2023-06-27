@@ -31,9 +31,15 @@ final class PlaneFactory {
     //Plane Schematic View
     static var planeViewModel = PlaneViewModel()
     
+    //TODO: move to view fac
     static func buildPlaneSchematic(options: PlaneSchematicDisplayMode) -> PlaneSchematic {
-        let view = PlaneSchematic(planeViewModel: planeViewModel)
+        let view = PlaneSchematic(planeViewModel: planeViewModel,
+                                  mediaViewModel: StateFactory.mediaViewModel,
+                                  planeDisplayOptionsBarBuilder: ViewFactory.buildPlaneDisplayOptionsBar,
+                                  planeFuselageBuilder: ViewFactory.buildPlaneFuselage)
+        
         Task { await planeViewModel.updateDisplayMode(options) }
+        
         return view
     }
     

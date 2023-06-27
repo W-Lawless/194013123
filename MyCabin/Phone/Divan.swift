@@ -63,9 +63,3 @@ struct DivanIcon: View  {
             }
     }
 }
-
-//struct Divan_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Divan()
-//    }
-//}

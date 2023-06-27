@@ -33,9 +33,3 @@ struct MiniTable: View {
         }
     }
 }
-
-//struct Table_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Table()
-//    }
-//}

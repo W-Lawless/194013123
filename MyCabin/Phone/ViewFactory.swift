@@ -118,4 +118,114 @@ final class ViewFactory {
         return view
     }
     
+    
+    //MARK: - Plane Views
+    
+    static func buildPlaneFuselage() -> PlaneFuselage {
+        let view = PlaneFuselage(areaSubViewBuilder: buildAreaSubView)
+        return view
+    }
+    
+    static func buildPlaneDisplayOptionsBar(options: PlaneSchematicDisplayMode) -> AnyView {
+        switch (options) {
+        case .showLights:
+            return AnyView(LightMenuPlaneDisplayOptions())
+        case .lightZones:
+            return AnyView(LightMenuPlaneDisplayOptions())
+        case .showShades:
+            return AnyView(ShadeMenuPlaneDisplayOptions())
+        default:
+            return AnyView(Text(""))
+        }
+    }
+    
+    static func buildAreaSubView(area: PlaneArea) -> AreaSubView {
+        let view = AreaSubView(area: area, baseBlueprintBuilder: buildAreaBaseBlueprint, featureBlueprintBuilder: buildAreaFeatureBlueprint)
+        return view
+    }
+    
+    static func buildAreaBaseBlueprint(area: PlaneArea) -> AreaBaseBlueprint {
+        return AreaBaseBlueprint(area: area)
+    }
+    
+    static func buildAreaFeatureBlueprint(area: PlaneArea, options: PlaneSchematicDisplayMode) -> AnyView {
+        
+        switch (options) {
+        case .showShades:
+            return AnyView(buildShadeBlueprint(area: area))
+        case .showMonitors:
+            return AnyView(buildMonitorsBlueprint(area: area))
+        case .showSpeakers:
+            return AnyView(buildSpeakerBlueprint(area: area))
+        case .showNowPlaying:
+            return AnyView(buildNowPlayingBluePrint(area: area))
+        case .tempZones:
+            return AnyView(buildClimateBlueprint(area: area))
+        default:
+            return AnyView(AreaBaseBlueprint(area: area))
+        }
+        
+    }
+    
+    //MARK: - Lights
+    
+    
+    
+    //MARK: - Shades
+    
+    static func buildShadeBlueprint(area: PlaneArea) -> ShadeBlueprint {
+        let view = ShadeBlueprint(area: area, shadeButtonBuilder: buildShadeButton)
+        return view
+    }
+    
+    static func buildShadeButton(shade: ShadeModel) -> ShadeButton {
+        let view = ShadeButton(viewModel: StateFactory.shadesViewModel, shade: shade)
+        return view
+    }
+    
+    //MARK: - Climate
+    
+    static func buildClimateBlueprint(area: PlaneArea) -> ClimateBlueprint {
+        let view = ClimateBlueprint(areaClimateZones: area.zoneTemp ?? [ClimateControllerModel]())
+        return view
+    }
+    
+    
+    //MARK: - Media_Monitors
+    
+    static func buildMonitorsBlueprint(area: PlaneArea) -> MonitorsBlueprint {
+        let view = MonitorsBlueprint(areaMonitors: area.monitors ?? [MonitorModel](), monitorButtonBuilder: buildMonitorButton)
+        return view
+    }
+    
+    //TODO: - Refactor passing callback from here
+    static func buildMonitorButton(monitor: MonitorModel, selected: Bool) -> MonitorButton {
+        let view = MonitorButton(monitor: monitor, selected: selected)
+        return view
+    }
+    
+    //MARK: - Media_Speakers
+    
+    static func buildSpeakerBlueprint(area: PlaneArea) -> SpeakersBlueprint {
+        let view = SpeakersBlueprint(areaSpeakers: area.speakers ?? [SpeakerModel](), speakerButtonBuilder: buildSpeakerButton)
+        return view
+    }
+    
+    static func buildSpeakerButton(speaker: SpeakerModel, selected: Bool) -> SpeakerButton {
+        let view = SpeakerButton(speaker: speaker, selected: selected)
+        return view
+    }
+    
+    //MARK: - Media_NowPlaying
+    
+    static func buildNowPlayingBluePrint(area: PlaneArea) -> NowPlayingBlueprint {
+        let view = NowPlayingBlueprint(area: area, activeMediaButtonBuilder: buildActiveMediaButton)
+        return view
+    }
+    
+    static func buildActiveMediaButton(area: PlaneArea, activeMedia: ActiveMedia) -> ActiveMediaButton {
+        let view = ActiveMediaButton(area: area, activeMedia: activeMedia)
+        return view
+    }
+    
 }
