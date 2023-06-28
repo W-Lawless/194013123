@@ -22,6 +22,7 @@ struct PlaneSchematic: View {
             ZStack(alignment: .custom) { // ZSTQ
                 
                 planeDisplayOptionsBarBuilder(planeViewModel.planeDisplayOptions)
+//                    .border(.red, width: 3)
                 
                 HStack(alignment: .center) { // HSTQ
 

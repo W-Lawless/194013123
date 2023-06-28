@@ -22,8 +22,9 @@ struct SpeakersBlueprint: View, AreaBlueprint {
                 speakerButtonBuilder(speaker, true)
                     .modifier(PlaceIcon(rect: speaker.rect))
             } else {
-                speakerButtonBuilder(speaker, false)
+                speakerButtonBuilder(speaker, false) //CAPTURES VIEW INTENT AS .SELECTMONITOR AND DOESNT CHANGE
                     .modifier(PlaceIcon(rect: speaker.rect))
+
             }
         }
     }

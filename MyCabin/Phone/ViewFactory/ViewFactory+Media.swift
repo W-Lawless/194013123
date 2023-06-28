@@ -7,21 +7,55 @@
 
 import SwiftUI
 
+extension ViewFactory {
+    
+    func buildMediaTab() -> MediaTab {
+        let view = MediaTab(//planeViewModel: state.planeViewModel,
+                            mediaViewModel: state.mediaViewModel,
+                            planeViewBuilder: buildPlaneSchematic,
+                            mediaSubViewBuilder: buildMediaSubView)
+        return view
+    }
+    
+}
+
+//MARK: - Options Bar
+
+extension ViewFactory {
+    
+    func buildMediaDiplayOptionsBar() -> MediaOptions {
+        let view = MediaOptions(mediaOptionsButtonBuilder: buildMediaDisplayOptionButton)
+        return view
+    }
+    
+    func buildMediaDisplayOptionButton(image: String, option: PlaneSchematicDisplayMode) -> MediaOptionsButton {
+        let view = MediaOptionsButton(imageName: image, planeDisplayOptions: option)
+        return view
+    }
+    
+}
+
 
 //MARK: - Monitors
 
 
 extension ViewFactory {
     
-    
     func buildMonitorsBlueprint(area: PlaneArea) -> MonitorsBlueprint {
         let view = MonitorsBlueprint(areaMonitors: area.monitors ?? [MonitorModel](), monitorButtonBuilder: buildMonitorButton)
         return view
     }
     
-    func buildMonitorButton(viewIntent: MediaViewIntent, monitor: MonitorModel, selected: Bool) -> MonitorButton {
+    func buildMonitorButton(monitor: MonitorModel, selected: Bool) -> MonitorButton {
         let view = MonitorButton(monitor: monitor, selected: selected) { monitor in
-            self.state.selectMonitor(monitor: monitor)
+            switch(self.state.mediaViewIntentPublisher.value) {
+            case .selectMonitorOutput:
+                self.state.selectMonitor(monitor: monitor)
+            case .selectSpeakerOutput:
+                print("ayyy")
+            case .viewNowPlaying:
+                print("ayyyview now[palying ")
+            }
         }
         return view
     }
@@ -39,10 +73,21 @@ extension ViewFactory {
         return view
     }
     
+    //TODO: - Build out removes extra .mediavm from here vs ... statefactory+ files
+    //TODO: if all mutation funcs moved into StF+ files VMs classes will be pure
+    
     func buildSpeakerButton(speaker: SpeakerModel, selected: Bool) -> SpeakerButton {
         let view = SpeakerButton(speaker: speaker, selected: selected) { speaker in
-            self.state.selectSpeaker(speaker: speaker)
+            switch(self.state.mediaViewIntentPublisher.value) {
+            case .selectMonitorOutput:
+                self.state.selectSpeaker(speaker: speaker)
+            case .selectSpeakerOutput:
+                self.state.assignSourceToSpeaker(speaker: speaker)
+            case .viewNowPlaying:
+                print("noowwwplayin")
+            }
         }
+        
         return view
     }
 }
@@ -79,8 +124,8 @@ extension ViewFactory {
 
 extension ViewFactory {
     
-    func buildMediaSubView(viewIntent: MediaViewIntent) -> AnyView {
-        switch (viewIntent) {
+    func buildMediaSubView() -> AnyView {
+        switch (self.state.mediaViewIntentPublisher.value) {
         case .selectMonitorOutput:
             return AnyView(buildMediaSourceSeleciton())
         case .selectSpeakerOutput:
@@ -93,7 +138,9 @@ extension ViewFactory {
     
 }
     
+
 //MARK: - Select Source Subview
+
 
 extension ViewFactory {
     
@@ -110,7 +157,14 @@ extension ViewFactory {
     }
     
     func buildSourceListView(_ filter: SourceTypes = .camera) -> SourceList {
-        let view = SourceList(sources: state.sourcesViewModel, filter: filter)
+        let view = SourceList(sources: state.sourcesViewModel, filter: filter) { source in
+            self.state.mediaViewModel.updateSelectedSource(source: source)
+            self.state.assignSourceToMonitor(source: source) //TODO: LEFT OFF
+            self.state.mediaViewIntentPublisher.send(.selectSpeakerOutput)
+            self.state.configureMediaViewIntent()
+            self.state.mediaViewModel.clearSelection()
+            self.state.rootTabCoordinator.dismiss()
+        }
         return view
     }
     

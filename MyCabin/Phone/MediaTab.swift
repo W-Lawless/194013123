@@ -10,30 +10,19 @@ import Combine
 
 struct MediaTab: View {
     
+//    @ObservedObject var planeViewModel: PlaneViewModel
     @ObservedObject var mediaViewModel: MediaViewModel
     let planeViewBuilder: (PlaneSchematicDisplayMode) -> PlaneSchematic
-    @State private var hasAppeared = false
+    let mediaSubViewBuilder: () -> AnyView
     
-    let mediaSubViewBuilder: (MediaViewIntent) -> AnyView
     
-
+    
     var body: some View {
         ZStack(alignment: .bottom) { // ZSTQ A
             
-            ZStack(alignment: .custom) { // ZSTQ B
-                
-                MediaOptions(mediaViewModel: mediaViewModel)
-                planeViewBuilder(mediaViewModel.planeDisplayOptions)
-                
-            } //:ZSTQ B
-            .onAppear {
-                if (!hasAppeared) {
-                    mediaViewModel.changeViewIntent(.selectMonitorOutput)
-                    hasAppeared = true
-                }
-                mediaViewModel.clearSelection()
-            }
-            
+
+            planeViewBuilder(mediaViewModel.planeDisplayOptions)
+
             
             if(mediaViewModel.displayToolTip) {
                 Text(mediaViewModel.contextualToolTip)
@@ -42,12 +31,17 @@ struct MediaTab: View {
             }
          
             if(mediaViewModel.displaySubView) {
-                mediaSubViewBuilder(mediaViewModel.mediaViewIntent)
-//                mediaViewModel.contextualSubView
+                mediaSubViewBuilder()
             }
 
         } //: ZSTQ A
         .environmentObject(mediaViewModel)
+        .onAppear {
+//            planeViewModel.updateDisplayMode(.showMonitors)
+            mediaViewModel.clearSelection()
+        }
+        
+        
         
     } //: BODY
 

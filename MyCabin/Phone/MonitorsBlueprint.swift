@@ -12,15 +12,15 @@ struct MonitorsBlueprint: View, AreaBlueprint {
     @EnvironmentObject var mediaViewModel: MediaViewModel
 
     let areaMonitors: [MonitorModel]
-    let monitorButtonBuilder: (MediaViewIntent, MonitorModel, Bool) -> MonitorButton
+    let monitorButtonBuilder: (MonitorModel, Bool) -> MonitorButton
     
     var body: some View {
         ForEach(areaMonitors) { monitor in
             if(monitor.id == mediaViewModel.selectedMonitor) {
-                monitorButtonBuilder(mediaViewModel.mediaViewIntent, monitor, true)
+                monitorButtonBuilder(monitor, true)
                     .modifier(PlaceIcon(rect: monitor.rect))
             } else {
-                monitorButtonBuilder(mediaViewModel.mediaViewIntent, monitor, false)
+                monitorButtonBuilder(monitor, false)
                     .modifier(PlaceIcon(rect: monitor.rect))
             }
         }

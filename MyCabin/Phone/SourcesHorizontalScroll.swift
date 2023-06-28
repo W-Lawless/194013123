@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-//TODO: - Remove Static References
 struct SourcesHorizontalScroll: View {
     
     @ObservedObject var viewModel: SourcesViewModel
@@ -50,43 +49,6 @@ struct SourcesHorizontalScroll: View {
         
     }
 
-}
-
-struct SourceList: View {
-    
-    @AppStorage("SelectedMonitor") var selectedMonitor: String = ""
-    let sources: SourcesViewModel
-    var filter: SourceTypes
-    
-    var body: some View {
-        
-        List {
-            
-            ForEach(sources.sourceList ?? [SourceModel](), id: \.id) { source in
-                
-                if(source.type == filter.rawValue) {
-
-                    Button {
-                        //TODO: - 
-//                        StateFactory.mediaViewModel.updateSelectedSource(source: source)
-//                        StateFactory.mediaViewModel.assignSourceToMonitor(source: source)
-//                        StateFactory.mediaViewModel.changeViewIntent(.selectSpeakerOutput)
-//                        StateFactory.mediaViewModel.clearSelection()
-//                        NavigationFactory.rootTabCoordinator.dismiss()
-                    } label: {
-                        Text(source.name)
-                    } //: BTN
-                    .accessibilityIdentifier(source.id)
-                    
-                } //: CONDITIONAL
-                
-            } //: FOREACH
-            
-        } //: LIST
-        .padding(.horizontal, 8)
-        
-    }
-    
 }
 
 

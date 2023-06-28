@@ -11,6 +11,7 @@ final class StateFactory {
     
     let apiClient = GCMSClient()
     var cancelTokens = Set<AnyCancellable>()
+    let mediaViewIntentPublisher = CurrentValueSubject<MediaViewIntent, Never>(.selectMonitorOutput)
     
     //Navigation
     let rootTabCoordinator = RootTabCoordinator()
@@ -72,6 +73,36 @@ final class StateFactory {
     
     
     //MARK: - Media State Update Methods
+    //TODO: - Coalesce into media view model or build out ?
+        func configureMediaViewIntent() {
+            print("configure media view for",mediaViewIntentPublisher.value)
+            switch (mediaViewIntentPublisher.value) {
+            case .selectMonitorOutput:
+                mediaViewModel.planeDisplayOptions = .showMonitors
+                mediaViewModel.mediaDisplayOptions = .outputs
+                mediaViewModel.contextualToolTip = MediaToolTips.monitors.rawValue
+            case .selectSpeakerOutput:
+                mediaViewModel.planeDisplayOptions = .showSpeakers
+                mediaViewModel.mediaDisplayOptions = .sound
+                mediaViewModel.contextualToolTip = MediaToolTips.speakers.rawValue
+            case .viewNowPlaying:
+                mediaViewModel.planeDisplayOptions = .showNowPlaying
+                mediaViewModel.mediaDisplayOptions = .all
+                mediaViewModel.contextualToolTip = MediaToolTips.nowPlaying.rawValue
+    
+//                activeSpeakerIconCallback = { [weak self] data in
+//                    self?.loadActiveMediaControls(data: data, device: .speaker)
+//                }
+//
+//                activeMonitorIconCallback = { [weak self] data in
+//                    self?.loadActiveMediaControls(data: data, device: .monitor)
+//                }
+    
+            }
+    
+        }
+    
+    
     
     func selectMonitor(monitor: MonitorModel) {
         let selected = mediaViewModel.selectedMonitor
@@ -87,6 +118,7 @@ final class StateFactory {
     }
     
     func selectSpeaker(speaker: SpeakerModel) {
+        print("Selecttting speak")
         let selected = mediaViewModel.selectedSpeaker
         if (selected == speaker.id) {
             mediaViewModel.updateSelectedSpeaker(id: "")
@@ -96,6 +128,40 @@ final class StateFactory {
             mediaViewModel.updateSelectedSpeaker(id: speaker.id)
             mediaViewModel.displaySubView = true
             mediaViewModel.displayToolTip = false
+        }
+    }
+    
+    func assignSourceToSpeaker(speaker: SpeakerModel) {
+        mediaViewModel.updateSelectedSpeaker(id: speaker.id)
+
+        if let activeMediaID = mediaViewModel.activeMediaID {
+            var mediaGroup = mediaViewModel.activeMedia[activeMediaID]
+            mediaGroup?.speaker = speaker
+            mediaViewModel.activeMedia[activeMediaID] = mediaGroup
+//            let monitor = mediaViewModel.activeMedia[activeMediaID]?.monitor
+//            let source = mediaViewModel.activeMedia[activeMediaID]?.source
+            
+//            apiClient.toggleMonitor(monitor!, cmd: true)
+//            apiClient.assignSourceToMonitor(monitor!, source: source!)
+//            apiClient.assignSourceToSpeaker(speaker, source: source!)
+//            apiClient.setVolume(speaker, volume: 50)
+        }
+        
+        mediaViewModel.clearSelection()
+        mediaViewIntentPublisher.send(.viewNowPlaying)
+        configureMediaViewIntent()
+    }
+    
+    func assignSourceToMonitor(source: SourceModel) {
+        let selectedMonitorModel = monitorsViewModel.monitorsList?.first(where: { monitorModel in
+            monitorModel.id == mediaViewModel.selectedMonitor
+        })
+        if let selectedMonitorModel {
+            let activeMediaInstance = ActiveMedia(source: source, monitor: selectedMonitorModel)
+            mediaViewModel.activeMedia[activeMediaInstance.id] = activeMediaInstance
+            mediaViewModel.activeMediaID = activeMediaInstance.id
+        } else {
+            print("monitor not found")
         }
     }
     

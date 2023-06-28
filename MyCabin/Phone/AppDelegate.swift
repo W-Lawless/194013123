@@ -71,6 +71,8 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
     
     func launch(_ app: AppCoordinator) {
         if CommandLine.arguments.contains("--uitesting") {
+            print("Launch UI")
+//            launchProduction(app)
             launchUITests(app)
         } else {
             launchProduction(app)
@@ -79,13 +81,13 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
 
     func launchUITests(_ app: AppCoordinator) {
         print("UI TESTS LAUNCHED")
-        app.configureViews()
-        try? cacheUtil.loadAllCaches()
-        app.goTo(.cabinFound)
+        app.start(publisher: planeFactory.cabinConnectionPublisher, tokenStore: &stateFactory.cancelTokens) { _ in } sinkValue: { _ in
+            try? self.cacheUtil.loadAllCaches()
+            app.goTo(.cabinFound)
+        }
     }
     
     func launchProduction(_ app: AppCoordinator) {
-        
         app.start(publisher: planeFactory.cabinConnectionPublisher, tokenStore: &stateFactory.cancelTokens) { _ in } sinkValue: { cabinHeartBeat in
             DispatchQueue.main.async { [weak self] in
                 if(cabinHeartBeat){

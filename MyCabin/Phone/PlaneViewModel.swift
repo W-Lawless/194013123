@@ -26,6 +26,7 @@ class PlaneViewModel: ObservableObject {
     }
     
     @MainActor func updateDisplayMode(_ mode: PlaneSchematicDisplayMode) {
+        print("updating with", mode)
         self.planeDisplayOptions = mode
     }
     

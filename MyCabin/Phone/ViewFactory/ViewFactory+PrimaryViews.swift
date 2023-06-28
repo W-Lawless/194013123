@@ -62,9 +62,6 @@ extension ViewFactory {
         }
     }
     
-    func buildMediaTab() -> MediaTab {
-        let view = MediaTab(mediaViewModel: state.mediaViewModel, planeViewBuilder: buildPlaneSchematic, mediaSubViewBuilder: buildMediaSubView)
-        return view
-    }
+
     
 }

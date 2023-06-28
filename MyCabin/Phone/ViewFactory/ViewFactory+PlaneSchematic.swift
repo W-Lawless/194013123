@@ -22,6 +22,8 @@ extension ViewFactory {
     
     func buildPlaneDisplayOptionsBar(options: PlaneSchematicDisplayMode) -> AnyView {
         switch (options) {
+        case .showMonitors, .showSpeakers, .showNowPlaying, .showBluetooth, .showRemote:
+            return AnyView(buildMediaDiplayOptionsBar())
         case .showLights:
             return AnyView(LightMenuPlaneDisplayOptions())
         case .lightZones:
@@ -29,7 +31,7 @@ extension ViewFactory {
         case .showShades:
             return AnyView(ShadeMenuPlaneDisplayOptions())
         default:
-            return AnyView(Text(""))
+            return AnyView(Text("").border(.green, width: 4))
         }
     }
     

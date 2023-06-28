@@ -9,7 +9,8 @@ import SwiftUI
 
 struct MediaOptions: View {
     
-    @ObservedObject var mediaViewModel: MediaViewModel
+    @EnvironmentObject var mediaViewModel: MediaViewModel
+    let mediaOptionsButtonBuilder: (String, PlaneSchematicDisplayMode) -> MediaOptionsButton
     
     var body: some View {
         
@@ -18,56 +19,60 @@ struct MediaOptions: View {
             
             if(mediaViewModel.mediaDisplayOptions == .all) {
             
-                OptionsButton(mediaViewModel: mediaViewModel, imageName: "display", planeDisplayOptions: .showMonitors)
-                OptionsButton(mediaViewModel: mediaViewModel, imageName: "play.display", planeDisplayOptions: .showNowPlaying)
-                OptionsButton(mediaViewModel: mediaViewModel, imageName: "speaker.wave.3", planeDisplayOptions: .showSpeakers)
-                OptionsButton(mediaViewModel: mediaViewModel, imageName: "headphones", planeDisplayOptions: .showBluetooth)
-                OptionsButton(mediaViewModel: mediaViewModel, imageName: "appletvremote.gen2", planeDisplayOptions: .showRemote)
+                mediaOptionsButtonBuilder("display", .showMonitors)
+                mediaOptionsButtonBuilder("play.display", .showNowPlaying)
+                mediaOptionsButtonBuilder("speaker.wave.3", .showSpeakers)
+                mediaOptionsButtonBuilder("headphones", .showBluetooth)
+                mediaOptionsButtonBuilder("appletvremote.gen2", .showRemote)
                 
             } else if (mediaViewModel.mediaDisplayOptions == .outputs) {
                 
-                OptionsButton(mediaViewModel: mediaViewModel, imageName: "display", planeDisplayOptions: .showMonitors)
-                OptionsButton(mediaViewModel: mediaViewModel, imageName: "speaker.wave.3", planeDisplayOptions: .showSpeakers)
-                OptionsButton(mediaViewModel: mediaViewModel, imageName: "headphones", planeDisplayOptions: .showBluetooth)
+                mediaOptionsButtonBuilder("display", .showMonitors)
+                mediaOptionsButtonBuilder("speaker.wave.3", .showSpeakers)
+                mediaOptionsButtonBuilder("headphones", .showBluetooth)
                 
             } else if (mediaViewModel.mediaDisplayOptions == .sound) {
                 
-                OptionsButton(mediaViewModel: mediaViewModel, imageName: "speaker.wave.3", planeDisplayOptions: .showSpeakers)
-                OptionsButton(mediaViewModel: mediaViewModel, imageName: "headphones", planeDisplayOptions: .showBluetooth)
+                mediaOptionsButtonBuilder("speaker.wave.3", .showSpeakers)
+                mediaOptionsButtonBuilder("headphones", .showBluetooth)
                 
             }
             
         } //: VSTQ
-        .padding(32)
+        .padding(.trailing, 12)
     }
 }
 
-struct OptionsButton: View {
+struct MediaOptionsButton: View {
   
-    @ObservedObject var mediaViewModel: MediaViewModel
+    @EnvironmentObject var mediaViewModel: MediaViewModel
 
     let imageName: String
     let planeDisplayOptions: PlaneSchematicDisplayMode
     
     var body: some View {
         Button {
-            mediaViewModel.clearSelection()
+//            mediaViewModel.clearSelection()
+//            planeViewModel.updateDisplayMode(planeDisplayOptions)
             mediaViewModel.updatePlaneDisplayOptions(planeDisplayOptions)
+            mediaViewModel.updateContextualToolTip(MediaToolTips.speakers.rawValue)
+//            mediaViewModel.updatePlaneDisplayOptions(planeDisplayOptions)
             
-            switch(mediaViewModel.planeDisplayOptions) {
-            case .showMonitors:
-                mediaViewModel.configForSelectMonitor()
-            case .showSpeakers:
-//                mediaViewModel.speakerIconCallback = mediaViewModel.selectSpeaker
-                mediaViewModel.updateContextualToolTip(MediaToolTips.speakers.rawValue)
-            case .showBluetooth:
-                mediaViewModel.updateContextualToolTip(MediaToolTips.bluetooth.rawValue)
-            case .showNowPlaying:
-                mediaViewModel.updateContextualToolTip(MediaToolTips.nowPlaying.rawValue)
-            default:
-                mediaViewModel.updateContextualToolTip(mediaViewModel.contextualToolTip)
-            }
-            
+//            switch(planeViewModel.planeDisplayOptions) {
+//            case .showMonitors:
+//                //mediaViewModel.configForSelectMonitor() //TODO: Refactor
+//                mediaViewModel.updateContextualToolTip(MediaToolTips.monitors.rawValue)
+//            case .showSpeakers:
+////                planeViewModel.updateDisplayMode(.showSpeakers)
+//            case .showBluetooth:
+////                mediaViewModel.changeViewIntent(.selectMonitorOutput)
+//                mediaViewModel.updateContextualToolTip(MediaToolTips.bluetooth.rawValue)
+//            case .showNowPlaying:
+//                mediaViewModel.updateContextualToolTip(MediaToolTips.nowPlaying.rawValue)
+//            default:
+//                mediaViewModel.updateContextualToolTip(mediaViewModel.contextualToolTip)
+//            }
+//            
         } label: {
             Image(systemName: imageName)
                 .resizable()

@@ -139,6 +139,8 @@
 		2BD08B9C2A4BA0E500623211 /* ViewFactory+ClimateMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08B9B2A4BA0E500623211 /* ViewFactory+ClimateMenu.swift */; };
 		2BD08B9E2A4BA10800623211 /* ViewFactory+PlaneSchematic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08B9D2A4BA10800623211 /* ViewFactory+PlaneSchematic.swift */; };
 		2BD08BA02A4BA1B600623211 /* ViewFactory+Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08B9F2A4BA1B600623211 /* ViewFactory+Media.swift */; };
+		2BD08BA22A4BA4F000623211 /* SourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08BA12A4BA4F000623211 /* SourceList.swift */; };
+		2BD08BA42A4BA60300623211 /* MediaViewModel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08BA32A4BA60300623211 /* MediaViewModel+.swift */; };
 		2BD5E7FF2A12B9140042DF92 /* elements.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BD5E7FE2A12B9140042DF92 /* elements.json */; };
 		2BD5E8012A12C0C40042DF92 /* planeMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BD5E8002A12C0C30042DF92 /* planeMap.json */; };
 		2BD75A17292E7503004360A3 /* LightsData.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BD75A16292E7503004360A3 /* LightsData.json */; };
@@ -338,6 +340,8 @@
 		2BD08B9B2A4BA0E500623211 /* ViewFactory+ClimateMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewFactory+ClimateMenu.swift"; sourceTree = "<group>"; };
 		2BD08B9D2A4BA10800623211 /* ViewFactory+PlaneSchematic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewFactory+PlaneSchematic.swift"; sourceTree = "<group>"; };
 		2BD08B9F2A4BA1B600623211 /* ViewFactory+Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewFactory+Media.swift"; sourceTree = "<group>"; };
+		2BD08BA12A4BA4F000623211 /* SourceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceList.swift; sourceTree = "<group>"; };
+		2BD08BA32A4BA60300623211 /* MediaViewModel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediaViewModel+.swift"; sourceTree = "<group>"; };
 		2BD5E7FE2A12B9140042DF92 /* elements.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = elements.json; sourceTree = "<group>"; };
 		2BD5E8002A12C0C30042DF92 /* planeMap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = planeMap.json; sourceTree = "<group>"; };
 		2BD75A16292E7503004360A3 /* LightsData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LightsData.json; sourceTree = "<group>"; };
@@ -469,6 +473,7 @@
 				2B11705029352D7A00A1CB8F /* Monitors.swift */,
 				2B11705F293548A100A1CB8F /* Speakers.swift */,
 				2B793F8B2A06D9AA005AB60C /* MediaViewModel.swift */,
+				2BD08BA32A4BA60300623211 /* MediaViewModel+.swift */,
 			);
 			name = Media;
 			sourceTree = "<group>";
@@ -783,6 +788,7 @@
 				2B11705D29353DED00A1CB8F /* SourcesHorizontalScroll.swift */,
 				2B793F8E2A0AB1E7005AB60C /* MediaSourceSelection.swift */,
 				2B793F912A0AB27B005AB60C /* ActiveMediaControlPanel.swift */,
+				2BD08BA12A4BA4F000623211 /* SourceList.swift */,
 			);
 			name = Subviews;
 			sourceTree = "<group>";
@@ -1317,6 +1323,7 @@
 				2B02B9C72936AB1900C6387A /* MapInPlace.swift in Sources */,
 				2B02B9BF2936729100C6387A /* Volume.swift in Sources */,
 				2B197EFF2A02FD5F00DF406B /* ClimateAPI.swift in Sources */,
+				2BD08BA42A4BA60300623211 /* MediaViewModel+.swift in Sources */,
 				2B02B9C92936ABAB00C6387A /* GeneralAPI.swift in Sources */,
 				2BD08B942A4BA05100623211 /* ViewFactory+PrimaryViews.swift in Sources */,
 				2BE97D3B291C137B00149BA4 /* HomeMenu.swift in Sources */,
@@ -1365,6 +1372,7 @@
 				2B11704A29352AF100A1CB8F /* MonitorsAPI.swift in Sources */,
 				2BD08B9E2A4BA10800623211 /* ViewFactory+PlaneSchematic.swift in Sources */,
 				2B117068293551AD00A1CB8F /* FlightTab.swift in Sources */,
+				2BD08BA22A4BA4F000623211 /* SourceList.swift in Sources */,
 				2B02B9D12936BBDD00C6387A /* Presets.swift in Sources */,
 				2B02B9CE2936B66500C6387A /* CabinClimateModel.swift in Sources */,
 				2BCF9E6D29F49CE1007C7CA5 /* Wheel.swift in Sources */,
