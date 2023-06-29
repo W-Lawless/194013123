@@ -9,9 +9,7 @@ import SwiftUI
 
 struct SourceList: View {
     
-    
-    @AppStorage("SelectedMonitor") var selectedMonitor: String = ""
-    let sources: SourcesViewModel
+    let sources: MediaViewModel
     var filter: SourceTypes
     
     let selectionCallback: (SourceModel) -> ()

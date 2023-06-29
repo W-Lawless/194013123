@@ -31,7 +31,7 @@ extension ViewFactory {
         case .showShades:
             return AnyView(ShadeMenuPlaneDisplayOptions())
         default:
-            return AnyView(Text("").border(.green, width: 4))
+            return AnyView(Text(""))
         }
     }
     
@@ -46,7 +46,7 @@ extension ViewFactory {
     }
     
     func buildAreaBaseBlueprint(area: PlaneArea) -> AreaBaseBlueprint {
-        return AreaBaseBlueprint(area: area)
+        return AreaBaseBlueprint(area: area, seatButtonBuilder: buildSeatButton)
     }
     
     func buildAreaFeatureBlueprint(area: PlaneArea, options: PlaneSchematicDisplayMode) -> AnyView {
@@ -63,11 +63,37 @@ extension ViewFactory {
         case .tempZones:
             return AnyView(buildClimateBlueprint(area: area))
         default:
-            return AnyView(AreaBaseBlueprint(area: area))
+            return AnyView(AreaBaseBlueprint(area: area, seatButtonBuilder: buildSeatButton))
         }
         
     }
 }
+
+//MARK: - Seat Buttons
+
+extension ViewFactory {
+    
+    func buildSeatButton(id: String, selected: Bool) -> SeatButton {
+        let view = SeatButton(id: id, selected: selected) { (displayOptions, seatID) in
+            switch displayOptions {
+            case .onlySeats:
+                UserDefaults.standard.set(seatID, forKey: "CurrentSeat")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    self.state.homeMenuCoordinator.dismiss()
+                }
+            case .showLights:
+                UserDefaults.standard.set(seatID, forKey: "CurrentSeat")
+                self.state.lightsViewModel.showSubView(forID: seatID)
+            default:
+                break
+            }
+        }
+        return view
+    }
+    
+}
+
+//MARK: - Shade Buttons
 
 extension ViewFactory {
     
@@ -82,6 +108,8 @@ extension ViewFactory {
   }
   
 }
+
+//MARK: - Climate 
 
 extension ViewFactory {
     

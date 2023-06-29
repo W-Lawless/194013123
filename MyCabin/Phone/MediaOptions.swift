@@ -14,7 +14,6 @@ struct MediaOptions: View {
     
     var body: some View {
         
-        
         VStack(spacing: 36) {
             
             if(mediaViewModel.mediaDisplayOptions == .all) {
@@ -52,27 +51,9 @@ struct MediaOptionsButton: View {
     
     var body: some View {
         Button {
-//            mediaViewModel.clearSelection()
-//            planeViewModel.updateDisplayMode(planeDisplayOptions)
+            mediaViewModel.clearMediaSelection()
+            mediaViewModel.updateContextualToolTip(planeDisplayOptions)
             mediaViewModel.updatePlaneDisplayOptions(planeDisplayOptions)
-            mediaViewModel.updateContextualToolTip(MediaToolTips.speakers.rawValue)
-//            mediaViewModel.updatePlaneDisplayOptions(planeDisplayOptions)
-            
-//            switch(planeViewModel.planeDisplayOptions) {
-//            case .showMonitors:
-//                //mediaViewModel.configForSelectMonitor() //TODO: Refactor
-//                mediaViewModel.updateContextualToolTip(MediaToolTips.monitors.rawValue)
-//            case .showSpeakers:
-////                planeViewModel.updateDisplayMode(.showSpeakers)
-//            case .showBluetooth:
-////                mediaViewModel.changeViewIntent(.selectMonitorOutput)
-//                mediaViewModel.updateContextualToolTip(MediaToolTips.bluetooth.rawValue)
-//            case .showNowPlaying:
-//                mediaViewModel.updateContextualToolTip(MediaToolTips.nowPlaying.rawValue)
-//            default:
-//                mediaViewModel.updateContextualToolTip(mediaViewModel.contextualToolTip)
-//            }
-//            
         } label: {
             Image(systemName: imageName)
                 .resizable()

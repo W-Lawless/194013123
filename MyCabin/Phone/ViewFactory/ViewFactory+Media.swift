@@ -10,8 +10,8 @@ import SwiftUI
 extension ViewFactory {
     
     func buildMediaTab() -> MediaTab {
-        let view = MediaTab(//planeViewModel: state.planeViewModel,
-                            mediaViewModel: state.mediaViewModel,
+        let view = MediaTab(mediaViewModel: state.mediaViewModel,
+                            activeMediaViewModel: state.activeMediaViewModel,
                             planeViewBuilder: buildPlaneSchematic,
                             mediaSubViewBuilder: buildMediaSubView)
         return view
@@ -48,13 +48,12 @@ extension ViewFactory {
     
     func buildMonitorButton(monitor: MonitorModel, selected: Bool) -> MonitorButton {
         let view = MonitorButton(monitor: monitor, selected: selected) { monitor in
-            switch(self.state.mediaViewIntentPublisher.value) {
-            case .selectMonitorOutput:
-                self.state.selectMonitor(monitor: monitor)
+            switch(self.state.mediaViewModel.mediaViewIntentPublisher.value) {
             case .selectSpeakerOutput:
                 print("ayyy")
-            case .viewNowPlaying:
-                print("ayyyview now[palying ")
+            default:
+                print("Monitor Button built in Default Context")
+                self.state.mediaViewModel.selectMonitor(monitor: monitor)
             }
         }
         return view
@@ -73,18 +72,13 @@ extension ViewFactory {
         return view
     }
     
-    //TODO: - Build out removes extra .mediavm from here vs ... statefactory+ files
-    //TODO: if all mutation funcs moved into StF+ files VMs classes will be pure
-    
     func buildSpeakerButton(speaker: SpeakerModel, selected: Bool) -> SpeakerButton {
         let view = SpeakerButton(speaker: speaker, selected: selected) { speaker in
-            switch(self.state.mediaViewIntentPublisher.value) {
-            case .selectMonitorOutput:
-                self.state.selectSpeaker(speaker: speaker)
-            case .selectSpeakerOutput:
-                self.state.assignSourceToSpeaker(speaker: speaker)
-            case .viewNowPlaying:
-                print("noowwwplayin")
+            switch(self.state.mediaViewModel.mediaViewIntentPublisher.value) {
+            case .pairSpeakerWithMonitor:
+                self.state.activeMediaViewModel.assignSourceToSpeaker(speaker: speaker)
+            default:
+                self.state.mediaViewModel.selectSpeaker(speaker: speaker)
             }
         }
         
@@ -99,70 +93,141 @@ extension ViewFactory {
 extension ViewFactory {
     
     func buildNowPlayingBluePrint(area: PlaneArea) -> NowPlayingBlueprint {
-        let view = NowPlayingBlueprint(area: area, activeMediaButtonBuilder: buildActiveMediaButton)
+        let view = NowPlayingBlueprint(area: area, activeMediaButtonGroupBuilder: buildActiveMediaButtonGroup)
         return view
     }
     
-    func buildActiveMediaControlPanel(for activeMedia: ActiveMedia, on device: MediaDevice) -> ActiveMediaControlPanel {
-        let view = ActiveMediaControlPanel(apiClient: state.apiClient, activeMedia: activeMedia, device: device) {
-            let destination = UIHostingController(rootView: self.buildSourceListView())
-            self.state.rootTabCoordinator.goTo(destination: destination)
+    func buildActiveMediaButtonGroup(area: PlaneArea, activeMedia: ActiveMedia) -> ActiveMediaButtonGroup {
+        var speakersInArea = [SpeakerModel]()
+        var monitorsInArea = [MonitorModel]()
+        //var bluetoothDevicesInArea: [BluetoothDevice]
+    //TODO: - Bluetooth
+        
+        if let speaker = activeMedia.speaker {
+            if(speakerInArea(area: area, speaker: speaker)) {
+                speakersInArea.append(speaker)
+            }
         }
+        if let monitor = activeMedia.monitor {
+            if(monitorInArea(area: area, monitor: monitor)) {
+                monitorsInArea.append(monitor)
+            }
+        }
+        
+        let view = ActiveMediaButtonGroup(activeMedia: activeMedia, speakers: speakersInArea, monitors: monitorsInArea, activeMediaDeviceButtonBuilder: buildActiveMediaDeviceButton)
         return view
     }
     
-    func buildActiveMediaButton(area: PlaneArea, activeMedia: ActiveMedia) -> ActiveMediaButton {
-        let view = ActiveMediaButton(area: area, activeMedia: activeMedia)
+    func buildActiveMediaDeviceButton(activeMedia: ActiveMedia, deviceModel: MediaDeviceModel, device: MediaDevice) -> ActiveMediaDeviceButton {
+        
+        let view = ActiveMediaDeviceButton(activeMedia: activeMedia, deviceModel: deviceModel, device: device) {
+            self.state.mediaViewModel.displayToolTip = false
+            self.updateActiveMediaControlPanel(activeMedia: activeMedia, device: device)
+        } //TODO: 'Off' click
+        
         return view
+        
+    }
+    
+    private func speakerInArea(area: PlaneArea, speaker: SpeakerModel) -> Bool {
+        guard let areaSpeakers = area.speakers  else { return false }
+
+        let allSpeakerIDs = areaSpeakers.map {
+            $0.id
+        }
+            
+        if ( allSpeakerIDs.contains(speaker.id) ) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func monitorInArea(area: PlaneArea, monitor: MonitorModel) -> Bool {
+        guard let areaMonitors = area.monitors  else { return false }
+        
+        let allMonitorIDs = areaMonitors.map {
+            $0.id
+        }
+        
+        if ( allMonitorIDs.contains(monitor.id) ) {
+            return true
+        } else {
+            return false
+        }
     }
     
 }
 
-
-//MARK: - Subviews
+//MARK: - Subview Builder
 
 
 extension ViewFactory {
     
     func buildMediaSubView() -> AnyView {
-        switch (self.state.mediaViewIntentPublisher.value) {
-        case .selectMonitorOutput:
-            return AnyView(buildMediaSourceSeleciton())
-        case .selectSpeakerOutput:
-            return AnyView(buildSourcesHScrollView())
+        switch (self.state.mediaViewModel.mediaViewIntentPublisher.value) {
         case .viewNowPlaying:
-            return AnyView(Text("Workin on it bos"))
-            //            return AnyView(buildActiveMediaControlPanel(for: state.mediaViewModel.selectedActiveMedia, on: state.mediaViewModel.))
+            switch(self.state.mediaViewModel.planeDisplayOptions) {
+            case .showNowPlaying:
+                return AnyView(
+                    self.buildActiveMediaControlPanel(for: self.state.activeMediaViewModel.selectedActiveMedia.value,
+                                                      on: self.state.activeMediaViewModel.selectedActiveMediaDevice.value))
+            default:
+                return AnyView(buildMediaSourceSelection())
+            }
+        default:
+            return AnyView(buildMediaSourceSelection())
         }
     }
     
 }
     
+//MARK: - Active Media Control Panel
 
-//MARK: - Select Source Subview
+extension ViewFactory {
+    
+    func buildActiveMediaControlPanel(for activeMedia: ActiveMedia, on device: MediaDevice) -> ActiveMediaControlPanel {
+        let view = ActiveMediaControlPanel(apiClient: api.apiClient, activeMedia: activeMedia, device: device) {
+            let destination = UIHostingController(rootView: self.buildSourceListView())
+            self.state.rootTabCoordinator.goTo(destination: destination)
+        }
+        return view
+        
+    }
+    
+    private func updateActiveMediaControlPanel(activeMedia: ActiveMedia, device: MediaDevice) {
+        self.state.mediaViewModel.displaySubView = false
+        self.state.activeMediaViewModel.selectedActiveMedia.send(activeMedia)
+        self.state.activeMediaViewModel.selectedActiveMediaDevice.send(device)
+        self.state.mediaViewModel.displaySubView = true
+    }
+
+}
+    
+
+//MARK: - Source Selection
 
 
 extension ViewFactory {
     
-    func buildMediaSourceSeleciton() -> MediaSourceSelection {
+    func buildMediaSourceSelection() -> MediaSourceSelection {
         let view = MediaSourceSelection(sourcesHScrollBuilder: buildSourcesHScrollView)
         return view
     }
     
     func buildSourcesHScrollView() -> SourcesHorizontalScroll {
-        let view = SourcesHorizontalScroll(viewModel: state.sourcesViewModel) { sourceType in
+        let view = SourcesHorizontalScroll(viewModel: state.mediaViewModel) { sourceType in
             self.state.rootTabCoordinator.goToWithParams(self.buildSourceListView(sourceType.id))
         }
         return view
     }
     
     func buildSourceListView(_ filter: SourceTypes = .camera) -> SourceList {
-        let view = SourceList(sources: state.sourcesViewModel, filter: filter) { source in
-            self.state.mediaViewModel.updateSelectedSource(source: source)
-            self.state.assignSourceToMonitor(source: source) //TODO: LEFT OFF
-            self.state.mediaViewIntentPublisher.send(.selectSpeakerOutput)
-            self.state.configureMediaViewIntent()
-            self.state.mediaViewModel.clearSelection()
+        let view = SourceList(sources: state.mediaViewModel, filter: filter) { source in
+            self.state.activeMediaViewModel.assignSourceToMonitor(source: source)
+            self.state.mediaViewModel.mediaViewIntentPublisher.send(.pairSpeakerWithMonitor)
+            self.state.mediaViewModel.configureMediaViewIntent()
+            self.state.mediaViewModel.clearMediaSelection()
             self.state.rootTabCoordinator.dismiss()
         }
         return view

@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-//TODO: Remove static references
 struct ShadeControl: View {
     
     @EnvironmentObject var viewModel: ShadesViewModel
@@ -70,7 +69,6 @@ struct ShadeControl: View {
                     apiClient.commandShade(shade: shade, cmd: .OPEN)
                 }
             } //: VSTQ
-            
 
             //-
             VStack {

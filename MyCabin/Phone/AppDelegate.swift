@@ -28,20 +28,19 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 
 final class SceneDelegate: NSObject, UIWindowSceneDelegate {
         
-    var appCoordinator: AppCoordinator?
     var hasAlreadyConnectedToCabin: Bool = false
     
+    let apiFactory: APIFactory
     let stateFactory: StateFactory
     let cacheUtil: FileCacheUtil
-    let planeFactory: PlaneFactory
     let viewFactory: ViewFactory
     let navigationFactory: NavigationFactory
     
     override init() {
-        self.stateFactory = StateFactory()
-        self.cacheUtil = FileCacheUtil(state: self.stateFactory)
-        self.planeFactory = PlaneFactory(state: self.stateFactory, cacheUtil: self.cacheUtil)
-        self.viewFactory = ViewFactory(state: self.stateFactory, plane: self.planeFactory)
+        self.apiFactory = APIFactory()
+        self.cacheUtil = FileCacheUtil()
+        self.stateFactory = StateFactory(api: self.apiFactory, cache: self.cacheUtil)
+        self.viewFactory = ViewFactory(api: self.apiFactory, state: self.stateFactory)
         self.navigationFactory = NavigationFactory(views: self.viewFactory, rootTabCoordinator: self.stateFactory.rootTabCoordinator, homeMenuCoordinator: self.stateFactory.homeMenuCoordinator)
         super.init()
     }
@@ -57,7 +56,7 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
     }
     
     func readyApplication(window: UIWindow) -> AppCoordinator {
-        let app = AppCoordinator(cabinAPI: planeFactory.cabinAPI, loadingView: viewFactory.buildUIHostedLoadingScreen(), rootTabCoordinator: stateFactory.rootTabCoordinator, window: window)
+        let app = AppCoordinator(cabinAPI: apiFactory.cabinAPI, loadingView: viewFactory.buildUIHostedLoadingScreen(), rootTabCoordinator: stateFactory.rootTabCoordinator, window: window)
         configureNavigationControllers()
         app.configureViews()
         return app
@@ -72,7 +71,6 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
     func launch(_ app: AppCoordinator) {
         if CommandLine.arguments.contains("--uitesting") {
             print("Launch UI")
-//            launchProduction(app)
             launchUITests(app)
         } else {
             launchProduction(app)
@@ -81,14 +79,14 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
 
     func launchUITests(_ app: AppCoordinator) {
         print("UI TESTS LAUNCHED")
-        app.start(publisher: planeFactory.cabinConnectionPublisher, tokenStore: &stateFactory.cancelTokens) { _ in } sinkValue: { _ in
-            try? self.cacheUtil.loadAllCaches()
+        app.start(publisher: apiFactory.cabinConnectionPublisher, tokenStore: &apiFactory.cancelTokens) { _ in } sinkValue: { _ in
+            try? self.stateFactory.loadAllCaches()
             app.goTo(.cabinFound)
         }
     }
     
     func launchProduction(_ app: AppCoordinator) {
-        app.start(publisher: planeFactory.cabinConnectionPublisher, tokenStore: &stateFactory.cancelTokens) { _ in } sinkValue: { cabinHeartBeat in
+        app.start(publisher: apiFactory.cabinConnectionPublisher, tokenStore: &apiFactory.cancelTokens) { _ in } sinkValue: { cabinHeartBeat in
             DispatchQueue.main.async { [weak self] in
                 if(cabinHeartBeat){
                     self?.loadAllCabinElementsOnFirstConnection(cabinHeartBeat)
@@ -103,11 +101,8 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
     func loadAllCabinElementsOnFirstConnection(_ pulse: Bool) {
         if pulse != hasAlreadyConnectedToCabin {
             hasAlreadyConnectedToCabin = true
-            self.planeFactory.connectToPlane()
+            self.stateFactory.connectToPlane()
         }
     }
     
 }
-
-protocol ApplicationWindow {}
-extension UIWindow: ApplicationWindow {}

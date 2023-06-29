@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SourcesHorizontalScroll: View {
     
-    @ObservedObject var viewModel: SourcesViewModel
+    @ObservedObject var viewModel: MediaViewModel
     
     let sourceIconCallback: (SourceType) -> ()
     
@@ -49,23 +49,4 @@ struct SourcesHorizontalScroll: View {
         
     }
 
-}
-
-
-class SourcesViewModel: ObservableObject, GCMSViewModel {
-    
-    @Published var sourceList: [SourceModel]?
-    @Published var sourceTypes = [SourceType]()
-    
-    func updateValues(_ data: [Codable]) {
-        self.sourceList = data as? [SourceModel]
-    }
-    
-    func updateSourceTypes(_ set: Set<SourceType>) {
-        set.forEach { sourceType in
-            self.sourceTypes.append(sourceType)
-        }
-        self.sourceTypes.sort { $0.name < $1.name }
-    }
-    
 }

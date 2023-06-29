@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MonitorModel: Codable, Identifiable, Hashable, ElementModel, MediaModel {
+struct MonitorModel: Codable, Identifiable, Hashable, ElementModel, MediaDeviceModel {
     
     static func == (lhs: MonitorModel, rhs: MonitorModel) -> Bool {
         return lhs.id == rhs.id

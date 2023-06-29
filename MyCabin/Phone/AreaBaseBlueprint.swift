@@ -9,19 +9,19 @@ import SwiftUI
 
 struct AreaBaseBlueprint: View, AreaBlueprint {
     
+    @AppStorage("CurrentSeat") var selectedSeat: String = ""
     @EnvironmentObject var planeViewModel: PlaneViewModel
     
     let area: PlaneArea
-    @AppStorage("CurrentSeat") var selectedSeat: String = ""
+    let seatButtonBuilder: (String, Bool) -> SeatButton
     
     var body: some View {
-        
         ForEach(area.seats ?? [SeatModel]()) { seat in
             if(seat.id == selectedSeat) {
-                SeatButton(id: seat.id, selected: true, callback: planeViewModel.seatIconCallback)
+                seatButtonBuilder(seat.id, true)//SeatButton(id: seat.id, selected: true, callback: planeViewModel.seatIconCallback)
                     .modifier(PlaceIcon(rect: seat.rect))
             } else {
-                SeatButton(id: seat.id, selected: false, callback: planeViewModel.seatIconCallback)
+                seatButtonBuilder(seat.id, false)
                     .modifier(PlaceIcon(rect: seat.rect))
             }
         } //: FOR EACH

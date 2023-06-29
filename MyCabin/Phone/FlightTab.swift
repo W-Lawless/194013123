@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-//TODO: 
 struct FlightTab: View {
     var body: some View {
         TabView {

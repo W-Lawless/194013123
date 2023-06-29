@@ -13,11 +13,9 @@ class ElementDataFormatter {
     
     typealias ElementsDictionary = [String:[Codable]]
     
-    let state: StateFactory
     let cacheUtil: FileCacheUtil
     
-    init(state: StateFactory, cacheUtil: FileCacheUtil) {
-        self.state = state
+    init(cacheUtil: FileCacheUtil) {
         self.cacheUtil = cacheUtil
     }
     
@@ -140,9 +138,6 @@ class ElementDataFormatter {
                 break
             }
         }
-        
-        self.state.sourcesViewModel.updateSourceTypes(sourceTypes)
-        self.cacheUtil.cacheToFile(data: sourceTypes)
         
         return sourceTypes
     }

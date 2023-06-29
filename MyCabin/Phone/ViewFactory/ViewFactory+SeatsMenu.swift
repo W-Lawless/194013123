@@ -8,7 +8,7 @@
 extension ViewFactory {
     
     func buildSeatSelection() -> SeatSelection {
-        let view = SeatSelection(viewModel: state.seatsViewModel, planeViewBuilder: buildPlaneSchematic)
+        let view = SeatSelection(planeViewBuilder: buildPlaneSchematic)
         return view
     }
     

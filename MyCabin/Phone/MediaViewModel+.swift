@@ -7,6 +7,23 @@
 
 import Foundation
 
+enum MediaViewIntent: String, Equatable {
+    case noActiveMedia
+    case selectMonitorOutput
+    case selectSpeakerOutput
+    case pairSpeakerWithMonitor
+//    case pairBluetoothWithMonitor
+//    case pairMonitorWithSpeaker
+//    case pairSpeakerWithMonitor
+    case viewNowPlaying
+    //case selectBluetoothOutput
+    //case viewRemote
+    
+    static func == (lhs: MediaViewIntent, rhs: MediaViewIntent) -> Bool {
+        return lhs.rawValue == rhs.rawValue
+    }
+}
+
 enum MediaDisplayOptions {
     case all
     case outputs
@@ -19,15 +36,12 @@ enum MediaDevice: String {
     case bluetooth
 }
 
-enum MediaViewIntent: String, Equatable {
-    case selectMonitorOutput
-    case selectSpeakerOutput
-    case viewNowPlaying
-    
-    static func == (lhs: MediaViewIntent, rhs: MediaViewIntent) -> Bool {
-        return lhs.rawValue == rhs.rawValue
-    }
+//TODO: - place where
+protocol MediaDeviceModel {
+    var id: String { get set  }
+    var rect: RenderCoordinates { get set }
 }
+
 
 enum MediaToolTips: String {
     case monitors = "Select a monitor output:"
@@ -36,18 +50,4 @@ enum MediaToolTips: String {
     case nowPlaying = "Currently playing media:"
 }
 
-struct ActiveMedia: Equatable, Hashable, Codable {
-    var id = UUID()
-    var source: SourceModel
-    var monitor: MonitorModel?
-    var speaker: SpeakerModel?
-    var bluetooth: String?
-    
-    static func == (lhs: ActiveMedia, rhs: ActiveMedia) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
-    }
-}
+

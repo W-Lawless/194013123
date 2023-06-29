@@ -23,7 +23,6 @@ struct AreaSubView: View {
             baseBlueprintBuilder(area)
             featureBlueprintBuilder(area, planeViewModel.planeDisplayOptions)
 
-
         }
         .frame(width: (planeViewModel.subviewWidthUnit * area.rect.w), height: (planeViewModel.subviewHeightUnit * area.rect.h))
         .onAppear {
@@ -34,7 +33,7 @@ struct AreaSubView: View {
                 .opacity(planeViewModel.selectedZone?.id == area.id ? 1 : 0.3)
                 .background(planeViewModel.selectedZone?.id == area.id ? Color.yellow.opacity(0.3) : nil)
                 .clipShape(RoundedRectangle(cornerRadius: 8))
-                
+         //TODO: - Zone Modifier in builder ?
         }
 
     }

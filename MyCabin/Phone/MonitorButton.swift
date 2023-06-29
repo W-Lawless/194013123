@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-//TODO: Remove static references
-
 struct MonitorButton: View {
     
     @EnvironmentObject var mediaViewModel: MediaViewModel
@@ -28,6 +26,7 @@ struct MonitorButton: View {
                 iconCallback(monitor)
             }
             .accessibilityIdentifier("\(monitor.id)")
+        //TODO: - Long press 
 //            .longPressHaptic {
 //                print("ay")
 //                pressed.toggle()

@@ -6,101 +6,149 @@
 //
 
 import SwiftUI
-
-protocol MediaModel {}
+import Combine
 
 class MediaViewModel: ObservableObject {
+
+    //MARK: - Properties
     
-    let apiClient: GCMSClient
-    
-    init(apiClient: GCMSClient) {
-        self.apiClient = apiClient
-    }
-    
+    let mediaViewIntentPublisher = CurrentValueSubject<MediaViewIntent, Never>(.selectMonitorOutput)
+
     @Published var planeDisplayOptions: PlaneSchematicDisplayMode = .showMonitors
     @Published var mediaDisplayOptions: MediaDisplayOptions = .outputs
-
+    
     @Published var selectedMonitor: String = ""
     @Published var selectedSpeaker: String = ""
-    @Published var selectedSource: SourceModel?
-
-    @Published var activeMedia: [UUID:ActiveMedia] = [:]
-    @Published var activeMediaID: UUID?
-    @Published var selectedActiveMedia: UUID?
-    @Published var controlPanelDisplayingFor: MediaDevice?
-    
-//    @Published var speakerIconCallback: (_: Codable?) -> () = { _ in }
-//    @Published var monitorIconCallback: (_: Codable?) -> () = { _ in }
-    @Published var activeSpeakerIconCallback: (_: Codable?) -> () = { _ in }
-    @Published var activeMonitorIconCallback: (_: Codable?) -> () = { _ in }
     
     @Published var displaySubView: Bool = false
     @Published var displayToolTip: Bool = true
     @Published var contextualSubView: AnyView = AnyView(Text(""))
     @Published var contextualToolTip: String = MediaToolTips.monitors.rawValue
     
+    var sourceList = [SourceModel]()
+    var sourceTypes = [SourceType]()
     
-    //TODO: - Refactor this nightmare
-    //  IF ACTIVEMEDIA.COUNT > 0 , SET STATE
-
-
-    
-
-    
-    
+    var monitors = [MonitorModel]()
+    var speakers = [SpeakerModel]()
+    //    var bluetoothDevices
 
     
-    func loadActiveMediaControls(data: Codable?, device: MediaDevice){
-        guard let data else { return }
-        guard let typecast = data as? ActiveMedia else { return }
-        self.selectedActiveMedia = typecast.id
-
-        self.displaySubView.toggle()
-        self.displayToolTip.toggle()
+    //MARK: - Configuration
+    
+    func configureMediaViewIntent() {
         
-        if(self.controlPanelDisplayingFor != device) {
-            self.displaySubView = true
-            self.displayToolTip = false
+        clearMediaSelection()
+        
+        switch (mediaViewIntentPublisher.value) {
+        case .noActiveMedia:
+            placeSettings(.showMonitors, .outputs, .monitors)
+        case .selectMonitorOutput:
+            placeSettings(.showMonitors, .all, .monitors)
+        case .selectSpeakerOutput:
+            placeSettings(.showSpeakers, .all, .speakers)
+        case .pairSpeakerWithMonitor:
+            placeSettings(.showSpeakers, .sound, .speakers)
+        case .viewNowPlaying:
+            placeSettings(.showNowPlaying, .all, .nowPlaying)
         }
-        
-//        contextualSubView = AnyView(ViewFactory.buildActiveMediaControlPanel(for: typecast, on: device))
-        controlPanelDisplayingFor = device
+    }
+    
+    //MARK: - Selection
+    
+    func selectMonitor(monitor: MonitorModel) {
+        let selected = selectedMonitor
+        if (isAlreadySelected(selected, monitor.id)) {
+            clearSelectedMonitor()
+            hideSubView()
+        } else {
+            selectedMonitor = monitor.id
+            showSubView()
+        }
+    }
+    
+    func selectSpeaker(speaker: SpeakerModel) {
+        let selected = selectedSpeaker
+        if (isAlreadySelected(selected, speaker.id)) {
+            clearSelectedSpeaker()
+            hideSubView()
+        } else {
+            selectedSpeaker = speaker.id
+            showSubView()
+        }
+    }
+    
+    //MARK: - Update Methods
+    
+    func updatePlaneDisplayOptions(_ option: PlaneSchematicDisplayMode) {
+        self.planeDisplayOptions = option
+    }
+    
+    func updateSourceList(_ data: [SourceModel]) {
+        self.sourceList = data
+    }
+    
+    func updateMonitors(_ data: [MonitorModel]) {
+        self.monitors = data
+    }
+    
+    func updateSpeakers(_ data: [SpeakerModel]) {
+        self.speakers = data
+    }
+    
+    func updateSourceTypes(_ set: Set<SourceType>) {
+        set.forEach { sourceType in
+            sourceTypes.append(sourceType)
+        }
+        sourceTypes.sort { $0.name < $1.name }
+    }
+    
+    func updateContextualToolTip(_ option: PlaneSchematicDisplayMode) {
+        switch(option) {
+        case .showNowPlaying:
+            contextualToolTip = MediaToolTips.nowPlaying.rawValue
+        case .showBluetooth:
+            contextualToolTip = MediaToolTips.bluetooth.rawValue
+        case .showSpeakers:
+            contextualToolTip = MediaToolTips.speakers.rawValue
+        default:
+            contextualToolTip = MediaToolTips.monitors.rawValue
+        }
+    }
+    
+    //MARK: - Utils
+
+    func clearMediaSelection() {
+        clearSelectedMonitor()
+        clearSelectedSpeaker()
+        hideSubView()
+    }
+    
+    private func placeSettings(_ planeOptions: PlaneSchematicDisplayMode, _ mediaOptions: MediaDisplayOptions, _ tooltip: MediaToolTips) {
+        planeDisplayOptions = planeOptions
+        mediaDisplayOptions = mediaOptions
+        contextualToolTip = tooltip.rawValue
+    }
+    
+    private func isAlreadySelected(_ prev: String, _ new: String) -> Bool {
+        return prev == new
+    }
+    
+    private func clearSelectedMonitor() {
+        selectedMonitor = ""
     }
 
-
-    func updatePlaneDisplayOptions(_ options: PlaneSchematicDisplayMode) {
-        self.planeDisplayOptions = options
+    private func clearSelectedSpeaker() {
+        selectedSpeaker = ""
     }
     
-    func updateContextualToolTip(_ text: String) {
-        self.contextualToolTip = text
+    private func hideSubView() {
+        displaySubView = false
+        displayToolTip = true
     }
     
-    func updateSelectedSource(source: SourceModel) {
-        self.selectedSource = source
-    }
-    
-    func updateSelectedMonitor(id monitorID: String) {
-        self.selectedMonitor = monitorID
-    }
-    
-    
-    func updateSelectedSpeaker(id speakerID: String) {
-        self.selectedSpeaker = speakerID
-    }
-    
-    
-    func configForSelectMonitor() {
-//        contextualSubView = AnyView(MediaSourceSelection())
-//        monitorIconCallback = selectMonitor
-        updateContextualToolTip(MediaToolTips.monitors.rawValue)
-    }
-    
-    func clearSelection() {
-        self.displayToolTip = true
-        self.displaySubView = false
-        self.selectedMonitor = ""
-        self.selectedSpeaker = ""
+    private func showSubView() {
+        displaySubView = true
+        displayToolTip = false
     }
     
 }

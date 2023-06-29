@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-//TODO: Remove static references
-
 struct ShadeButton: View {
     
     @ObservedObject var viewModel: ShadesViewModel
@@ -23,6 +21,7 @@ struct ShadeButton: View {
                 .frame(width:21, height: 44)
                 .accessibilityIdentifier(shade.id)
                 .hapticFeedback(feedbackStyle: .light) { _ in
+                    //TODO: Build with proper callback
                     print(shade.id)
 //                    viewModel.appendShade(shade)
                     viewModel.selectShade(is: shade.id)

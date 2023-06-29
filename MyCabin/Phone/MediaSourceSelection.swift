@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-//TODO: - remove static reference
 struct MediaSourceSelection: View {
     
     let sourcesHScrollBuilder: () -> SourcesHorizontalScroll
@@ -15,7 +14,7 @@ struct MediaSourceSelection: View {
     var body: some View {
         VStack(alignment: .leading) {
             
-            Text("Select an input.")
+            Text("Select a source.")
                 .font(.headline)
                 .padding(.leading, 8)
             

@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-//TODO: Remove static references
-
 struct SpeakerButton: View {
     
     @EnvironmentObject var mediaViewModel: MediaViewModel

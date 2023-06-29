@@ -13,16 +13,13 @@ import SwiftUI
 class MonitorsViewModel: ObservableObject, GCMSViewModel {
     
     @Published var loading: Bool = false
-    @Published var monitorsList: [MonitorModel]?
-    @Published var selectedMonitor: MonitorModel?
-    @Published var playingMonitors: [String:String] = ["-":"-"]
+    @Published var monitorsList = [MonitorModel]()
     
     func updateValues(_ data: [Codable]) {
-        self.monitorsList = data as? [MonitorModel]
-    }
-    
-    func updatePlayingMonitors(monitor: MonitorModel, source: SourceModel) {
-        playingMonitors[monitor.id] = source.id
+        let monitors = data as? [MonitorModel]
+        if let monitors {
+            self.monitorsList = monitors
+        }
     }
     
 }

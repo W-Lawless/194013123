@@ -7,20 +7,18 @@
 
 import SwiftUI
 
-//TODO: Remove static references
-
 struct NowPlayingBlueprint: View, AreaBlueprint {
 
-    @EnvironmentObject var mediaViewModel: MediaViewModel //= StateFactory.mediaViewModel
-
+    @EnvironmentObject var activeMediaViewModel: ActiveMediaViewModel
+    
     let area: PlaneArea
-    let activeMediaButtonBuilder: (PlaneArea, ActiveMedia) -> ActiveMediaButton
+    let activeMediaButtonGroupBuilder: (PlaneArea, ActiveMedia) -> ActiveMediaButtonGroup
 
     var body: some View {
-        ForEach(Array(mediaViewModel.activeMedia.values), id: \.self) { activeMedia in
-            
-            activeMediaButtonBuilder(area, activeMedia)
-            
+        
+        ForEach(Array(activeMediaViewModel.activeMedia.values), id: \.self) { activeMedia in
+            activeMediaButtonGroupBuilder(area, activeMedia)
         }
+        
     }
 }

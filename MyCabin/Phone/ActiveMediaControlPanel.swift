@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-//TODO: - remove static reference
 struct ActiveMediaControlPanel: View {
     
     @EnvironmentObject var mediaViewModel: MediaViewModel
@@ -163,7 +162,6 @@ struct ActiveMediaControlPanel: View {
     
     private func getSourceIcon() -> String {
         let sourceType = String(describing: SourceTypes(rawValue: activeMedia.source.type)!)
-        print("source type enum case is", sourceType)
 
         let iconMap: [String:SourceIcons] = [
             "appleTV" : .appleTV,
@@ -188,7 +186,6 @@ struct ActiveMediaControlPanel: View {
     }
     
     private func getDeviceIcon() -> String {
-        print(device)
         switch(device) {
         case .monitor:
             return "ic_monitor_off"

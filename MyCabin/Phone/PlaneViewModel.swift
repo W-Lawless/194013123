@@ -20,30 +20,9 @@ class PlaneViewModel: ObservableObject {
     
     @Published var subviewHeightUnit: CGFloat = 0
     @Published var subviewWidthUnit: CGFloat = 0
-    
-    @MainActor func updateValues(_ data: PlaneMap) {
-        self.plane = data
-    }
-    
+
     @MainActor func updateDisplayMode(_ mode: PlaneSchematicDisplayMode) {
-        print("updating with", mode)
         self.planeDisplayOptions = mode
-    }
-    
-    func seatIconCallback(displayOptions: PlaneSchematicDisplayMode, seatID: String) {
-        //TODO: - Refactor into view fac
-//        switch displayOptions {
-//        case .onlySeats:
-//            UserDefaults.standard.set(seatID, forKey: "CurrentSeat")
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-//                NavigationFactory.homeMenuCoordinator.dismiss()
-//            }
-//        case .showLights:
-//            UserDefaults.standard.set(seatID, forKey: "CurrentSeat")
-//            StateFactory.lightsViewModel.showSubView(forID: seatID)
-//        default:
-//            break
-//        }
     }
     
 }

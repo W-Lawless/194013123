@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SpeakerModel: Codable, Identifiable, ElementModel, MediaModel {
+struct SpeakerModel: Codable, Identifiable, ElementModel, MediaDeviceModel {
     var id: String
     var name: String
     var rect: RenderCoordinates

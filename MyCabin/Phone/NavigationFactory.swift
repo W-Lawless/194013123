@@ -14,11 +14,13 @@ final class NavigationFactory {
     let views: ViewFactory
     let rootTabCoordinator: RootTabCoordinator
     let homeMenuCoordinator: HomeMenuCoordinator
+    let volumeView: UIHostingController<Volume>
 
     init(views: ViewFactory, rootTabCoordinator: RootTabCoordinator, homeMenuCoordinator: HomeMenuCoordinator) {
         self.views = views
         self.rootTabCoordinator = rootTabCoordinator
         self.homeMenuCoordinator = homeMenuCoordinator
+        self.volumeView = views.buildUIHostedVolumeMenu()
     }
     
     func buildRootTabNavigation() -> RootTabCoordinator {
@@ -54,10 +56,7 @@ final class NavigationFactory {
         rootMenuView.navigationItem.compactAppearance = navigationBarAppearance
         rootMenuView.navigationItem.scrollEdgeAppearance = navigationBarAppearance
 
-//        let planeMenu = UIHostingController(rootView: AppFactory.buildPlaneSchematic())
-//        planeMenu.title = "Select your seat"
-
-        let volumeMenu = views.buildUIHostedVolumeMenu()
+        let volumeMenu = self.volumeView
 
         let volume = UIBarButtonItem(image: UIImage(systemName: "speaker"), style: .plain, target: self, action: #selector(volumeClick))
         let icon = UIBarButtonItem(image: UIImage(named: "ic_attendant_off"), style: .plain, target: self, action: #selector(attendantClick))
@@ -71,8 +70,8 @@ final class NavigationFactory {
         return homeMenuCoordinator
     }
 
-    @objc func volumeClick() { //TODO: - Refactor volume menu into single reference
-        homeMenuCoordinator.navigationController.present(views.buildUIHostedVolumeMenu(), animated: true)
+    @objc func volumeClick() {
+        homeMenuCoordinator.navigationController.present(self.volumeView, animated: true)
     }
 
     @objc func attendantClick() {

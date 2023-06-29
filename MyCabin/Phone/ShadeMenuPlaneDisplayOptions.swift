@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-//TODO: Remove static references
-
 struct ShadeMenuPlaneDisplayOptions: View {
     var body: some View {
         VStack(spacing: 32) {
@@ -19,7 +17,6 @@ struct ShadeMenuPlaneDisplayOptions: View {
         .padding(.horizontal, 18)
     }
 }
-
 
 struct ShadeGroupButton: View {
   

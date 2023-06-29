@@ -20,12 +20,12 @@ extension ViewFactory {
     }
     
     func buildAdjustablePowerButton(light: LightModel) -> AdjustablePowerButton {
-        let view = AdjustablePowerButton(apiClient: state.apiClient, light: light)
+        let view = AdjustablePowerButton(apiClient: api.apiClient, light: light)
         return view
     }
     
     func buildLightPowerButton(light: LightModel) -> LightPowerButton {
-        let view = LightPowerButton(apiClient: state.apiClient, light: light)
+        let view = LightPowerButton(apiClient: api.apiClient, light: light)
         return view
     }
     

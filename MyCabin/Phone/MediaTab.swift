@@ -10,20 +10,17 @@ import Combine
 
 struct MediaTab: View {
     
-//    @ObservedObject var planeViewModel: PlaneViewModel
     @ObservedObject var mediaViewModel: MediaViewModel
+    @ObservedObject var activeMediaViewModel: ActiveMediaViewModel
+    
     let planeViewBuilder: (PlaneSchematicDisplayMode) -> PlaneSchematic
     let mediaSubViewBuilder: () -> AnyView
-    
-    
     
     var body: some View {
         ZStack(alignment: .bottom) { // ZSTQ A
             
-
             planeViewBuilder(mediaViewModel.planeDisplayOptions)
 
-            
             if(mediaViewModel.displayToolTip) {
                 Text(mediaViewModel.contextualToolTip)
                     .font(.headline)
@@ -35,13 +32,11 @@ struct MediaTab: View {
             }
 
         } //: ZSTQ A
+        .environmentObject(activeMediaViewModel)
         .environmentObject(mediaViewModel)
         .onAppear {
-//            planeViewModel.updateDisplayMode(.showMonitors)
-            mediaViewModel.clearSelection()
+            mediaViewModel.clearMediaSelection()
         }
-        
-        
         
     } //: BODY
 

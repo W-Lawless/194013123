@@ -9,12 +9,12 @@ import Foundation
 
 final class ViewFactory {
     
+    let api: APIFactory
     let state: StateFactory
-    let plane: PlaneFactory
     
-    init(state: StateFactory, plane: PlaneFactory) {
+    init(api: APIFactory, state: StateFactory) {
+        self.api = api
         self.state = state
-        self.plane = plane
     }
     
 }
@@ -33,16 +33,24 @@ extension ViewFactory {
         return view
     }
     
+    //TODO: FLight / Weather views
     //Flight
     
     func buildFlightInfo() -> FlightInfo {
         
         let viewModel = state.flightViewModel
-        let startMonitor = state.flightAPI.monitor.startMonitor
-        let monitorCallback = state.flightAPI.monitorCallback
-        let stopMonitor = state.flightAPI.monitor.stopMonitor
+        //TODO: RTapi flight
+//        let startMonitor = state.flightAPI.monitor.startMonitor
+//        let monitorCallback = state.flightAPI.monitorCallback
+//        let stopMonitor = state.flightAPI.monitor.stopMonitor
         
-        let view = FlightInfo(viewModel: viewModel , startMonitor: startMonitor, monitorCallback: monitorCallback, stopMonitor: stopMonitor)
+        let view = FlightInfo(viewModel: viewModel) { (_,_) in
+            //
+        } monitorCallback: {
+            //
+        } stopMonitor: {
+            //
+        }
         
         return view
     }

@@ -22,7 +22,7 @@ extension ViewFactory {
     //    }
     
     func buildShadeControl() -> ShadeControl {
-        let view = ShadeControl(apiClient: state.apiClient)
+        let view = ShadeControl(apiClient: api.apiClient)
         return view
     }
     

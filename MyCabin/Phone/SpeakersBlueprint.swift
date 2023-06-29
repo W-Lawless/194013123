@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-//TODO: Remove static references
-
 struct SpeakersBlueprint: View, AreaBlueprint {
     
     @EnvironmentObject var mediaViewModel: MediaViewModel
