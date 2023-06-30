@@ -23,18 +23,17 @@ final class APIFactory {
 //        self.weatherAPI = buildRealTimeAPI(endpoint: Endpoint<EndpointFormats.Get, WeatherModel>(path: .weather), viewModel: weatherViewModel)
         
     }
-    
-    func buildRealTimeAPI<F, R>(endpoint: Endpoint<F, R>, viewModel: GCMSViewModel) -> RealtimeAPI<F, R> {
-        let rtApi = RealtimeAPI(endpoint: endpoint) { result in
-            viewModel.updateValues(result)
-        }
-        return rtApi
-    }
+//    
+//    func buildRealTimeAPI<F, R>(endpoint: Endpoint<F, R>, viewModel: GCMSViewModel) -> RealtimeAPI<F, R> {
+//        let rtApi = RealtimeAPI(endpoint: endpoint) { result in
+//            viewModel.updateValues(result)
+//        }
+//        return rtApi
+//    }
     
 }
 
 
-//TODO: - API Factory
 //TODO: - Bluetooth api that real time watches for new devices
 //    let flightAPI: RealtimeAPI<EndpointFormats.Get, FlightModel>
 //    let weatherAPI: RealtimeAPI<EndpointFormats.Get, WeatherModel>

@@ -36,8 +36,7 @@ final class Cache_Tests: XCTestCase {
     }
     
     private func getMockCacheUtil() -> FileCacheUtil {
-        let mockStateObjects = StateFactory()
-        let mockCacheUtil = FileCacheUtil(state: mockStateObjects)
+        let mockCacheUtil = FileCacheUtil()
         return mockCacheUtil
     }
     

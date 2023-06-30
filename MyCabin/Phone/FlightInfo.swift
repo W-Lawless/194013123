@@ -43,7 +43,7 @@ struct FlightInfo: View {
 
 //MARK: - View Model
 
-class FlightViewModel: ObservableObject, GCMSViewModel {
+class FlightViewModel: ObservableObject {
         
     @Published var loading: Bool = true
     @Published var groundSpeed: Int?

@@ -26,11 +26,14 @@ struct ActiveMediaButtonGroup: View {
             activeMediaDeviceButtonBuilder(activeMedia, monitor, .monitor)
         }
         
-        //TODO: - Bluetooth
+        //TODO: - Bluetooth Pair
 //        ForEach(monitors, id: \.id) { monitor in
 //            activeMediaDeviceButtonBuilder(activeMedia.source, .monitor, monitor)
 //        }
-
+        
+        //TODO: - Speaker Only
+        //TODO: - Blueooth Only
+        
     }
 
 }

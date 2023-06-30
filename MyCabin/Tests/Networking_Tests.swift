@@ -221,7 +221,7 @@ final class Networking_Tests: XCTestCase {
     
     func getMockLightViewModel() -> LightsViewModel {
         let planeViewModel = PlaneViewModel()
-        let lightViewModel = LightsViewModel(plane: planeViewModel)
+        let lightViewModel = LightsViewModel()
         return lightViewModel
     }
     

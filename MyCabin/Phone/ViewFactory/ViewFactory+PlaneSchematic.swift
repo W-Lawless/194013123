@@ -10,7 +10,12 @@ import SwiftUI
 extension ViewFactory {
     
     func buildPlaneSchematic(options: PlaneSchematicDisplayMode) -> PlaneSchematic {
-        Task { await state.planeViewModel.updateDisplayMode(options) }
+        Task {
+            print("*** update to", options.rawValue)
+            await state.planeViewModel.updateDisplayMode(options)
+            print("*** updated to", state.planeViewModel.planeDisplayOptions)
+            
+        }
         
         let view = PlaneSchematic(planeViewModel: state.planeViewModel,
                                   mediaViewModel: state.mediaViewModel,
@@ -20,6 +25,8 @@ extension ViewFactory {
         return view
     }
     
+    //TODO: - Use ViewBuilder to remove AnyView bs?
+    //TODO: - Use some View to remove anyview ?
     func buildPlaneDisplayOptionsBar(options: PlaneSchematicDisplayMode) -> AnyView {
         switch (options) {
         case .showMonitors, .showSpeakers, .showNowPlaying, .showBluetooth, .showRemote:
@@ -41,7 +48,7 @@ extension ViewFactory {
     }
     
     func buildAreaSubView(area: PlaneArea) -> AreaSubView {
-        let view = AreaSubView(area: area, baseBlueprintBuilder: buildAreaBaseBlueprint, featureBlueprintBuilder: buildAreaFeatureBlueprint)
+        let view = AreaSubView(area: area, baseBlueprintBuilder: self.buildAreaBaseBlueprint, featureBlueprintBuilder: self.buildAreaFeatureBlueprint)
         return view
     }
     
@@ -50,7 +57,6 @@ extension ViewFactory {
     }
     
     func buildAreaFeatureBlueprint(area: PlaneArea, options: PlaneSchematicDisplayMode) -> AnyView {
-        
         switch (options) {
         case .showShades:
             return AnyView(buildShadeBlueprint(area: area))
@@ -114,6 +120,7 @@ extension ViewFactory {
 extension ViewFactory {
     
   func buildClimateBlueprint(area: PlaneArea) -> ClimateBlueprint {
+//      print("*** building cabin climate blueprint")
       let view = ClimateBlueprint(areaClimateZones: area.zoneTemp ?? [ClimateControllerModel]())
       return view
   }

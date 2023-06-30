@@ -7,16 +7,6 @@
 
 import SwiftUI
 
-protocol GCMSViewModel {
-    func updateValues(_ data: [Codable])
-}
-
-protocol ParentViewModel: ViewWithSubViews & ObservableObject {}
-
-protocol ViewWithSubViews {
-    func showSubView(forID: String)
-}
-
 extension HorizontalAlignment {
     enum Custom: AlignmentID {
         static func defaultValue(in d: ViewDimensions) -> CGFloat {
@@ -36,4 +26,17 @@ extension VerticalAlignment {
 extension Alignment {
     static let custom = Alignment(horizontal: .custom,
                                   vertical: .custom)
+}
+
+public extension Collection {
+    
+    /// Returns: the pretty printed JSON string or an error string if any error occur.
+    var prettyJSON: String {
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: self, options: [.prettyPrinted])
+            return String(data: jsonData, encoding: .utf8) ?? ""
+        } catch {
+            return "json serialization error: \(error)"
+        }
+    }
 }

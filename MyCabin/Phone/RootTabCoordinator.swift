@@ -10,37 +10,37 @@ import SwiftUI
 
 class RootTabCoordinator: NSObject  {
     
-    var navigationController = UITabBarController()
+    var tabBarController = UITabBarController()
     var subviews: [UIViewController]!
     
     func goTo<V>(destination: UIHostingController<V>) {
         destination.modalTransitionStyle = .coverVertical
-        navigationController.present(destination, animated: true)
+        tabBarController.present(destination, animated: true)
     }
     
     func goToWithParams(_ view: some View) {
         let destination = UIHostingController(rootView: view)
         destination.modalTransitionStyle = .coverVertical
-        navigationController.present(destination, animated: true)
+        tabBarController.present(destination, animated: true)
     }
     
     func start(subviews: [UIViewController]) {
         self.subviews = subviews
-        navigationController.delegate = self
-        navigationController.setViewControllers(subviews, animated: true)
+        tabBarController.delegate = self
+        tabBarController.setViewControllers(subviews, animated: false)
     }
     
     func goToTab(_ index: Int) {
-        let views = navigationController.viewControllers
+        let views = tabBarController.viewControllers
         let view = views?[index]
         guard view != nil else { return }
-        navigationController.show(view!, sender: self)
+        tabBarController.show(view!, sender: self)
     }
     
     open func dismiss() {
-        navigationController.dismiss(animated: true) { [weak self] in
+        tabBarController.dismiss(animated: true) { [weak self] in
             /// because there is a leak in UIHostingControllers that prevents from deallocation
-            self?.navigationController.viewControllers = self?.subviews ?? [UIViewController()]
+            self?.tabBarController.viewControllers = self?.subviews ?? [UIViewController()]
         }
     }
     

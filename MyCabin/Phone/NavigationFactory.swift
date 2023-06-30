@@ -23,9 +23,9 @@ final class NavigationFactory {
         self.volumeView = views.buildUIHostedVolumeMenu()
     }
     
-    func buildRootTabNavigation() -> RootTabCoordinator {
+    func configureRootTabCoordinator() {
         let coordinator = rootTabCoordinator
-        coordinator.navigationController.tabBar.tintColor = .white
+        coordinator.tabBarController.tabBar.tintColor = .white
 
         let tabOne = self.buildHomeMenu()
         let tabTwo = views.buildUIHostedMediaTab()
@@ -42,7 +42,7 @@ final class NavigationFactory {
         let subviews = [tabOne.navigationController, tabTwo, tabThree]
 
         coordinator.start(subviews: subviews)
-        return coordinator
+
     }
 
     func buildHomeMenu() -> HomeMenuCoordinator {

@@ -12,6 +12,7 @@ struct Session {
     
     let session: URLSession
     
+    
     static var shared: URLSession  {
         get {
             return Session().session
@@ -50,7 +51,7 @@ extension URLSession {
             .eraseToAnyPublisher()
     }
     
-    func publisherForNullResponse<Format, ResponseModel>( for endpoint: Endpoint<Format, ResponseModel>,
+    func publisherForNullResponse<Format, ResponseModel>(for endpoint: Endpoint<Format, ResponseModel>,
         using requestData: Format.RequestData? = nil, decoder: JSONDecoder = .init() ) -> AnyPublisher<EmptyResponse, Error> {
         
         guard let request = endpoint.makeRequest(with: requestData) else {
@@ -80,7 +81,7 @@ extension URLSession {
             .eraseToAnyPublisher()
     }
     
-    func publisherForPinging<Format, ResponseModel>( for endpoint: Endpoint<Format, ResponseModel>, decoder: JSONDecoder = .init() ) -> AnyPublisher<HTTPURLResponse, Error> {
+    func publisherForPinging<Format, ResponseModel>( for endpoint: Endpoint<Format, ResponseModel> ) -> AnyPublisher<HTTPURLResponse, Error> {
         
         guard let request = endpoint.makeRequest(with: nil) else {
             return Fail(error: InvalidEndpoint())

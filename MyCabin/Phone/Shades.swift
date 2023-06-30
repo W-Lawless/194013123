@@ -32,6 +32,9 @@ struct Shades: View {
         }
         .environmentObject(viewModel)
         .edgesIgnoringSafeArea(.bottom)
+        .onAppear {
+            viewModel.clearSelection()
+        }
         
     }
     

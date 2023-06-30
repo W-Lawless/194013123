@@ -36,7 +36,7 @@ class AppCoordinator {
     
     func configureViews() {
         rootNavView.navigationBar.isHidden = true
-        rootNavView.setViewControllers([tabs.navigationController,loadingView], animated: true)
+        rootNavView.setViewControllers([tabs.tabBarController,loadingView], animated: false)
         self.window.rootViewController = rootNavView
     }
     

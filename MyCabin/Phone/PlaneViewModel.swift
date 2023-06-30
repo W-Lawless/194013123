@@ -13,13 +13,12 @@ class PlaneViewModel: ObservableObject {
     @Published var planeDisplayOptions: PlaneSchematicDisplayMode = .onlySeats
     @Published var selectedZone: PlaneArea? = nil
     
-    @Published var containerViewHeight: CGFloat = 0
-    @Published var containerViewWidth: CGFloat = 0
+    //TODO: - Initialize at app start ?
     @Published var containerWidthUnit: CGFloat = 0
     @Published var containerHeightUnit: CGFloat = 0
     
-    @Published var subviewHeightUnit: CGFloat = 0
     @Published var subviewWidthUnit: CGFloat = 0
+    @Published var subviewHeightUnit: CGFloat = 0
 
     @MainActor func updateDisplayMode(_ mode: PlaneSchematicDisplayMode) {
         self.planeDisplayOptions = mode

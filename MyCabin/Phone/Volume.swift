@@ -9,17 +9,17 @@ import SwiftUI
 
 struct Volume: View {
     
-    @StateObject var viewModel: SpeakersViewModel
+    @StateObject var viewModel: MediaViewModel
     @State var vol: Int = 0
     
     func callback(_ speaker: SpeakerModel) {
-        viewModel.updateState(for: speaker)
+//        viewModel.updateState(for: speaker)
     }
     
     var body: some View {
         Group {
             
-                List(viewModel.speakerList ?? [SpeakerModel]() ) { speaker in
+                List(viewModel.speakers) { speaker in
                     VolumeControl(speaker: speaker, cb: callback)
                 }
 
@@ -64,20 +64,3 @@ struct VolumeControl: View {
         }
     }
 }
-
-
-class VolumeViewModel: SpeakersViewModel {
-    
-//    @Published var loading: Bool = false
-//    @Published var speakerList: [SpeakerModel]?
-    
-//    override func updateValues(_ alive: Bool, _ data: [SpeakerModel]?) {
-//        self.loading = !alive
-//        if let data = data {
-//            self.speakerList = data
-//        }
-//    }
-}
-
-
-

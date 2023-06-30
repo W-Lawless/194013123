@@ -77,6 +77,9 @@ extension ViewFactory {
             switch(self.state.mediaViewModel.mediaViewIntentPublisher.value) {
             case .pairSpeakerWithMonitor:
                 self.state.activeMediaViewModel.assignSourceToSpeaker(speaker: speaker)
+                self.state.activeMediaViewModel.completeOrClearActiveMediaSelection()
+                self.state.mediaViewModel.mediaViewIntentPublisher.send(.viewNowPlaying)
+                self.state.mediaViewModel.configureMediaViewIntent()
             default:
                 self.state.mediaViewModel.selectSpeaker(speaker: speaker)
             }
@@ -87,7 +90,7 @@ extension ViewFactory {
 }
 
 
-//MARK: - NowPlaying
+//MARK: - NowPlaying ActiveMedia
 
 
 extension ViewFactory {
@@ -121,9 +124,26 @@ extension ViewFactory {
     func buildActiveMediaDeviceButton(activeMedia: ActiveMedia, deviceModel: MediaDeviceModel, device: MediaDevice) -> ActiveMediaDeviceButton {
         
         let view = ActiveMediaDeviceButton(activeMedia: activeMedia, deviceModel: deviceModel, device: device) {
-            self.state.mediaViewModel.displayToolTip = false
-            self.updateActiveMediaControlPanel(activeMedia: activeMedia, device: device)
-        } //TODO: 'Off' click
+            
+            if(self.activeMediaNotAlreadySelected(activeMedia.id)) {
+                
+                self.state.activeMediaViewModel.selectedActiveMedia = activeMedia
+                self.state.activeMediaViewModel.selectedActiveMediaDevice = device
+                self.updateActiveMediaControlPanel(activeMedia: activeMedia, device: device)
+                
+            } else if(self.activeMediaIsAlreadySelected(activeMedia.id) && self.differentOutputSelected(device)) {
+                
+                self.state.activeMediaViewModel.selectedActiveMediaDevice = device
+                self.updateActiveMediaControlPanel(activeMedia: activeMedia, device: device)
+                
+            } else if (self.activeMediaIsAlreadySelected(activeMedia.id) && self.sameOutputSelected(device)) {
+                
+                self.state.activeMediaViewModel.completeOrClearActiveMediaSelection()
+                self.state.mediaViewModel.hideSubView()
+                
+            }
+            
+        }
         
         return view
         
@@ -157,6 +177,22 @@ extension ViewFactory {
         }
     }
     
+    private func activeMediaNotAlreadySelected(_ id: UUID) -> Bool {
+        return self.state.activeMediaViewModel.selectedActiveMedia.id != id
+    }
+    
+    private func activeMediaIsAlreadySelected(_ id: UUID) -> Bool {
+        return self.state.activeMediaViewModel.selectedActiveMedia.id == id
+    }
+    
+    private func differentOutputSelected(_ device: MediaDevice) -> Bool {
+        return self.state.activeMediaViewModel.selectedActiveMediaDevice != device
+    }
+    
+    private func sameOutputSelected(_ device: MediaDevice) -> Bool {
+        return self.state.activeMediaViewModel.selectedActiveMediaDevice == device
+    }
+    
 }
 
 //MARK: - Subview Builder
@@ -170,8 +206,8 @@ extension ViewFactory {
             switch(self.state.mediaViewModel.planeDisplayOptions) {
             case .showNowPlaying:
                 return AnyView(
-                    self.buildActiveMediaControlPanel(for: self.state.activeMediaViewModel.selectedActiveMedia.value,
-                                                      on: self.state.activeMediaViewModel.selectedActiveMediaDevice.value))
+                    self.buildActiveMediaControlPanel(for: self.state.activeMediaViewModel.selectedActiveMedia,
+                                                      on: self.state.activeMediaViewModel.selectedActiveMediaDevice))
             default:
                 return AnyView(buildMediaSourceSelection())
             }
@@ -187,19 +223,19 @@ extension ViewFactory {
 extension ViewFactory {
     
     func buildActiveMediaControlPanel(for activeMedia: ActiveMedia, on device: MediaDevice) -> ActiveMediaControlPanel {
-        let view = ActiveMediaControlPanel(apiClient: api.apiClient, activeMedia: activeMedia, device: device) {
+        let view = ActiveMediaControlPanel(activeMediaViewModel: state.activeMediaViewModel, activeMedia: activeMedia, device: device) {
             let destination = UIHostingController(rootView: self.buildSourceListView())
             self.state.rootTabCoordinator.goTo(destination: destination)
         }
         return view
         
     }
-    
+        
     private func updateActiveMediaControlPanel(activeMedia: ActiveMedia, device: MediaDevice) {
-        self.state.mediaViewModel.displaySubView = false
-        self.state.activeMediaViewModel.selectedActiveMedia.send(activeMedia)
-        self.state.activeMediaViewModel.selectedActiveMediaDevice.send(device)
-        self.state.mediaViewModel.displaySubView = true
+        state.mediaViewModel.hideSubView()
+        self.state.activeMediaViewModel.selectedActiveMedia = activeMedia
+        self.state.activeMediaViewModel.selectedActiveMediaDevice = device
+        state.mediaViewModel.showSubView()
     }
 
 }

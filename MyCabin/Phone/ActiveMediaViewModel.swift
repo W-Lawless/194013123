@@ -11,53 +11,71 @@ import Combine
 final class ActiveMediaViewModel: ObservableObject {
     
     let mediaViewModel: MediaViewModel
-    let monitorsViewModel: MonitorsViewModel //TODO: Refactor to have needed [monitors] at compile not need other obj
     
-    init(mediaViewModel: MediaViewModel, monitorsViewModel: MonitorsViewModel) {
+    init(mediaViewModel: MediaViewModel) {
         self.mediaViewModel = mediaViewModel
-        self.monitorsViewModel = monitorsViewModel
     }
     
     @Published var activeMedia: [UUID:ActiveMedia] = [:]
-    @Published var activeMediaID: UUID?
-    let selectedActiveMedia = CurrentValueSubject<ActiveMedia, Never>(ActiveMedia())
-    let selectedActiveMediaDevice = CurrentValueSubject<MediaDevice, Never>(.monitor)
+    @Published var selectedActiveMedia: ActiveMedia = ActiveMedia()
+    @Published var selectedActiveMediaDevice: MediaDevice = MediaDevice.monitor
     
-    //TODO: Selected Source?
+    //TODO: Swap Speaker Output for Monitor
+    //TODO: Swap Source Input for Speaker/Monitor
+    //TODO: Swap Monitor Output for Speaker
+    //TODO: Speaker to Monitor or
+    //TODO: MultiSpeaker
+    //TODO: MultiMonitor
+    
+    
+    //TODO: Cache Active Media
     //TODO:  IF ACTIVEMEDIA.COUNT > 0 , SET STATE
-
     
     func assignSourceToSpeaker(speaker: SpeakerModel) {
+        
         mediaViewModel.selectedSpeaker = speaker.id
-        
-        if let activeMediaID = activeMediaID {
-            var mediaGroup = activeMedia[activeMediaID]
-            mediaGroup?.speaker = speaker
-            activeMedia[activeMediaID] = mediaGroup
-            //            let monitor = mediaViewModel.activeMedia[activeMediaID]?.monitor
-            //            let source = mediaViewModel.activeMedia[activeMediaID]?.source
-            
-            //            apiClient.toggleMonitor(monitor!, cmd: true)
-            //            apiClient.assignSourceToMonitor(monitor!, source: source!)
-            //            apiClient.assignSourceToSpeaker(speaker, source: source!)
-            //            apiClient.setVolume(speaker, volume: 50)
-        }
-        
-        mediaViewModel.clearMediaSelection()
-        mediaViewModel.mediaViewIntentPublisher.send(.viewNowPlaying)
-        mediaViewModel.configureMediaViewIntent()
+                
+        var mediaGroup = activeMedia[selectedActiveMedia.id]
+        mediaGroup?.speaker = speaker
+        activeMedia[selectedActiveMedia.id] = mediaGroup
+//        TODO: --
+//        let monitor = mediaViewModel.activeMedia[activeMediaID]?.monitor
+//        let source = mediaViewModel.activeMedia[activeMediaID]?.source
+//
+//        apiClient.toggleMonitor(monitor!, cmd: true)
+//        apiClient.assignSourceToMonitor(monitor!, source: source!)
+//        apiClient.assignSourceToSpeaker(speaker, source: source!)
+//        apiClient.setVolume(speaker, volume: 50)
+//
     }
     
     func assignSourceToMonitor(source: SourceModel) {
-        let selectedMonitorModel = monitorsViewModel.monitorsList.first(where: { monitorModel in
+        guard let selectedMonitorModel = mediaViewModel.monitors.first(where: { monitorModel in
             monitorModel.id == mediaViewModel.selectedMonitor
-        })
-        if let selectedMonitorModel {
-            let activeMediaInstance = ActiveMedia(source: source, monitor: selectedMonitorModel)
-            activeMedia[activeMediaInstance.id] = activeMediaInstance
-            activeMediaID = activeMediaInstance.id
-        } else {
-            print("monitor not found")
+        }) else { return }
+        
+        let activeMediaInstance = ActiveMedia(source: source, monitor: selectedMonitorModel)
+        selectedActiveMedia = activeMediaInstance
+        activeMedia[activeMediaInstance.id] = activeMediaInstance        
+    }
+    
+    func completeOrClearActiveMediaSelection() {
+        selectedActiveMedia = ActiveMedia()
+    }
+    
+    func hideActiveMediaControlPanel() {
+        mediaViewModel.clearMediaSelection()
+    }
+    
+    func removeActiveMedia(mediaToMakeInactive: ActiveMedia) {
+        
+        activeMedia.removeValue(forKey: mediaToMakeInactive.id)
+        hideActiveMediaControlPanel()
+        
+        if (activeMedia.isEmpty) {
+            mediaViewModel.mediaViewIntentPublisher.send(.noActiveMedia)
+            mediaViewModel.configureMediaViewIntent()
+            mediaViewModel.clearMediaSelection()
         }
     }
     

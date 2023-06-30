@@ -23,14 +23,12 @@
 		2B11704A29352AF100A1CB8F /* MonitorsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11704929352AF100A1CB8F /* MonitorsAPI.swift */; };
 		2B11704C29352CDE00A1CB8F /* LightsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11704B29352CDE00A1CB8F /* LightsModel.swift */; };
 		2B11704E29352D0A00A1CB8F /* MonitorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11704D29352D0A00A1CB8F /* MonitorModel.swift */; };
-		2B11705129352D7A00A1CB8F /* Monitors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11705029352D7A00A1CB8F /* Monitors.swift */; };
 		2B1170552935338D00A1CB8F /* Speakers.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B1170522935338D00A1CB8F /* Speakers.json */; };
 		2B1170562935338D00A1CB8F /* Monitors.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B1170532935338D00A1CB8F /* Monitors.json */; };
 		2B1170572935338D00A1CB8F /* Sources.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B1170542935338D00A1CB8F /* Sources.json */; };
 		2B11705A29353C0E00A1CB8F /* SourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11705929353C0E00A1CB8F /* SourceModel.swift */; };
 		2B11705C29353DBF00A1CB8F /* SourcesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11705B29353DBF00A1CB8F /* SourcesAPI.swift */; };
 		2B11705E29353DED00A1CB8F /* SourcesHorizontalScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11705D29353DED00A1CB8F /* SourcesHorizontalScroll.swift */; };
-		2B117060293548A100A1CB8F /* Speakers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B11705F293548A100A1CB8F /* Speakers.swift */; };
 		2B1170632935491000A1CB8F /* SpeakersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1170622935491000A1CB8F /* SpeakersAPI.swift */; };
 		2B1170652935491D00A1CB8F /* SpeakerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1170642935491D00A1CB8F /* SpeakerModel.swift */; };
 		2B117068293551AD00A1CB8F /* FlightTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B117067293551AD00A1CB8F /* FlightTab.swift */; };
@@ -117,6 +115,7 @@
 		2BB135FF292708750016444C /* ShadesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB135FE292708750016444C /* ShadesAPI.swift */; };
 		2BB13601292713570016444C /* Shades.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BB13600292713570016444C /* Shades.json */; };
 		2BB3A587292445C90094B787 /* HeartbeatMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3A586292445C90094B787 /* HeartbeatMonitor.swift */; };
+		2BB629642A4DEE900060794A /* ActiveMediaControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB629632A4DEE900060794A /* ActiveMediaControlButton.swift */; };
 		2BBBB10F2A4369B20045DF40 /* MyCabinUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBBB10E2A4369B20045DF40 /* MyCabinUITests.swift */; };
 		2BBBB11A2A439D4F0045DF40 /* RootTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBBB1192A439D4F0045DF40 /* RootTabCoordinator.swift */; };
 		2BBBB11C2A439D870045DF40 /* HomeMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBBB11B2A439D870045DF40 /* HomeMenuCoordinator.swift */; };
@@ -141,12 +140,11 @@
 		2BD08BA42A4BA60300623211 /* MediaViewModel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08BA32A4BA60300623211 /* MediaViewModel+.swift */; };
 		2BD08BA72A4CB28400623211 /* ActiveMediaIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08BA62A4CB28400623211 /* ActiveMediaIcons.swift */; };
 		2BD08BA92A4CC54600623211 /* ActiveMediaDeviceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08BA82A4CC54600623211 /* ActiveMediaDeviceButton.swift */; };
-		2BD08BAC2A4CC6C500623211 /* StateFactory+Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08BAB2A4CC6C500623211 /* StateFactory+Media.swift */; };
 		2BD08BAE2A4CD26C00623211 /* ActiveMediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08BAD2A4CD26C00623211 /* ActiveMediaViewModel.swift */; };
-		2BD08BB02A4CD41700623211 /* StateFactory+ActiveMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08BAF2A4CD41700623211 /* StateFactory+ActiveMedia.swift */; };
 		2BD08BB22A4CD6FA00623211 /* ActiveMediaViewModel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08BB12A4CD6FA00623211 /* ActiveMediaViewModel+.swift */; };
 		2BD08BBD2A4CFADF00623211 /* LightsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08BBC2A4CFADF00623211 /* LightsViewModel.swift */; };
 		2BD08BBF2A4CFB1F00623211 /* ShadesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08BBE2A4CFB1F00623211 /* ShadesViewModel.swift */; };
+		2BD08BC22A4D09FA00623211 /* StateFactory+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD08BC12A4D09FA00623211 /* StateFactory+.swift */; };
 		2BD5E7FF2A12B9140042DF92 /* elements.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BD5E7FE2A12B9140042DF92 /* elements.json */; };
 		2BD5E8012A12C0C40042DF92 /* planeMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BD5E8002A12C0C30042DF92 /* planeMap.json */; };
 		2BD75A17292E7503004360A3 /* LightsData.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BD75A16292E7503004360A3 /* LightsData.json */; };
@@ -224,14 +222,12 @@
 		2B11704929352AF100A1CB8F /* MonitorsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorsAPI.swift; sourceTree = "<group>"; };
 		2B11704B29352CDE00A1CB8F /* LightsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightsModel.swift; sourceTree = "<group>"; };
 		2B11704D29352D0A00A1CB8F /* MonitorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorModel.swift; sourceTree = "<group>"; };
-		2B11705029352D7A00A1CB8F /* Monitors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monitors.swift; sourceTree = "<group>"; };
 		2B1170522935338D00A1CB8F /* Speakers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Speakers.json; sourceTree = "<group>"; };
 		2B1170532935338D00A1CB8F /* Monitors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Monitors.json; sourceTree = "<group>"; };
 		2B1170542935338D00A1CB8F /* Sources.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Sources.json; sourceTree = "<group>"; };
 		2B11705929353C0E00A1CB8F /* SourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceModel.swift; sourceTree = "<group>"; };
 		2B11705B29353DBF00A1CB8F /* SourcesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesAPI.swift; sourceTree = "<group>"; };
 		2B11705D29353DED00A1CB8F /* SourcesHorizontalScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesHorizontalScroll.swift; sourceTree = "<group>"; };
-		2B11705F293548A100A1CB8F /* Speakers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speakers.swift; sourceTree = "<group>"; };
 		2B1170622935491000A1CB8F /* SpeakersAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakersAPI.swift; sourceTree = "<group>"; };
 		2B1170642935491D00A1CB8F /* SpeakerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerModel.swift; sourceTree = "<group>"; };
 		2B117067293551AD00A1CB8F /* FlightTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightTab.swift; sourceTree = "<group>"; };
@@ -322,6 +318,7 @@
 		2BB135FE292708750016444C /* ShadesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadesAPI.swift; sourceTree = "<group>"; };
 		2BB13600292713570016444C /* Shades.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Shades.json; sourceTree = "<group>"; };
 		2BB3A586292445C90094B787 /* HeartbeatMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatMonitor.swift; sourceTree = "<group>"; };
+		2BB629632A4DEE900060794A /* ActiveMediaControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveMediaControlButton.swift; sourceTree = "<group>"; };
 		2BBBB10C2A4369B20045DF40 /* MyCabinUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyCabinUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BBBB10E2A4369B20045DF40 /* MyCabinUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCabinUITests.swift; sourceTree = "<group>"; };
 		2BBBB1192A439D4F0045DF40 /* RootTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabCoordinator.swift; sourceTree = "<group>"; };
@@ -348,12 +345,11 @@
 		2BD08BA32A4BA60300623211 /* MediaViewModel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediaViewModel+.swift"; sourceTree = "<group>"; };
 		2BD08BA62A4CB28400623211 /* ActiveMediaIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveMediaIcons.swift; sourceTree = "<group>"; };
 		2BD08BA82A4CC54600623211 /* ActiveMediaDeviceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveMediaDeviceButton.swift; sourceTree = "<group>"; };
-		2BD08BAB2A4CC6C500623211 /* StateFactory+Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StateFactory+Media.swift"; sourceTree = "<group>"; };
 		2BD08BAD2A4CD26C00623211 /* ActiveMediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveMediaViewModel.swift; sourceTree = "<group>"; };
-		2BD08BAF2A4CD41700623211 /* StateFactory+ActiveMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StateFactory+ActiveMedia.swift"; sourceTree = "<group>"; };
 		2BD08BB12A4CD6FA00623211 /* ActiveMediaViewModel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActiveMediaViewModel+.swift"; sourceTree = "<group>"; };
 		2BD08BBC2A4CFADF00623211 /* LightsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightsViewModel.swift; sourceTree = "<group>"; };
 		2BD08BBE2A4CFB1F00623211 /* ShadesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadesViewModel.swift; sourceTree = "<group>"; };
+		2BD08BC12A4D09FA00623211 /* StateFactory+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StateFactory+.swift"; sourceTree = "<group>"; };
 		2BD5E7FE2A12B9140042DF92 /* elements.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = elements.json; sourceTree = "<group>"; };
 		2BD5E8002A12C0C30042DF92 /* planeMap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = planeMap.json; sourceTree = "<group>"; };
 		2BD75A16292E7503004360A3 /* LightsData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LightsData.json; sourceTree = "<group>"; };
@@ -481,8 +477,6 @@
 			isa = PBXGroup;
 			children = (
 				2BE97D3E291C175F00149BA4 /* MediaTab.swift */,
-				2B11705029352D7A00A1CB8F /* Monitors.swift */,
-				2B11705F293548A100A1CB8F /* Speakers.swift */,
 				2BD08BA52A4CB27800623211 /* ActiveMedia */,
 				2B793F8D2A0AB1D8005AB60C /* Subviews */,
 			);
@@ -1050,6 +1044,7 @@
 				2B793F932A0B0192005AB60C /* ActiveMediaButtonGroup.swift */,
 				2BD08BA82A4CC54600623211 /* ActiveMediaDeviceButton.swift */,
 				2B793F912A0AB27B005AB60C /* ActiveMediaControlPanel.swift */,
+				2BB629632A4DEE900060794A /* ActiveMediaControlButton.swift */,
 				2BD08BA62A4CB28400623211 /* ActiveMediaIcons.swift */,
 			);
 			name = ActiveMedia;
@@ -1059,8 +1054,7 @@
 			isa = PBXGroup;
 			children = (
 				2B20BF522A05AE500096568D /* StateFactory.swift */,
-				2BD08BAB2A4CC6C500623211 /* StateFactory+Media.swift */,
-				2BD08BAF2A4CD41700623211 /* StateFactory+ActiveMedia.swift */,
+				2BD08BC12A4D09FA00623211 /* StateFactory+.swift */,
 			);
 			path = StateFactory;
 			sourceTree = "<group>";
@@ -1392,6 +1386,7 @@
 				2B5A28D02A44E419009A8DC0 /* PlaneDisplayOptionBar.swift in Sources */,
 				2B183F4E2913F8BD0087654E /* Loading.swift in Sources */,
 				2B11705C29353DBF00A1CB8F /* SourcesAPI.swift in Sources */,
+				2BB629642A4DEE900060794A /* ActiveMediaControlButton.swift in Sources */,
 				2B939C91293E9DC80014AD13 /* RenderCoordinates.swift in Sources */,
 				2B8F7139292D763C00073637 /* Shades.swift in Sources */,
 				2B5A28DF2A44EAEB009A8DC0 /* NowPlayingBlueprint.swift in Sources */,
@@ -1405,7 +1400,6 @@
 				2BD08BB22A4CD6FA00623211 /* ActiveMediaViewModel+.swift in Sources */,
 				2B939C8F293E910F0014AD13 /* AreasModel.swift in Sources */,
 				2B02B9D92937C93300C6387A /* Cache.swift in Sources */,
-				2BD08BB02A4CD41700623211 /* StateFactory+ActiveMedia.swift in Sources */,
 				2BB135EC2926D6AB0016444C /* WeatherModels.swift in Sources */,
 				2BE97D67291C69F700149BA4 /* Haptics.swift in Sources */,
 				2BD08BBD2A4CFADF00623211 /* LightsViewModel.swift in Sources */,
@@ -1451,9 +1445,9 @@
 				2B197F022A031B4D00DF406B /* SeatButton.swift in Sources */,
 				2BD08B9C2A4BA0E500623211 /* ViewFactory+ClimateMenu.swift in Sources */,
 				2BB135FF292708750016444C /* ShadesAPI.swift in Sources */,
+				2BD08BC22A4D09FA00623211 /* StateFactory+.swift in Sources */,
 				2BD75A1B292EB256004360A3 /* AppDelegate.swift in Sources */,
 				2BE4D4F22940FE3E0026FC01 /* ElementsEnumModel.swift in Sources */,
-				2B11705129352D7A00A1CB8F /* Monitors.swift in Sources */,
 				2BA8F61A29258F78005621D3 /* ElementsDataFormatter.swift in Sources */,
 				2BD08BAE2A4CD26C00623211 /* ActiveMediaViewModel.swift in Sources */,
 				2B1170462933E43800A1CB8F /* AppCoordinator.swift in Sources */,
@@ -1472,7 +1466,6 @@
 				2B197F042A031C2000DF406B /* Divan.swift in Sources */,
 				2BD08B922A4BA01E00623211 /* ViewFactory+HostedViews.swift in Sources */,
 				2B02B9DB2937FD4500C6387A /* PlaneSchematic.swift in Sources */,
-				2BD08BAC2A4CC6C500623211 /* StateFactory+Media.swift in Sources */,
 				2B11704E29352D0A00A1CB8F /* MonitorModel.swift in Sources */,
 				2B197EE62A02CAFA00DF406B /* RealtimeAPI.swift in Sources */,
 				2B86580C2939414A00982BBB /* AccessAPI.swift in Sources */,
@@ -1493,7 +1486,6 @@
 				2BE4D4F5294107680026FC01 /* TableModel.swift in Sources */,
 				2B793F942A0B0192005AB60C /* ActiveMediaButtonGroup.swift in Sources */,
 				2BD08BA02A4BA1B600623211 /* ViewFactory+Media.swift in Sources */,
-				2B117060293548A100A1CB8F /* Speakers.swift in Sources */,
 				2B9ABC6D294A1CB600670EE0 /* LightsBottomPanel.swift in Sources */,
 				2B5A28D22A44E435009A8DC0 /* LightMenuPlaneDisplayOptions.swift in Sources */,
 				2B793F882A06B663005AB60C /* MediaOptions.swift in Sources */,

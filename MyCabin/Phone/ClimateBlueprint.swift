@@ -14,15 +14,30 @@ struct ClimateBlueprint: View, AreaBlueprint {
 
     var body: some View {
         ZStack {
-            ForEach(areaClimateZones, id: \.self) { tempZone in
+            Text("Climate")
+            ForEach(areaClimateZones, id: \.id) { tempZone in
                 
                 RoundedRectangle(cornerRadius: 4)
-                    .stroke(.red, lineWidth: 1)
+                    .stroke(getColor(zone: tempZone), lineWidth: 3)
                     .frame(width: tempZone.rect.w * planeViewModel.subviewWidthUnit, height: tempZone.rect.h * planeViewModel.subviewHeightUnit)
-//                    .modifier(PlaceIcon(rect: tempZone.rect, subviewWidthUnit: subviewWidthUnit, subviewHeightUnit: subviewHeightUnit))
+                    .offset(x: 0, y: ((planeViewModel.subviewHeightUnit * tempZone.rect.y) - ((planeViewModel.subviewHeightUnit * tempZone.rect.h)/2)))
+//                    .modifier(PlaceIcon(rect: tempZone.rect))
+                    .onAppear {
+                        print("***", tempZone.id)
+                        print("*** ", tempZone.rect)
+                        print("*** height", tempZone.rect.h * planeViewModel.subviewHeightUnit)
+                    }
                 
             } //: FOREACH
             
         } //: ZSTQ
+    }
+    
+    func getColor(zone: ClimateControllerModel) -> Color {
+        if(zone.id == "second-temp-ctrl") {
+            return .red
+        } else {
+            return .blue
+        }
     }
 }

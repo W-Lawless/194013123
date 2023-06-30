@@ -20,6 +20,22 @@ struct PlaceIcon: ViewModifier {
     }
 }
 
+struct TappableClimateZone: ViewModifier {
+    @EnvironmentObject var planeViewModel: PlaneViewModel
+    var rect: RenderCoordinates
+    
+    func body(content: Content) -> some View {
+        content
+            .position(x: ((planeViewModel.subviewWidthUnit * rect.x) + ((planeViewModel.subviewWidthUnit * rect.w)/2)),
+                      y: ((planeViewModel.subviewHeightUnit * rect.y) + ((planeViewModel.subviewHeightUnit * rect.h)/2)) )
+            .onAppear {
+                print("Climate zone drawing")
+                print(planeViewModel.plane.parentArea.rect.x)
+            }
+        /// Position Center according to API coordinate data & add half the width/height to the coordinate to align image by top left corner
+    }
+}
+
 struct TappableZone: ViewModifier {
     
     @EnvironmentObject var planeViewModel: PlaneViewModel

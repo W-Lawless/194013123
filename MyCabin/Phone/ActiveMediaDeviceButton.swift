@@ -18,7 +18,7 @@ struct ActiveMediaDeviceButton: View {
         Image(assetUrl(activeMedia.source, device: device))
             .resizable()
             .scaledToFit()
-            .frame(maxWidth: 48, maxHeight: 48)
+            .frame(maxWidth: 42, maxHeight: 42)
             .accessibilityIdentifier("active_\(deviceModel.id)")
             .modifier(PlaceIcon(rect: deviceModel.rect))
             .hapticFeedback(feedbackStyle: .light) { _ in
@@ -26,6 +26,7 @@ struct ActiveMediaDeviceButton: View {
             }
     }
     
+    //TODO: - Make public util ?
     private func assetUrl(_ source: SourceModel, device: MediaDevice) -> String {
         switch (source.type) {
         case SourceTypes.aux.rawValue:

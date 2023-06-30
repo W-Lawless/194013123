@@ -21,22 +21,7 @@ struct ShadeButton: View {
                 .frame(width:21, height: 44)
                 .accessibilityIdentifier(shade.id)
                 .hapticFeedback(feedbackStyle: .light) { _ in
-                    //TODO: Build with proper callback
-                    print(shade.id)
-//                    viewModel.appendShade(shade)
-                    viewModel.selectShade(is: shade.id)
-                    if(viewModel.selectedShade != viewModel.activeShade?.id) {
-                        viewModel.activeShade = shade
-                    } else {
-                        viewModel.showPanel.toggle()
-                    }
+                    viewModel.selectShade(shade)
                 } //: HAPTIC
-
     }
 }
-
-//struct ShadeIcon_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ShadeIcon()
-//    }
-//}

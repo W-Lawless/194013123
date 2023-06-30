@@ -157,9 +157,8 @@ final class Data_Formatting_Tests: XCTestCase {
     }
     
     func getMockDataFormatter() -> ElementDataFormatter {
-        let mockState = StateFactory()
-        let mockCacheUtil = FileCacheUtil(state: mockState)
-        let sut = ElementDataFormatter(state: mockState, cacheUtil: mockCacheUtil)
+        let mockCache = FileCacheUtil()
+        let sut = ElementDataFormatter(cacheUtil: mockCache)
         return sut
     }
     

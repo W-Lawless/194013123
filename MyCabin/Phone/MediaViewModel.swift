@@ -22,7 +22,6 @@ class MediaViewModel: ObservableObject {
     
     @Published var displaySubView: Bool = false
     @Published var displayToolTip: Bool = true
-    @Published var contextualSubView: AnyView = AnyView(Text(""))
     @Published var contextualToolTip: String = MediaToolTips.monitors.rawValue
     
     var sourceList = [SourceModel]()
@@ -102,6 +101,14 @@ class MediaViewModel: ObservableObject {
         sourceTypes.sort { $0.name < $1.name }
     }
     
+    func updateSpeakerState(for speaker: SpeakerModel) {
+        self.speakers.mapInPlace({ value in
+            if(value.id == speaker.id) {
+                value = speaker
+            }
+        })
+    }
+    
     func updateContextualToolTip(_ option: PlaneSchematicDisplayMode) {
         switch(option) {
         case .showNowPlaying:
@@ -141,12 +148,12 @@ class MediaViewModel: ObservableObject {
         selectedSpeaker = ""
     }
     
-    private func hideSubView() {
+    func hideSubView() {
         displaySubView = false
         displayToolTip = true
     }
     
-    private func showSubView() {
+    func showSubView() {
         displaySubView = true
         displayToolTip = false
     }

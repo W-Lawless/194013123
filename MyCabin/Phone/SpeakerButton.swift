@@ -19,8 +19,8 @@ struct SpeakerButton: View {
         Image(selected ? "ic_speaker_on" : "ic_speaker_off")
             .resizable()
             .scaledToFit()
-            .frame(maxWidth: 48, maxHeight: 48)
-            .scaleEffect(selected ? 1.4 : 1)
+            .frame(maxWidth: 42, maxHeight: 42)
+            .scaleEffect(selected ? 1.1 : 1)
             .accessibilityIdentifier(speaker.id)
             .hapticFeedback(feedbackStyle: .light) { _ in
                 iconCallback(speaker)

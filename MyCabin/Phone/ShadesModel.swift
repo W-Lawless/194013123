@@ -7,16 +7,6 @@
 
 import Foundation
 
-struct ShadeCommand: Codable {
-    var cmd: String
-}
-
-enum ShadeStates: String {
-    case OPEN
-    case CLOSE
-    case SHEER
-}
-
 struct ShadeModel: Codable, Identifiable, ElementModel, Equatable {
     static func == (lhs: ShadeModel, rhs: ShadeModel) -> Bool {
         return lhs.id == rhs.id

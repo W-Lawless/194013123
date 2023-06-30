@@ -17,9 +17,3 @@ struct FlightTab: View {
         .tabViewStyle(.page)
     }
 }
-
-struct FlightTab_Previews: PreviewProvider {
-    static var previews: some View {
-        FlightTab()
-    }
-}

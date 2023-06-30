@@ -7,12 +7,10 @@
 
 import SwiftUI
 
-class LightsViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
+class LightsViewModel: ObservableObject {
     
     typealias F = EndpointFormats.Get
     typealias R = LightModel.state
-
-    let planeViewModel: PlaneViewModel
     
     @Published var activeSeat: String = ""
     @Published var lightList: [LightModel]?
@@ -21,10 +19,7 @@ class LightsViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
     @Published var lightsForSeat = [LightModel]()
     
     var rtAPI = [RealtimeAPI<F ,R>]()
-    
-    init(plane: PlaneViewModel) {
-        self.planeViewModel = plane
-    }
+    var allSeats = [SeatModel]()
     
     func updateValues(_ data: [Codable]) {
         let typecast = data as? [LightModel]
@@ -33,8 +28,12 @@ class LightsViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
         }
     }
     
+    func updateSeats(_ seats: [SeatModel]) {
+        self.allSeats = seats
+    }
+    
     func getLightsForSeat() {
-        let target = planeViewModel.plane.allSeats.filter { seat in
+        let target = allSeats.filter { seat in
             return seat.id == activeSeat
         }
 
@@ -54,22 +53,26 @@ class LightsViewModel: GCMSViewModel, ParentViewModel, ObservableObject {
     
     
     func pollLightsForState(lights: [LightModel]) {
+        
         lights.forEach { light in
             let ep = Endpoint<F, R>(path: .lights, stateUpdate: light.id)
-            let pointer =  RealtimeAPI(endpoint: ep, callback: { [weak self] apiResult in
+            
+            let client =  RealtimeAPI(endpoint: ep) { [weak self] apiResult in
                 if let state = apiResult.first {
                     self?.rtResponses[light.id] = state
                 }
-            })
-            rtAPI.append(pointer)
-            pointer.monitor.startMonitor(interval: 1.0, callback: pointer.monitorCallback)
+            }
+            
+            rtAPI.append(client)
+            
+            client.monitor.startMonitor(interval: 1.0, callback: client.monitorCallback)
         }
     }
     
     func killMonitor() {
         print("KILL MONITOR!")
-        self.rtAPI.forEach({ api in
-            api.monitor.stopMonitor()
+        self.rtAPI.forEach({ rtApiClient in
+            rtApiClient.monitor.stopMonitor()
         })
     }
     

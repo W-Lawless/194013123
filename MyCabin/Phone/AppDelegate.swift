@@ -14,6 +14,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 ///        if let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.path {
 ///            print("Documents Directory: \(documentsPath)")
 ///        }
+
         return true
     }
     
@@ -28,6 +29,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 
 final class SceneDelegate: NSObject, UIWindowSceneDelegate {
         
+    var window: UIWindow?
     var hasAlreadyConnectedToCabin: Bool = false
     
     let apiFactory: APIFactory
@@ -42,17 +44,27 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
         self.stateFactory = StateFactory(api: self.apiFactory, cache: self.cacheUtil)
         self.viewFactory = ViewFactory(api: self.apiFactory, state: self.stateFactory)
         self.navigationFactory = NavigationFactory(views: self.viewFactory, rootTabCoordinator: self.stateFactory.rootTabCoordinator, homeMenuCoordinator: self.stateFactory.homeMenuCoordinator)
-        super.init()
     }
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let window = UIWindow(windowScene: windowScene)
+        window = UIWindow(windowScene: windowScene)
         
-        let app = readyApplication(window: window)
-        launch(app)
         
-        window.makeKeyAndVisible()
+        if let window {
+            let app = readyApplication(window: window)
+            
+//            let screenWidth = window.windowScene?.screen.bounds.width
+//            let screenHeight = window.windowScene?.screen.bounds.height
+//
+//            stateFactory.planeViewModel.containerViewWidth = screenWidth!
+//            stateFactory.planeViewModel.containerViewHeight = screenHeight!
+            //TODO: - pass into state factory ?
+            
+            launch(app)
+            window.makeKeyAndVisible()
+        }
+        
     }
     
     func readyApplication(window: UIWindow) -> AppCoordinator {
@@ -62,27 +74,32 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
         return app
     }
     
-    
     func configureNavigationControllers() {
-        _ = self.navigationFactory.buildRootTabNavigation()
-        _ = self.navigationFactory.buildHomeMenu()
+        navigationFactory.configureRootTabCoordinator()
     }
     
     func launch(_ app: AppCoordinator) {
         if CommandLine.arguments.contains("--uitesting") {
-            print("Launch UI")
             launchUITests(app)
         } else {
+            #if DEBUG
+            launchDevelopment(app)
+            #else
             launchProduction(app)
+            #endif
         }
     }
 
     func launchUITests(_ app: AppCoordinator) {
-        print("UI TESTS LAUNCHED")
-        app.start(publisher: apiFactory.cabinConnectionPublisher, tokenStore: &apiFactory.cancelTokens) { _ in } sinkValue: { _ in
-            try? self.stateFactory.loadAllCaches()
-            app.goTo(.cabinFound)
-        }
+        print("LAUNCH UI TESTING")
+        try? self.stateFactory.loadAllCaches()
+        app.goTo(.cabinFound)
+    }
+    
+    func launchDevelopment(_ app: AppCoordinator) {
+        print("LAUNCH DEVELOPMENT")
+        try? self.stateFactory.loadAllCaches()
+        app.goTo(.cabinFound)
     }
     
     func launchProduction(_ app: AppCoordinator) {

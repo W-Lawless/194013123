@@ -12,18 +12,14 @@ extension ViewFactory {
         return view
     }
     
-    //    func buildShadeMenuPlaneDisplayOptions() -> ShadeMenuPlaneDisplayOptions {
-    //        let view = ShadeMenuPlaneDisplayOptions()
-    //        return view
-    //    }
-    //
-    //    func buildShadeGroupButton() -> ShadeGroupButton {
-    //        let view = ShadeGroupButton(group: T##ShadeGroup, text: T##String)
-    //    }
-    
     func buildShadeControl() -> ShadeControl {
-        let view = ShadeControl(apiClient: api.apiClient)
+        let view = ShadeControl(buttonCallback: commandActiveShades)
         return view
     }
     
+    func commandActiveShades(shadeState: ShadeStates) {
+        self.state.shadesViewModel.activeShades.forEach { shade in
+            api.apiClient.commandShade(shade: shade, cmd: shadeState)
+        }
+    }
 }

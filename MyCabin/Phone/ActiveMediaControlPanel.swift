@@ -13,8 +13,9 @@ struct ActiveMediaControlPanel: View {
     @State var mute: Bool = false
     @State var volume: Int = 25
     @State var monitorPower: Bool = true
-
-    let apiClient: GCMSClient
+    @State var dummyBinding: Bool = false
+    
+    @ObservedObject var activeMediaViewModel: ActiveMediaViewModel
     let activeMedia: ActiveMedia
     let device: MediaDevice
     let navHandler: () -> ()
@@ -22,130 +23,32 @@ struct ActiveMediaControlPanel: View {
     
     var body: some View {
         
-        
+        //TODO: -- Componentize
         GeometryReader { geo in
             
             ScrollView(.horizontal) {
                 
                 HStack(spacing: 24) {
                     
-                        Image(getDeviceIcon())
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 64, height: 64)
-                            .accessibilityIdentifier("active_device_\(device.rawValue)")
-
-                    Button {} label: {
-                        VStack(spacing: 4) {
-                            Image(systemName: "power.off")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 48, height: 48)
-                                .accessibilityIdentifier("source_icon_\(activeMedia.source.id)")
-                            Text("delete_it")
-                                .foregroundColor(.white)
-                                .font(.system(size: 11))
-                        } //: VSTQ
-                        .frame(width: 88, height: 88)
-                        .overlay (
-                            RoundedRectangle(cornerRadius: 8).stroke(.blue, lineWidth: 1).frame(width: 86, height: 86)
-                        )
-                        .hapticFeedback(feedbackStyle: .medium) { _ in
-                            //TODO: - Refactor subview generation
-//                            mediaViewModel.displaySubView.toggle()
-//                            mediaViewModel.contextualSubView = AnyView(ViewFactory.buildSourcesView())
-//                            mediaViewModel.displaySubView.toggle()
-                        }
-                        
-                    } //: BTN
+                    Image(getDeviceIcon())
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 32, height: 32)
+                        .accessibilityIdentifier("active_device_\(device.rawValue)")
                     
-                        Button {} label: {
-                            VStack(spacing: 4) {
-                                Image(getSourceIcon())
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 48, height: 48)
-                                    .accessibilityIdentifier("source_icon_\(activeMedia.source.id)")
-                                Text(activeMedia.source.name)
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 11))
-                            } //: VSTQ
-                            .frame(width: 88, height: 88)
-                            .overlay (
-                                RoundedRectangle(cornerRadius: 8).stroke(.blue, lineWidth: 1).frame(width: 86, height: 86)
-                            )
-                            .hapticFeedback(feedbackStyle: .medium) { _ in
-                                navHandler()
-                            }
-                            
-                        } //: BTN
-                    
-                    
-                    switch(device) {
-                    case .speaker:
-                        Image(systemName: "speaker.plus")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: 48, maxHeight: 48)
-                            .hapticFeedback(feedbackStyle: .light) { _ in
-                                if (volume < 100) {
-                                    volume = volume + 5
-                                    print(volume)
-                                    apiClient.setVolume(activeMedia.speaker!, volume: volume)
-                                }
-                            }
-                        
-                        Image(systemName: "speaker.minus")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: 48, maxHeight: 48)
-                            .hapticFeedback(feedbackStyle: .light) { _ in
-                                if(volume > 0) {
-                                    volume = volume - 5
-                                    print(volume)
-                                    apiClient.setVolume(activeMedia.speaker!, volume: volume)
-                                }
-                            }
-                                                
-                        Image(systemName: "speaker.slash")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: 48, maxHeight: 48)
-                            .hapticFeedback(feedbackStyle: .light) { _ in
-                                mute.toggle()
-                                apiClient.toggleMute(activeMedia.speaker!, cmd: mute)
-                            }
-                        
-                    case .monitor:
-                        
-                        Button {} label: {
-                            VStack(spacing: 4) {
-                                Image(systemName: monitorPower ? "power.circle.fill" : "power.circle" )
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(maxWidth: 48, maxHeight: 48)
-                                Text("Power")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 11))
-                            } //: VSTQ
-                            .frame(width: 88, height: 88)
-                            .overlay (
-                                RoundedRectangle(cornerRadius: 8).stroke(.blue, lineWidth: 1).frame(width: 86, height: 86)
-                            )
-                            .hapticFeedback(feedbackStyle: .medium) { _ in
-                                
-                                guard let monitor = activeMedia.monitor else { return }
-                                monitorPower.toggle()
-                                apiClient.toggleMonitor(monitor, cmd: monitorPower)
-                                
-                            }
-                            
-                        } //: BTN
-                        
-                    case .bluetooth:
-                        Text("bluetooth")
+                    SourceSelectionButton(image: "stop.circle", label: "Stop", uilabel: "source_icon_\(activeMedia.source.id)", sysimg: true)
+                    .hapticFeedback(feedbackStyle: .medium) { _ in
+                        //TODO: - Refactor subview generation
+                        activeMediaViewModel.removeActiveMedia(mediaToMakeInactive: activeMedia)
                     }
-
+                    
+                    //TODO: - Generic 'Button' Builder
+                    SourceSelectionButton(image: getSourceIcon(), label: activeMedia.source.name, uilabel: activeMedia.source.id)
+                    .hapticFeedback(feedbackStyle: .medium) { _ in
+                        navHandler()
+                    }
+                        
+                    loadProperControlButtons()
                     
                 } //:HSTQ
                 .padding(.horizontal, (geo.size.width * 0.08))
@@ -155,14 +58,56 @@ struct ActiveMediaControlPanel: View {
             
         } //: GEO
         .frame(height: 108)
-        .border(.red, width: 1)
-    
         
     }
     
+    //TODO: - Investigate view builder ?
+    //TODO: - ActiveMediaControl Button Wrap into Button Builder
+    @ViewBuilder
+    func loadProperControlButtons() -> some View {
+        switch(device) {
+        case .speaker:
+            
+            ActiveMediaControlButton(image: "speaker.plus", imageSelected:  "speaker.plus", label: "volume+", selectionBinding: $dummyBinding) {
+                if (volume < 100) {
+                    volume = volume + 5
+                    print(volume)
+                    //apiClient.setVolume(activeMedia.speaker!, volume: volume)
+                }
+            }
+            
+            ActiveMediaControlButton(image: "speaker.minus", imageSelected: "speaker.minus", label: "volume-", selectionBinding: $dummyBinding) {
+                if(volume > 0) {
+                    volume = volume - 5
+                    print(volume)
+                    //apiClient.setVolume(activeMedia.speaker!, volume: volume)
+                }
+            }
+            
+            ActiveMediaControlButton(image: "speaker.slash", imageSelected: "speaker.slash", label: "mute", selectionBinding: $dummyBinding) {
+                mute.toggle()
+                //apiClient.toggleMute(activeMedia.speaker!, cmd: mute)
+            }
+            
+            
+        case .monitor:
+            //TODO: Binding doesnt wokr ?
+            ActiveMediaControlButton(image: "power.circle", imageSelected: "power.circle.fill", label: "power", selectionBinding: $monitorPower) {
+//                guard let monitor = activeMedia.monitor else { return }
+                print("clicked it for", monitorPower)
+                monitorPower.toggle()
+                //apiClient.toggleMonitor(monitor, cmd: monitorPower)
+            }
+            
+        case .bluetooth:
+            Text("bluetooth")
+        }
+    }
+    
+    //TODO: - Make public util ? 
     private func getSourceIcon() -> String {
         let sourceType = String(describing: SourceTypes(rawValue: activeMedia.source.type)!)
-
+        
         let iconMap: [String:SourceIcons] = [
             "appleTV" : .appleTV,
             "aux" : .aux,
@@ -196,4 +141,3 @@ struct ActiveMediaControlPanel: View {
         }
     }
 }
-

@@ -10,101 +10,61 @@ import SwiftUI
 struct ShadeControl: View {
     
     @EnvironmentObject var viewModel: ShadesViewModel
-    @State private var iconState: OSC = .none
+    @State private var iconState: ShadeStates = .NONE
     
-    let apiClient: GCMSClient
-    
+    let buttonCallback: (ShadeStates) -> ()
+ 
     var body: some View {
-        
-        HStack {
-            Text(viewModel.activeShade?.id ?? "none")
-                .font(.caption)
+        GeometryReader { geo in
+
+            HStack(alignment: .center) {
+                ShadeControlButton(currentState: $iconState, stateRepresented: .OPEN, imageName: "power", label: "OPEN", buttonCallback: buttonCallback)
+                ShadeControlButton(currentState: $iconState, stateRepresented: .SHEER, imageName: "power", label: "SHEER", buttonCallback: buttonCallback)
+                ShadeControlButton(currentState: $iconState, stateRepresented: .CLOSE, imageName: "power", label: "CLOSE", buttonCallback: buttonCallback)
+            }
+            .padding(.top, 12)
+            .frame(width: geo.size.width)
             
-            //-
-            VStack {
-                ZStack {
-                    Circle()
-                        .fill(iconState == .opened ? Color.green : Color.black)
-                        .frame(width:48, height: 50)
-                        .overlay (
-                            Circle()
-                                .stroke(Color.white, lineWidth: 1)
-                        )
-                    Image(systemName: "power")
-                        .foregroundColor(.white)
-                }
-                Text("OPEN")
-                    .font(.caption2)
-            }
-            .frame(width: 64)
-            .hapticFeedback(feedbackStyle: .rigid) { _ in
-                iconState = .opened
-                
-                if let shade = viewModel.activeShade {
-                    apiClient.commandShade(shade: shade, cmd: .OPEN)
-                }
-            } //: VSTQ
+        }
 
-            //-
-            VStack {
-                ZStack {
-                    Circle()
-                        .fill(iconState == .sheer ? Color.green : Color.black)
-                        .frame(width:48, height: 50)
-                        .overlay (
-                            Circle()
-                                .stroke(Color.white, lineWidth: 1)
-                        )
-                    Image(systemName: "power")
-                        .foregroundColor(.white)
-                }
-                Text("SHEER")
-                    .font(.caption2)
-            }
-            .frame(width: 64)
-            .hapticFeedback(feedbackStyle: .rigid) { _ in
-                iconState = .sheer
-                
-                if let shade = viewModel.activeShade {
-                    apiClient.commandShade(shade: shade, cmd: .OPEN)
-                }
-            } //: VSTQ
-
-            //-
-            VStack {
-                ZStack {
-                    Circle()
-                        .fill(iconState == .closed ? Color.green : Color.black)
-                        .frame(width:48, height: 50)
-                        .overlay (
-                            Circle()
-                                .stroke(Color.white, lineWidth: 1)
-                        )
-                    Image(systemName: "power")
-                        .foregroundColor(.white)
-                }
-                Text("CLOSE")
-                    .font(.caption2)
-            }
-            .frame(width: 64)
-            .hapticFeedback(feedbackStyle: .rigid) { _ in
-                iconState = .closed
-                
-                if let shade = viewModel.activeShade {
-                    apiClient.commandShade(shade: shade, cmd: .OPEN)
-                }
-            } //: VSTQ
-
-        } //: HSTQ
-        .padding(18)
         
     } //: BODY
     
-    private enum OSC {
-        case opened
-        case sheer
-        case closed
-        case none
-    }
+}
+
+
+//TODO: - Componentize Control Button
+//TODO: - viewbuilder
+
+struct ShadeControlButton: View {
     
+    @Binding var currentState: ShadeStates
+    var stateRepresented: ShadeStates
+    let imageName: String
+    let label: String
+    
+    let buttonCallback: (ShadeStates) -> ()
+    
+    var body: some View {
+        VStack {
+            ZStack {
+                Circle()
+                    .fill(currentState == stateRepresented ? Color.green : Color.black)
+                    .frame(width:48, height: 50)
+                    .overlay (
+                        Circle()
+                            .stroke(Color.white, lineWidth: 1)
+                    )
+                Image(systemName: imageName)
+                    .foregroundColor(.white)
+            }
+            Text(label)
+                .font(.caption2)
+        }
+        .frame(width: 64)
+        .hapticFeedback(feedbackStyle: .rigid) { _ in
+            currentState = stateRepresented
+            buttonCallback(stateRepresented)
+        } //: VSTQ
+    }
 }

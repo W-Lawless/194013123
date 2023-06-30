@@ -24,14 +24,14 @@ struct FileCacheUtil {
                 let dataEncoded = try encoder.encode(data)
                 try dataEncoded.write(to: cacheDirectory)
             }
-            print("Data cached successfully")
+            print("Data cached successfully", type(of: data))
         } catch {
             print(error)
         }
     }
     
     func retrieveCachedFile<T: Codable>(dataModel: T.Type, mockPath: String? = nil) throws -> T {
-        print("retrieving cache", T.self)
+        print("Retrieving Cache ~", T.self)
         do {
             if let mockPath {
                 let mockFilePath = URL(fileURLWithPath: "\(mockPath)/\(T.self).store")

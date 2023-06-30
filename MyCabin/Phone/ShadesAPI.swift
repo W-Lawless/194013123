@@ -36,3 +36,7 @@ extension GCMSClient {
     }
     
 }
+
+struct ShadeCommand: Codable {
+    var cmd: String
+}

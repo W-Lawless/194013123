@@ -15,7 +15,9 @@ enum MediaViewIntent: String, Equatable {
 //    case pairBluetoothWithMonitor
 //    case pairMonitorWithSpeaker
 //    case pairSpeakerWithMonitor
+    
     case viewNowPlaying
+    //case changeActiveMediaSource
     //case selectBluetoothOutput
     //case viewRemote
     
@@ -36,7 +38,6 @@ enum MediaDevice: String {
     case bluetooth
 }
 
-//TODO: - place where
 protocol MediaDeviceModel {
     var id: String { get set  }
     var rect: RenderCoordinates { get set }

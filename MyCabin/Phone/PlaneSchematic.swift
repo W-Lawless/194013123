@@ -22,7 +22,6 @@ struct PlaneSchematic: View {
             ZStack(alignment: .custom) { // ZSTQ
                 
                 planeDisplayOptionsBarBuilder(planeViewModel.planeDisplayOptions)
-//                    .border(.red, width: 3)
                 
                 HStack(alignment: .center) { // HSTQ
 
@@ -31,6 +30,9 @@ struct PlaneSchematic: View {
                         .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
                     
                     planeFuselageBuilder()
+                        .onAppear {
+                            print("*** plane fuselage built")
+                        }
                     
                     Image("plane_right_side")
                         .resizable()

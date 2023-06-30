@@ -50,7 +50,7 @@ struct Weather: View {
 
 //MARK: - View Model
 
-class WeatherViewModel: ObservableObject, GCMSViewModel {
+class WeatherViewModel: ObservableObject {
     
     @Published var condition: String = "Cloudy"
     @Published var currentTemp: Int = 0

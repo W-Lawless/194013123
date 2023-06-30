@@ -22,14 +22,9 @@ final class ViewFactory {
 
 extension ViewFactory {
     
-    func buildSpeakersView() -> Speakers {
-        let view = Speakers(viewModel: self.state.speakersViewModel)
-        return view
-    }
-    
     
     func buildVolumeView() -> Volume {
-        let view = Volume(viewModel: self.state.speakersViewModel)
+        let view = Volume(viewModel: self.state.mediaViewModel)
         return view
     }
     

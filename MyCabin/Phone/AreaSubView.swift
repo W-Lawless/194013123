@@ -8,7 +8,6 @@
 import SwiftUI
 
 
-
 struct AreaSubView: View {
     
     @EnvironmentObject var planeViewModel: PlaneViewModel
@@ -22,20 +21,32 @@ struct AreaSubView: View {
             
             baseBlueprintBuilder(area)
             featureBlueprintBuilder(area, planeViewModel.planeDisplayOptions)
+            //TODO: - Feature Blueprint double draws on lights / seats menu
 
         }
         .frame(width: (planeViewModel.subviewWidthUnit * area.rect.w), height: (planeViewModel.subviewHeightUnit * area.rect.h))
         .onAppear {
+//            if(planeViewModel.planeDisplayOptions != .onlySeats) {
+                print("**", area.id)
+//            }
+//            dump(area.rect)
             calculateAreaCoorindates()
         }
-        .if(planeViewModel.planeDisplayOptions == .tempZones || planeViewModel.planeDisplayOptions == .lightZones) { view in
+        .if(isZoneDisplayMode()) { view in
             view
                 .opacity(planeViewModel.selectedZone?.id == area.id ? 1 : 0.3)
                 .background(planeViewModel.selectedZone?.id == area.id ? Color.yellow.opacity(0.3) : nil)
                 .clipShape(RoundedRectangle(cornerRadius: 8))
-         //TODO: - Zone Modifier in builder ?
         }
 
+    }
+    
+    private func isZoneDisplayMode() -> Bool {
+        if (planeViewModel.planeDisplayOptions == .tempZones || planeViewModel.planeDisplayOptions == .lightZones) {
+            return true
+        } else {
+            return false
+        }
     }
     
     private func calculateAreaCoorindates() {

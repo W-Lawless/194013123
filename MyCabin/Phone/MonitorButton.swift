@@ -20,8 +20,8 @@ struct MonitorButton: View {
         Image(selected ? "ic_monitor_on" : "ic_monitor_off")
             .resizable()
             .scaledToFit()
-            .frame(maxWidth: 48, maxHeight: 48)
-            .scaleEffect(selected ? 1.4 : 1)
+            .frame(maxWidth: 42, maxHeight: 42)
+            .scaleEffect(selected ? 1.2 : 1)
             .hapticFeedback(feedbackStyle: .light) { _ in
                 iconCallback(monitor)
             }
