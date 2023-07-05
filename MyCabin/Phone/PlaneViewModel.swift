@@ -13,15 +13,52 @@ class PlaneViewModel: ObservableObject {
     @Published var planeDisplayOptions: PlaneSchematicDisplayMode = .onlySeats
     @Published var selectedZone: PlaneArea? = nil
     
-    //TODO: - Initialize at app start ?
-    @Published var containerWidthUnit: CGFloat = 0
-    @Published var containerHeightUnit: CGFloat = 0
+    var screenWidth: CGFloat = 0
+    var screenHeight: CGFloat = 0
     
-    @Published var subviewWidthUnit: CGFloat = 0
-    @Published var subviewHeightUnit: CGFloat = 0
+    var containerWidthUnit: CGFloat = 0
+    var containerHeightUnit: CGFloat = 0
+    
+    var heightOfAllAreas: CGFloat = 0
+    var widthOfAllAreas: CGFloat = 0
+    
+    var subviewWidthUnit: CGFloat = 0
+    var subviewHeightUnit: CGFloat = 0
 
     @MainActor func updateDisplayMode(_ mode: PlaneSchematicDisplayMode) {
         self.planeDisplayOptions = mode
+    }
+    
+    func configureBaseUnits() {
+        containerWidthUnit = (screenWidth * 0.39) / plane.parentArea.rect.w
+        containerHeightUnit = (screenHeight) / plane.parentArea.rect.h
+        
+        configurePlaneSchematicParentContainer()
+    }
+    
+    func configurePlaneSchematicParentContainer() {
+//        print("AREAS:",plane.mapAreas.count)
+        var heightValues = [CGFloat]()
+        var widthValue: CGFloat = 0
+        plane.mapAreas.forEach { area in
+            let subviewHeight = containerHeightUnit * area.rect.h
+            heightValues.append(subviewHeight)
+            widthValue = containerWidthUnit * area.rect.w
+            
+            subviewHeightUnit = subviewHeight / area.rect.h
+            subviewWidthUnit = widthValue / area.rect.w
+
+            
+            //TODO: - Check drawable on config with areas of variant sizes
+//            let areaInternalHeightUnit = subviewHeight / area.rect.h
+//            let areaInternalWidthUnit = subviewWidth / area.rect.w
+        }
+        var sumHeight: CGFloat = 0
+        heightValues.forEach { value in
+            sumHeight += value
+        }
+        heightOfAllAreas = sumHeight
+        widthOfAllAreas = widthValue
     }
     
 }

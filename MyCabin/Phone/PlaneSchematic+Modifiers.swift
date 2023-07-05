@@ -11,6 +11,7 @@ struct PlaceIcon: ViewModifier {
     @EnvironmentObject var planeViewModel: PlaneViewModel
     var rect: RenderCoordinates
     
+    //TODO: - Check configuration with plane area of variant sizes
     func body(content: Content) -> some View {
         content
             .rotationEffect(Angle(degrees: rect.r))

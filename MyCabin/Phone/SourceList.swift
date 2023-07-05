@@ -18,7 +18,7 @@ struct SourceList: View {
         
         List {
             
-            ForEach(sources.sourceList ?? [SourceModel](), id: \.id) { source in
+            ForEach(sources.sourceList, id: \.id) { source in
                 
                 if(source.type == filter.rawValue) {
                 

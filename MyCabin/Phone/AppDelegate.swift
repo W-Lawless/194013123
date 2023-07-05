@@ -54,11 +54,11 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
         if let window {
             let app = readyApplication(window: window)
             
-//            let screenWidth = window.windowScene?.screen.bounds.width
-//            let screenHeight = window.windowScene?.screen.bounds.height
-//
-//            stateFactory.planeViewModel.containerViewWidth = screenWidth!
-//            stateFactory.planeViewModel.containerViewHeight = screenHeight!
+            let screenWidth = window.windowScene?.screen.bounds.width
+            let screenHeight = window.windowScene?.screen.bounds.height
+
+            stateFactory.planeViewModel.screenWidth = screenWidth!
+            stateFactory.planeViewModel.screenHeight = screenHeight!
             //TODO: - pass into state factory ?
             
             launch(app)

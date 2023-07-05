@@ -11,38 +11,46 @@ import SwiftUI
 struct AreaSubView: View {
     
     @EnvironmentObject var planeViewModel: PlaneViewModel
-
+    
     let area: PlaneArea
     let baseBlueprintBuilder: (PlaneArea) -> AreaBaseBlueprint
     let featureBlueprintBuilder: (PlaneArea, PlaneSchematicDisplayMode) -> AnyView
     
+    var areaWidthInPoints: CGFloat {
+        if (area.id != "") {
+            return planeViewModel.subviewWidthUnit * area.rect.w
+        } else {
+            return  planeViewModel.widthOfAllAreas
+        }
+    }
+    
+    var areaHeightInPoints: CGFloat {
+        if (area.id != "") {
+            return planeViewModel.subviewHeightUnit * area.rect.h
+        } else {
+            return planeViewModel.heightOfAllAreas
+        }
+    }
+    
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            
-            baseBlueprintBuilder(area)
-            featureBlueprintBuilder(area, planeViewModel.planeDisplayOptions)
-            //TODO: - Feature Blueprint double draws on lights / seats menu
-
-        }
-        .frame(width: (planeViewModel.subviewWidthUnit * area.rect.w), height: (planeViewModel.subviewHeightUnit * area.rect.h))
-        .onAppear {
-//            if(planeViewModel.planeDisplayOptions != .onlySeats) {
-                print("**", area.id)
-//            }
-//            dump(area.rect)
-            calculateAreaCoorindates()
-        }
-        .if(isZoneDisplayMode()) { view in
-            view
-                .opacity(planeViewModel.selectedZone?.id == area.id ? 1 : 0.3)
-                .background(planeViewModel.selectedZone?.id == area.id ? Color.yellow.opacity(0.3) : nil)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-        }
-
+            ZStack(alignment: .topLeading) {
+                baseBlueprintBuilder(area)
+                featureBlueprintBuilder(area, planeViewModel.planeDisplayOptions)
+                //TODO: - Feature Blueprint double draws on lights / seats menu
+                
+            }
+            .frame(width: areaWidthInPoints, height: areaHeightInPoints)
+            .if(isZoneDisplayMode()) { view in
+                view
+                    .opacity(planeViewModel.selectedZone?.id == area.id ? 1 : 0.3)
+                    .background(planeViewModel.selectedZone?.id == area.id ? Color.yellow.opacity(0.3) : nil)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+            }
+        
     }
     
     private func isZoneDisplayMode() -> Bool {
-        if (planeViewModel.planeDisplayOptions == .tempZones || planeViewModel.planeDisplayOptions == .lightZones) {
+        if (planeViewModel.planeDisplayOptions == .lightZones) {
             return true
         } else {
             return false

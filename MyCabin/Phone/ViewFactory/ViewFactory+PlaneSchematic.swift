@@ -38,12 +38,12 @@ extension ViewFactory {
         case .showShades:
             return AnyView(ShadeMenuPlaneDisplayOptions())
         default:
-            return AnyView(Text(""))
+            return AnyView(EmptyView())
         }
     }
     
     func buildPlaneFuselage() -> PlaneFuselage {
-        let view = PlaneFuselage(areaSubViewBuilder: buildAreaSubView)
+        let view = PlaneFuselage(areaSubViewBuilder: buildAreaSubView, climateOverlayBuilder: buildClimateBlueprint)
         return view
     }
     
@@ -52,6 +52,7 @@ extension ViewFactory {
         return view
     }
     
+    //TODO: - Fix double draw here
     func buildAreaBaseBlueprint(area: PlaneArea) -> AreaBaseBlueprint {
         return AreaBaseBlueprint(area: area, seatButtonBuilder: buildSeatButton)
     }
@@ -66,10 +67,9 @@ extension ViewFactory {
             return AnyView(buildSpeakerBlueprint(area: area))
         case .showNowPlaying:
             return AnyView(buildNowPlayingBluePrint(area: area))
-        case .tempZones:
-            return AnyView(buildClimateBlueprint(area: area))
         default:
-            return AnyView(AreaBaseBlueprint(area: area, seatButtonBuilder: buildSeatButton))
+            return AnyView(EmptyView())
+            //TODO: - double draw 
         }
         
     }
@@ -119,9 +119,10 @@ extension ViewFactory {
 
 extension ViewFactory {
     
-  func buildClimateBlueprint(area: PlaneArea) -> ClimateBlueprint {
-//      print("*** building cabin climate blueprint")
-      let view = ClimateBlueprint(areaClimateZones: area.zoneTemp ?? [ClimateControllerModel]())
+  func buildClimateBlueprint() -> ClimateBlueprint {
+      print("*** building cabin climate blueprint")
+      let view = ClimateBlueprint(areaClimateZones: self.state.planeViewModel.plane.parentArea.zoneTemp ?? [ClimateControllerModel]())
+      //TODO: fix
       return view
   }
     

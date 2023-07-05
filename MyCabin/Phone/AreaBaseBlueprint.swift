@@ -18,7 +18,7 @@ struct AreaBaseBlueprint: View, AreaBlueprint {
     var body: some View {
         ForEach(area.seats ?? [SeatModel]()) { seat in
             if(seat.id == selectedSeat) {
-                seatButtonBuilder(seat.id, true)//SeatButton(id: seat.id, selected: true, callback: planeViewModel.seatIconCallback)
+                seatButtonBuilder(seat.id, true)
                     .modifier(PlaceIcon(rect: seat.rect))
             } else {
                 seatButtonBuilder(seat.id, false)

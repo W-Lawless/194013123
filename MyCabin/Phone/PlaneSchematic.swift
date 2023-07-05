@@ -30,6 +30,8 @@ struct PlaneSchematic: View {
                         .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
                     
                     planeFuselageBuilder()
+                        .frame(width: planeViewModel.widthOfAllAreas, height: planeViewModel.heightOfAllAreas)
+//                        .border(.green, width: 2)
                         .onAppear {
                             print("*** plane fuselage built")
                         }
@@ -40,7 +42,6 @@ struct PlaneSchematic: View {
 
                 } //: HSTQ
                 .padding(.horizontal, 34)
-                .frame(height: geometry.size.height)
                 .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                 
             } //: ZSTQ
@@ -50,8 +51,11 @@ struct PlaneSchematic: View {
             
         } //: GEO
         .passGeometry { geo in
-            planeViewModel.containerWidthUnit = (geo.size.width * 0.39) / planeViewModel.plane.parentArea.rect.w
-            planeViewModel.containerHeightUnit = (geo.size.height) / planeViewModel.plane.parentArea.rect.h
+            print("*** >> >>")
+            print(planeViewModel.widthOfAllAreas)
+            print(planeViewModel.heightOfAllAreas)
+//            planeViewModel.containerWidthUnit = (geo.size.width * 0.39) / planeViewModel.plane.parentArea.rect.w
+//            planeViewModel.containerHeightUnit = (geo.size.height) / planeViewModel.plane.parentArea.rect.h
         } //: PASS GEO UTIL
         
     } //: BODY

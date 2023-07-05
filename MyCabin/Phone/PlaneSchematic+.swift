@@ -53,6 +53,7 @@ public struct GeometryPasser: View {
     }
 }
 
+/// Expose geometry information to a function outside the view heirarchy
 extension View {
     public func passGeometry(_ op: @escaping (GeometryProxy) -> Void) -> some View {
         self.background(
