@@ -10,8 +10,8 @@ import Foundation
 struct ActiveMedia: Equatable, Hashable, Codable {
     var id = UUID()
     var source: SourceModel = SourceModel()
-    var monitor: MonitorModel?
-    var speaker: SpeakerModel?
+    var monitors = [MonitorModel]()
+    var speakers = [SpeakerModel]()
     var bluetooth: String?
     
     static func == (lhs: ActiveMedia, rhs: ActiveMedia) -> Bool {

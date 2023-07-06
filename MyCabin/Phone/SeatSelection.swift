@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct SeatSelection: View {
+struct SeatSelection<Content: View>: View {
     
-    let planeViewBuilder: (PlaneSchematicDisplayMode) -> PlaneSchematic
+    let planeView: () -> Content
     
     var body: some View {
-        planeViewBuilder(.onlySeats)
+        planeView()
     }
 }
 

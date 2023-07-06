@@ -5,11 +5,15 @@
 //  Created by Lawless on 6/27/23.
 //
 
+import SwiftUI
+
 extension ViewFactory {
     
-    func buildShadesView() -> Shades {
-        let view = Shades(viewModel: state.shadesViewModel, planeViewBuilder: buildPlaneSchematic, shadeControlBuilder: buildShadeControl)
-        return view
+    @ViewBuilder
+    func buildShadesView() -> some View {
+        Shades(viewModel: state.shadesViewModel, shadeControlBuilder: buildShadeControl) {
+            self.buildPlaneSchematic(.showShades)
+        }
     }
     
     func buildShadeControl() -> ShadeControl {

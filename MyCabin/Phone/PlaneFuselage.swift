@@ -7,43 +7,14 @@
 
 import SwiftUI
 
-struct PlaneFuselage: View {
-    @EnvironmentObject var planeViewModel: PlaneViewModel
+struct PlaneFuselage<Content: View>: View {
     
-    let areaSubViewBuilder: (PlaneArea) -> AreaSubView
-    let climateOverlayBuilder: () -> ClimateBlueprint
+    @EnvironmentObject var planeViewModel: PlaneViewModel //Needs reference to trigger contextual re-paint
+    
+    let areaSubView: () -> Content
     
     var body: some View {
-        
-        VStack(alignment: .center, spacing: 0) { //VSTQ B
-            
-            loadContent()
-            
-        }
+        areaSubView()
     }
     
-}
-
-extension PlaneFuselage {
-    @ViewBuilder func loadContent() -> some View {
-        
-        ZStack {
-            
-            VStack(spacing:0) {
-                
-                ForEach(planeViewModel.plane.mapAreas) { area in
-                    areaSubViewBuilder(area)
-                        .if(planeViewModel.planeDisplayOptions == .lightZones) {
-                            $0.modifier(TappableZone(area: area))
-                        }
-                }
-            }
-            
-            if(planeViewModel.planeDisplayOptions == .tempZones) {
-                climateOverlayBuilder()
-            }
-            
-        }
-        
-    }
 }

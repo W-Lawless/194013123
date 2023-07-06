@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct PlaneSchematic: View {
+struct PlaneSchematic<OptionBar: View, Fuselage: View>: View {
     
     @ObservedObject var planeViewModel: PlaneViewModel
     @ObservedObject var mediaViewModel: MediaViewModel
     
-    let planeDisplayOptionsBarBuilder: (PlaneSchematicDisplayMode) -> AnyView
-    let planeFuselageBuilder: () -> PlaneFuselage
+    let planeDisplayOptionsBar: () -> OptionBar
+    let planeFuselage: () -> Fuselage
         
     var body: some View {
         
@@ -21,43 +21,46 @@ struct PlaneSchematic: View {
             
             ZStack(alignment: .custom) { // ZSTQ
                 
-                planeDisplayOptionsBarBuilder(planeViewModel.planeDisplayOptions)
+                planeDisplayOptionsBar()
                 
                 HStack(alignment: .center) { // HSTQ
 
-                    Image("plane_left_side")
-                        .resizable()
-                        .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
+                    PlaneWing(image: "plane_left_side", width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
                     
-                    planeFuselageBuilder()
+                    planeFuselage()
                         .frame(width: planeViewModel.widthOfAllAreas, height: planeViewModel.heightOfAllAreas)
-//                        .border(.green, width: 2)
-                        .onAppear {
-                            print("*** plane fuselage built")
-                        }
                     
-                    Image("plane_right_side")
-                        .resizable()
-                        .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
+                    PlaneWing(image: "plane_right_side", width: geometry.size.width * 0.15, height: geometry.size.height * 0.6)
 
                 } //: HSTQ
-                .padding(.horizontal, 34)
+                .frame(width: geometry.size.width)
                 .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                 
             } //: ZSTQ
-            .padding(.horizontal, 12)
+            .padding(.horizontal, geometry.size.width * 0.03)
             .environmentObject(planeViewModel)
             .environmentObject(mediaViewModel) // Since the plane schematic is shared between screens that both do/don't use a media reference, always needed in env to avoid crash
             
         } //: GEO
-        .passGeometry { geo in
-            print("*** >> >>")
-            print(planeViewModel.widthOfAllAreas)
-            print(planeViewModel.heightOfAllAreas)
-//            planeViewModel.containerWidthUnit = (geo.size.width * 0.39) / planeViewModel.plane.parentArea.rect.w
-//            planeViewModel.containerHeightUnit = (geo.size.height) / planeViewModel.plane.parentArea.rect.h
-        } //: PASS GEO UTIL
+//        .passGeometry { geo in
+////            planeViewModel.containerWidthUnit = (geo.size.width * 0.39) / planeViewModel.plane.parentArea.rect.w
+////            planeViewModel.containerHeightUnit = (geo.size.height) / planeViewModel.plane.parentArea.rect.h
+//        } //: PASS GEO UTIL
         
     } //: BODY
+    
+}
+
+struct PlaneWing: View {
+   
+    let image: String
+    let width: CGFloat
+    let height: CGFloat
+    
+    var body: some View {
+        Image(image)
+            .resizable()
+            .frame(width: width, height: height)
+    }
     
 }

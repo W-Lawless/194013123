@@ -13,7 +13,7 @@ enum MediaViewIntent: String, Equatable {
     case selectSpeakerOutput
     case pairSpeakerWithMonitor
 //    case pairBluetoothWithMonitor
-//    case pairMonitorWithSpeaker
+    case pairMonitorWithSpeaker
 //    case pairSpeakerWithMonitor
     
     case viewNowPlaying
@@ -30,6 +30,7 @@ enum MediaDisplayOptions {
     case all
     case outputs
     case sound
+    case onlyVisible
 }
 
 enum MediaDevice: String {
@@ -45,9 +46,9 @@ protocol MediaDeviceModel {
 
 
 enum MediaToolTips: String {
-    case monitors = "Select a monitor output:"
-    case speakers = "Select a speaker output:"
-    case bluetooth = "Select a bluetooth device:"
+    case monitors = "Select output monitor(s):"
+    case speakers = "Select output speaker(s):"
+    case bluetooth = "Select output bluetooth device(s):"
     case nowPlaying = "Currently playing media:"
 }
 

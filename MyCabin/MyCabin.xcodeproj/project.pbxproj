@@ -51,7 +51,7 @@
 		2B20BF552A05AE740096568D /* NavigationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20BF542A05AE740096568D /* NavigationFactory.swift */; };
 		2B27F7372A40A75600868884 /* Navigation_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B27F7362A40A75600868884 /* Navigation_Tests.swift */; };
 		2B27F7392A40D19500868884 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B27F7382A40D19500868884 /* TestAppDelegate.swift */; };
-		2B27F73B2A40D20E00868884 /* _pri_main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B27F73A2A40D20E00868884 /* _pri_main.swift */; };
+		2B3E1F182A56473500A0D6AC /* ConfirmationSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3E1F172A56473500A0D6AC /* ConfirmationSubView.swift */; };
 		2B40FE782A41FE5E007E0D96 /* Data_Formatting_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B40FE772A41FE5E007E0D96 /* Data_Formatting_Tests.swift */; };
 		2B41EF4A292C105E0062CA2B /* Cabin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B41EF49292C105E0062CA2B /* Cabin.swift */; };
 		2B4A50162A03F71800DF47EF /* UI+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4A50152A03F71800DF47EF /* UI+.swift */; };
@@ -252,7 +252,7 @@
 		2B20BF542A05AE740096568D /* NavigationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFactory.swift; sourceTree = "<group>"; };
 		2B27F7362A40A75600868884 /* Navigation_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation_Tests.swift; sourceTree = "<group>"; };
 		2B27F7382A40D19500868884 /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
-		2B27F73A2A40D20E00868884 /* _pri_main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _pri_main.swift; sourceTree = "<group>"; };
+		2B3E1F172A56473500A0D6AC /* ConfirmationSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationSubView.swift; sourceTree = "<group>"; };
 		2B40FE772A41FE5E007E0D96 /* Data_Formatting_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data_Formatting_Tests.swift; sourceTree = "<group>"; };
 		2B41EF49292C105E0062CA2B /* Cabin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cabin.swift; sourceTree = "<group>"; };
 		2B4A50152A03F71800DF47EF /* UI+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+.swift"; sourceTree = "<group>"; };
@@ -541,7 +541,6 @@
 				2BE97D5C291C47EB00149BA4 /* UI */,
 				2B20BF4F2A05A09B0096568D /* Root */,
 				2BD75A1A292EB256004360A3 /* AppDelegate.swift */,
-				2B27F73A2A40D20E00868884 /* _pri_main.swift */,
 				2B183F512913F8C00087654E /* MyCabin.entitlements */,
 				2B183F4F2913F8C00087654E /* Assets.xcassets */,
 				2B7FE8102919C692002C64FF /* Info.plist */,
@@ -790,6 +789,7 @@
 				2B793F872A06B663005AB60C /* MediaOptions.swift */,
 				2BD08BB92A4CFA7E00623211 /* Buttons */,
 				2BD08BB82A4CFA6C00623211 /* SourceSelection */,
+				2B3E1F172A56473500A0D6AC /* ConfirmationSubView.swift */,
 			);
 			name = Subviews;
 			sourceTree = "<group>";
@@ -1405,6 +1405,7 @@
 				2BD08BBD2A4CFADF00623211 /* LightsViewModel.swift in Sources */,
 				2BD08B982A4BA08D00623211 /* ViewFactory+SeatsMenu.swift in Sources */,
 				2BBBB11C2A439D870045DF40 /* HomeMenuCoordinator.swift in Sources */,
+				2B3E1F182A56473500A0D6AC /* ConfirmationSubView.swift in Sources */,
 				2BB3A587292445C90094B787 /* HeartbeatMonitor.swift in Sources */,
 				2BB135FC292703970016444C /* CodableWrapper.swift in Sources */,
 				2BA7B4CF291D551A00942CB5 /* SeatSelection.swift in Sources */,
@@ -1433,7 +1434,6 @@
 				2B197F092A031C6C00DF406B /* PlaneSchematic+Modifiers.swift in Sources */,
 				2B4A50162A03F71800DF47EF /* UI+.swift in Sources */,
 				2B197EFC2A02D86000DF406B /* PlaneSchematic+.swift in Sources */,
-				2B27F73B2A40D20E00868884 /* _pri_main.swift in Sources */,
 				2BA8F60629252166005621D3 /* SeatModels.swift in Sources */,
 				2BA7D906293FC63F004E2DF6 /* PlaneViewModel.swift in Sources */,
 				2B4A501A2A0433D700DF47EF /* MonitorButton.swift in Sources */,

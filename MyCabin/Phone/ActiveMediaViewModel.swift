@@ -19,25 +19,30 @@ final class ActiveMediaViewModel: ObservableObject {
     @Published var activeMedia: [UUID:ActiveMedia] = [:]
     @Published var selectedActiveMedia: ActiveMedia = ActiveMedia()
     @Published var selectedActiveMediaDevice: MediaDevice = MediaDevice.monitor
+    var selectedSource: SourceModel = SourceModel()
     
     //TODO: Swap Speaker Output for Monitor
     //TODO: Swap Source Input for Speaker/Monitor
     //TODO: Swap Monitor Output for Speaker
-    //TODO: Speaker to Monitor or
-    //TODO: MultiSpeaker
-    //TODO: MultiMonitor
-    
+    //TODO: Speaker to Monitor or    
     
     //TODO: Cache Active Media
     //TODO:  IF ACTIVEMEDIA.COUNT > 0 , SET STATE
     
-    func assignSourceToSpeaker(speaker: SpeakerModel) {
+    func assignSourceToSpeakers() {
+//        if(selectedActiveMedia.source.id == "") {
+//            if let source {
+//                let activeMediaInstance = ActiveMedia(source: source, speakers: mediaViewModel.selectedSpeakers)
+//                selectedActiveMedia = activeMediaInstance
+//                activeMedia[activeMediaInstance.id] = activeMediaInstance
+//            }
+//        } else {
+        print("Currently working with",selectedActiveMedia.id)
+            var mediaGroup = activeMedia[selectedActiveMedia.id]
+            mediaGroup?.speakers = mediaViewModel.selectedSpeakers
+            activeMedia[selectedActiveMedia.id] = mediaGroup
+//        }
         
-        mediaViewModel.selectedSpeaker = speaker.id
-                
-        var mediaGroup = activeMedia[selectedActiveMedia.id]
-        mediaGroup?.speaker = speaker
-        activeMedia[selectedActiveMedia.id] = mediaGroup
 //        TODO: --
 //        let monitor = mediaViewModel.activeMedia[activeMediaID]?.monitor
 //        let source = mediaViewModel.activeMedia[activeMediaID]?.source
@@ -49,14 +54,14 @@ final class ActiveMediaViewModel: ObservableObject {
 //
     }
     
-    func assignSourceToMonitor(source: SourceModel) {
-        guard let selectedMonitorModel = mediaViewModel.monitors.first(where: { monitorModel in
-            monitorModel.id == mediaViewModel.selectedMonitor
-        }) else { return }
-        
-        let activeMediaInstance = ActiveMedia(source: source, monitor: selectedMonitorModel)
+    func assignSourceToMonitors() {
+        let activeMediaInstance = ActiveMedia(source: selectedSource, monitors: mediaViewModel.selectedMonitors)
         selectedActiveMedia = activeMediaInstance
-        activeMedia[activeMediaInstance.id] = activeMediaInstance        
+        activeMedia[activeMediaInstance.id] = activeMediaInstance
+    }
+    
+    func selectActiveSource(_ source: SourceModel) {
+        self.selectedSource = source
     }
     
     func completeOrClearActiveMediaSelection() {

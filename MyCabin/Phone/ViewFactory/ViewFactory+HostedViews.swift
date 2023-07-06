@@ -24,7 +24,8 @@ extension ViewFactory {
         return view
     }
     
-    func buildUIHostedMediaTab() ->  UIHostingController<MediaTab> {
+
+    func buildUIHostedMediaTab() ->  UIHostingController<some View> {
         let view = UIHostingController(rootView: buildMediaTab())
         return view
     }

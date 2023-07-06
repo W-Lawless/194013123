@@ -7,17 +7,14 @@
 
 import SwiftUI
 
-struct CabinClimate: View {
+struct CabinClimate<Content: View>: View {
     
     @ObservedObject var viewModel: CabinClimateViewModel
-    let planeViewBuilder: (PlaneSchematicDisplayMode) -> PlaneSchematic
+    let planeView: () -> Content
     
     
     var body: some View {
-        planeViewBuilder(.tempZones)
-            .onAppear {
-                print("*** climate top layer")
-            }
+        planeView()
     }
     
     func currentTemp(for c: ClimateControllerModel) -> String {

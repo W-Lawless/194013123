@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-struct Shades: View {
+struct Shades<Content: View>: View {
     
     @ObservedObject var viewModel: ShadesViewModel
-    let planeViewBuilder: (PlaneSchematicDisplayMode) -> PlaneSchematic
     let shadeControlBuilder: () -> ShadeControl
+    let planeView: () -> Content
     
     var body: some View {
         
         ZStack(alignment: .bottom) {
             
-            planeViewBuilder(.showShades)
+            planeView()
             
             VStack(alignment: .center) {
                 if(viewModel.showPanel) {

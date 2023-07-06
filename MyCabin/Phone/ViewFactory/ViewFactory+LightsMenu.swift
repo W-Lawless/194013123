@@ -5,28 +5,39 @@
 //  Created by Lawless on 6/27/23.
 //
 
+import SwiftUI
+
 extension ViewFactory {
     
     //MARK: - Lights Menu
     
-    func buildLightsMenu() -> Lights {
-        let view = Lights(viewModel: state.lightsViewModel, planeViewBuilder: buildPlaneSchematic, bottomPanelBuilder: buildLightsBottomPanel)
-        return view
+    @ViewBuilder
+    func buildLightsMenu() -> some View {
+        Lights(viewModel: state.lightsViewModel) {
+            self.buildLightsBottomPanel()
+        } planeView: {
+            self.buildPlaneSchematic(.showLights)
+        }
+        
     }
     
-    func buildLightsBottomPanel() -> LightsBottomPanel {
-        let view = LightsBottomPanel(adjustablePowerButtonBuilder: buildAdjustablePowerButton, lightPowerButtonBuilder: buildLightPowerButton)
-        return view
+    @ViewBuilder
+    func buildLightsBottomPanel() -> some View {
+        LightsBottomPanel() { light in
+            self.buildAdjustablePowerButton(light: light)
+        } lightPowerButton: { light in
+            self.buildLightPowerButton(light: light)
+        }
     }
     
-    func buildAdjustablePowerButton(light: LightModel) -> AdjustablePowerButton {
-        let view = AdjustablePowerButton(apiClient: api.apiClient, light: light)
-        return view
+    @ViewBuilder
+    func buildAdjustablePowerButton(light: LightModel) -> some View {
+        AdjustablePowerButton(apiClient: api.apiClient, light: light)
     }
     
-    func buildLightPowerButton(light: LightModel) -> LightPowerButton {
-        let view = LightPowerButton(apiClient: api.apiClient, light: light)
-        return view
+    @ViewBuilder
+    func buildLightPowerButton(light: LightModel) -> some View {
+        LightPowerButton(apiClient: api.apiClient, light: light)
     }
     
 }

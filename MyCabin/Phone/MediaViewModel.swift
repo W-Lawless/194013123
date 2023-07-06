@@ -17,8 +17,8 @@ class MediaViewModel: ObservableObject {
     @Published var planeDisplayOptions: PlaneSchematicDisplayMode = .showMonitors
     @Published var mediaDisplayOptions: MediaDisplayOptions = .outputs
     
-    @Published var selectedMonitor: String = ""
-    @Published var selectedSpeaker: String = ""
+    @Published var selectedMonitors = [MonitorModel]()
+    @Published var selectedSpeakers = [SpeakerModel]()
     
     @Published var displaySubView: Bool = false
     @Published var displayToolTip: Bool = true
@@ -47,6 +47,8 @@ class MediaViewModel: ObservableObject {
             placeSettings(.showSpeakers, .all, .speakers)
         case .pairSpeakerWithMonitor:
             placeSettings(.showSpeakers, .sound, .speakers)
+        case .pairMonitorWithSpeaker:
+            placeSettings(.showMonitors, .onlyVisible, .monitors)
         case .viewNowPlaying:
             placeSettings(.showNowPlaying, .all, .nowPlaying)
         }
@@ -55,23 +57,27 @@ class MediaViewModel: ObservableObject {
     //MARK: - Selection
     
     func selectMonitor(monitor: MonitorModel) {
-        let selected = selectedMonitor
-        if (isAlreadySelected(selected, monitor.id)) {
-            clearSelectedMonitor()
-            hideSubView()
+        let selected = selectedMonitors.contains(monitor)
+        if (selected) {
+            deselectMonitor(monitor)
+            if(selectedMonitors.count == 0) {
+                hideSubView()
+            }
         } else {
-            selectedMonitor = monitor.id
+            selectedMonitors.append(monitor)
             showSubView()
         }
     }
     
     func selectSpeaker(speaker: SpeakerModel) {
-        let selected = selectedSpeaker
-        if (isAlreadySelected(selected, speaker.id)) {
-            clearSelectedSpeaker()
-            hideSubView()
+        let selected = selectedSpeakers.contains(speaker)
+        if (selected) {
+            deselectSpeaker(speaker)
+            if(selectedSpeakers.count == 0) {
+                hideSubView()
+            }
         } else {
-            selectedSpeaker = speaker.id
+            selectedSpeakers.append(speaker)
             showSubView()
         }
     }
@@ -125,8 +131,8 @@ class MediaViewModel: ObservableObject {
     //MARK: - Utils
 
     func clearMediaSelection() {
-        clearSelectedMonitor()
-        clearSelectedSpeaker()
+        clearAllSelectedMonitors()
+        clearAllSelectedSpeakers()
         hideSubView()
     }
     
@@ -140,12 +146,24 @@ class MediaViewModel: ObservableObject {
         return prev == new
     }
     
-    private func clearSelectedMonitor() {
-        selectedMonitor = ""
+    private func deselectMonitor(_ monitor: MonitorModel) {
+        selectedMonitors.removeAll { existing in
+            existing.id == monitor.id
+        }
+    }
+    
+    private func clearAllSelectedMonitors() {
+        selectedMonitors = [MonitorModel]()
     }
 
-    private func clearSelectedSpeaker() {
-        selectedSpeaker = ""
+    private func deselectSpeaker(_ speaker: SpeakerModel) {
+        selectedSpeakers.removeAll { existing in
+            existing.id == speaker.id
+        }
+    }
+    
+    private func clearAllSelectedSpeakers() {
+        selectedSpeakers = [SpeakerModel]()
     }
     
     func hideSubView() {

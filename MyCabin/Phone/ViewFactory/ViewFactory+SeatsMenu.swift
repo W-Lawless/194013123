@@ -5,11 +5,15 @@
 //  Created by Lawless on 6/27/23.
 //
 
+import SwiftUI
+
 extension ViewFactory {
     
-    func buildSeatSelection() -> SeatSelection {
-        let view = SeatSelection(planeViewBuilder: buildPlaneSchematic)
-        return view
+    @ViewBuilder
+    func buildSeatSelection() -> some View {
+        SeatSelection() {
+            self.buildPlaneSchematic(.onlySeats)
+        }
     }
     
 }

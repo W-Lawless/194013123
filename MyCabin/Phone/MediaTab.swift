@@ -8,18 +8,18 @@
 import SwiftUI
 import Combine
 
-struct MediaTab: View {
+struct MediaTab<Plane: View, BottomPanel: View>: View {
     
     @ObservedObject var mediaViewModel: MediaViewModel
     @ObservedObject var activeMediaViewModel: ActiveMediaViewModel
     
-    let planeViewBuilder: (PlaneSchematicDisplayMode) -> PlaneSchematic
-    let mediaSubViewBuilder: () -> AnyView
+    let planeView: () -> Plane
+    let bottomPanel: () -> BottomPanel //TODO: - viewbuilder here
     
     var body: some View {
         ZStack(alignment: .bottom) { // ZSTQ A
             
-            planeViewBuilder(mediaViewModel.planeDisplayOptions)
+            planeView()
 
             if(mediaViewModel.displayToolTip) {
                 Text(mediaViewModel.contextualToolTip)
@@ -28,7 +28,7 @@ struct MediaTab: View {
             }
          
             if(mediaViewModel.displaySubView) {
-                mediaSubViewBuilder()
+                bottomPanel()
             }
 
         } //: ZSTQ A

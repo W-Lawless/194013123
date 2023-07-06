@@ -16,7 +16,7 @@ struct MonitorsBlueprint: View, AreaBlueprint {
     
     var body: some View {
         ForEach(areaMonitors) { monitor in
-            if(monitor.id == mediaViewModel.selectedMonitor) {
+            if(mediaViewModel.selectedMonitors.contains(monitor)) {
                 monitorButtonBuilder(monitor, true)
                     .modifier(PlaceIcon(rect: monitor.rect))
             } else {

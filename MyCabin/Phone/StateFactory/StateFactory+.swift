@@ -77,7 +77,6 @@ extension StateFactory {
         
     }
     
-    //TODO: - MainActor?
     func loadAllCaches() throws {
         do {
             let cachedElements = try cache.retrieveCachedFile(dataModel: PlaneMap.self)

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SpeakerModel: Codable, Identifiable, ElementModel, MediaDeviceModel {
+struct SpeakerModel: Codable, Identifiable, Hashable, ElementModel, MediaDeviceModel {
     var id: String
     var name: String
     var rect: RenderCoordinates
@@ -16,6 +16,15 @@ struct SpeakerModel: Codable, Identifiable, ElementModel, MediaDeviceModel {
     var assoc: [String]?
     var type: String
     var state: SpeakerState
+    
+    
+    static func == (lhs: SpeakerModel, rhs: SpeakerModel) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
+    }
 }
 
 struct SpeakerState: Codable {

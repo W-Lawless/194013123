@@ -35,6 +35,10 @@ struct MediaOptions: View {
                 mediaOptionsButtonBuilder("speaker.wave.3", .showSpeakers)
                 mediaOptionsButtonBuilder("headphones", .showBluetooth)
                 
+            } else if (mediaViewModel.mediaDisplayOptions == .onlyVisible) {
+                
+                EmptyView()
+                
             }
             
         } //: VSTQ

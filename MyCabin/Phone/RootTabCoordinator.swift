@@ -26,7 +26,6 @@ class RootTabCoordinator: NSObject  {
     
     func start(subviews: [UIViewController]) {
         self.subviews = subviews
-        tabBarController.delegate = self
         tabBarController.setViewControllers(subviews, animated: false)
     }
     
@@ -44,20 +43,4 @@ class RootTabCoordinator: NSObject  {
         }
     }
     
-}
-
-extension RootTabCoordinator: UITabBarControllerDelegate {
-    
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if viewController as? UINavigationController != nil {
-            print("Home Tab")
-        }
-        if viewController as? UIHostingController<MediaTab> != nil {
-            print("media tab")
-        }
-    }
-    
-    
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-    }
 }

@@ -39,11 +39,6 @@ struct SourceSelectionButton: View {
     let label: String
     let uilabel: String
     var sysimg: Bool = false
-
-    //TODO: - ViewBuilder Ref
-//    <Content: View>
-//    @ViewBuilder var content: () -> Content
-//    content()
     
     var body: some View {
         VStack(spacing: 4) {

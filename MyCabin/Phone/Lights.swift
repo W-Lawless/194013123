@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-struct Lights: View {
+struct Lights<LightControlPanel: View, PlaneView: View>: View {
     
     @ObservedObject var viewModel: LightsViewModel
-    let planeViewBuilder: (PlaneSchematicDisplayMode) -> PlaneSchematic
-    let bottomPanelBuilder: () -> LightsBottomPanel
+    let bottomPanel: () -> LightControlPanel
+    let planeView: () -> PlaneView
     
     var body: some View {
         ZStack(alignment: .bottom) {
             
-            planeViewBuilder(.showLights)
+            planeView()
             
             VStack(alignment: .center) {
                 if(viewModel.showPanel) {
-                    bottomPanelBuilder()
+                    bottomPanel()
                 }
             }
             .edgesIgnoringSafeArea(.bottom)

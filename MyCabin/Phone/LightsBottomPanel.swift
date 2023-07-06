@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct LightsBottomPanel: View {
+struct LightsBottomPanel<AdjustableButton: View, PowerButton: View>: View {
     
     @EnvironmentObject var viewModel: LightsViewModel
     
-    let adjustablePowerButtonBuilder: (LightModel) -> AdjustablePowerButton
-    let lightPowerButtonBuilder: (LightModel) -> LightPowerButton
+    let adjustablePowerButton: (LightModel) -> AdjustableButton
+    let lightPowerButton: (LightModel) -> PowerButton
     
     var body: some View {
         
@@ -21,16 +21,24 @@ struct LightsBottomPanel: View {
             ScrollView(.horizontal, showsIndicators: false) {
             
                 HStack(alignment: .center, spacing: 12) {
+                    
                     ForEach(Array(viewModel.lightsForSeat.enumerated()), id: \.element) { index, element in
+                    
                         if(viewModel.lightsForSeat[index].brightness.dimmable){
-                            adjustablePowerButtonBuilder(viewModel.lightsForSeat[index])
+                            
+                            adjustablePowerButton(viewModel.lightsForSeat[index])
+                            
                         } else {
-                            lightPowerButtonBuilder(viewModel.lightsForSeat[index])
+                            
+                            lightPowerButton(viewModel.lightsForSeat[index])
+                            
                         }
-                    }
+                        
+                    } //: FOREACH
                     .padding(.horizontal, 24)
                     .padding(.vertical, 16)
-                }                
+                    
+                } //: HSTQ
                 
             } //: SCROLL
             .accessibilityIdentifier("lightControlPanel")
@@ -38,7 +46,6 @@ struct LightsBottomPanel: View {
             
         }  //: GEO
         .onAppear {
-//            print("APPEAR!")
             viewModel.getLightsForSeat()
             viewModel.pollLightsForState(lights: viewModel.lightsForSeat)
         }
@@ -48,9 +55,7 @@ struct LightsBottomPanel: View {
             viewModel.pollLightsForState(lights: viewModel.lightsForSeat)
         }
         .onDisappear {
-//            print("GOODBYE")
             viewModel.killMonitor()
-//            print(viewModel.rtResponses)
         }
     }
 

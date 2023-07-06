@@ -9,67 +9,100 @@ import SwiftUI
 
 extension ViewFactory {
     
-    func buildPlaneSchematic(options: PlaneSchematicDisplayMode) -> PlaneSchematic {
-        Task {
-            print("*** update to", options.rawValue)
-            await state.planeViewModel.updateDisplayMode(options)
-            print("*** updated to", state.planeViewModel.planeDisplayOptions)
-            
+    func buildPlaneSchematic(_ displayOption: PlaneSchematicDisplayMode) -> some View {
+        
+        Task { await self.state.planeViewModel.updateDisplayMode(displayOption) }
+        let view = PlaneSchematic(planeViewModel: state.planeViewModel,
+                       mediaViewModel: state.mediaViewModel) {
+            self.buildPlaneDisplayOptionsBar(options: self.state.planeViewModel.planeDisplayOptions)
+        } planeFuselage:{
+            self.buildPlaneFuselage()
         }
         
-        let view = PlaneSchematic(planeViewModel: state.planeViewModel,
-                                  mediaViewModel: state.mediaViewModel,
-                                  planeDisplayOptionsBarBuilder: buildPlaneDisplayOptionsBar,
-                                  planeFuselageBuilder: buildPlaneFuselage)
-        
         return view
+        
     }
     
-    //TODO: - Use ViewBuilder to remove AnyView bs?
-    //TODO: - Use some View to remove anyview ?
-    func buildPlaneDisplayOptionsBar(options: PlaneSchematicDisplayMode) -> AnyView {
+    @ViewBuilder
+    func buildPlaneDisplayOptionsBar(options: PlaneSchematicDisplayMode) -> some View {
         switch (options) {
         case .showMonitors, .showSpeakers, .showNowPlaying, .showBluetooth, .showRemote:
-            return AnyView(buildMediaDiplayOptionsBar())
+            buildMediaDiplayOptionsBar()
         case .showLights:
-            return AnyView(LightMenuPlaneDisplayOptions())
+            LightMenuPlaneDisplayOptions()
         case .lightZones:
-            return AnyView(LightMenuPlaneDisplayOptions())
+            LightMenuPlaneDisplayOptions()
         case .showShades:
-            return AnyView(ShadeMenuPlaneDisplayOptions())
+            ShadeMenuPlaneDisplayOptions()
         default:
-            return AnyView(EmptyView())
+            EmptyView()
         }
     }
     
-    func buildPlaneFuselage() -> PlaneFuselage {
-        let view = PlaneFuselage(areaSubViewBuilder: buildAreaSubView, climateOverlayBuilder: buildClimateBlueprint)
-        return view
+    @ViewBuilder
+    func buildPlaneFuselage() -> some View {
+        PlaneFuselage() {
+            ZStack {
+                VStack(spacing:0) {
+                    ForEach(self.state.planeViewModel.plane.mapAreas) { area in
+                        self.buildAreaSubView(area: area)
+                            .if(self.state.planeViewModel.planeDisplayOptions == .lightZones) {
+                                $0.modifier(TappableZone(area: area))
+                            }
+                    } //: FOREACH
+                } //: VSTQ
+                if(self.state.planeViewModel.planeDisplayOptions == .tempZones) {
+                    self.buildClimateBlueprint()
+                }
+            } //:ZSTQ
+        } //:PLANEFUSELAGE
+        .onAppear {
+            print("my display mode is", self.state.planeViewModel.planeDisplayOptions)
+        }
     }
     
-    func buildAreaSubView(area: PlaneArea) -> AreaSubView {
-        let view = AreaSubView(area: area, baseBlueprintBuilder: self.buildAreaBaseBlueprint, featureBlueprintBuilder: self.buildAreaFeatureBlueprint)
-        return view
+    @ViewBuilder
+    func buildAreaSubView(area: PlaneArea) -> some View {
+        AreaSubView() {
+            self.buildAreaSubViewZStack(area: area)
+        }
     }
     
-    //TODO: - Fix double draw here
-    func buildAreaBaseBlueprint(area: PlaneArea) -> AreaBaseBlueprint {
-        return AreaBaseBlueprint(area: area, seatButtonBuilder: buildSeatButton)
+    @ViewBuilder
+    func buildAreaSubViewZStack(area: PlaneArea) -> some View {
+        ZStack(alignment: .topLeading) {
+            self.buildAreaBaseBlueprint(area: area)
+            self.buildAreaFeatureBlueprint(area: area)
+        }
+        .frame(width: self.state.planeViewModel.subviewWidthUnit * area.rect.w, height: self.state.planeViewModel.subviewHeightUnit * area.rect.h)
+        .if(self.state.planeViewModel.planeDisplayOptions == .lightZones) { view in
+            view
+                .opacity(self.state.planeViewModel.selectedZone?.id == area.id ? 1 : 0.3)
+                .background(self.state.planeViewModel.selectedZone?.id == area.id ? Color.yellow.opacity(0.3) : nil)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+        }
     }
     
-    func buildAreaFeatureBlueprint(area: PlaneArea, options: PlaneSchematicDisplayMode) -> AnyView {
-        switch (options) {
+    @ViewBuilder
+    func buildAreaBaseBlueprint(area: PlaneArea) -> some View {
+        AreaBaseBlueprint(area: area) { (id, selected) in
+            self.buildSeatButton(id: id, selected: selected)
+        }
+    }
+    
+    @ViewBuilder
+    func buildAreaFeatureBlueprint(area: PlaneArea) -> some View {
+        switch (self.state.planeViewModel.planeDisplayOptions) {
         case .showShades:
-            return AnyView(buildShadeBlueprint(area: area))
+            buildShadeBlueprint(area: area)
         case .showMonitors:
-            return AnyView(buildMonitorsBlueprint(area: area))
+            buildMonitorsBlueprint(area: area)
         case .showSpeakers:
-            return AnyView(buildSpeakerBlueprint(area: area))
+            buildSpeakerBlueprint(area: area)
         case .showNowPlaying:
-            return AnyView(buildNowPlayingBluePrint(area: area))
+            buildNowPlayingBluePrint(area: area)
         default:
-            return AnyView(EmptyView())
-            //TODO: - double draw 
+            EmptyView()
         }
         
     }
@@ -79,12 +112,13 @@ extension ViewFactory {
 
 extension ViewFactory {
     
-    func buildSeatButton(id: String, selected: Bool) -> SeatButton {
-        let view = SeatButton(id: id, selected: selected) { (displayOptions, seatID) in
+    @ViewBuilder
+    func buildSeatButton(id: String, selected: Bool) -> some View {
+        SeatButton(id: id, selected: selected) { (displayOptions, seatID) in
             switch displayOptions {
             case .onlySeats:
                 UserDefaults.standard.set(seatID, forKey: "CurrentSeat")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     self.state.homeMenuCoordinator.dismiss()
                 }
             case .showLights:
@@ -94,7 +128,6 @@ extension ViewFactory {
                 break
             }
         }
-        return view
     }
     
 }
@@ -103,27 +136,27 @@ extension ViewFactory {
 
 extension ViewFactory {
     
-  func buildShadeBlueprint(area: PlaneArea) -> ShadeBlueprint {
-      let view = ShadeBlueprint(area: area, shadeButtonBuilder: buildShadeButton)
-      return view
-  }
-  
-  func buildShadeButton(shade: ShadeModel) -> ShadeButton {
-      let view = ShadeButton(viewModel: state.shadesViewModel, shade: shade)
-      return view
-  }
-  
+    @ViewBuilder
+    func buildShadeBlueprint(area: PlaneArea) -> some View {
+        ShadeBlueprint(area: area) { shade in
+            self.buildShadeButton(shade: shade)
+        }
+    }
+    
+    @ViewBuilder
+    func buildShadeButton(shade: ShadeModel) -> some View {
+        ShadeButton(viewModel: state.shadesViewModel, shade: shade)
+    }
+    
 }
 
 //MARK: - Climate 
 
 extension ViewFactory {
     
-  func buildClimateBlueprint() -> ClimateBlueprint {
-      print("*** building cabin climate blueprint")
-      let view = ClimateBlueprint(areaClimateZones: self.state.planeViewModel.plane.parentArea.zoneTemp ?? [ClimateControllerModel]())
-      //TODO: fix
-      return view
-  }
+    @ViewBuilder
+    func buildClimateBlueprint() -> some View {
+        ClimateBlueprint(areaClimateZones: self.state.planeViewModel.plane.parentArea.zoneTemp ?? [ClimateControllerModel]())
+    }
     
 }

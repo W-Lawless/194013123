@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//TODO: - Remove Static References
+//TODO: - Cleanup
 struct AdjustablePowerButton: View {
     
     @EnvironmentObject var viewModel: LightsViewModel

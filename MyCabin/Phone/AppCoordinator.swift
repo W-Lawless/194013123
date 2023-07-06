@@ -51,7 +51,10 @@ class AppCoordinator {
     func goTo(_ route: AppRouter) {
         switch route {
         case .cabinFound:
+            #if DEBUG
+            #else
             startMonitor(atInterval: 30.0)
+            #endif
             if(rootNavView.visibleViewController === loadingView) { ///Check view order
                 rootNavView.popViewController(animated: true)
             }

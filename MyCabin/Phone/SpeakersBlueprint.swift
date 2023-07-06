@@ -16,7 +16,7 @@ struct SpeakersBlueprint: View, AreaBlueprint {
     
     var body: some View {
         ForEach(areaSpeakers) { speaker in
-            if(speaker.id == mediaViewModel.selectedSpeaker) {
+            if(mediaViewModel.selectedSpeakers.contains(speaker)) {
                 speakerButtonBuilder(speaker, true)
                     .modifier(PlaceIcon(rect: speaker.rect))
             } else {

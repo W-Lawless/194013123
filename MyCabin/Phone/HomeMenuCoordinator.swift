@@ -17,8 +17,6 @@ class HomeMenuCoordinator: NSObject {
         self.navigationController = UINavigationController()
         navigationController.navigationBar.tintColor = .white
         super.init()
-        
-        navigationController.delegate = self
     }
 
     func start(subviews: [UIViewController]) {
@@ -53,13 +51,5 @@ class HomeMenuCoordinator: NSObject {
     }
 }
 
-extension HomeMenuCoordinator: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        if viewController as? UIHostingController<Home> != nil {
-            print("Home Menu")
-        } else if viewController as? UIHostingController<Lights> != nil {
-            print("Lights Opened")
-        }
-    }
-}
+
 

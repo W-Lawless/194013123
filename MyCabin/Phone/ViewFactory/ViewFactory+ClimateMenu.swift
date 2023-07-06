@@ -4,12 +4,15 @@
 //
 //  Created by Lawless on 6/27/23.
 //
+import SwiftUI
 
 extension ViewFactory {
     
-    func buildCabinClimateView() -> CabinClimate {
-        let view = CabinClimate(viewModel: state.climateViewModel, planeViewBuilder: buildPlaneSchematic)
-        return view
+    @ViewBuilder
+    func buildCabinClimateView() -> some View {
+        CabinClimate(viewModel: state.climateViewModel) {
+            self.buildPlaneSchematic(.tempZones)
+        }
     }
     
 }
