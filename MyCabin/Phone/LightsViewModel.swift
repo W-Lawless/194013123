@@ -21,11 +21,8 @@ class LightsViewModel: ObservableObject {
     var rtAPI = [RealtimeAPI<F ,R>]()
     var allSeats = [SeatModel]()
     
-    func updateValues(_ data: [Codable]) {
-        let typecast = data as? [LightModel]
-        if let typecast {
-            self.lightList = typecast
-        }
+    func updateLights(_ data: [LightModel]) {
+            self.lightList = data
     }
     
     func updateSeats(_ seats: [SeatModel]) {

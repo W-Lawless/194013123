@@ -10,9 +10,9 @@ import SwiftUI
 struct ShadeMenuPlaneDisplayOptions: View {
     var body: some View {
         VStack(spacing: 32) {
-            ShadeGroupButton(group: .all, image: "arrow.left.arrow.right")
-            ShadeGroupButton(group: .left, image: "arrow.left")
-            ShadeGroupButton(group: .right, image: "arrow.right")
+            ShadeGroupButton(group: .all, image: "arrow.left.arrow.right", uilabel: "All")
+            ShadeGroupButton(group: .left, image: "arrow.left", uilabel: "Left")
+            ShadeGroupButton(group: .right, image: "arrow.right", uilabel: "Right")
         }
         .padding(.horizontal, 18)
     }
@@ -24,6 +24,7 @@ struct ShadeGroupButton: View {
     @EnvironmentObject var viewModel: ShadesViewModel
     let group: ShadeGroup
     let image: String
+    let uilabel: String
     
     var body: some View {
         Button {
@@ -43,5 +44,6 @@ struct ShadeGroupButton: View {
                     )
             }
         }
+        .accessibilityLabel(uilabel)
     }
 }

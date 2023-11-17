@@ -40,7 +40,7 @@ final class StateFactory {
         self.api = api
         self.cache = cache
         self.elementFormatter = ElementDataFormatter(cacheUtil: cache)
-        self.activeMediaViewModel = ActiveMediaViewModel(mediaViewModel: mediaViewModel)
+        self.activeMediaViewModel = ActiveMediaViewModel(mediaViewModel: mediaViewModel, apiClient: api.apiClient)
     }
     
 }

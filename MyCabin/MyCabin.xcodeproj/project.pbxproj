@@ -46,6 +46,8 @@
 		2B197F062A031C3700DF406B /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197F052A031C3700DF406B /* Table.swift */; };
 		2B197F092A031C6C00DF406B /* PlaneSchematic+Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197F082A031C6C00DF406B /* PlaneSchematic+Modifiers.swift */; };
 		2B197F0B2A034CDA00DF406B /* ShadeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B197F0A2A034CDA00DF406B /* ShadeButton.swift */; };
+		2B1E30482A573A3D008BD70C /* SourceAssignmentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E30472A573A3D008BD70C /* SourceAssignmentUITests.swift */; };
+		2B1E304A2A573A87008BD70C /* ActiveMediaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E30492A573A87008BD70C /* ActiveMediaUITests.swift */; };
 		2B20BF4E2A059AED0096568D /* SpeakerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20BF4D2A059AED0096568D /* SpeakerButton.swift */; };
 		2B20BF532A05AE500096568D /* StateFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20BF522A05AE500096568D /* StateFactory.swift */; };
 		2B20BF552A05AE740096568D /* NavigationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20BF542A05AE740096568D /* NavigationFactory.swift */; };
@@ -94,10 +96,8 @@
 		2BA7B5D52A42509D00A02965 /* HeartbeatMonitor_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B5D42A42509C00A02965 /* HeartbeatMonitor_Tests.swift */; };
 		2BA7B5D72A4250F500A02965 /* Endpoint_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B5D62A4250F500A02965 /* Endpoint_Tests.swift */; };
 		2BA7B5D92A425DFC00A02965 /* Cache_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B5D82A425DFC00A02965 /* Cache_Tests.swift */; };
-		2BA7B5DB2A425F4100A02965 /* PlaneSchematic_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B5DA2A425F4100A02965 /* PlaneSchematic_Tests.swift */; };
 		2BA7B5DD2A425F5C00A02965 /* LightsSubMenu_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B5DC2A425F5C00A02965 /* LightsSubMenu_Tests.swift */; };
 		2BA7B5DF2A425F6A00A02965 /* ShadesSubMenu_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B5DE2A425F6A00A02965 /* ShadesSubMenu_Tests.swift */; };
-		2BA7B5E12A42600F00A02965 /* SeatsSubMenu_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B5E02A42600F00A02965 /* SeatsSubMenu_Tests.swift */; };
 		2BA7B5E32A42602300A02965 /* FlightInfoTab_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B5E22A42602300A02965 /* FlightInfoTab_Tests.swift */; };
 		2BA7B5E62A42604400A02965 /* MediaTabView_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7B5E52A42604400A02965 /* MediaTabView_Tests.swift */; };
 		2BA7D906293FC63F004E2DF6 /* PlaneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7D905293FC63F004E2DF6 /* PlaneViewModel.swift */; };
@@ -247,6 +247,8 @@
 		2B197F052A031C3700DF406B /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
 		2B197F082A031C6C00DF406B /* PlaneSchematic+Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaneSchematic+Modifiers.swift"; sourceTree = "<group>"; };
 		2B197F0A2A034CDA00DF406B /* ShadeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadeButton.swift; sourceTree = "<group>"; };
+		2B1E30472A573A3D008BD70C /* SourceAssignmentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceAssignmentUITests.swift; sourceTree = "<group>"; };
+		2B1E30492A573A87008BD70C /* ActiveMediaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveMediaUITests.swift; sourceTree = "<group>"; };
 		2B20BF4D2A059AED0096568D /* SpeakerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerButton.swift; sourceTree = "<group>"; };
 		2B20BF522A05AE500096568D /* StateFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateFactory.swift; sourceTree = "<group>"; };
 		2B20BF542A05AE740096568D /* NavigationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFactory.swift; sourceTree = "<group>"; };
@@ -296,10 +298,8 @@
 		2BA7B5D42A42509C00A02965 /* HeartbeatMonitor_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatMonitor_Tests.swift; sourceTree = "<group>"; };
 		2BA7B5D62A4250F500A02965 /* Endpoint_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint_Tests.swift; sourceTree = "<group>"; };
 		2BA7B5D82A425DFC00A02965 /* Cache_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache_Tests.swift; sourceTree = "<group>"; };
-		2BA7B5DA2A425F4100A02965 /* PlaneSchematic_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneSchematic_Tests.swift; sourceTree = "<group>"; };
 		2BA7B5DC2A425F5C00A02965 /* LightsSubMenu_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightsSubMenu_Tests.swift; sourceTree = "<group>"; };
 		2BA7B5DE2A425F6A00A02965 /* ShadesSubMenu_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadesSubMenu_Tests.swift; sourceTree = "<group>"; };
-		2BA7B5E02A42600F00A02965 /* SeatsSubMenu_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatsSubMenu_Tests.swift; sourceTree = "<group>"; };
 		2BA7B5E22A42602300A02965 /* FlightInfoTab_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightInfoTab_Tests.swift; sourceTree = "<group>"; };
 		2BA7B5E52A42604400A02965 /* MediaTabView_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTabView_Tests.swift; sourceTree = "<group>"; };
 		2BA7D905293FC63F004E2DF6 /* PlaneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneViewModel.swift; sourceTree = "<group>"; };
@@ -737,6 +737,36 @@
 			name = Modifiers;
 			sourceTree = "<group>";
 		};
+		2B1E30432A573A09008BD70C /* Lights */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Lights;
+			sourceTree = "<group>";
+		};
+		2B1E30442A573A17008BD70C /* Shades */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Shades;
+			sourceTree = "<group>";
+		};
+		2B1E30452A573A1C008BD70C /* Climate */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Climate;
+			sourceTree = "<group>";
+		};
+		2B1E30462A573A28008BD70C /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				2B1E30472A573A3D008BD70C /* SourceAssignmentUITests.swift */,
+				2B1E30492A573A87008BD70C /* ActiveMediaUITests.swift */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
 		2B20BF4F2A05A09B0096568D /* Root */ = {
 			isa = PBXGroup;
 			children = (
@@ -752,10 +782,8 @@
 			isa = PBXGroup;
 			children = (
 				2B27F7362A40A75600868884 /* Navigation_Tests.swift */,
-				2BA7B5DA2A425F4100A02965 /* PlaneSchematic_Tests.swift */,
 				2BA7B5DC2A425F5C00A02965 /* LightsSubMenu_Tests.swift */,
 				2BA7B5DE2A425F6A00A02965 /* ShadesSubMenu_Tests.swift */,
-				2BA7B5E02A42600F00A02965 /* SeatsSubMenu_Tests.swift */,
 				2BA7B5E22A42602300A02965 /* FlightInfoTab_Tests.swift */,
 			);
 			name = "View Tests";
@@ -970,6 +998,10 @@
 		2BBBB10D2A4369B20045DF40 /* MyCabinUITests */ = {
 			isa = PBXGroup;
 			children = (
+				2B1E30462A573A28008BD70C /* Media */,
+				2B1E30452A573A1C008BD70C /* Climate */,
+				2B1E30442A573A17008BD70C /* Shades */,
+				2B1E30432A573A09008BD70C /* Lights */,
 				2BBBB10E2A4369B20045DF40 /* MyCabinUITests.swift */,
 			);
 			path = MyCabinUITests;
@@ -1502,9 +1534,7 @@
 				2BA7B5D72A4250F500A02965 /* Endpoint_Tests.swift in Sources */,
 				2BA7B5DF2A425F6A00A02965 /* ShadesSubMenu_Tests.swift in Sources */,
 				2B27F7372A40A75600868884 /* Navigation_Tests.swift in Sources */,
-				2BA7B5DB2A425F4100A02965 /* PlaneSchematic_Tests.swift in Sources */,
 				2BA7B5D92A425DFC00A02965 /* Cache_Tests.swift in Sources */,
-				2BA7B5E12A42600F00A02965 /* SeatsSubMenu_Tests.swift in Sources */,
 				2BA7B5D52A42509D00A02965 /* HeartbeatMonitor_Tests.swift in Sources */,
 				2B27F7392A40D19500868884 /* TestAppDelegate.swift in Sources */,
 				2BA7B5DD2A425F5C00A02965 /* LightsSubMenu_Tests.swift in Sources */,
@@ -1521,7 +1551,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B1E30482A573A3D008BD70C /* SourceAssignmentUITests.swift in Sources */,
 				2BBBB10F2A4369B20045DF40 /* MyCabinUITests.swift in Sources */,
+				2B1E304A2A573A87008BD70C /* ActiveMediaUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

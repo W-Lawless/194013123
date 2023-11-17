@@ -11,10 +11,6 @@ import UIKit
 final class AppDelegate: NSObject, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-///        if let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.path {
-///            print("Documents Directory: \(documentsPath)")
-///        }
-
         return true
     }
     
@@ -98,14 +94,14 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
     
     func launchDevelopment(_ app: AppCoordinator) {
         print("LAUNCH DEVELOPMENT")
-        try? self.stateFactory.loadAllCaches()
+        self.stateFactory.connectToPlane()
         app.goTo(.cabinFound)
     }
     
     func launchProduction(_ app: AppCoordinator) {
         app.start(publisher: apiFactory.cabinConnectionPublisher, tokenStore: &apiFactory.cancelTokens) { _ in } sinkValue: { cabinHeartBeat in
             DispatchQueue.main.async { [weak self] in
-                if(cabinHeartBeat){
+                if(cabinHeartBeat){ // if true
                     self?.loadAllCabinElementsOnFirstConnection(cabinHeartBeat)
                     app.goTo(.cabinFound)
                 } else {
@@ -117,9 +113,13 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
     
     func loadAllCabinElementsOnFirstConnection(_ pulse: Bool) {
         if pulse != hasAlreadyConnectedToCabin {
-            hasAlreadyConnectedToCabin = true
+            hasAlreadyConnectedToCabin = true 
             self.stateFactory.connectToPlane()
         }
     }
     
 }
+
+///        if let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.path {
+///            print("Documents Directory: \(documentsPath)")
+///        }

@@ -12,7 +12,6 @@ struct Loading: View {
     
     var body: some View {
         VStack {
-            
             Image(systemName: "globe")
                 .resizable()
                 .frame(width: 64, height: 64)

@@ -14,7 +14,11 @@ struct CabinClimate<Content: View>: View {
     
     
     var body: some View {
-        planeView()
+        ZStack {
+            Color("PrimaryColor")
+            planeView()
+        }
+        .edgesIgnoringSafeArea(.bottom)
     }
     
     func currentTemp(for c: ClimateControllerModel) -> String {

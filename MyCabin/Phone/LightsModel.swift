@@ -25,27 +25,27 @@ struct LightModel: Codable, Identifiable, Hashable {
         hasher.combine(self.id)
     }
     
-    var id: String
-    var name: String
-    var rect: RenderCoordinates
-    var side: String
-    var sub: [String?]
+    var id: String = ""
+    var name: String = ""
+    var rect: RenderCoordinates = RenderCoordinates()
+    var side: String = ""
+    var sub: [String?] = [String?]()
     struct assoc: Codable {
-        var id: String
+        var id: String = ""
     }
-    var type: String
+    var type: String = ""
     struct color: Codable {
-        var color_type: String
-        var palettes: [String]?
+        var color_type: String = ""
+        var palettes: [String]? = nil
     }
-    var brightness: LightBrightness
+    var brightness: LightBrightness = LightBrightness()
     struct icons: Codable {
-        var on: String
-        var off: String
+        var on: String = ""
+        var off: String = ""
     }
     struct state: Codable, Equatable {
-        var on: Bool
-        var brightness: Int
+        var on: Bool = false
+        var brightness: Int = 0
         
         static func == (lhs: LightModel.state, rhs: LightModel.state) -> Bool {
             return lhs.on == rhs.on && lhs.brightness == rhs.brightness
@@ -54,6 +54,6 @@ struct LightModel: Codable, Identifiable, Hashable {
 }
 
 struct LightBrightness: Codable {
-    var dimmable: Bool
-    var range: [Int]
+    var dimmable: Bool = false
+    var range: [Int] = [Int]()
 }

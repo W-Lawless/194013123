@@ -6,30 +6,41 @@
 //
 
 import XCTest
+@testable import MyCabin
 
 final class LightsSubMenu_Tests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func test_UpdateLights() {
+        let sut = makeSUT()
+        let mockData = [LightModel(), LightModel()]
+        sut.updateLights(mockData)
+        
+        XCTAssertEqual(sut.lightList, mockData)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func test_UpdateSeats() {
+        let sut = makeSUT()
+        let mockData = [SeatModel(), SeatModel()]
+        sut.updateSeats(mockData)
+        
+        XCTAssertEqual(sut.allSeats, mockData)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func test_GetLightsForSeat() {
+        let sut = makeSUT()
+        sut.activeSeat = "seat1"
+        let mockData = [SeatModel(id: "seat1", lights: [LightModel(id: "light1")])]
+        sut.updateSeats(mockData)
+        sut.getLightsForSeat()
+        
+        XCTAssertEqual(sut.lightsForSeat[0], mockData[0].lights![0])
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    //TODO: ? Unit Test Poll Lights For State ? 
+    
+    private func makeSUT() -> LightsViewModel {
+        let sut = LightsViewModel()
+        return sut
     }
 
 }

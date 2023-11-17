@@ -16,9 +16,13 @@ struct ActiveMediaControlPanel: View {
     @State var dummyBinding: Bool = false
     
     @ObservedObject var activeMediaViewModel: ActiveMediaViewModel
+    //TODO: temp api client add
+    let apiClient: GCMSClient
     let activeMedia: ActiveMedia
-    let device: MediaDevice
+    let device: MediaDevice // makes device field irrelevant
     let navHandler: () -> ()
+    
+    //TODO: Add specificity of WHICH monitor / speaker / bluetooth is loaded into control panel // ^^^
     
     
     var body: some View {
@@ -93,10 +97,12 @@ struct ActiveMediaControlPanel: View {
         case .monitor:
             //TODO: Binding doesnt wokr ?
             ActiveMediaControlButton(image: "power.circle", imageSelected: "power.circle.fill", label: "power", selectionBinding: $monitorPower) {
-//                guard let monitor = activeMedia.monitor else { return }
-                print("clicked it for", monitorPower)
+                
                 monitorPower.toggle()
-                //apiClient.toggleMonitor(monitor, cmd: monitorPower)
+                self.activeMedia.monitors.forEach { monitor in
+                    apiClient.toggleMonitor(monitor, cmd: monitorPower)
+                }
+                
             }
             
         case .bluetooth:

@@ -19,8 +19,7 @@ extension StateFactory {
                 let result = ElementsRoot(results: res, length: res.count)
                 
                 var dictionary = self.elementFormatter.mapResultsToDictionary(result: result)
-                print("from plane elem")
-                dump(dictionary["allTempCtrlrs"])
+
                 self.elementFormatter.mapLightsToSeat(elements: &dictionary)
                 
                 let sourceTypes = self.elementFormatter.findUniqueSourceTypes(elements: &dictionary)
@@ -54,7 +53,7 @@ extension StateFactory {
         planeViewModel.plane = self.planeMap
         cache.cacheToFile(data: self.planeMap)
         
-        lightsViewModel.updateValues(allLights)
+        lightsViewModel.updateLights(allLights)
         lightsViewModel.updateSeats(allSeats)
         
         cache.cacheToFile(data: allLights, mockPath: mockPath)
@@ -70,6 +69,7 @@ extension StateFactory {
         mediaViewModel.updateSpeakers(allSpeakers)
         mediaViewModel.updateSourceList(allSources)
         mediaViewModel.updateSourceTypes(sourceTypes)
+        
         cache.cacheToFile(data: sourceTypes)
         cache.cacheToFile(data: allMonitors, mockPath: mockPath)
         cache.cacheToFile(data: allSpeakers, mockPath: mockPath)
@@ -83,7 +83,6 @@ extension StateFactory {
             let cachedLights = try cache.retrieveCachedFile(dataModel: [LightModel].self)
             let cachedSeats = try cache.retrieveCachedFile(dataModel: [SeatModel].self)
             let cachedClimateControllers = try cache.retrieveCachedFile(dataModel: [ClimateControllerModel].self)
-            //            dump(cachedClimateControllers)
             let cachedMonitors = try cache.retrieveCachedFile(dataModel: [MonitorModel].self)
             let cachedSpeakers = try cache.retrieveCachedFile(dataModel: [SpeakerModel].self)
             let cachedSources = try cache.retrieveCachedFile(dataModel: [SourceModel].self)
@@ -92,7 +91,7 @@ extension StateFactory {
             
             planeViewModel.plane = cachedElements
             
-            lightsViewModel.updateValues(cachedLights)
+            lightsViewModel.updateLights(cachedLights)
             lightsViewModel.updateSeats(cachedSeats)
             
             shadesViewModel.updateShades(cachedShades)

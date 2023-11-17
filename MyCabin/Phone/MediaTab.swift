@@ -19,6 +19,8 @@ struct MediaTab<Plane: View, BottomPanel: View>: View {
     var body: some View {
         ZStack(alignment: .bottom) { // ZSTQ A
             
+            Color("PrimaryColor")
+            
             planeView()
 
             if(mediaViewModel.displayToolTip) {
@@ -37,6 +39,7 @@ struct MediaTab<Plane: View, BottomPanel: View>: View {
         .onAppear {
             mediaViewModel.clearMediaSelection()
         }
+        .edgesIgnoringSafeArea(.top)
         
     } //: BODY
 

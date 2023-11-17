@@ -70,7 +70,7 @@ final class Networking_Tests: XCTestCase {
 
         let sut = GCMSClient()
         sut.fetch(for: endpoint) { result in
-            viewModel.updateValues(result)
+            viewModel.updateLights(result)
             exp.fulfill()
         }
         
@@ -90,7 +90,7 @@ final class Networking_Tests: XCTestCase {
         var count = 0
         
         let sut = RealtimeAPI(endpoint: endpoint) { result in
-            viewModel.updateValues(result)
+            viewModel.updateLights(result)
             count += 1
             if(count == 3){
                 exp.fulfill()

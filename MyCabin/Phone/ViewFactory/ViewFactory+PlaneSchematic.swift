@@ -56,9 +56,6 @@ extension ViewFactory {
                 }
             } //:ZSTQ
         } //:PLANEFUSELAGE
-        .onAppear {
-            print("my display mode is", self.state.planeViewModel.planeDisplayOptions)
-        }
     }
     
     @ViewBuilder

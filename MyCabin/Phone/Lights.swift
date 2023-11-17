@@ -5,6 +5,9 @@
 //  Created by Lawless on 11/23/22.
 //
 
+//TODO: -- Light Zones glichts while panel is open,
+//TODO: -- Light ZOne group command
+
 import SwiftUI
 
 struct Lights<LightControlPanel: View, PlaneView: View>: View {
@@ -15,6 +18,8 @@ struct Lights<LightControlPanel: View, PlaneView: View>: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
+            
+            Color("PrimaryColor")
             
             planeView()
             

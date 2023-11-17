@@ -36,21 +36,38 @@ class MediaViewModel: ObservableObject {
     
     func configureMediaViewIntent() {
         
-        clearMediaSelection()
-        
         switch (mediaViewIntentPublisher.value) {
+            
         case .noActiveMedia:
+            
+            clearMediaSelection()
             placeSettings(.showMonitors, .outputs, .monitors)
+            
         case .selectMonitorOutput:
+            
+            clearMediaSelection()
             placeSettings(.showMonitors, .all, .monitors)
+            
         case .selectSpeakerOutput:
+            
+            clearMediaSelection()
             placeSettings(.showSpeakers, .all, .speakers)
+            
         case .pairSpeakerWithMonitor:
+            
+            hideSubView()
             placeSettings(.showSpeakers, .sound, .speakers)
+            
         case .pairMonitorWithSpeaker:
+            
+            hideSubView()
             placeSettings(.showMonitors, .onlyVisible, .monitors)
+            
         case .viewNowPlaying:
+            
+            clearMediaSelection()
             placeSettings(.showNowPlaying, .all, .nowPlaying)
+            
         }
     }
     
@@ -129,21 +146,17 @@ class MediaViewModel: ObservableObject {
     }
     
     //MARK: - Utils
-
-    func clearMediaSelection() {
-        clearAllSelectedMonitors()
-        clearAllSelectedSpeakers()
-        hideSubView()
-    }
     
     private func placeSettings(_ planeOptions: PlaneSchematicDisplayMode, _ mediaOptions: MediaDisplayOptions, _ tooltip: MediaToolTips) {
         planeDisplayOptions = planeOptions
         mediaDisplayOptions = mediaOptions
         contextualToolTip = tooltip.rawValue
     }
-    
-    private func isAlreadySelected(_ prev: String, _ new: String) -> Bool {
-        return prev == new
+
+    func clearMediaSelection() {
+        clearAllSelectedMonitors()
+        clearAllSelectedSpeakers()
+        hideSubView()
     }
     
     private func deselectMonitor(_ monitor: MonitorModel) {

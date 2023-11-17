@@ -21,7 +21,7 @@ struct SpeakerButton: View {
             .scaledToFit()
             .frame(maxWidth: 42, maxHeight: 42)
             .scaleEffect(selected ? 1.1 : 1)
-            .accessibilityIdentifier(speaker.id)
+            .accessibilityIdentifier(selected ? "ic_sel_\(speaker.id)" : speaker.id)
             .hapticFeedback(feedbackStyle: .light) { _ in
                 iconCallback(speaker)
             }

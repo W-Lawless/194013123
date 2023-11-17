@@ -26,6 +26,8 @@ final class NavigationFactory {
     func configureRootTabCoordinator() {
         let coordinator = rootTabCoordinator
         coordinator.tabBarController.tabBar.tintColor = .white
+        
+        coordinator.tabBarController.tabBar.backgroundColor = UIColor(named: "PrimaryColor")
 
         let tabOne = self.buildHomeMenu()
         let tabTwo = views.buildUIHostedMediaTab()
@@ -51,7 +53,7 @@ final class NavigationFactory {
 //        rootMenuView.title = "Home"
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
-//        navigationBarAppearance.backgroundColor = .systemIndigo
+        navigationBarAppearance.backgroundColor = UIColor(named: "PrimaryColor")
         rootMenuView.navigationItem.standardAppearance = navigationBarAppearance
         rootMenuView.navigationItem.compactAppearance = navigationBarAppearance
         rootMenuView.navigationItem.scrollEdgeAppearance = navigationBarAppearance
@@ -65,6 +67,7 @@ final class NavigationFactory {
         icon.accessibilityLabel = "CallAttendantNavBar"
 
         rootMenuView.navigationItem.rightBarButtonItems = [volume, icon]
+        
         homeMenuCoordinator.start(subviews: [rootMenuView])
         
         return homeMenuCoordinator

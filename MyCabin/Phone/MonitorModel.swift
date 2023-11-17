@@ -17,31 +17,30 @@ struct MonitorModel: Codable, Identifiable, Hashable, ElementModel, MediaDeviceM
         hasher.combine(self.id)
     }
     
-    var id: String
-    var name: String
-    var rect: RenderCoordinates
-    var side: String
-    var sub: [String]?
+    var id: String = ""
+    var name: String = ""
+    var rect: RenderCoordinates = RenderCoordinates()
+    var side: String = ""
+    var sub: [String]? = nil
     struct assoc: Codable {
-        var id: String
+        var id: String = ""
     }
-    var type: String
+    var type: String = ""
     struct capabilities: Codable {
-        var deploy: Bool
-        var rotate: Bool
+        var deploy: Bool = false
+        var rotate: Bool = false
     }
     struct state: Codable {
-        var on: Bool
-        var source: String
-        var sourceShortName: String
+        var on: Bool = false
+        var source: String = ""
+        var sourceShortName: String = ""
     }
-
 }
 
 struct MonitorPowerState: Codable {
-    var on: Bool
+    var on: Bool = false
 }
 
 struct MonitorSourceAssignment: Codable {
-    var source: String
+    var source: String = ""
 }

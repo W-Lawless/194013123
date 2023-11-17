@@ -15,6 +15,7 @@ struct ClimateBlueprint: View, AreaBlueprint {
     
     var body: some View {
         ZStack {
+            
             ForEach(areaClimateZones.reversed(), id: \.id) { tempZone in
                 
                 RoundedRectangle(cornerRadius: 8)

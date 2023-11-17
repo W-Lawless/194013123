@@ -23,9 +23,10 @@ struct MonitorButton: View {
             .frame(maxWidth: 42, maxHeight: 42)
             .scaleEffect(selected ? 1.2 : 1)
             .hapticFeedback(feedbackStyle: .light) { _ in
+                print(monitor.id)
                 iconCallback(monitor)
             }
-            .accessibilityIdentifier("\(monitor.id)")
+            .accessibilityIdentifier(selected ? "ic_sel_\(monitor.id)" : "\(monitor.id)")
         //TODO: - Long press 
 //            .longPressHaptic {
 //                print("ay")

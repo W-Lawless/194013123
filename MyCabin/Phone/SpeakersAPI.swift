@@ -11,6 +11,9 @@ import Combine
 extension GCMSClient {
     
     func assignSourceToSpeaker(_ speaker: SpeakerModel, source: SourceModel) {
+        
+        print("ASSIGNING SOURCE TO MONITOR", source.id, speaker.id)
+        
         let endpoint = Endpoint<EndpointFormats.Put<SpeakerSourceAssignment>, SpeakerState>(path: .speakers, stateUpdate: speaker.id)
         let encodeObj = SpeakerSourceAssignment(source: source.id)
             

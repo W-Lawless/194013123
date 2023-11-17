@@ -14,38 +14,42 @@ struct Home: View {
     
     var body: some View {
         
-        Group {
+        ZStack(alignment: .center) {
             
-            HStack(alignment: .center, spacing: 32) {
-                
-                homeMenuButtonBuilder("ic_lights", "Lights", "LightsMenu", .lights)
-                Divider()
-                    .background(Color.white)
-                homeMenuButtonBuilder("ic_windows", "Shades", "ShadesMenu", .shades)
+            Color("PrimaryColor")
+            
+            VStack {
+                HStack(alignment: .center, spacing: 32) {
+                    
+                    homeMenuButtonBuilder("ic_lights", "Lights", "LightsMenu", .lights)
+                    Divider()
+                        .background(Color.white)
+                    homeMenuButtonBuilder("ic_windows", "Shades", "ShadesMenu", .shades)
 
-            } //:HSTQ
-            .padding(.top, 24)
-            
-            
-            HStack(alignment: .center, spacing: 32) {
+                } //:HSTQ
+                .padding(.top, 24)
                 
-                homeMenuButtonBuilder("ic_temperature", "Temperature", "ClimateMenu", .climate)
-                Divider()
-                    .background(Color.white)
-                homeMenuButtonBuilder("ic_change_seat", "Seats", "SeatsMenu", .seats)
                 
-            } //:HSTQ
+                HStack(alignment: .center, spacing: 32) {
+                    
+                    homeMenuButtonBuilder("ic_temperature", "Temperature", "ClimateMenu", .climate)
+                    Divider()
+                        .background(Color.white)
+                    homeMenuButtonBuilder("ic_change_seat", "Seats", "SeatsMenu", .seats)
+                    
+                } //:HSTQ
 
-            
-            
-            HStack(alignment: .center, spacing: 32) {
-                homeMenuButtonBuilder("ic_presets", "Presets", "Presets", .presets)
-                Divider()
-                    .background(Color.white)
-                homeMenuButtonBuilder("ic_settings", "Settings", "SettingsMenu", .settings)
                 
-            } //: HSTQ
-            .padding(.bottom, 24)
+                
+                HStack(alignment: .center, spacing: 32) {
+                    homeMenuButtonBuilder("ic_presets", "Presets", "Presets", .presets)
+                    Divider()
+                        .background(Color.white)
+                    homeMenuButtonBuilder("ic_settings", "Settings", "SettingsMenu", .settings)
+                    
+                } //: HSTQ
+                .padding(.bottom, 24)
+            }
         }
         
         

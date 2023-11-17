@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct SourceModel: Codable, Identifiable, ElementModel, MediaDeviceModel {
+struct SourceModel: Codable, Identifiable, Equatable, ElementModel, MediaDeviceModel {
+    static func == (lhs: SourceModel, rhs: SourceModel) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     var id: String = ""
     var name: String = ""
     var allowRename: Bool = true

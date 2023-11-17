@@ -17,6 +17,8 @@ struct Shades<Content: View>: View {
         
         ZStack(alignment: .bottom) {
             
+            Color("PrimaryColor")
+            
             planeView()
             
             VStack(alignment: .center) {
@@ -40,4 +42,4 @@ struct Shades<Content: View>: View {
     
 }
 
-
+//TODO: -- Add Realtime Polling

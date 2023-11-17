@@ -28,7 +28,7 @@ extension GCMSClient {
         let encodeObj = MonitorSourceAssignment(source: source.id)
             
         let callback = { monitorStatus in
-            print("put request data", monitorStatus)
+            print("GCMS Response for \(monitor.id):: \n", monitorStatus)
         }
         
         self.put(for: endpoint, putData: encodeObj, callback: callback)
